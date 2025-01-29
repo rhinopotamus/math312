@@ -1,4 +1,4 @@
-\documentclass[8pt,handout]{beamer} 
+\documentclass[8pt, handout]{beamer} 
 
 %% Math packages
 %%
@@ -92,8 +92,8 @@
 \setbeamertemplate{enumerate items}[default]
 %\setbeamercolor{enumerate subitem}{fg=red!80!black}
 \def\opacity{0.5}
-\setbeamercovered{transparent}
-%\setbeamercovered{invisible}
+%\setbeamercovered{transparent}
+\setbeamercovered{invisible}
 
 
 \newcommand{\Pause}{}      %% Comment this out => lots more page breaks
@@ -131,7 +131,6 @@
   \item \textbf{\Alert{dihedral groups}}: rotational \emph{and}
     reflective symmetries \Pause
   \item \textbf{\Alert{abelian groups}}: where $ab=ba$ (always) \Pause
-  \item \textbf{\Alert{matrix groups}}: (actually, you get to think about this in the homework) \Pause
   \item \textbf{\Alert{permutation groups}}: collections of
     rearrangements. \Pause
   \end{enumerate}
@@ -147,8 +146,15 @@
   \item \textbf{\Balert{semidirect products}} of groups.  \Pause
   \end{enumerate}
 
-  We'll see a few other visualization techniques and surprises along
-  the way.
+  I'm also kicking a couple of things to the homework for you to think about on your own:
+
+  \begin{enumerate}
+    \setcounter{enumi}{7}
+    \item \textbf{\Alert{matrix groups}}
+    \item the \textbf{\Alert{quaternion group}} $Q_8$
+  \end{enumerate}
+
+
   
   %efore finishing with a few miscellaneous examples. 
   
@@ -171,7 +177,7 @@
     The \Alert{order of a group} $G$ is its size as a set 
     (how many distinct elements are in it), denoted by
     $|G|$.
-  \end{definition}
+  \end{definition} \Pause
 
   \begin{example}
     $|\Sq| = 8$, and $|\Z| = \infty$.
@@ -189,6 +195,10 @@
   \end{definition}
   
 \end{frame}
+
+%%====================================================================
+%%====================================================================
+\section{Cyclic groups}
 
 
 %%====================================================================
@@ -610,6 +620,11 @@
   
   \medskip\Pause (Hey, this looks kind of familiar, like the hilt of a sword)
   
+  \Pause
+  
+  \begin{alertblock}{Exercise}
+    Draw the Cayley table for $C_2$.
+  \end{alertblock}
 \end{frame}
 
 %%====================================================================
@@ -786,17 +801,23 @@
 \end{frame}
 
 %%====================================================================
+%%====================================================================
+
+\section{Dihedral groups}
+
+
+%%====================================================================
 
 \begin{frame}{Dihedral groups}
 
   \begin{block}{Definition}
     The \Alert{dihedral group} $D_n$ or $\operatorname{Dih}_n$ is the group of
     symmetries of a regular $n$-gon.
-  \end{block}
+  \end{block} \Pause
 
   \begin{block}{Examples}
     $\Tri = D_3$ and $\Sq = D_4$. :)
-  \end{block}
+  \end{block} \Pause
 
   Conjecture time:
   \begin{itemize}
@@ -997,8 +1018,8 @@
     A strong advantage to our convention is that we can write
     \[
     C_n=\<r\>=\big\{1,r,r^2,\dots,r^{n-1}\big\}\Pause\leq \<r,f\>=D_n.
-    \]
-    (In the other convention, $C_n \leq D_{2n}$, which I find annoying.)
+    \]\Pause
+    (In the other convention, for instance, $C_3 \leq D_6$, which I find annoying.)
   \end{alertblock}
   
 \end{frame}
@@ -1006,94 +1027,12 @@
 %%====================================================================
 
 \begin{frame}{Dihedral groups}
-  
-  Another canonical way to generate $D_n$ is with two reflections:
-  \begin{itemize}
-  \item \Balert{$s:=f$}
-  \item \Galert{$t:=fr=r^{n-1}f$} -- Convince yourself that this is indeed a different reflection.
-  \end{itemize}
-  \Pause Composing these in either order is a rotation of $2\pi/n$ radians:
-  \[
-  st=f(fr)\Pause=r\Pause,\qquad ts=(fr)f\Pause=(r^{n-1}f)f\Pause=r^{n-1}.
-  \]
-  \Pause A group presentation with these generators is
-  \[
-  D_n=\big\<s,t\mid s^2=1,\;t^2=1,\;(st)^n=1\big\> 
-  \Pause=\big\{\underbrace{1,st,ts,(st)^2,(ts)^2,\ldots,}_{\text{rotations}}\;
-  \underbrace{s,t,sts,tst,\ldots}_{\text{reflections}}\big\}.
-  \]
-  
-  \Pause
-  
-  % 2 Cayley graphs of D_3 = <r, f> = <s,t>, and the triangle
-  \[
-  \begin{tikzpicture}[scale=.6,auto]
-    \colorlet{color1}{actBlue}
-    \colorlet{color2}{actGreen}
-    \colorlet{color3}{cosetPurple}
-    %%
-    %% Cayley graph of D3
-    %%
-    \begin{scope}[shift={(0,0)},scale=.9]
-      \tikzstyle{every node}=[font=\small]
-      \tikzstyle{r-in} = [draw, very thick, eRed,-stealth,bend left=35]
-      \tikzstyle{r-out} = [draw, very thick, eRed,-stealth,bend right=48]
-      \node (e) at (0:2.4) [v] {$1$};
-      \node (r) at (120:2.4) [v] {$r$};
-      \node (r2) at (240:2.4) [v] {$r^2$};
-      \node (f) at (0:1) [v] {$f$};
-      \node (r2f) at (240:1) [v] {$r^2\!f$};
-      \node (rf) at (120:1) [v] {$rf$};
-      \draw [r-out] (e) to  (r);
-      \draw [r-out] (r) to (r2);
-      \draw [r-out] (r2) to (e);
-      \draw [r-in] (f) to (r2f);
-      \draw [r-in] (r2f) to (rf);
-      \draw [r-in] (rf) to (f);
-      \draw [bb] (e) to (f);
-      \draw [bb] (r) to (rf);
-      \draw [bb] (r2) to (r2f);
-    \end{scope}
-    %%
-    %% Cayley graph of D4
-    %%
-    \begin{scope}[shift={(7,0)}]
-      \tikzstyle{every node}=[font=\small]
-      \node (e) at (90:2) [v] {$1$};
-      \node (t) at (30:2) [v] {$t$};
-      \node (ts) at (-30:2) [v] {$ts$};
-      \node (sts) at (-90:2) [v] {$sts$};
-      \node (st) at (-150:2) [v] {$st$};
-      \node (s) at (150:2) [v] {$s$};
-      \path[gg] (e) to (t);
-      \path[bb] (t) to (ts);
-      \path[gg] (ts) to (sts);
-      \path[bb] (st) to (sts);
-      \path[gg] (s) to (st);
-      \path[bb] (e) to (s);
-    \end{scope}
-    %%
-    %% Cayley graph of D3
-    %%
-    \begin{scope}[shift={(13,-.75)},scale=1.5]
-      \draw[dashed,thick,eBlue] (.5,1.5) to (.5,-.8);
-      \draw[dashed,thick,ePurple] (-.5,-.307) to (1.5,.921);
-      \draw[dashed,thick,eGreen] (-.5,.921) to (1.5,-.307);
-      \draw[color1,fill=color1]
-      (.5,.307)--(.25,.433)--(.5,.866)--(.75,.433)--cycle;
-      \draw[color2,fill=color2] (.5,.307)--(.75,.433)--(1,0)--(.5,0)--cycle;
-      \draw[color3,fill=color3] (.5,.307)--(.25,.433)--(0,0)--(.5,0)--cycle;
-      \draw [black] (0,0)--(.5,.866)--(1,0)--cycle;
-      \draw (.5,.55) node {$\mathbf{1}$}; 
-      \draw (.3,.2) node {$\mathbf{2}$};\draw (.7,.2) node {$\mathbf{3}$};
-      \node at (.5,1.75) {\color{xBlue}$s=f$};
-      \node at (-.8,1.25) {\color{xGreen}$t=fr$};
-      \draw[-stealth',eRed] (1.5,-.5) to[very thick,bend right=60] (1.7,.2);
-      \node at (2,-.7) {\color{xRed}$st=r$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
+  \begin{exampleblock}{Observation}
+    When we were first playing with $\Sq$ and $\Tri$, we identified lots of different reflections, but lately we've been pinning it down to just one specific one.
+  \end{exampleblock}\Pause
+  \begin{alertblock}{Question}
+    Can you generate $D_n$ using only reflections?
+  \end{alertblock}
 \end{frame}
 
 %%====================================================================
@@ -1152,54 +1091,10 @@
 
   \medskip\Pause
   
-  We can also generate $D_\infty$ with two reflections,
-  \Balert{$s:=f$} and \Galert{$t=fr$}.
 
-  \Pause
-  
-  \[
-  D_\infty=\big\<s,t\mid s^2=1,\;t^2=1\big\> 
-  \Pause=\big\{\underbrace{1,st,ts,(st)^2,(ts)^2,
-    \ldots,}_{\text{``rotations''}}\;
-  \underbrace{s,t,sts,tst,\ldots}_{\text{``reflections''}}\big\}.
-  \]
-  
-  \vspace{-2mm}\Pause
-  
-  % Cayley graph of D_\infty = <r, s>
-  \[
-  \begin{tikzpicture}[scale=1.15,auto]
-    \begin{scope}[shift={(0,0)}]
-      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
-        minimum size=4.5mm]
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (stst) at (-4,0) [v] {\scriptsize $stst$};
-      \node (sts) at (-3,0) [v] {$sts$};
-      \node (st) at (-2,0) [v] {$st$};
-      \node (s) at (-1,0) [v] {$s$};
-      \node (e) at (0,0) [v] {$1$};
-      \node (t) at (1,0) [v] {$t$};
-      \node (ts) at (2,0) [v] {$ts$};
-      \node (tst) at (3,0) [v] {$tst$};
-      \node (tsts) at (4,0) [v] {$tsts$};     
-      \draw [bb] (stst) to (-4.5,0);
-      \draw [gg] (stst) to (sts);
-      \draw [bb] (sts) to (st);
-      \draw [gg] (st) to (s);
-      \draw [bb] (s) to (e);
-      \draw [gg] (e) to (t);
-      \draw [bb] (t) to (ts);
-      \draw [gg] (ts) to (tst);
-      \draw [bb] (tst) to (tsts);
-      \draw [gg] (tsts) to (4.5,0);
-      \node at (4.7,0) {\normalsize $\mathbf{\cdots}$};
-      \node at (-4.7,0) {\normalsize $\mathbf{\cdots}$};
-      \node at (0,.5) {};
-    \end{scope}
-    \end{tikzpicture}
-    \]
-    
+  \begin{alertblock}{Question}
+    Can we generate $D_\infty$ with two reflections?
+  \end{alertblock}
      
 \end{frame}
 
@@ -1831,6 +1726,10 @@
 %%====================================================================
 %%====================================================================
 
+\section{Abelian groups}
+
+%%====================================================================
+
 
 \begin{frame}{Abelian groups}
 
@@ -2005,6 +1904,10 @@
 
 %%====================================================================
 %%====================================================================
+\section{Permutation groups}
+
+%%====================================================================
+
 
 \begin{frame}{Groups of permutations} \smallskip
 
@@ -3165,6 +3068,103 @@
 %%====================================================================
 %%====================================================================
 
+%Dihedral groups via reflections only
+\begin{frame}{Dihedral groups}
+  
+  Another canonical way to generate $D_n$ is with two reflections:
+  \begin{itemize}
+  \item \Balert{$s:=f$}
+  \item \Galert{$t:=fr=r^{n-1}f$} -- Convince yourself that this is indeed a different reflection.
+  \end{itemize}
+  \Pause Composing these in either order is a rotation of $2\pi/n$ radians:
+  \[
+  st=f(fr)\Pause=r\Pause,\qquad ts=(fr)f\Pause=(r^{n-1}f)f\Pause=r^{n-1}.
+  \]
+  \Pause A group presentation with these generators is
+  \[
+  D_n=\big\<s,t\mid s^2=1,\;t^2=1,\;(st)^n=1\big\> 
+  \Pause=\big\{\underbrace{1,st,ts,(st)^2,(ts)^2,\ldots,}_{\text{rotations}}\;
+  \underbrace{s,t,sts,tst,\ldots}_{\text{reflections}}\big\}.
+  \]
+  
+  \Pause
+  
+  % 2 Cayley graphs of D_3 = <r, f> = <s,t>, and the triangle
+  \[
+  \begin{tikzpicture}[scale=.6,auto]
+    \colorlet{color1}{actBlue}
+    \colorlet{color2}{actGreen}
+    \colorlet{color3}{cosetPurple}
+    %%
+    %% Cayley graph of D3
+    %%
+    \begin{scope}[shift={(0,0)},scale=.9]
+      \tikzstyle{every node}=[font=\small]
+      \tikzstyle{r-in} = [draw, very thick, eRed,-stealth,bend left=35]
+      \tikzstyle{r-out} = [draw, very thick, eRed,-stealth,bend right=48]
+      \node (e) at (0:2.4) [v] {$1$};
+      \node (r) at (120:2.4) [v] {$r$};
+      \node (r2) at (240:2.4) [v] {$r^2$};
+      \node (f) at (0:1) [v] {$f$};
+      \node (r2f) at (240:1) [v] {$r^2\!f$};
+      \node (rf) at (120:1) [v] {$rf$};
+      \draw [r-out] (e) to  (r);
+      \draw [r-out] (r) to (r2);
+      \draw [r-out] (r2) to (e);
+      \draw [r-in] (f) to (r2f);
+      \draw [r-in] (r2f) to (rf);
+      \draw [r-in] (rf) to (f);
+      \draw [bb] (e) to (f);
+      \draw [bb] (r) to (rf);
+      \draw [bb] (r2) to (r2f);
+    \end{scope}
+    %%
+    %% Cayley graph of D4
+    %%
+    \begin{scope}[shift={(7,0)}]
+      \tikzstyle{every node}=[font=\small]
+      \node (e) at (90:2) [v] {$1$};
+      \node (t) at (30:2) [v] {$t$};
+      \node (ts) at (-30:2) [v] {$ts$};
+      \node (sts) at (-90:2) [v] {$sts$};
+      \node (st) at (-150:2) [v] {$st$};
+      \node (s) at (150:2) [v] {$s$};
+      \path[gg] (e) to (t);
+      \path[bb] (t) to (ts);
+      \path[gg] (ts) to (sts);
+      \path[bb] (st) to (sts);
+      \path[gg] (s) to (st);
+      \path[bb] (e) to (s);
+    \end{scope}
+    %%
+    %% Cayley graph of D3
+    %%
+    \begin{scope}[shift={(13,-.75)},scale=1.5]
+      \draw[dashed,thick,eBlue] (.5,1.5) to (.5,-.8);
+      \draw[dashed,thick,ePurple] (-.5,-.307) to (1.5,.921);
+      \draw[dashed,thick,eGreen] (-.5,.921) to (1.5,-.307);
+      \draw[color1,fill=color1]
+      (.5,.307)--(.25,.433)--(.5,.866)--(.75,.433)--cycle;
+      \draw[color2,fill=color2] (.5,.307)--(.75,.433)--(1,0)--(.5,0)--cycle;
+      \draw[color3,fill=color3] (.5,.307)--(.25,.433)--(0,0)--(.5,0)--cycle;
+      \draw [black] (0,0)--(.5,.866)--(1,0)--cycle;
+      \draw (.5,.55) node {$\mathbf{1}$}; 
+      \draw (.3,.2) node {$\mathbf{2}$};\draw (.7,.2) node {$\mathbf{3}$};
+      \node at (.5,1.75) {\color{xBlue}$s=f$};
+      \node at (-.8,1.25) {\color{xGreen}$t=fr$};
+      \draw[-stealth',eRed] (1.5,-.5) to[very thick,bend right=60] (1.7,.2);
+      \node at (2,-.7) {\color{xRed}$st=r$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+%%====================================================================
+%%====================================================================
+
 \begin{frame}{Direct products}
 
   An easy way to construct finite abelian groups is by taking
@@ -3988,6 +3988,8 @@
 
 %%====================================================================
 %%====================================================================
+
+
 
 \begin{frame}{Permutation matrices} \smallskip
 
