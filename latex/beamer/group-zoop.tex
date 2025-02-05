@@ -3209,7 +3209,7 @@
 %%====================================================================
 
 \begin{frame}{Direct products}
-  Here is a fun way to combine two groups $\Alert{A}$ and $\Balert{B}$ to make a bigger group $\Alert{A}\times\Balert{B}$. I shall illustrate with the example of $\Alert{C_2} \times \Balert{C_4}$.
+  Here is a fun way to combine two groups $\Alert{A}$ and $\Balert{B}$ to make a bigger group $\Alert{A}\times\Balert{B}$. I shall illustrate with the example of $\Alert{C_4} \times \Balert{C_2}$.
 
   \[
   \begin{tikzpicture}[scale=.6,auto]
@@ -3224,8 +3224,8 @@
       \node at (0,-2) {};
       \node (H) at (0,2.5) [v] {};
       \node (1H) at (0,0) [v] {};
-      \draw [rr] (H) to (1H);
-      \node at (0,-1.3) {\small Draw $\Alert{C_2}$};
+      \draw [bb] (H) to (1H);
+      \node at (0,-1.3) {\small Draw $\Balert{C_2}$};
     \end{scope}
     %%
     %% Inflate C2
@@ -3241,8 +3241,8 @@
       \draw[faded, fill=faded] (0,1.9) rectangle (4.5,3.5);
       \draw[faded, fill=faded] (0,2.7) circle (.8);
       \draw[faded, fill=faded] (4.5,2.7) circle (.8);
-      \draw[rr] (2.25, 0.7) to (2.25,1.9);
-      \node at (2.25,-1.3) {\small Inflate each node of $\Alert{C_2}$};
+      \draw[bb] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Inflate each node of $\Balert{C_2}$};
     \end{scope}
     %%
     %% C2 Cayley graph inflated, with C4 Cayley graphs in each node.
@@ -3266,16 +3266,16 @@
       \node (01) at (1.5,0) [v] {};
       \node (02) at (3,0) [v] {};
       \node (03) at (4.5,0) [v] {};
-      \draw [b] (00) to (01); 
-      \draw [b] (01) to (02);
-      \draw [b] (02) to (03);
-      \draw [b] (03) to [bend left] (00);
-      \draw [b] (10) to (11); 
-      \draw [b] (11) to (12);
-      \draw [b] (12) to (13);
-      \draw [b] (13) to [bend right] (10);
-      \draw[rr] (2.25, 0.7) to (2.25,1.9);
-      \node at (2.25,-1.3) {\small Insert $\Balert{C_4}$};
+      \draw [r] (00) to (01); 
+      \draw [r] (01) to (02);
+      \draw [r] (02) to (03);
+      \draw [r] (03) to [bend left] (00);
+      \draw [r] (10) to (11); 
+      \draw [r] (11) to (12);
+      \draw [r] (12) to (13);
+      \draw [r] (13) to [bend right] (10);
+      \draw[bb] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Insert $\Alert{C_4}$};
     \end{scope}
     %%
     %% C2 inflated, C4 inserted, but C2 popped
@@ -3293,19 +3293,19 @@
       \node (01) at (1.5,0) [v] {};
       \node (02) at (3,0) [v] {};
       \node (03) at (4.5,0) [v] {};
-      \draw [b] (00) to (01); 
-      \draw [b] (01) to (02);
-      \draw [b] (02) to (03);
-      \draw [b] (03) to [bend left] (00);
-      \draw [b] (10) to (11); 
-      \draw [b] (11) to (12);
-      \draw [b] (12) to (13);
-      \draw [b] (13) to [bend right] (10);
-      \draw[rr] (2.25, 0.7) to (2.25,1.9);
-      \node at (2.25,-1.3) {\small Pop the nodes of $\Alert{C_2}$};
+      \draw [r] (00) to (01); 
+      \draw [r] (01) to (02);
+      \draw [r] (02) to (03);
+      \draw [r] (03) to [bend left] (00);
+      \draw [r] (10) to (11); 
+      \draw [r] (11) to (12);
+      \draw [r] (12) to (13);
+      \draw [r] (13) to [bend right] (10);
+      \draw[bb] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Pop the nodes of $\Balert{C_2}$};
     \end{scope}
     %%
-    %% Cayley graph of C4xC2
+    %% Cayley graph of C4 x C2  
     %%
     \begin{scope}[shift={(8, -6)}]
       \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
@@ -3320,19 +3320,19 @@
       \node (01) at (1.5,0) [v] {};
       \node (02) at (3,0) [v] {};
       \node (03) at (4.5,0) [v] {};
-      \draw [b] (00) to (01); 
-      \draw [b] (01) to (02);
-      \draw [b] (02) to (03);
-      \draw [b] (03) to [bend left] (00);
-      \draw [b] (10) to (11); 
-      \draw [b] (11) to (12);
-      \draw [b] (12) to (13);
-      \draw [b] (13) to [bend right] (10);
-      \draw [rr] (00) to (10);
-      \draw [rr] (01) to (11);
-      \draw [rr] (02) to (12);
-      \draw [rr] (03) to (13);
-      \node at (2.25,-1.3) {\small Copy $\Alert{C_2}$'s arrows correctly};
+      \draw [r] (00) to (01); 
+      \draw [r] (01) to (02);
+      \draw [r] (02) to (03);
+      \draw [r] (03) to [bend left] (00);
+      \draw [r] (10) to (11); 
+      \draw [r] (11) to (12);
+      \draw [r] (12) to (13);
+      \draw [r] (13) to [bend right] (10);
+      \draw [bb] (00) to (10);
+      \draw [bb] (01) to (11);
+      \draw [bb] (02) to (12);
+      \draw [bb] (03) to (13);
+      \node at (2.25,-1.3) {\small Copy $\Balert{C_2}$'s arrows correctly};
     \end{scope}
   \end{tikzpicture}
   \]
@@ -3344,8 +3344,8 @@
 \begin{frame}{Direct products: Your turn!}
   \begin{itemize}
     \item Do $\Alert{C_2}\times\Balert{C_2}$. Who is this? \Pause
-    \item Do $\Alert{C_2}\times\Balert{C_3}$. Is this guy new? \Pause
-    \item Do $\Alert{C_4}\times\Balert{C_2}$. Is this the same as $\Alert{C_2}\times\Balert{C_4}$?
+    \item Do $\Alert{C_3}\times\Balert{C_2}$. Is this a new group of order 6, or one of the ones we already know? \Pause
+    \item Do $\Alert{C_2}\times\Balert{C_4}$. Is this the same as $\Alert{C_4}\times\Balert{C_2}$?
   \end{itemize}
 \end{frame}
 
@@ -3360,9 +3360,9 @@
   \vspace{-2mm}\Pause
   
   \begin{definition}
-    The \Alert{direct product} of groups $(A,\star)$ and $(B, \circ)$ is a group whose elements are the
-    \emph{set} $A\times B$, and the group \Balert{operation} is
-    done component-wise: \Pause for generic elements $(a,b),(c,d)\in A\times B$,
+    The \Alert{direct product} of groups $(A,\star)$ and $(B, \circ)$ is a group whose \Alert{elements} are the \emph{set} $A\times B$, 
+    and the group \Balert{operation} is done component-wise: \Pause 
+    for generic elements $(a,b),(c,d)\in A\times B$,
     \[
     (a,b)*(c,d)=(a\star c,b\circ d).
     \]
@@ -3379,7 +3379,7 @@
 
   \begin{alertblock}{Question}
     Is $D_4\times \Z_4$ abelian?
-  \end{alertblock}
+  \end{alertblock} \Pause
   \begin{exampleblock}{Homework}
     Prove that $A\times B$ is abelian \alert{if and only if} both $A$ and $B$ are abelian.
   \end{exampleblock}
