@@ -1214,7 +1214,7 @@
   \hspace*{-3.25mm}
   \begin{tikzpicture}[scale=.6]
     \newdimen\r
-    \r=1.2cm;
+    \r=1.2cm
     \coordinate (center) at (0,0);
     %%
     %% Square with blue and green axes of reflection.
@@ -2172,7 +2172,7 @@
 
 %%====================================================================
 
-\begin{frame}{Composing permutations} %\smallskip
+\begin{frame}{Composing permutations}
 
   \begin{exampleblock}{Remark}
     The \Balert{order} of a permutation is the least common multiple
@@ -2861,6 +2861,532 @@
 
 %%====================================================================
 
+
+%Dihedral groups via reflections only
+% NO PAUSES
+\begin{frame}{Constructing permutations from a \alert{different} Cayley diagram}
+  
+  \begin{columns}
+    \column{0.6 \textwidth}
+      Another canonical way to generate $D_n$ is with \\ \alert{two reflections}:
+      \begin{itemize}
+      \item \Balert{$s:=f$}
+      \item \Galert{$t:=fr=r^{n-1}f$} -- a different reflection!
+      \end{itemize}
+    \column{0.4\textwidth}
+      \begin{tikzpicture}
+        \colorlet{color1}{actBlue}
+        \colorlet{color2}{actGreen}
+        \colorlet{color3}{cosetPurple}
+        \draw[dashed,thick,eBlue] (.5,1.5) to (.5,-.8);
+        \draw[dashed,thick,ePurple] (-.5,-.307) to (1.5,.921);
+        \draw[dashed,thick,eGreen] (-.5,.921) to (1.5,-.307);
+        \draw[color1,fill=color1]
+        (.5,.307)--(.25,.433)--(.5,.866)--(.75,.433)--cycle;
+        \draw[color2,fill=color2] (.5,.307)--(.75,.433)--(1,0)--(.5,0)--cycle;
+        \draw[color3,fill=color3] (.5,.307)--(.25,.433)--(0,0)--(.5,0)--cycle;
+        \draw [black] (0,0)--(.5,.866)--(1,0)--cycle;
+        \draw (.5,.55) node {$\mathbf{1}$}; 
+        \draw (.3,.2) node {$\mathbf{2}$};\draw (.7,.2) node {$\mathbf{3}$};
+        \node at (.5,1.75) {\color{xBlue}$s=f$};
+        \node at (-.8,1.25) {\color{xGreen}$t=fr$};
+        \draw[-stealth',eRed] (1.5,-.5) to[very thick,bend right=60] (1.7,.2);
+        \node at (2,-.7) {\color{xRed}$st=r$};
+      \end{tikzpicture}
+  \end{columns}
+   Composing these in either order is a rotation of $2\pi/n$ radians:
+  \[
+  st=f(fr)=r,\qquad ts=(fr)f=(r^{n-1}f)f=r^{n-1}.
+  \]
+  A group presentation with these generators is
+  \[
+  D_n=\big\<s,t\mid s^2=1,\;t^2=1,\;(st)^n=1\big\> 
+  =\big\{\underbrace{1,st,ts,(st)^2,(ts)^2,\ldots,}_{\text{rotations}}\;
+  \underbrace{s,t,sts,tst,\ldots}_{\text{reflections}}\big\}.
+  \]
+  
+  % 2 Cayley graphs of D_3 = <r, f> = <s,t>, and the triangle
+  \[
+  \begin{tikzpicture}[scale=.6,auto]
+    \colorlet{color1}{actBlue}
+    \colorlet{color2}{actGreen}
+    \colorlet{color3}{cosetPurple}
+    \tikzstyle{P} = [draw,bend left=45,-stealth]
+    \tikzstyle{n} = [inner sep=1pt]
+    %%
+    %% Cayley graph of D3
+    %%
+    \begin{scope}[shift={(0,0)},scale=.9]
+      \tikzstyle{every node}=[font=\small]
+      \tikzstyle{r-in} = [draw, very thick, eRed,-stealth,bend left=35]
+      \tikzstyle{r-out} = [draw, very thick, eRed,-stealth,bend right=48]
+      \node (e) at (0:2.4) [v] {$1$};
+      \node (r) at (120:2.4) [v] {$r$};
+      \node (r2) at (240:2.4) [v] {$r^2$};
+      \node (f) at (0:1) [v] {$f$};
+      \node (r2f) at (240:1) [v] {$r^2\!f$};
+      \node (rf) at (120:1) [v] {$rf$};
+      \draw [r-out] (e) to  (r);
+      \draw [r-out] (r) to (r2);
+      \draw [r-out] (r2) to (e);
+      \draw [r-in] (f) to (r2f);
+      \draw [r-in] (r2f) to (rf);
+      \draw [r-in] (rf) to (f);
+      \draw [bb] (e) to (f);
+      \draw [bb] (r) to (rf);
+      \draw [bb] (r2) to (r2f);
+    \end{scope}
+    %%
+    %% Cayley graph of D4
+    %%
+    \begin{scope}[shift={(7,0)}]
+      \tikzstyle{every node}=[font=\small]
+      \node (e) at (90:2) [v] {$1$};
+      \node (t) at (30:2) [v] {$t$};
+      \node (ts) at (-30:2) [v] {$ts$};
+      \node (sts) at (-90:2) [v] {$sts$};
+      \node (st) at (-150:2) [v] {$st$};
+      \node (s) at (150:2) [v] {$s$};
+      \path[gg] (e) to (t);
+      \path[bb] (t) to (ts);
+      \path[gg] (ts) to (sts);
+      \path[bb] (st) to (sts);
+      \path[gg] (s) to (st);
+      \path[bb] (e) to (s);
+    \end{scope}
+    %%%%
+      %% Two permutation diagrams.
+      %%
+    \begin{scope}[shift={(10,1)}]
+      \node [n] (r1) at (1,0) {$1$};
+      \node [n] (r2) at (2,0) {$2$};
+      \node [n] (r3) at (3,0) {$3$};
+      \node [n] (r4) at (4,0) {$4$};
+      \node [n] (r5) at (5,0) {$5$};
+      \node [n] (r6) at (6,0) {$6$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(10,-1)}]
+      \node [n] (b1) at (1,0) {$1$};
+      \node [n] (b2) at (2,0) {$2$};
+      \node [n] (b3) at (3,0) {$3$};
+      \node [n] (b4) at (4,0) {$4$};
+      \node [n] (b5) at (5,0) {$5$};
+      \node [n] (b6) at (6,0) {$6$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+
+\begin{frame}{Transpositions} %\Pause
+  
+  A \alert{transposition} is a permutation that swaps two objects and
+  fixes the rest, e.g.:
+  
+  \vspace{-1mm}
+
+  %% Permutation diagram of (ij) in S_n
+  \[
+  \begin{tikzpicture}[scale=.5,auto]
+    \tikzstyle{n} = [inner sep=1pt]
+    \tikzstyle{r} = [draw,bend left=40,-stealth]
+    \tikzstyle{l} = [draw,bend left=40,-stealth]
+    \tikzstyle{every node}=[font=\footnotesize]
+    \node at (-3,0) {\normalsize $\tau=(i\,j)$:};
+    \node [n] (1) at (1,0) {$1$};
+    \node [n] (2) at (2,0) {$2$};
+    \node [n] (3) at (3,0) {\normalsize $\cdots$};
+    \node [n] (4) at (4,0) {$i-1$};
+    \node [n] (5) at (5,0) {$i$};
+    \node [n] (6) at (6,0) {$i\!+\!1$};
+    \node [n] (7) at (7,0) {\normalsize $\cdots$};
+    \node [n] (8) at (8,0) {$j\!-\!1$};
+    \node [n] (9) at (9,0) {$j$};
+    \node [n] (10) at (10,0) {$j\!+\!1$};
+    \node [n] (11) at (11,0) {\normalsize $\cdots$};
+    \node [n] (12) at (12,0) {$n\!-\!1$};
+    \node [n] (13) at (13,0) {$n$};
+    \path [r] (5) to (9);
+    \path [l] (9) to (5);
+  \end{tikzpicture}
+  \]
+  
+  \vspace{-1mm}\Pause
+  
+  An \Balert{adjacent transposition} is one of the form $(i\;\;i\!+\!1)$. 
+
+  \medskip\Pause
+
+  \begin{alertblock}{Remark}
+    There are three canonical types of generating sets for
+    $S_n$: \smallskip\Pause
+    \begin{itemize}
+    \item A \Galert{transposition} and an \Alert{$n$-cycle},
+      e.g.,: \vspace{-1mm}
+      \[
+      S_n=\big\<\,\Galert{(1\;2)},\;\;\Alert{(1\;2\,\cdots\,
+        n\!-\!1\;\;n)}\big\>\,.
+      \]
+
+      \vspace{-2mm}
+      
+    \item \Balert{Adjacent transpositions}: \vspace{-2mm}
+      \[
+      S_n=\big\<\,(1\;2),\;(2\; 3),\;\dots,\; (n-1\;\;n)\big\>\,. 
+      \]
+
+      \vspace{-2mm}
+      
+    \item \Palert{Overlapping transpositions}: \vspace{-2mm}
+      \[
+      S_n=\big\<\,(1\;2),\;(1\; 3),\;\dots,\; (1\;\;n)\big\>\,. 
+      \] \vspace{-4mm}\Pause
+    \end{itemize}
+  \end{alertblock}
+
+  \begin{exampleblock}{Homework}
+    Explain why each of these will generate the full $S_n$. \\ (It may be helpful to think about $n$ objects arranged in a row.)
+  \end{exampleblock}
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Even and odd permutations} %\Pause
+  
+  \begin{exampleblock}{Remark}
+    Every permutation in $S_n$ can be written as a product of transpositions... \alert{uniquely?}
+  \end{exampleblock}
+  
+  \medskip\Pause
+
+  \begin{itemize}
+    \item Example: $(1\; 3\; 2) = (1\; 2) (2\; 3)$ \Pause
+    \item Write $(1\; 3\; 5)$ as a product of transpositions. \Pause
+    \item Write $(1\; 3\; 5)$ using only \Balert{adjacent transpositions}.
+    \item Write $(1\; 3\; 5)$ using only \Palert{overlapping transpositions}.
+  \end{itemize}
+  
+  \medskip\Pause
+  
+  \begin{block}{Proposition}
+    The \alert{parity} of the number of transpositions of a fixed
+    permutation is unique.
+  \end{block}
+  
+  \Pause
+
+  \begin{definition}
+    An \Alert{even permutation} in $S_n$ can be written with an even
+    number of transpositions. \\
+    An \Balert{odd permutation} requires an odd number.
+  \end{definition}
+
+  \Pause
+  
+  \begin{exampleblock}{Remark}
+    \begin{itemize}
+    \item The product of two \Alert{even} permutations is \Alert{even}. (Why?) \Pause
+    \item The product of two \Balert{odd} permutations is \Pause
+    \item The product of an \Alert{even} and an \Balert{odd} permutation is 
+    \end{itemize}
+  \end{exampleblock}
+
+
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{The alternating groups} \smallskip
+
+  \begin{block}{Definition}
+    The set of \Alert{even} permutations in $S_n$ is the \Alert{alternating
+      group}, denoted $A_n$.
+  \end{block}
+
+  \Pause
+  
+  \begin{block}{Proposition}
+    Exactly half of the permutations in $S_n$ are even, and so 
+    $\displaystyle |A_n|=\tfrac{n!}{2}$.
+  \end{block}
+
+  \smallskip\Pause
+  
+  Rather than prove this using (messy) elementary methods now, we'll
+  wait until we see the \Balert{isomorphism theorems} to get a 1-line
+  proof. \medskip\Pause
+  
+  Here are Cayley graphs for $A_4$ on a \Balert{truncated tetrahedron} and
+  \Galert{cuboctahedron}.
+  
+  %% Cayley graphs for A_4 on truncated tetrahedron and a cuboctahedron.
+  \[
+  \begin{tikzpicture}[scale=.6]
+    %%
+    %% A_4 Cayley graph on a truncated tetrahedron
+    %% 
+    \begin{scope}[shift={(0,0)},scale=1.95]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=3.5mm] 
+      \tikzstyle{v-f} = [circle, draw, gray, fill=lightgray,inner sep=0pt,
+        minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \node (l1) at (-.05,.8) [v] {$x$};
+      \node (l2) at (0,.4) [v] {$b$};
+      \node (l3) at (.5,0) [v] {$c^2$};
+      \node (t1) at (.85,2.5) [v] {$e$};
+      \node (t2) at (1.3,2.8) [v] {$a^2$};
+      \node (t3) at (1.8,2.55) [v] {$a$};
+      \node (r1) at (2.4,.2) [v] {$d^2$};
+      \node (r2) at (2.5,.7) [v-f] {\color{darkgray} $z$};
+      \node (r3) at (2.9,.9) [v] {$c$};
+      \node (m2) at (1.15,1.9) [v-f] {\color{darkgray} $b^2$};
+      \node (m1) at (.8,1.25) [v-f] {\color{darkgray} $d$};
+      \node (m3) at (1.5,1.3) [v-f] {\color{darkgray} $y$};
+      \draw [rFaded] (r1) to (r2);
+      \draw [rFaded] (r2) to (r3);
+      \draw [bbFaded] (l2) to (m1);
+      \draw [bbFaded] (m2) to (t2);
+      \draw [bbFaded] (r2) to (m3);
+      \draw [rFaded] (m1) to (m2);
+      \draw [rFaded] (m2) to (m3);
+      \draw [rFaded] (m3) to (m1);
+      \draw [bb] (l1) to (t1);
+      \draw [bb] (l3) to (r1);
+      \draw [bb] (r3) to (t3);
+      \draw [r] (l1) to (l2);
+      \draw [r] (l2) to (l3);
+      \draw [r] (l3) to (l1);
+      \draw [r] (t1) to (t3);
+      \draw [r] (t2) to (t1);
+      \draw [r] (t3) to (t2);
+      \draw [r] (r3) to (r1);
+      \node at (0,-.2) {};
+    \end{scope}
+    %%
+    %% A_4 Cayley graph on a cuboctahedron
+    %%
+    \begin{scope}[shift={(12,2.75)},scale=.95]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=1.75mm]
+      %%
+      \node (a2) at (45:1) [v] {};
+      \node (a4) at (135:1) [v] {}; %{$\tiny *$};
+      \node (a6) at (225:1) [v] {};
+      \node (a8) at (315:1) [v] {};
+      \node (b1) at (0:2) [v] {};
+      \node (b3) at (90:2) [v] {};
+      \node (b5) at (180:2) [v] {};
+      \node (b7) at (270:2) [v] {};
+      \node (c2) at (45:4) [v] {};
+      \node (c4) at (135:4) [v] {};
+      \node (c6) at (225:4) [v] {};
+      \node (c8) at (315:4) [v] {};
+      \draw [p] (b1) to (a8); \draw [p] (a8) to (a2); \draw [p] (a2) to (b1);
+      \draw [p] (a4) to (a6); \draw [p] (a6) to (b5); \draw [p] (b5) to (a4);
+      \draw [p] (c2) to (b3); \draw [p] (b3) to (c4); \draw [p] (c4) to (c2);
+      \draw [p] (c6) to (b7); \draw [p] (b7) to (c8); \draw [p] (c8) to (c6);
+      \draw [g] (b1) to (c2); \draw [g] (c2) to (c8); \draw [g] (c8) to (b1);
+      \draw [g] (b5) to (c6); \draw [g] (c6) to (c4); \draw [g] (c4) to (b5);
+      \draw [g] (b3) to (a2); \draw [g] (a2) to (a4); \draw [g] (a4) to (b3);
+      \draw [g] (a6) to (a8); \draw [g] (a8) to (b7); \draw [g] (b7) to (a6);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+%%====================================================================
+\section{Direct products}
+
+%%====================================================================
+
+\begin{frame}{Direct products}
+  Here is a fun way to combine two groups $\Alert{A}$ and $\Balert{B}$ to make a bigger group $\Alert{A}\times\Balert{B}$. I shall illustrate with the example of $\Alert{C_2} \times \Balert{C_4}$.
+
+  \[
+  \begin{tikzpicture}[scale=.6,auto]
+    %%
+    %% Cayley graph of C2
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=3mm]
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \node at (0,-2) {};
+      \node (H) at (0,2.5) [v] {};
+      \node (1H) at (0,0) [v] {};
+      \draw [rr] (H) to (1H);
+      \node at (0,-1.3) {\small Draw $\Alert{C_2}$};
+    \end{scope}
+    %%
+    %% Inflate C2
+    %%
+    \begin{scope}[shift={(2,0)}]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \draw[faded, fill=faded] (0,-.9) rectangle (4.5,.7);
+      \draw[faded, fill=faded] (0,-.1) circle (.8);
+      \draw[faded, fill=faded] (4.5,-.1) circle (.8);
+      \draw[faded, fill=faded] (0,1.9) rectangle (4.5,3.5);
+      \draw[faded, fill=faded] (0,2.7) circle (.8);
+      \draw[faded, fill=faded] (4.5,2.7) circle (.8);
+      \draw[rr] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Inflate each node of $\Alert{C_2}$};
+    \end{scope}
+    %%
+    %% C2 Cayley graph inflated, with C4 Cayley graphs in each node.
+    %%
+    \begin{scope}[shift={(9,0)}]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \draw[faded, fill=faded] (0,-.9) rectangle (4.5,.7);
+      \draw[faded, fill=faded] (0,-.1) circle (.8);
+      \draw[faded, fill=faded] (4.5,-.1) circle (.8);
+      \draw[faded, fill=faded] (0,1.9) rectangle (4.5,3.5);
+      \draw[faded, fill=faded] (0,2.7) circle (.8);
+      \draw[faded, fill=faded] (4.5,2.7) circle (.8);
+      \node (10) at (0,2.5) [v] {};
+      \node (11) at (1.5,2.5) [v] {};
+      \node (12) at (3,2.5) [v] {};
+      \node (13) at (4.5,2.5) [v] {};
+      \node (00) at (0,0) [v] {};
+      \node (01) at (1.5,0) [v] {};
+      \node (02) at (3,0) [v] {};
+      \node (03) at (4.5,0) [v] {};
+      \draw [b] (00) to (01); 
+      \draw [b] (01) to (02);
+      \draw [b] (02) to (03);
+      \draw [b] (03) to [bend left] (00);
+      \draw [b] (10) to (11); 
+      \draw [b] (11) to (12);
+      \draw [b] (12) to (13);
+      \draw [b] (13) to [bend right] (10);
+      \draw[rr] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Insert $\Balert{C_4}$};
+    \end{scope}
+    %%
+    %% C2 inflated, C4 inserted, but C2 popped
+    %%
+    \begin{scope}[shift={(0.5,-6)}]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \node (10) at (0,2.5) [v] {};
+      \node (11) at (1.5,2.5) [v] {};
+      \node (12) at (3,2.5) [v] {};
+      \node (13) at (4.5,2.5) [v] {};
+      \node (00) at (0,0) [v] {};
+      \node (01) at (1.5,0) [v] {};
+      \node (02) at (3,0) [v] {};
+      \node (03) at (4.5,0) [v] {};
+      \draw [b] (00) to (01); 
+      \draw [b] (01) to (02);
+      \draw [b] (02) to (03);
+      \draw [b] (03) to [bend left] (00);
+      \draw [b] (10) to (11); 
+      \draw [b] (11) to (12);
+      \draw [b] (12) to (13);
+      \draw [b] (13) to [bend right] (10);
+      \draw[rr] (2.25, 0.7) to (2.25,1.9);
+      \node at (2.25,-1.3) {\small Pop the nodes of $\Alert{C_2}$};
+    \end{scope}
+    %%
+    %% Cayley graph of C4xC2
+    %%
+    \begin{scope}[shift={(8, -6)}]
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=5mm]  
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \node (10) at (0,2.5) [v] {};
+      \node (11) at (1.5,2.5) [v] {};
+      \node (12) at (3,2.5) [v] {};
+      \node (13) at (4.5,2.5) [v] {};
+      \node (00) at (0,0) [v] {};
+      \node (01) at (1.5,0) [v] {};
+      \node (02) at (3,0) [v] {};
+      \node (03) at (4.5,0) [v] {};
+      \draw [b] (00) to (01); 
+      \draw [b] (01) to (02);
+      \draw [b] (02) to (03);
+      \draw [b] (03) to [bend left] (00);
+      \draw [b] (10) to (11); 
+      \draw [b] (11) to (12);
+      \draw [b] (12) to (13);
+      \draw [b] (13) to [bend right] (10);
+      \draw [rr] (00) to (10);
+      \draw [rr] (01) to (11);
+      \draw [rr] (02) to (12);
+      \draw [rr] (03) to (13);
+      \node at (2.25,-1.3) {\small Copy $\Alert{C_2}$'s arrows correctly};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Direct products: Your turn!}
+  \begin{itemize}
+    \item Do $\Alert{C_2}\times\Balert{C_2}$. Who is this? \Pause
+    \item Do $\Alert{C_2}\times\Balert{C_3}$. Is this guy new? \Pause
+    \item Do $\Alert{C_4}\times\Balert{C_2}$. Is this the same as $\Alert{C_2}\times\Balert{C_4}$?
+  \end{itemize}
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Direct products, symbolically}
+  For two groups, $A$ and $B$, the Cartesian product is the set of ordered pairs
+  \[
+  A\times B=\big\{(a,b)\mid a\in A,\;b\in B\big\}.
+  \]
+  
+  \vspace{-2mm}\Pause
+  
+  \begin{definition}
+    The \Alert{direct product} of groups $(A,\star)$ and $(B, \circ)$ is a group whose elements are the
+    \emph{set} $A\times B$, and the group \Balert{operation} is
+    done component-wise: \Pause for generic elements $(a,b),(c,d)\in A\times B$,
+    \[
+    (a,b)*(c,d)=(a\star c,b\circ d).
+    \]
+    \Pause We call $A$ and $B$ the \Alert{factors}.
+  \end{definition}
+  
+  \smallskip\Pause
+  
+  I wish to emphasize that the binary operations on $A$ and $B$ could be different. \Pause 
+  For example, in $D_4\times\Z_4$:
+  \[
+  (r^3,3)*(fr,1)=(r^3\cdot fr,3+1)\Pause=(fr^2,0). 
+  \]
+
+  \begin{alertblock}{Question}
+    Is $D_4\times \Z_4$ abelian?
+  \end{alertblock}
+  \begin{exampleblock}{Homework}
+    Prove that $A\times B$ is abelian \alert{if and only if} both $A$ and $B$ are abelian.
+  \end{exampleblock}
+  
+\end{frame}
+
+\section{The end!}
 \end{document}
 
 %%====================================================================
@@ -3065,102 +3591,6 @@
   
 \end{frame}
 
-%%====================================================================
-%%====================================================================
-
-%Dihedral groups via reflections only
-\begin{frame}{Dihedral groups}
-  
-  Another canonical way to generate $D_n$ is with two reflections:
-  \begin{itemize}
-  \item \Balert{$s:=f$}
-  \item \Galert{$t:=fr=r^{n-1}f$} -- Convince yourself that this is indeed a different reflection.
-  \end{itemize}
-  \Pause Composing these in either order is a rotation of $2\pi/n$ radians:
-  \[
-  st=f(fr)\Pause=r\Pause,\qquad ts=(fr)f\Pause=(r^{n-1}f)f\Pause=r^{n-1}.
-  \]
-  \Pause A group presentation with these generators is
-  \[
-  D_n=\big\<s,t\mid s^2=1,\;t^2=1,\;(st)^n=1\big\> 
-  \Pause=\big\{\underbrace{1,st,ts,(st)^2,(ts)^2,\ldots,}_{\text{rotations}}\;
-  \underbrace{s,t,sts,tst,\ldots}_{\text{reflections}}\big\}.
-  \]
-  
-  \Pause
-  
-  % 2 Cayley graphs of D_3 = <r, f> = <s,t>, and the triangle
-  \[
-  \begin{tikzpicture}[scale=.6,auto]
-    \colorlet{color1}{actBlue}
-    \colorlet{color2}{actGreen}
-    \colorlet{color3}{cosetPurple}
-    %%
-    %% Cayley graph of D3
-    %%
-    \begin{scope}[shift={(0,0)},scale=.9]
-      \tikzstyle{every node}=[font=\small]
-      \tikzstyle{r-in} = [draw, very thick, eRed,-stealth,bend left=35]
-      \tikzstyle{r-out} = [draw, very thick, eRed,-stealth,bend right=48]
-      \node (e) at (0:2.4) [v] {$1$};
-      \node (r) at (120:2.4) [v] {$r$};
-      \node (r2) at (240:2.4) [v] {$r^2$};
-      \node (f) at (0:1) [v] {$f$};
-      \node (r2f) at (240:1) [v] {$r^2\!f$};
-      \node (rf) at (120:1) [v] {$rf$};
-      \draw [r-out] (e) to  (r);
-      \draw [r-out] (r) to (r2);
-      \draw [r-out] (r2) to (e);
-      \draw [r-in] (f) to (r2f);
-      \draw [r-in] (r2f) to (rf);
-      \draw [r-in] (rf) to (f);
-      \draw [bb] (e) to (f);
-      \draw [bb] (r) to (rf);
-      \draw [bb] (r2) to (r2f);
-    \end{scope}
-    %%
-    %% Cayley graph of D4
-    %%
-    \begin{scope}[shift={(7,0)}]
-      \tikzstyle{every node}=[font=\small]
-      \node (e) at (90:2) [v] {$1$};
-      \node (t) at (30:2) [v] {$t$};
-      \node (ts) at (-30:2) [v] {$ts$};
-      \node (sts) at (-90:2) [v] {$sts$};
-      \node (st) at (-150:2) [v] {$st$};
-      \node (s) at (150:2) [v] {$s$};
-      \path[gg] (e) to (t);
-      \path[bb] (t) to (ts);
-      \path[gg] (ts) to (sts);
-      \path[bb] (st) to (sts);
-      \path[gg] (s) to (st);
-      \path[bb] (e) to (s);
-    \end{scope}
-    %%
-    %% Cayley graph of D3
-    %%
-    \begin{scope}[shift={(13,-.75)},scale=1.5]
-      \draw[dashed,thick,eBlue] (.5,1.5) to (.5,-.8);
-      \draw[dashed,thick,ePurple] (-.5,-.307) to (1.5,.921);
-      \draw[dashed,thick,eGreen] (-.5,.921) to (1.5,-.307);
-      \draw[color1,fill=color1]
-      (.5,.307)--(.25,.433)--(.5,.866)--(.75,.433)--cycle;
-      \draw[color2,fill=color2] (.5,.307)--(.75,.433)--(1,0)--(.5,0)--cycle;
-      \draw[color3,fill=color3] (.5,.307)--(.25,.433)--(0,0)--(.5,0)--cycle;
-      \draw [black] (0,0)--(.5,.866)--(1,0)--cycle;
-      \draw (.5,.55) node {$\mathbf{1}$}; 
-      \draw (.3,.2) node {$\mathbf{2}$};\draw (.7,.2) node {$\mathbf{3}$};
-      \node at (.5,1.75) {\color{xBlue}$s=f$};
-      \node at (-.8,1.25) {\color{xGreen}$t=fr$};
-      \draw[-stealth',eRed] (1.5,-.5) to[very thick,bend right=60] (1.7,.2);
-      \node at (2,-.7) {\color{xRed}$st=r$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
 
 %%====================================================================
 %%====================================================================
@@ -4430,81 +4860,6 @@
 
 %%====================================================================
 
-\begin{frame}{Transpositions} %\Pause
-  
-  A \alert{transposition} is a permutation that swaps two objects and
-  fixes the rest, e.g.:
-  
-  \vspace{-1mm}
-
-  %% Permutation diagram of (ij) in S_n
-  \[
-  \begin{tikzpicture}[scale=.5,auto]
-    \tikzstyle{n} = [inner sep=1pt]
-    \tikzstyle{r} = [draw,bend left=40,-stealth]
-    \tikzstyle{l} = [draw,bend left=40,-stealth]
-    \tikzstyle{every node}=[font=\footnotesize]
-    \node at (-3,0) {\normalsize $\tau=(i\,j)$:};
-    \node [n] (1) at (1,0) {$1$};
-    \node [n] (2) at (2,0) {$2$};
-    \node [n] (3) at (3,0) {\normalsize $\cdots$};
-    \node [n] (4) at (4,0) {$i-1$};
-    \node [n] (5) at (5,0) {$i$};
-    \node [n] (6) at (6,0) {$i\!+\!1$};
-    \node [n] (7) at (7,0) {\normalsize $\cdots$};
-    \node [n] (8) at (8,0) {$j\!-\!1$};
-    \node [n] (9) at (9,0) {$j$};
-    \node [n] (10) at (10,0) {$j\!+\!1$};
-    \node [n] (11) at (11,0) {\normalsize $\cdots$};
-    \node [n] (12) at (12,0) {$n\!-\!1$};
-    \node [n] (13) at (13,0) {$n$};
-    \path [r] (5) to (9);
-    \path [l] (9) to (5);
-  \end{tikzpicture}
-  \]
-  
-  \vspace{-1mm}\Pause
-  
-  An \Balert{adjacent transposition} is one of the form $(i\;\;i\!+\!1)$. 
-
-  \medskip\Pause
-  
-  The following result should be intuitive, if one thinks about
-  rearranging $n$ objects in a row.
-
-  \medskip\Pause
-
-  \begin{alertblock}{Remark}
-    There are three canonical types of generating sets for
-    $S_n$: \smallskip\Pause
-    \begin{itemize}
-    \item A \Galert{transposition} and an \Alert{$n$-cycle},
-      e.g.,: \vspace{-1mm}
-      \[
-      S_n=\big\<\,\Galert{(1\;2)},\;\;\Alert{(1\;2\,\cdots\,
-        n\!-\!1\;\;n)}\big\>\,.
-      \]
-
-      \vspace{-2mm}
-      
-    \item \Balert{Adjacent transpositions}:
-      \[
-      S_n=\big\<\,(1\;2),\;(2\; 3),\;\dots,\; (n-1\;\;n)\big\>\,. 
-      \]
-
-      \vspace{-2mm}
-      
-    \item \Palert{Overlapping transpositions}:
-      \[
-      S_n=\big\<\,(1\;2),\;(1\; 3),\;\dots,\; (1\;\;n)\big\>\,. 
-      \] \vspace{-4mm}\Pause
-    \end{itemize}
-  \end{alertblock}
-  
-\end{frame}
-
-%%====================================================================
-
 \begin{frame}{Polytopes and platonic solids} %\Pause
   
   A \Alert{polytope} is a finite region of $\R^n$ enclosed by
@@ -4754,165 +5109,6 @@
   \end{tikzpicture}
   \]
 
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Even and odd permutations} %\Pause
-  
-  \begin{exampleblock}{Remark}
-    Even though every permutation in $S_n$ can be written as a product
-    of transpositions, there may be many ways to do this.
-  \end{exampleblock}
-  
-  \medskip\Pause
-
-  For example: \qquad
-  $
-  (132)=(12)(23) \Pause=(12)(23)(23)(23)
-  \Pause=(12)(23)\,(12)\,(12)$.
-  
-  \medskip\Pause
-  
-  \begin{block}{Proposition}
-    The \alert{parity} of the number of transpositions of a fixed
-    permutation is unique.
-  \end{block}
-  
-  \Pause
-
-  \begin{definition}
-    An \Alert{even permutation} in $S_n$ can be written with an even
-    number of transpositions. An \Balert{odd permutation}
-    requires an odd number.
-  \end{definition}
-
-  \Pause
-  
-  \begin{exampleblock}{Remark}
-    The product of:
-    \begin{itemize}
-    \item two \Alert{even} permutations is \Alert{even} \Pause
-    \item two \Balert{odd} permutations is \Alert{even} \Pause
-    \item an \Alert{even} an an \Balert{odd} permutation is \Balert{odd}.
-    \end{itemize}
-  \end{exampleblock}
-  
-%  That is, a fixed permutation can either be written with an
-%  \alert{even number} of transpositions, or an {\color{xBlue}odd
-%    number} of transpositions, but \emph{not both}!
-
-%    \medskip\Pause
-
-%    We thus have a notion of \alert{even permutations} and
-%    {\color{xBlue}odd permutations}.
-
-%    \smallskip\Pause
-
-
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{The alternating groups} \smallskip
-
-  \begin{block}{Definition}
-    The set of even permutations in $S_n$ is the \Alert{alternating
-      group}, denoted $A_n$.
-  \end{block}
-
-  \Pause
-  
-  \begin{block}{Proposition}
-    Exactly half of the permutations in $S_n$ are even, and so 
-    $\displaystyle |A_n|=\tfrac{n!}{2}$.
-  \end{block}
-
-  \smallskip\Pause
-  
-  Rather than prove this using (messy) elementary methods now, we'll
-  wait until we see the \Balert{isomorphism theorems} to get a 1-line
-  proof. \medskip\Pause
-  
-  Here are Cayley graphs for $A_4$ on a \Balert{truncated tetrahedron} and
-  \Galert{cuboctahedron}.
-  
-  %% Cayley graphs for A_4 on truncated tetrahedron and a cuboctahedron.
-  \[
-  \begin{tikzpicture}[scale=.6]
-    %%
-    %% A_4 Cayley graph on a truncated tetrahedron
-    %% 
-    \begin{scope}[shift={(0,0)},scale=1.95]
-      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
-        minimum size=3.5mm] 
-      \tikzstyle{v-f} = [circle, draw, gray, fill=lightgray,inner sep=0pt,
-        minimum size=3.5mm]
-      \tikzstyle{every node}=[font=\tiny]
-      %%
-      \node (l1) at (-.05,.8) [v] {$x$};
-      \node (l2) at (0,.4) [v] {$b$};
-      \node (l3) at (.5,0) [v] {$c^2$};
-      \node (t1) at (.85,2.5) [v] {$e$};
-      \node (t2) at (1.3,2.8) [v] {$a^2$};
-      \node (t3) at (1.8,2.55) [v] {$a$};
-      \node (r1) at (2.4,.2) [v] {$d^2$};
-      \node (r2) at (2.5,.7) [v-f] {\color{darkgray} $z$};
-      \node (r3) at (2.9,.9) [v] {$c$};
-      \node (m2) at (1.15,1.9) [v-f] {\color{darkgray} $b^2$};
-      \node (m1) at (.8,1.25) [v-f] {\color{darkgray} $d$};
-      \node (m3) at (1.5,1.3) [v-f] {\color{darkgray} $y$};
-      \draw [rFaded] (r1) to (r2);
-      \draw [rFaded] (r2) to (r3);
-      \draw [bbFaded] (l2) to (m1);
-      \draw [bbFaded] (m2) to (t2);
-      \draw [bbFaded] (r2) to (m3);
-      \draw [rFaded] (m1) to (m2);
-      \draw [rFaded] (m2) to (m3);
-      \draw [rFaded] (m3) to (m1);
-      \draw [bb] (l1) to (t1);
-      \draw [bb] (l3) to (r1);
-      \draw [bb] (r3) to (t3);
-      \draw [r] (l1) to (l2);
-      \draw [r] (l2) to (l3);
-      \draw [r] (l3) to (l1);
-      \draw [r] (t1) to (t3);
-      \draw [r] (t2) to (t1);
-      \draw [r] (t3) to (t2);
-      \draw [r] (r3) to (r1);
-      \node at (0,-.2) {};
-    \end{scope}
-    %%
-    %% A_4 Cayley graph on a cuboctahedron
-    %%
-    \begin{scope}[shift={(12,2.75)},scale=.95]
-      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
-        minimum size=1.75mm]
-      %%
-      \node (a2) at (45:1) [v] {};
-      \node (a4) at (135:1) [v] {}; %{$\tiny *$};
-      \node (a6) at (225:1) [v] {};
-      \node (a8) at (315:1) [v] {};
-      \node (b1) at (0:2) [v] {};
-      \node (b3) at (90:2) [v] {};
-      \node (b5) at (180:2) [v] {};
-      \node (b7) at (270:2) [v] {};
-      \node (c2) at (45:4) [v] {};
-      \node (c4) at (135:4) [v] {};
-      \node (c6) at (225:4) [v] {};
-      \node (c8) at (315:4) [v] {};
-      \draw [p] (b1) to (a8); \draw [p] (a8) to (a2); \draw [p] (a2) to (b1);
-      \draw [p] (a4) to (a6); \draw [p] (a6) to (b5); \draw [p] (b5) to (a4);
-      \draw [p] (c2) to (b3); \draw [p] (b3) to (c4); \draw [p] (c4) to (c2);
-      \draw [p] (c6) to (b7); \draw [p] (b7) to (c8); \draw [p] (c8) to (c6);
-      \draw [g] (b1) to (c2); \draw [g] (c2) to (c8); \draw [g] (c8) to (b1);
-      \draw [g] (b5) to (c6); \draw [g] (c6) to (c4); \draw [g] (c4) to (b5);
-      \draw [g] (b3) to (a2); \draw [g] (a2) to (a4); \draw [g] (a4) to (b3);
-      \draw [g] (a6) to (a8); \draw [g] (a8) to (b7); \draw [g] (b7) to (a6);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
 \end{frame}
 
 %%====================================================================
