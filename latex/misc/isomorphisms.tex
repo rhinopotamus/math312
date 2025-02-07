@@ -10,7 +10,9 @@
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{problem}{Problem}
 \newtheorem*{definition}{Definition}
+\newtheorem*{question}{Question}
 \newtheorem*{exercise}{Exercise}
+\newtheorem*{example}{Examples}
 
 % pretty colors!
 \usepackage[dvipsnames]{xcolor}
@@ -46,6 +48,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\Zstar}{\mathbb{Z} - \{0\}}
 \newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
 \def\<{\langle}
@@ -144,6 +147,13 @@ Here are some examples of homomorphisms.
 \end{exercise}
 
 \subsection*{What about isomorphisms?}
+
+Okay, so to return to the top of this document, an isomorphism is a homomorphism that is also a bijection. 
+
+\begin{question}
+    Which of the example homomorphisms in the previous section are isomorphisms?
+\end{question}
+
 A general theme in math is that if you make something more special, you get stronger results. By adding ``bijection'' to ``homomorphism,'' you can thus expect to preserve even more structure.
 
 \begin{exercise} Let $\phi:G\to H$ be an isomorphism. Prove that:
@@ -168,6 +178,33 @@ If there is an isomorphism $\phi:G \to H$, we say that $G$ and $H$ are \Alert{is
         \item $|G| = |H|$.
     \end{itemize}
 \end{exercise}
+
+\subsection*{Automorphisms}
+Certainly every group is isomorphic to itself. There's an obvious way to do this, but there may be more interesting ways as well. These are called \Alert{automorphisms}.
+
+\begin{definition}
+    An \Alert{automorphism} is a map $\phi:G\to G$ that is an isomorphism, ie., a bijective homomorphism.
+\end{definition}
+
+\begin{example} Prove that each of these are automorphisms.
+    \begin{itemize}
+        \item The identity homomorphism is an automorphism.
+        \item The complex-conjugate map $\overline{\phantom{z}}:\C \to \C$ given by $\overline{a+bi} = a - bi$ is an automorphism.
+        \begin{proof}
+            We need to check three things:
+            \begin{itemize}
+                \item First, that $\overline{\phantom{z}}$ is a homomorphism: $\overline{(a+bi)(c+di)} = \overline{a+bi} \cdot \overline{c+di}$. Do some tedious complex-numbers multiplication to check that the thing on the left is indeed the same as the thing on the right. (They both end up being $(ac-bd)-(ad-bc)i$.)
+                \item Second, that $\overline{\phantom{z}}$ is injective (aka 1-1): Suppose that $\overline{a+bi} = \overline{c+di}$. Well, then $a-bi$ = $c-di$. Equating real and imaginary parts, we see that $a=c$ and $-b = -d$. Okay, so $b=d$. Therefore $a+bi = c+di$.
+                \item Lastly, that $\overline{\phantom{z}}$ is surjective (aka onto): Pick a generic complex number $a+bi$. Well, that's $\overline{a-bi}$, so yay.
+            \end{itemize}
+            (Aside: these properties are just as easy to check, and maybe even easier, if you write your complex numbers in polar form $re^{i\theta}$.)
+        \end{proof}
+        \item We shall allow ourselves a moment of brief annoyance that the word ``conjugation'' means something different in different contexts, and now that we've gotten that out of our system: Pick a fixed element $g\in G$. The ``$g$-conjugation map'' $\phi_g:G\to G$ given by $\phi_g(h) = ghg\inv$ is an automorphism.
+        \item Let's say that $G$ is an abelian group, so the squaring map $s(g) = g^2$ (which I might also write as $g\mapsto g^2$) is a homomorphism. Is it an automorphism? Prove that it is, or give an example where it's not.
+        \item Is the squaring map an automorphism of $C_2$? $C_3$? $C_4$?
+        \item The $k$-power map $g\mapsto g^k$ is an automorphism of $C_n$ \Alert{iff} $n$ and $k$ are relatively prime.
+    \end{itemize}
+\end{example}
 
 
 \end{document}
