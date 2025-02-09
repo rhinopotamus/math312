@@ -530,7 +530,7 @@
     \item \Galert{meet}, or \Alert{inf}, or \Balert{greatest lower bound}\\ $x\!\And\!y$.\Pause
     \end{itemize}
   \end{multicols}
-  Examples that we're familiar with are \Balert{subset lattices} and
+  Examples you may have seen previously are \Balert{subset lattices} and
   \Balert{divisor lattices}.
   %%
   %% Boolean lattice, and divisor lattice of 24
@@ -593,7 +593,7 @@
   \begin{block}{Theorem}
     $\<H, K\>$ is the smallest subgroup containing both $H$ and $K$. \Pause
 
-    (Note that $H \cup K$ is not in general a subgroup.)
+    (Note that $H \cup K$ is not in general a subgroup. Why not?)
   \end{block}
 \end{frame}
 
@@ -757,7 +757,7 @@
       \draw [cy2] (1) to (r2f);
       \draw [cy2] (1) to (r3f);
       \node at (0,0) {\normalsize $D_4$};
-    \end{scope}
+    \end{scope} \Pause
     %%
     \begin{scope}[shift={(11.25,-3.5)},scale=1.35,shorten >= -2pt,
         shorten <= -2pt]
@@ -1358,6 +1358,383 @@
 
 %%====================================================================
 
+\begin{frame}{The subgroup lattice of $Q_8$} %\Pause
+
+  
+  Let's determine all  subgroups of the quaternion group
+  \[
+  Q_8=\big\<i,j,k\mid i^2=j^2=k^2=ijk=-1\big\>.
+  \]
+  \Pause
+  %% Cayley graph, cycle graph, and subgroup lattice of Q_8
+  \[
+  \begin{tikzpicture}[scale=.73]
+    %%
+    \tikzstyle{cy2-i} = [draw,very thick,eRed]
+    \tikzstyle{cy2-j} = [draw,very thick,eBlue]
+    \tikzstyle{cy2-k} = [draw,very thick,ePurple]
+    \tikzstyle{B} = [draw, very thick, eBlue,-stealth',bend right]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1.1]
+      \tikzstyle{every node}=[font=\small]
+      \node (1) at (0:2) [v] {$1$};
+      \node (i) at (90:2) [v] {$i$};
+      \node (-1) at (180:2) [v] {$-1$};
+      \node (-i) at (270:2) [v] {$-i$};
+      \node (j) at (0:1) [v] {$j$};
+      \node (-k) at (270:1) [v] {$-k$};
+      \node (-j) at (180:1) [v] {$-j$};
+      \node (k) at (90:1) [v] {$k$};
+      %%
+      \draw [b] (1) to (j); \draw [B] (j) to (-1);
+      \draw [b] (-1) to (-j); \draw [B] (-j) to (1);
+      %%
+      \draw [b] (i) to (k); \draw [B] (k) to (-i);
+      \draw [b] (-i) to (-k); \draw [B] (-k) to (i);
+      %%
+      \draw [r] (1) to [bend right] (i);
+      \draw [r] (i) to [bend right] (-1);
+      \draw [r] (-1) to [bend right] (-i);
+      \draw [r] (-i) to [bend right] (1);
+      \draw [r] (j) to [bend left=28] (-k);
+      \draw [r] (-k) to [bend left=28] (-j);
+      \draw [r] (-j) to [bend left=28] (k);
+      \draw [r] (k) to [bend left=28] (j);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(5.75,0)},scale=.7,xscale=.85]
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node (-i) at (-.75,0) [v] {$-\!i$};
+      \node (i) at (.75,0) [v] {$i$};
+      \node (-j) at (-2.25,0) [v] {$-\!j$};
+      \node (j) at (2.25,0) [v] {$j$};
+      \node (-k) at (-3.75,0) [v] {$-\!k$};
+      \node (k) at (3.75,0) [v] {$k$};
+      \node (1) at (0,3) [v] {$1$};
+      \node (-1) at (0,-3) [v] {$-1$};
+      \draw [cy2-i] (1) to (i); \draw [cy2-i] (1) to (-i);
+      \draw [cy2-j] (1) to (j); \draw [cy2-j] (1) to (-j);
+      \draw [cy2-k] (1) to (k); \draw [cy2-k] (1) to (-k);
+      \draw [cy2-i] (-1) to (i); \draw [cy2-i] (-1) to (-i);
+      \draw [cy2-j] (-1) to (j); \draw [cy2-j] (-1) to (-j);
+      \draw [cy2-k] (-1) to (k); \draw [cy2-k] (-1) to (-k);
+    \end{scope}
+  \end{tikzpicture}
+  \]  \Pause
+
+  \begin{columns}
+    \column{0.6\textwidth}
+    Every element generates a \Balert{cyclic subgroup}:
+      \[
+      \<1\>=\{1\},\qquad\Pause\<-1\>=\{\pm 1\},\qquad\Pause
+      \<i\>=\<-i\>=\{\pm 1,\pm i\},\qquad
+      \]
+      \vspace{-2mm}\Pause
+      \[
+      \<j\>=\<-j\>=\{\pm 1,\pm j\},\qquad\quad\Pause \<k\>=\<k\>=\{\pm 1,\pm k\}.
+      \] \Pause
+      Are there any other proper subgroups? \Pause
+
+    \column{0.3\textwidth}
+    \[\begin{tikzpicture}
+      \begin{scope}[shorten >= -2pt,shorten <= -2pt,scale=1]
+        \node(Q8) at (0,2.8) {$Q_8$};
+        \node(i) at (-1,1.9) { $\<i\>$};
+        \node(j) at (0,1.9) { $\<j\>$};
+        \node(k) at (1,1.9) { $\<k\>$};
+        \node(-1) at (0,1) { $\<-1\>$};
+        \node(1) at (0,.2) { $\left\<1\right\>$};
+        \draw(1)--(-1); \draw(-1)--(i); \draw(-1)--(j); \draw(-1)--(k);
+        \draw(Q8)--(i); \draw(Q8)--(j); \draw(Q8)--(k);
+      \end{scope}
+    \end{tikzpicture}\]
+  \end{columns}
+  
+\end{frame}
+
+
+%%====================================================================
+
+\begin{frame}{Subgroups of $\Z_2\times\Z_2\times\Z_2$} %\Pause
+  
+  We've seen the subgroup lattices of two groups of order $8$: \Pause
+  \begin{itemize}
+  \item $D_4$ has five elements of order $2$, and $10$ subgroups. \Pause
+  \item $Q_8$ has one element of order $2$, and $6$ subgroups. \Pause
+  \item $\Z_2^3$ has seven \emph{elements} of order $2$.
+  \end{itemize}  
+  
+  \smallskip\Pause
+  
+  \begin{exampleblock}{Rule of thumb}
+    Groups with elements of small order tend to have more subgroups
+    than those with elements of large order.
+  \end{exampleblock}
+  
+  \medskip\Pause
+  
+  The following Cayley graphs show three different subgroups of
+  order $4$ in $\Z_2^3$.
+
+  %% Three Cayley graphs of Z_2^3 with order-4 subgroups highlighted
+  \[
+  \begin{tikzpicture}[scale=.5]
+    %%
+    \tikzstyle{every node}=[font=\footnotesize]
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \node (000) at (0,0) [v-y] {$000$};
+      \node (100) at (-1.5,-1.5) [v-y] {$100$};
+      \node (010) at (3,0) [v-y] {$010$};
+      \node (110) at (1.5,-1.5) [v-y] {$110$};
+      \node (001) at (0,3) [v] {$001$};
+      \node (101) at (-1.5,1.5) [v] {$101$};
+      \node (011) at (3,3) [v] {$011$};
+      \node (111) at (1.5,1.5) [v] {$111$};
+      \draw [ggFaded] (000) to (001);
+      \draw [rrFaded] (000) to (010);
+      \draw [bbFaded] (000) to (100);
+      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
+      \draw [rr] (001) to (011);
+      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
+      \draw [gg] (010) to (011);
+      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
+      \draw [bb] (110) to (010);
+      \node at (.75,-2.5) {\normalsize $\<\Balert{100},\Alert{010}\>$};
+    \end{scope}\Pause
+    %%
+    \begin{scope}[shift={(7,0)}]
+      \node (000) at (0,0) [v-y] {$000$};
+      \node (100) at (-1.5,-1.5) [v-y] {$100$};
+      \node (010) at (3,0) [v] {$010$};
+      \node (110) at (1.5,-1.5) [v] {$110$};
+      \node (001) at (0,3) [v] {$001$};
+      \node (101) at (-1.5,1.5) [v] {$101$};
+      \node (011) at (3,3) [v-y] {$011$};
+      \node (111) at (1.5,1.5) [v-y] {$111$};
+      \draw [ggFaded] (000) to (001);
+      \draw [rrFaded] (000) to (010);
+      \draw [bbFaded] (000) to (100);
+      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
+      \draw [rr] (001) to (011);
+      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
+      \draw [gg] (010) to (011);
+      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
+      \draw [bb] (110) to (010);
+      \node at (.75,-2.5) {\normalsize $\<\Balert{100},011\>$};
+    \end{scope} \Pause
+    %%
+    \begin{scope}[shift={(14,0)}]
+      \node (000) at (0,0) [v-y] {$000$};
+      \node (100) at (-1.5,-1.5) [v] {$100$};
+      \node (010) at (3,0) [v] {$010$};
+      \node (110) at (1.5,-1.5) [v-y] {$110$};
+      \node (001) at (0,3) [v] {$001$};
+      \node (101) at (-1.5,1.5) [v-y] {$101$};
+      \node (011) at (3,3) [v-y] {$011$};
+      \node (111) at (1.5,1.5) [v] {$111$};
+      \draw [ggFaded] (000) to (001);
+      \draw [rrFaded] (000) to (010);
+      \draw [bbFaded] (000) to (100);
+      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
+      \draw [rr] (001) to (011);
+      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
+      \draw [gg] (010) to (011);
+      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
+      \draw [bb] (110) to (010);
+      \node at (.75,-2.5) {\normalsize $\<110,011\>$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+
+%%====================================================================
+
+\begin{frame}{The subgroup lattice of $\Z_2\times\Z_2\times\Z_2$}
+  
+  All $\binom{7}{2}=21$ pairs of non-identity element elements
+  generate a subgroup isomorphic to $V_4$. \medskip\Pause
+
+  But this triple-counts all such subgroups. \Pause In summary, the
+  subgroups of $\Z_2^3$ are: \smallskip
+  
+  \begin{itemize}
+  \item The subgroups $G$ and $\{000\}$, \smallskip\Pause
+  \item $7$ subgroups isomorphic to $C_2$, \smallskip\Pause
+  \item $7$ subgroups isomorphic to $V_4$. \Pause
+  \end{itemize}
+
+  %% Subgroup lattices of Z_2^3 and Z_8
+  \[
+  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.2]
+    \begin{scope}[shift={(0,0)}]
+      %%
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \node (G) at (0,3) {\normalsize $\Z_2^3$};
+      \node (010-001) at (-3,2) {$\<010,001\>$}; % 010,001,011
+      \node (100-001) at (-2,2) {$\<100,001\>$}; % 100,001,101    
+      \node (100-010) at (-1,2) {$\<100,010\>$}; % 100,010,110
+      \node (100-011) at (0,2) {$\<100,011\>$};  % 100,011,111
+      \node (010-101) at (1,2) {$\<010,101\>$};  % 010,101,111
+      \node (110-001) at (2,2) {$\<110,001\>$};  % 110,001,111
+      \node (110-011) at (3,2) {$\<110,011\>$};  % 110,011,101
+      %%
+      \node (100) at (-3,1) {$\<100\>$};
+      \node (010) at (-2,1) {$\<010\>$};
+      \node (001) at (-1,1) {$\<001\>$};
+      \node (011) at (0,1) {$\<011\>$};
+      \node (101) at (1,1) {$\<101\>$};
+      \node (110) at (2,1) {$\<110\>$};
+      \node (111) at (3,1) {$\<111\>$};
+      %%
+      \node (000) at (0,0) {\small $\<000\>$};
+      %%
+      \draw (000) to (100); \draw (000) to (010); \draw (000) to (110);
+      \draw (000) to (101); \draw (000) to (001); \draw (000) to (011);
+      \draw (000) to (111);
+      %%
+      \draw(100)to(100-010); \draw(100)to(100-001); \draw(100)to(100-011);
+      \draw(010)to(100-010); \draw(010)to(010-001); \draw(010)to(010-101);
+      \draw(110)to(100-010); \draw(110)to(110-001); \draw(110)to(110-011);
+      \draw(101)to(100-001); \draw(101)to(010-101); \draw(101)to(110-011);
+      \draw(111)to(100-011); \draw(111)to(010-101); \draw(111)to(110-001);
+      \draw(011)to(010-001); \draw(011)to(100-011); \draw(011)to(110-011);
+      \draw(001)to(100-001); \draw(001)to(010-001); \draw(001)to(110-001);
+      %%
+      \draw (100-010) to (G); \draw (100-001) to (G); \draw (010-001) to (G);
+      \draw (100-011) to (G); \draw (010-101) to (G); \draw (110-001) to (G);
+      \draw (110-011) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{The subgroup lattice of $\Z_8$}
+  Draw the Cayley diagram of $Z_8$ and find all its subgroups.
+
+  Arrange them in a lattice.
+
+  \[
+  \begin{tikzpicture}
+    \begin{scope}
+      \node (0) at (90:2) [v] {0};
+      \node (1) at (45:2) [v] {1};
+      \node (2) at (0:2) [v] {2};
+      \node (3) at (315:2) [v] {3};
+      \node (4) at (270:2) [v] {4};
+      \node (5) at (225:2) [v] {5};
+      \node (6) at (180:2) [v] {6};
+      \node (7) at (135:2) [v] {7};
+      \draw [r] (0) to (1);
+      \draw [r] (1) to (2);
+      \draw [r] (2) to (3);
+      \draw [r] (3) to (4);
+      \draw [r] (4) to (5);
+      \draw [r] (5) to (6);
+      \draw [r] (6) to (7);
+      \draw [r] (7) to (0);
+    \end{scope} \Pause
+    \begin{scope}[shift={(5,0)}]
+      \node (Z8) at (0,2) {\hspace{-7mm}$\Z_8\!=\!\<1\>$};
+      \node (Z4) at (0,2/3) {$\<2\>$};
+      \node (Z2) at (0,-2/3) {$\<4\>$};
+      \node (Z1) at (0,-2) {$\<0\>$};
+      \draw (Z8) to (Z4); \draw (Z4) to (Z2); \draw (Z2) to (Z1); 
+    \end{scope}
+  \end{tikzpicture}
+  \]
+\end{frame}
+
+
+%%====================================================================
+
+\begin{frame}{Groups of order $8$} \smallskip
+  
+  There is one more group of order $8$, which is $\Z_4 \times \Z_2$.
+  %%
+  %% Cayley graph and subgroup lattice of Z_4 x Z_2
+  \[
+  \begin{tikzpicture}[scale=.75,auto]
+    \begin{scope}
+      %%
+      \tikzstyle{every node}=[font=\tiny]
+      %%
+      \node (00) at (0,3) [v] {$(0,0)$};
+      \node (10) at (1.5,3) [v] {$(1,0)$};
+      \node (20) at (3,3) [v] {$(2,0)$};
+      \node (30) at (4.5,3) [v] {$(3,0)$};
+      \node (01) at (0,1.5) [v] {$(0,1)$};
+      \node (11) at (1.5,1.5) [v] {$(1,1)$};
+      \node (21) at (3,1.5) [v] {$(2,1)$};
+      \node (31) at (4.5,1.5) [v] {$(3,1)$};
+      \draw [r] (00) to (10);
+      \draw [r] (10) to (20);
+      \draw [r] (20) to (30);
+      \draw [r] (30) to [bend right=25] (00);
+      \draw [r] (01) to (11);
+      \draw [r] (11) to (21);
+      \draw [r] (21) to (31);
+      \draw [r] (31) to [bend left=25] (01);
+      \draw [bb] (00) to (01);
+      \draw [bb] (10) to (11);
+      \draw [bb] (20) to (21);
+      \draw [bb] (30) to (31);
+    \end{scope} \Pause
+    %%
+    \begin{scope}[shift={(7,-.55)},shorten >= -3pt, shorten <= -3pt,scale=.75]
+      %%
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \node(G) at (3.5,6) {\small $\Z_4\times\Z_2$};
+      \node(10) at (5.25,4.5) {$\<(1,0)\>$};
+      \node(01-20) at (1.75,4.5) {$\<(0,1),(2,0)\>$};
+      \node(11) at (3.5,4.5) {$\<(1,1)\>$};
+      \node(01) at (0,3) {$\<(0,1)\>$};
+      \node(21) at (1.75,3) {$\<(2,1)\>$};
+      \node(20) at (3.5,3) {$\<(2,0)\>$};
+      \node(00) at (1.75,1.5) {$\<(0,0)\>$};
+      \draw(G)--(01-20); \draw(G)--(11); \draw(G)--(10);
+      \draw(01-20)--(01); \draw(01-20)--(21); \draw(01-20)--(20); 
+      \draw(11)--(20); \draw(10)--(20);
+      \draw(01)--(00); 
+      \draw(21)--(00); \draw(20)--(00);
+    \end{scope}
+  \end{tikzpicture}
+  \] \Pause
+  \vspace{-1mm} Let's summarize the sizes of the subgroups of the
+  groups of order $8$ that we have seen.
+  
+  \[
+  \begin{tabular}{l|ccccc}
+    & $C_8$ & $Q_8$ & $C_4\!\times\! C_2$ & $D_4$ & $C_2^3$ \\ \hline
+    \# elts.\ of order $8$ & $4$ & $0$ & $0$ & $0$ & $0$ \\
+    \# elts.\ of order $4$ & $2$ & $6$ & $4$ & $2$ & $0$ \\
+    \# elts.\ of order $2$ & $1$ & $1$ & $3$ & $5$ & $7$ \\
+    \# elts.\ of order $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\ \hline
+    \# subgroups & $4$ & $6$ & $8$ & $10$ & $16$ \\
+  \end{tabular}
+  \] \Pause
+  
+  \begin{exampleblock}{Observations?} \Pause
+    \begin{itemize}
+    \item Groups that have more elements of
+      small order tend to have more subgroups. \Pause
+    \item In all of these cases, the order of each subgroup divides
+      $|G|$.
+    \end{itemize}
+  \end{exampleblock}
+    
+\end{frame}
+
+%%====================================================================
+
 \section{The end!}
 \end{document}
 
@@ -1574,349 +1951,6 @@
   There are a number of mathematical objects that can be viewed in
   these two ways.
   
-\end{frame}
-
-
-
-%%====================================================================
-
-\begin{frame}{The subgroup lattice of $Q_8$} %\Pause
-
-  
-  Let's determine all  subgroups of the quaternion group
-  \[
-  Q_8=\big\<i,j,k\mid i^2=j^2=k^2=ijk=-1\big\>.
-  \]
-
-  \Pause
-
-  Every element generates a \Balert{cyclic subgroup}:
-  \[
-  \<1\>=\{1\},\qquad\Pause\<-1\>=\{\pm 1\},\qquad\Pause
-  \<i\>=\<-i\>=\{\pm 1,\pm i\},\qquad
-  \]
-  \vspace{-2mm}\Pause
-  \[
-  \<j\>=\<-j\>=\{\pm 1,\pm j\},\qquad\quad\Pause \<k\>=\<k\>=\{\pm 1,\pm k\}.
-  \]
-  There are no other proper subgroups. \Pause
-  
-  %% Cayley graph, cycle graph, and subgroup lattice of Q_8
-  \[
-  \begin{tikzpicture}[scale=.73]
-    %%
-    \tikzstyle{cy2-i} = [draw,very thick,eRed]
-    \tikzstyle{cy2-j} = [draw,very thick,eBlue]
-    \tikzstyle{cy2-k} = [draw,very thick,ePurple]
-    \tikzstyle{B} = [draw, very thick, eBlue,-stealth',bend right]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1.1]
-      \tikzstyle{every node}=[font=\small]
-      \node (1) at (0:2) [v] {$1$};
-      \node (i) at (90:2) [v] {$i$};
-      \node (-1) at (180:2) [v] {$-1$};
-      \node (-i) at (270:2) [v] {$-i$};
-      \node (j) at (0:1) [v] {$j$};
-      \node (-k) at (270:1) [v] {$-k$};
-      \node (-j) at (180:1) [v] {$-j$};
-      \node (k) at (90:1) [v] {$k$};
-      %%
-      \draw [b] (1) to (j); \draw [B] (j) to (-1);
-      \draw [b] (-1) to (-j); \draw [B] (-j) to (1);
-      %%
-      \draw [b] (i) to (k); \draw [B] (k) to (-i);
-      \draw [b] (-i) to (-k); \draw [B] (-k) to (i);
-      %%
-      \draw [r] (1) to [bend right] (i);
-      \draw [r] (i) to [bend right] (-1);
-      \draw [r] (-1) to [bend right] (-i);
-      \draw [r] (-i) to [bend right] (1);
-      \draw [r] (j) to [bend left=28] (-k);
-      \draw [r] (-k) to [bend left=28] (-j);
-      \draw [r] (-j) to [bend left=28] (k);
-      \draw [r] (k) to [bend left=28] (j);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(5.75,0)},scale=.7,xscale=.85]
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (-i) at (-.75,0) [v] {$-\!i$};
-      \node (i) at (.75,0) [v] {$i$};
-      \node (-j) at (-2.25,0) [v] {$-\!j$};
-      \node (j) at (2.25,0) [v] {$j$};
-      \node (-k) at (-3.75,0) [v] {$-\!k$};
-      \node (k) at (3.75,0) [v] {$k$};
-      \node (1) at (0,3) [v] {$1$};
-      \node (-1) at (0,-3) [v] {$-1$};
-      \draw [cy2-i] (1) to (i); \draw [cy2-i] (1) to (-i);
-      \draw [cy2-j] (1) to (j); \draw [cy2-j] (1) to (-j);
-      \draw [cy2-k] (1) to (k); \draw [cy2-k] (1) to (-k);
-      \draw [cy2-i] (-1) to (i); \draw [cy2-i] (-1) to (-i);
-      \draw [cy2-j] (-1) to (j); \draw [cy2-j] (-1) to (-j);
-      \draw [cy2-k] (-1) to (k); \draw [cy2-k] (-1) to (-k);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(11,-2.5)},shorten >= -2pt,shorten <= -2pt,scale=1.75]
-      \node(Q8) at (0,2.8) {$Q_8$};
-      \node(i) at (-1,1.9) { $\<i\>$};
-      \node(j) at (0,1.9) { $\<j\>$};
-      \node(k) at (1,1.9) { $\<k\>$};
-      \node(-1) at (0,1) { $\<-1\>$};
-      \node(1) at (0,.2) { $\left\<1\right\>$};
-      \draw(1)--(-1); \draw(-1)--(i); \draw(-1)--(j); \draw(-1)--(k);
-      \draw(Q8)--(i); \draw(Q8)--(j); \draw(Q8)--(k);
-    \end{scope}
-  \end{tikzpicture}
-  \]  
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Subgroups of $\Z_2\times\Z_2\times\Z_2$} %\Pause
-  
-  We've seen the subgroup lattices of two groups of order $8$: \Pause
-  \begin{itemize}
-  \item $D_4$ has five elements of order $2$, and $10$ subgroups. \Pause
-  \item $Q_8$ has one element of order $2$, and $6$ subgroups. \Pause
-  \item $\Z_2^3$ has seven \emph{elements} of order $2$.
-  \end{itemize}  
-  
-  \smallskip\Pause
-  
-  \begin{exampleblock}{Rule of thumb}
-    Groups with elements of small order tend to have more subgroups
-    than those with elements of large order.
-  \end{exampleblock}
-  
-  \medskip\Pause
-  
-  The following Cayley graphs show three different subgroups of
-  order $4$ in $\Z_2^3$.
-
-  %% Three Cayley graphs of Z_2^3 with order-4 subgroups highlighted
-  \[
-  \begin{tikzpicture}[scale=.5]
-    %%
-    \tikzstyle{every node}=[font=\footnotesize]
-    %%
-    \begin{scope}[shift={(0,0)}]
-      \node (000) at (0,0) [v-y] {$000$};
-      \node (100) at (-1.5,-1.5) [v-y] {$100$};
-      \node (010) at (3,0) [v-y] {$010$};
-      \node (110) at (1.5,-1.5) [v-y] {$110$};
-      \node (001) at (0,3) [v] {$001$};
-      \node (101) at (-1.5,1.5) [v] {$101$};
-      \node (011) at (3,3) [v] {$011$};
-      \node (111) at (1.5,1.5) [v] {$111$};
-      \draw [ggFaded] (000) to (001);
-      \draw [rrFaded] (000) to (010);
-      \draw [bbFaded] (000) to (100);
-      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
-      \draw [rr] (001) to (011);
-      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
-      \draw [gg] (010) to (011);
-      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
-      \draw [bb] (110) to (010);
-      \node at (.75,-2.5) {\normalsize $\<\Balert{100},\Alert{010}\>$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7,0)}]
-      \node (000) at (0,0) [v-y] {$000$};
-      \node (100) at (-1.5,-1.5) [v-y] {$100$};
-      \node (010) at (3,0) [v] {$010$};
-      \node (110) at (1.5,-1.5) [v] {$110$};
-      \node (001) at (0,3) [v] {$001$};
-      \node (101) at (-1.5,1.5) [v] {$101$};
-      \node (011) at (3,3) [v-y] {$011$};
-      \node (111) at (1.5,1.5) [v-y] {$111$};
-      \draw [ggFaded] (000) to (001);
-      \draw [rrFaded] (000) to (010);
-      \draw [bbFaded] (000) to (100);
-      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
-      \draw [rr] (001) to (011);
-      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
-      \draw [gg] (010) to (011);
-      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
-      \draw [bb] (110) to (010);
-      \node at (.75,-2.5) {\normalsize $\<\Balert{100},011\>$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(14,0)}]
-      \node (000) at (0,0) [v-y] {$000$};
-      \node (100) at (-1.5,-1.5) [v] {$100$};
-      \node (010) at (3,0) [v] {$010$};
-      \node (110) at (1.5,-1.5) [v-y] {$110$};
-      \node (001) at (0,3) [v] {$001$};
-      \node (101) at (-1.5,1.5) [v-y] {$101$};
-      \node (011) at (3,3) [v-y] {$011$};
-      \node (111) at (1.5,1.5) [v] {$111$};
-      \draw [ggFaded] (000) to (001);
-      \draw [rrFaded] (000) to (010);
-      \draw [bbFaded] (000) to (100);
-      \draw [rr] (100) to (110); \draw [rr] (101) to (111);
-      \draw [rr] (001) to (011);
-      \draw [gg] (100) to (101); \draw [gg] (110) to (111);
-      \draw [gg] (010) to (011);
-      \draw [bb] (101) to (001); \draw [bb] (111) to (011);
-      \draw [bb] (110) to (010);
-      \node at (.75,-2.5) {\normalsize $\<110,011\>$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{The subgroup lattices of $\Z_2\times\Z_2\times\Z_2$ and $\Z_8$}
-  
-  All $\binom{7}{2}=21$ pairs of non-identity element elements
-  generate a subgroup isomorphic to $V_4$. \medskip\Pause
-
-  But this triple-counts all such subgroups. \Pause In summary, the
-  subgroups of $\Z_2^3$ are: \smallskip
-  
-  \begin{itemize}
-  \item The subgroups $G$ and $\{000\}$, \smallskip\Pause
-  \item $7$ subgroups isomorphic to $C_2$, \smallskip\Pause
-  \item $7$ subgroups isomorphic to $V_4$. \Pause
-  \end{itemize}
-
-  %% Subgroup lattices of Z_2^3 and Z_8
-  \[
-  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.2]
-    \begin{scope}[shift={(0,0)}]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node (G) at (0,3) {\normalsize $\Z_2^3$};
-      \node (010-001) at (-3,2) {$\<010,001\>$}; % 010,001,011
-      \node (100-001) at (-2,2) {$\<100,001\>$}; % 100,001,101    
-      \node (100-010) at (-1,2) {$\<100,010\>$}; % 100,010,110
-      \node (100-011) at (0,2) {$\<100,011\>$};  % 100,011,111
-      \node (010-101) at (1,2) {$\<010,101\>$};  % 010,101,111
-      \node (110-001) at (2,2) {$\<110,001\>$};  % 110,001,111
-      \node (110-011) at (3,2) {$\<110,011\>$};  % 110,011,101
-      %%
-      \node (100) at (-3,1) {$\<100\>$};
-      \node (010) at (-2,1) {$\<010\>$};
-      \node (001) at (-1,1) {$\<001\>$};
-      \node (011) at (0,1) {$\<011\>$};
-      \node (101) at (1,1) {$\<101\>$};
-      \node (110) at (2,1) {$\<110\>$};
-      \node (111) at (3,1) {$\<111\>$};
-      %%
-      \node (000) at (0,0) {\small $\<000\>$};
-      %%
-      \draw (000) to (100); \draw (000) to (010); \draw (000) to (110);
-      \draw (000) to (101); \draw (000) to (001); \draw (000) to (011);
-      \draw (000) to (111);
-      %%
-      \draw(100)to(100-010); \draw(100)to(100-001); \draw(100)to(100-011);
-      \draw(010)to(100-010); \draw(010)to(010-001); \draw(010)to(010-101);
-      \draw(110)to(100-010); \draw(110)to(110-001); \draw(110)to(110-011);
-      \draw(101)to(100-001); \draw(101)to(010-101); \draw(101)to(110-011);
-      \draw(111)to(100-011); \draw(111)to(010-101); \draw(111)to(110-001);
-      \draw(011)to(010-001); \draw(011)to(100-011); \draw(011)to(110-011);
-      \draw(001)to(100-001); \draw(001)to(010-001); \draw(001)to(110-001);
-      %%
-      \draw (100-010) to (G); \draw (100-001) to (G); \draw (010-001) to (G);
-      \draw (100-011) to (G); \draw (010-101) to (G); \draw (110-001) to (G);
-      \draw (110-011) to (G);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(5.25,0)}]
-      \node (Z8) at (0,3) {\hspace{-7mm}$\Z_8\!=\!\<1\>$};
-      \node (Z4) at (0,2) {$\<2\>$};
-      \node (Z2) at (0,1) {$\<4\>$};
-      \node (Z1) at (0,0) {$\<0\>$};
-      \draw (Z8) to (Z4); \draw (Z4) to (Z2); \draw (Z2) to (Z1); 
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Groups of order $8$} \smallskip
-  
-  There is one more group of order $8$ whose subgroup lattice we have
-  not yet seen.
-  %%
-  %% Cayley graph and subgroup lattice of Z_4 x Z_2
-  \[
-  \begin{tikzpicture}[scale=.75,auto]
-    \begin{scope}
-      %%
-      \tikzstyle{every node}=[font=\tiny]
-      %%
-      \node (00) at (0,3) [v] {$(0,0)$};
-      \node (10) at (1.5,3) [v] {$(1,0)$};
-      \node (20) at (3,3) [v] {$(2,0)$};
-      \node (30) at (4.5,3) [v] {$(3,0)$};
-      \node (01) at (0,1.5) [v] {$(0,1)$};
-      \node (11) at (1.5,1.5) [v] {$(1,1)$};
-      \node (21) at (3,1.5) [v] {$(2,1)$};
-      \node (31) at (4.5,1.5) [v] {$(3,1)$};
-      \draw [r] (00) to (10);
-      \draw [r] (10) to (20);
-      \draw [r] (20) to (30);
-      \draw [r] (30) to [bend right=25] (00);
-      \draw [r] (01) to (11);
-      \draw [r] (11) to (21);
-      \draw [r] (21) to (31);
-      \draw [r] (31) to [bend left=25] (01);
-      \draw [bb] (00) to (01);
-      \draw [bb] (10) to (11);
-      \draw [bb] (20) to (21);
-      \draw [bb] (30) to (31);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7,-.55)},shorten >= -3pt, shorten <= -3pt,scale=.75]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node(G) at (3.5,6) {\small $\Z_4\times\Z_2$};
-      \node(10) at (5.25,4.5) {$\<(1,0)\>$};
-      \node(01-20) at (1.75,4.5) {$\<(0,1),(2,0)\>$};
-      \node(11) at (3.5,4.5) {$\<(1,1)\>$};
-      \node(01) at (0,3) {$\<(0,1)\>$};
-      \node(21) at (1.75,3) {$\<(2,1)\>$};
-      \node(20) at (3.5,3) {$\<(2,0)\>$};
-      \node(00) at (1.75,1.5) {$\<(0,0)\>$};
-      \draw(G)--(01-20); \draw(G)--(11); \draw(G)--(10);
-      \draw(01-20)--(01); \draw(01-20)--(21); \draw(01-20)--(20); 
-      \draw(11)--(20); \draw(10)--(20);
-      \draw(01)--(00); 
-      \draw(21)--(00); \draw(20)--(00);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  \vspace{-1mm} Let's summarize the sizes of the subgroups of the
-  groups of order $8$ that we have seen.
-  
-  \[
-  \begin{tabular}{l|ccccc}
-    & $C_8$ & $Q_8$ & $C_4\!\times\! C_2$ & $D_4$ & $C_2^3$ \\ \hline
-    \# elts.\ of order $8$ & $4$ & $0$ & $0$ & $0$ & $0$ \\
-    \# elts.\ of order $4$ & $2$ & $6$ & $4$ & $2$ & $0$ \\
-    \# elts.\ of order $2$ & $1$ & $1$ & $3$ & $5$ & $7$ \\
-    \# elts.\ of order $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\ \hline
-    \# subgroups & $4$ & $6$ & $8$ & $10$ & $16$ \\
-  \end{tabular}
-  \]
-  
-  \begin{exampleblock}{Observations}
-    \begin{itemize}
-    \item Groups that have more elements of
-      small order tend to have more subgroups.
-    \item In all of these cases, the order of each subgroup divides
-      $|G|$.
-    \end{itemize}
-  \end{exampleblock}
-    
 \end{frame}
 
 %%====================================================================
