@@ -1,4 +1,4 @@
-\documentclass[8pt,handout]{beamer} 
+\documentclass[8pt]{beamer} 
 
 %% Math packages
 %%
@@ -92,10 +92,22 @@
 \setbeamertemplate{enumerate items}[default]
 %\setbeamercolor{enumerate subitem}{fg=red!80!black}
 \def\opacity{0.5}
-\setbeamercovered{transparent}
-%\setbeamercovered{invisible}
+%setbeamercovered{transparent}
+\setbeamercovered{invisible}
 
-\newcommand{\Pause}{}      %% Comment this out => lots more page breaks
+\newcommand{\Pause}{\pause}      %% Comment this out => lots more page breaks
+% \newcommand{\Pause}{}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
 
 
 \begin{document}
@@ -116,6 +128,21 @@
 
 \frame{\titlepage}
 
+%%====================================================================
+
+\begin{frame}{Goals for today:}
+  \begin{enumerate}
+    \item Define what subgroups are \Pause
+    \item See some examples \Pause
+    \item Figure out all the subgroups of all the groups of order 4 \Pause
+    \item \ldots of order 6 \Pause
+    \item \ldots of order 8
+  \end{enumerate}
+\end{frame}
+
+
+%%====================================================================
+\section{Definition time!}
 %%====================================================================
 
 \begin{frame}{Definition time!}
@@ -229,6 +256,8 @@
 \end{frame}
 
 %%====================================================================
+\section{Groups of order $4$}
+%%====================================================================
 
 \begin{frame}{The two groups of order $4$} 
   
@@ -265,7 +294,7 @@
       \node at (0,0) {$C_4\!=\!\<r\>$};
     \end{scope}
   \end{tikzpicture}
-  \]
+  \]\Pause
   \vspace{-5mm}
   \begin{itemize}
   \item Proper subgroups of $V_4$: $\<h\>=\{e,h\}$,\;
@@ -317,6 +346,8 @@
 \end{frame}
 
 %%====================================================================
+\section{Groups of order $6$}
+%%====================================================================
 
 \begin{frame}{Subgroups of $\Z_6$}
 
@@ -344,6 +375,7 @@
       \path[r-bend] (4) to (5);
       \path[r-bend] (5) to (0);
       \node at (0,0) {\normalsize $\<1\>$};
+      \node at (270:2.5) {Hello I am secretly also the cycle graph};
     \end{scope}
     %%
     \begin{scope}[shift={(6,0)},scale=1.15]
@@ -423,7 +455,7 @@
   Here are the \Balert{non-trivial proper subgroups} of $D_3$:
   \[
   \<r\>=\{1,r,r^2\}=\<r^2\>,\quad \<f\>=\{1,f\},\quad
-  \<rf\>=\{1,rf\},\quad\<r^2f\>=\{1,r^2f\},\quad\<1\>=\{1\}.
+  \<rf\>=\{1,rf\},\quad\<r^2f\>=\{1,r^2f\}\Pause,\Alert{\quad\<1\>=\{1\}}.
   \] \Pause
   
   Observations: 
@@ -435,6 +467,8 @@
 
 \end{frame}
 
+%%====================================================================
+\section{Groups of order $8$}
 %%====================================================================
 
 \begin{frame}{Subgroups of $D_4$}
@@ -519,14 +553,16 @@
 \end{frame}
 
 %%====================================================================
+\subsection{Lattices}
+%%====================================================================
 
 \begin{frame}{Lattices} %\Pause
   
   A \Alert{lattice} is a \Balert{partially ordered set} such that
-  every pair of elements $x,y$ has a \Alert{unique}: \vspace{-2mm}
+  every pair of elements $x,y$ has a \Alert{unique}: \vspace{-2mm} \Pause
   \begin{multicols}{2}
     \begin{itemize}
-    \item \Galert{join}, or \Alert{sup}, or \Balert{least upper bound} \\$x\!\Or\!y$
+    \item \Galert{join}, or \Alert{sup}, or \Balert{least upper bound} \\$x\!\Or\!y$ \Pause
     \item \Galert{meet}, or \Alert{inf}, or \Balert{greatest lower bound}\\ $x\!\And\!y$.\Pause
     \end{itemize}
   \end{multicols}
@@ -1553,9 +1589,11 @@
 
 %%====================================================================
 
-\begin{frame}{The subgroup lattice of $\Z_2\times\Z_2\times\Z_2$}
+\begin{frame}{The subgroup lattice of $\Z_2\times\Z_2\times\Z_2$} \Pause
+
+  All 7 non-identity elements generate a subgroup isomorphic to $C_2$.
   
-  All $\binom{7}{2}=21$ pairs of non-identity element elements
+  All $\binom{7}{2}=21$ pairs of non-identity elements
   generate a subgroup isomorphic to $V_4$. \medskip\Pause
 
   But this triple-counts all such subgroups. \Pause In summary, the
@@ -1623,33 +1661,42 @@
 
   \[
   \begin{tikzpicture}
-    \begin{scope}
-      \node (0) at (90:2) [v] {0};
-      \node (1) at (45:2) [v] {1};
-      \node (2) at (0:2) [v] {2};
-      \node (3) at (315:2) [v] {3};
-      \node (4) at (270:2) [v] {4};
-      \node (5) at (225:2) [v] {5};
-      \node (6) at (180:2) [v] {6};
-      \node (7) at (135:2) [v] {7};
-      \draw [r] (0) to (1);
-      \draw [r] (1) to (2);
-      \draw [r] (2) to (3);
-      \draw [r] (3) to (4);
-      \draw [r] (4) to (5);
-      \draw [r] (5) to (6);
-      \draw [r] (6) to (7);
-      \draw [r] (7) to (0);
-    \end{scope} \Pause
-    \begin{scope}[shift={(5,0)}]
-      \node (Z8) at (0,2) {\hspace{-7mm}$\Z_8\!=\!\<1\>$};
-      \node (Z4) at (0,2/3) {$\<2\>$};
-      \node (Z2) at (0,-2/3) {$\<4\>$};
-      \node (Z1) at (0,-2) {$\<0\>$};
-      \draw (Z8) to (Z4); \draw (Z4) to (Z2); \draw (Z2) to (Z1); 
-    \end{scope}
-  \end{tikzpicture}
-  \]
+    \onslide<2->{
+      \begin{scope}
+        \node (0) at (90:2) [v] {0};
+        \node (1) at (45:2) [v] {1};
+        \node (2) at (0:2) [v] {2};
+        \node (3) at (315:2) [v] {3};
+        \node (4) at (270:2) [v] {4};
+        \node (5) at (225:2) [v] {5};
+        \node (6) at (180:2) [v] {6};
+        \node (7) at (135:2) [v] {7};
+        \draw [r] (0) to (1);
+        \draw [r] (1) to (2);
+        \draw [r] (2) to (3);
+        \draw [r] (3) to (4);
+        \draw [r] (4) to (5);
+        \draw [r] (5) to (6);
+        \draw [r] (6) to (7);
+        \draw [r] (7) to (0);
+      \end{scope} 
+    }
+    \onslide<3->{
+      \begin{scope}[shift={(5,0)}]
+        \node (Z8) at (0,2) {\hspace{-7mm}$\Z_8\!=\!\<1\>$};
+        \node (Z4) at (0,2/3) {$\<2\>$};
+        \node (Z2) at (0,-2/3) {$\<4\>$};
+        \node (Z1) at (0,-2) {$\<0\>$};
+        \draw (Z8) to (Z4); \draw (Z4) to (Z2); \draw (Z2) to (Z1); 
+      \end{scope}
+    }
+  \end{tikzpicture} 
+  \] 
+  \onslide<4->{
+    \begin{block}{Theorem}
+      Every subgroup of a cyclic group is cyclic.
+    \end{block}
+  }
 \end{frame}
 
 
@@ -1662,32 +1709,35 @@
   %% Cayley graph and subgroup lattice of Z_4 x Z_2
   \[
   \begin{tikzpicture}[scale=.75,auto]
-    \begin{scope}
-      %%
-      \tikzstyle{every node}=[font=\tiny]
-      %%
-      \node (00) at (0,3) [v] {$(0,0)$};
-      \node (10) at (1.5,3) [v] {$(1,0)$};
-      \node (20) at (3,3) [v] {$(2,0)$};
-      \node (30) at (4.5,3) [v] {$(3,0)$};
-      \node (01) at (0,1.5) [v] {$(0,1)$};
-      \node (11) at (1.5,1.5) [v] {$(1,1)$};
-      \node (21) at (3,1.5) [v] {$(2,1)$};
-      \node (31) at (4.5,1.5) [v] {$(3,1)$};
-      \draw [r] (00) to (10);
-      \draw [r] (10) to (20);
-      \draw [r] (20) to (30);
-      \draw [r] (30) to [bend right=25] (00);
-      \draw [r] (01) to (11);
-      \draw [r] (11) to (21);
-      \draw [r] (21) to (31);
-      \draw [r] (31) to [bend left=25] (01);
-      \draw [bb] (00) to (01);
-      \draw [bb] (10) to (11);
-      \draw [bb] (20) to (21);
-      \draw [bb] (30) to (31);
-    \end{scope} \Pause
+    \onslide<2->{
+      \begin{scope}
+        %%
+        \tikzstyle{every node}=[font=\tiny]
+        %%
+        \node (00) at (0,3) [v] {$(0,0)$};
+        \node (10) at (1.5,3) [v] {$(1,0)$};
+        \node (20) at (3,3) [v] {$(2,0)$};
+        \node (30) at (4.5,3) [v] {$(3,0)$};
+        \node (01) at (0,1.5) [v] {$(0,1)$};
+        \node (11) at (1.5,1.5) [v] {$(1,1)$};
+        \node (21) at (3,1.5) [v] {$(2,1)$};
+        \node (31) at (4.5,1.5) [v] {$(3,1)$};
+        \draw [r] (00) to (10);
+        \draw [r] (10) to (20);
+        \draw [r] (20) to (30);
+        \draw [r] (30) to [bend right=25] (00);
+        \draw [r] (01) to (11);
+        \draw [r] (11) to (21);
+        \draw [r] (21) to (31);
+        \draw [r] (31) to [bend left=25] (01);
+        \draw [bb] (00) to (01);
+        \draw [bb] (10) to (11);
+        \draw [bb] (20) to (21);
+        \draw [bb] (30) to (31);
+      \end{scope} 
+    }
     %%
+    \onslide<3->{
     \begin{scope}[shift={(7,-.55)},shorten >= -3pt, shorten <= -3pt,scale=.75]
       %%
       \tikzstyle{every node}=[font=\footnotesize]
@@ -1706,30 +1756,37 @@
       \draw(01)--(00); 
       \draw(21)--(00); \draw(20)--(00);
     \end{scope}
+  }
   \end{tikzpicture}
-  \] \Pause
-  \vspace{-1mm} Let's summarize the sizes of the subgroups of the
-  groups of order $8$ that we have seen.
+  \]
+  \onslide<4->{
+    \vspace{-1mm} Let's summarize the sizes of the subgroups of the
+    groups of order $8$ that we have seen.
+    
+    \[
+    \begin{tabular}{l|ccccc}
+      & $C_8$ & $Q_8$ & $C_4\!\times\! C_2$ & $D_4$ & $C_2^3$ \\ \hline
+      \# elts.\ of order $8$ & $4$ & $0$ & $0$ & $0$ & $0$ \\
+      \# elts.\ of order $4$ & $2$ & $6$ & $4$ & $2$ & $0$ \\
+      \# elts.\ of order $2$ & $1$ & $1$ & $3$ & $5$ & $7$ \\
+      \# elts.\ of order $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\ \hline
+      \# subgroups & $4$ & $6$ & $8$ & $10$ & $16$ \\
+    \end{tabular}
+  \] 
+  }
   
-  \[
-  \begin{tabular}{l|ccccc}
-    & $C_8$ & $Q_8$ & $C_4\!\times\! C_2$ & $D_4$ & $C_2^3$ \\ \hline
-    \# elts.\ of order $8$ & $4$ & $0$ & $0$ & $0$ & $0$ \\
-    \# elts.\ of order $4$ & $2$ & $6$ & $4$ & $2$ & $0$ \\
-    \# elts.\ of order $2$ & $1$ & $1$ & $3$ & $5$ & $7$ \\
-    \# elts.\ of order $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\ \hline
-    \# subgroups & $4$ & $6$ & $8$ & $10$ & $16$ \\
-  \end{tabular}
-  \] \Pause
-  
-  \begin{exampleblock}{Observations?} \Pause
-    \begin{itemize}
-    \item Groups that have more elements of
-      small order tend to have more subgroups. \Pause
-    \item In all of these cases, the order of each subgroup divides
-      $|G|$.
-    \end{itemize}
-  \end{exampleblock}
+  \onslide<5->{
+    \begin{exampleblock}{Observations?}
+      \onslide<6->{
+        \begin{itemize}
+          \item Groups that have more elements of
+            small order tend to have more subgroups.
+          \item In all of these cases, the order of each subgroup divides
+            $|G|$.
+        \end{itemize}
+      }
+    \end{exampleblock}
+  }
     
 \end{frame}
 
