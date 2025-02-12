@@ -1457,35 +1457,7 @@
       \draw [cy2-k] (-1) to (k); \draw [cy2-k] (-1) to (-k);
     \end{scope}
   \end{tikzpicture}
-  \]  \Pause
-
-  \begin{columns}
-    \column{0.6\textwidth}
-    Every element generates a \Balert{cyclic subgroup}:
-      \[
-      \<1\>=\{1\},\qquad\Pause\<-1\>=\{\pm 1\},\qquad\Pause
-      \<i\>=\<-i\>=\{\pm 1,\pm i\},\qquad
-      \]
-      \vspace{-2mm}\Pause
-      \[
-      \<j\>=\<-j\>=\{\pm 1,\pm j\},\qquad\quad\Pause \<k\>=\<k\>=\{\pm 1,\pm k\}.
-      \] \Pause
-      Are there any other proper subgroups? \Pause
-
-    \column{0.3\textwidth}
-    \[\begin{tikzpicture}
-      \begin{scope}[shorten >= -2pt,shorten <= -2pt,scale=1]
-        \node(Q8) at (0,2.8) {$Q_8$};
-        \node(i) at (-1,1.9) { $\<i\>$};
-        \node(j) at (0,1.9) { $\<j\>$};
-        \node(k) at (1,1.9) { $\<k\>$};
-        \node(-1) at (0,1) { $\<-1\>$};
-        \node(1) at (0,.2) { $\left\<1\right\>$};
-        \draw(1)--(-1); \draw(-1)--(i); \draw(-1)--(j); \draw(-1)--(k);
-        \draw(Q8)--(i); \draw(Q8)--(j); \draw(Q8)--(k);
-      \end{scope}
-    \end{tikzpicture}\]
-  \end{columns}
+  \] 
   
 \end{frame}
 
@@ -1586,74 +1558,6 @@
   
 \end{frame}
 
-
-%%====================================================================
-
-\begin{frame}{The subgroup lattice of $\Z_2\times\Z_2\times\Z_2$} \Pause
-
-  All 7 non-identity elements generate a subgroup isomorphic to $C_2$.
-  
-  All $\binom{7}{2}=21$ pairs of non-identity elements
-  generate a subgroup isomorphic to $V_4$. \medskip\Pause
-
-  But this triple-counts all such subgroups. \Pause In summary, the
-  subgroups of $\Z_2^3$ are: \smallskip
-  
-  \begin{itemize}
-  \item The subgroups $G$ and $\{000\}$, \smallskip\Pause
-  \item $7$ subgroups isomorphic to $C_2$, \smallskip\Pause
-  \item $7$ subgroups isomorphic to $V_4$. \Pause
-  \end{itemize}
-
-  %% Subgroup lattices of Z_2^3 and Z_8
-  \[
-  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.2]
-    \begin{scope}[shift={(0,0)}]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node (G) at (0,3) {\normalsize $\Z_2^3$};
-      \node (010-001) at (-3,2) {$\<010,001\>$}; % 010,001,011
-      \node (100-001) at (-2,2) {$\<100,001\>$}; % 100,001,101    
-      \node (100-010) at (-1,2) {$\<100,010\>$}; % 100,010,110
-      \node (100-011) at (0,2) {$\<100,011\>$};  % 100,011,111
-      \node (010-101) at (1,2) {$\<010,101\>$};  % 010,101,111
-      \node (110-001) at (2,2) {$\<110,001\>$};  % 110,001,111
-      \node (110-011) at (3,2) {$\<110,011\>$};  % 110,011,101
-      %%
-      \node (100) at (-3,1) {$\<100\>$};
-      \node (010) at (-2,1) {$\<010\>$};
-      \node (001) at (-1,1) {$\<001\>$};
-      \node (011) at (0,1) {$\<011\>$};
-      \node (101) at (1,1) {$\<101\>$};
-      \node (110) at (2,1) {$\<110\>$};
-      \node (111) at (3,1) {$\<111\>$};
-      %%
-      \node (000) at (0,0) {\small $\<000\>$};
-      %%
-      \draw (000) to (100); \draw (000) to (010); \draw (000) to (110);
-      \draw (000) to (101); \draw (000) to (001); \draw (000) to (011);
-      \draw (000) to (111);
-      %%
-      \draw(100)to(100-010); \draw(100)to(100-001); \draw(100)to(100-011);
-      \draw(010)to(100-010); \draw(010)to(010-001); \draw(010)to(010-101);
-      \draw(110)to(100-010); \draw(110)to(110-001); \draw(110)to(110-011);
-      \draw(101)to(100-001); \draw(101)to(010-101); \draw(101)to(110-011);
-      \draw(111)to(100-011); \draw(111)to(010-101); \draw(111)to(110-001);
-      \draw(011)to(010-001); \draw(011)to(100-011); \draw(011)to(110-011);
-      \draw(001)to(100-001); \draw(001)to(010-001); \draw(001)to(110-001);
-      %%
-      \draw (100-010) to (G); \draw (100-001) to (G); \draw (010-001) to (G);
-      \draw (100-011) to (G); \draw (010-101) to (G); \draw (110-001) to (G);
-      \draw (110-011) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
 \begin{frame}{The subgroup lattice of $\Z_8$}
   Draw the Cayley diagram of $Z_8$ and find all its subgroups.
 
@@ -1681,22 +1585,8 @@
         \draw [r] (7) to (0);
       \end{scope} 
     }
-    \onslide<3->{
-      \begin{scope}[shift={(5,0)}]
-        \node (Z8) at (0,2) {\hspace{-7mm}$\Z_8\!=\!\<1\>$};
-        \node (Z4) at (0,2/3) {$\<2\>$};
-        \node (Z2) at (0,-2/3) {$\<4\>$};
-        \node (Z1) at (0,-2) {$\<0\>$};
-        \draw (Z8) to (Z4); \draw (Z4) to (Z2); \draw (Z2) to (Z1); 
-      \end{scope}
-    }
   \end{tikzpicture} 
   \] 
-  \onslide<4->{
-    \begin{block}{Theorem}
-      Every subgroup of a cyclic group is cyclic.
-    \end{block}
-  }
 \end{frame}
 
 
@@ -1737,56 +1627,8 @@
       \end{scope} 
     }
     %%
-    \onslide<3->{
-    \begin{scope}[shift={(7,-.55)},shorten >= -3pt, shorten <= -3pt,scale=.75]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node(G) at (3.5,6) {\small $\Z_4\times\Z_2$};
-      \node(10) at (5.25,4.5) {$\<(1,0)\>$};
-      \node(01-20) at (1.75,4.5) {$\<(0,1),(2,0)\>$};
-      \node(11) at (3.5,4.5) {$\<(1,1)\>$};
-      \node(01) at (0,3) {$\<(0,1)\>$};
-      \node(21) at (1.75,3) {$\<(2,1)\>$};
-      \node(20) at (3.5,3) {$\<(2,0)\>$};
-      \node(00) at (1.75,1.5) {$\<(0,0)\>$};
-      \draw(G)--(01-20); \draw(G)--(11); \draw(G)--(10);
-      \draw(01-20)--(01); \draw(01-20)--(21); \draw(01-20)--(20); 
-      \draw(11)--(20); \draw(10)--(20);
-      \draw(01)--(00); 
-      \draw(21)--(00); \draw(20)--(00);
-    \end{scope}
-  }
   \end{tikzpicture}
   \]
-  \onslide<4->{
-    \vspace{-1mm} Let's summarize the sizes of the subgroups of the
-    groups of order $8$ that we have seen.
-    
-    \[
-    \begin{tabular}{l|ccccc}
-      & $C_8$ & $Q_8$ & $C_4\!\times\! C_2$ & $D_4$ & $C_2^3$ \\ \hline
-      \# elts.\ of order $8$ & $4$ & $0$ & $0$ & $0$ & $0$ \\
-      \# elts.\ of order $4$ & $2$ & $6$ & $4$ & $2$ & $0$ \\
-      \# elts.\ of order $2$ & $1$ & $1$ & $3$ & $5$ & $7$ \\
-      \# elts.\ of order $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\ \hline
-      \# subgroups & $4$ & $6$ & $8$ & $10$ & $16$ \\
-    \end{tabular}
-  \] 
-  }
-  
-  \onslide<5->{
-    \begin{exampleblock}{Observations?}
-      \onslide<6->{
-        \begin{itemize}
-          \item Groups that have more elements of
-            small order tend to have more subgroups.
-          \item In all of these cases, the order of each subgroup divides
-            $|G|$.
-        \end{itemize}
-      }
-    \end{exampleblock}
-  }
     
 \end{frame}
 
