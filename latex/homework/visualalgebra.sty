@@ -1,0 +1,357 @@
+%%
+%% ESSENTIAL COLORS [Tip for Mac: CMD+Space --> Digital color meter]
+%%
+\definecolor{lightgray}{rgb}{.85, .85, .85}
+\definecolor{midgray}{rgb}{.5,.5,.5}
+\definecolor{darkgray}{rgb}{.3,.3,.3}
+%%
+\colorlet{lightestgray}{gray!15!white}
+\colorlet{lightestblue}{blue!15!white}
+\colorlet{lightestred}{red!15!white}
+%%
+%%---------------------------------------------------------------------------
+%%
+%% TEXT COLORS
+%%
+\definecolor{xRed}{rgb}{.9,0,0}       
+\definecolor{xBlue}{rgb}{0,0,.9}      
+\definecolor{xGreen}{HTML}{009000}   %% "Islamic green"
+\definecolor{xPurple}{HTML}{D14FFF}  
+\definecolor{xOrange}{HTML}{F56600}  %% "Clemson orange"
+
+\newcommand{\Alert}[1]{\textcolor{xRed}{#1}}
+\newcommand{\Balert}[1]{\textcolor{xBlue}{#1}}
+\newcommand{\Galert}[1]{\textcolor{xGreen}{#1}}
+\newcommand{\Palert}[1]{\textcolor{xPurple}{#1}}
+\newcommand{\Oalert}[1]{\textcolor{xOrange}{#1}}
+\newcommand{\Walert}[1]{\textcolor{white}{#1}}
+
+%%---------------------------------------------------------------------------
+%%
+%% CAYLEY GRAPH COLORS
+%%
+
+%% Vertices  (6mm for book, 4mm for slides)
+%% If compiling slides: \usepackage{visualalgebraslides} overwrites this
+%%
+\tikzset{v/.style={circle, draw, fill=lightgray,inner sep=0pt, 
+  minimum size=6mm}}
+%%
+\tikzstyle{v-r} = [circle, draw, fill=vRed,inner sep=0pt,
+    minimum size=6mm]
+\tikzstyle{v-g} = [circle, draw, fill=vGreen,inner sep=0pt,
+    minimum size=6mm]
+\tikzstyle{v-b} = [circle, draw, fill=vBlue,inner sep=0pt,
+    minimum size=6mm]
+\tikzstyle{v-p} = [circle, draw, fill=vPurple,inner sep=0pt, 
+  minimum size=6mm]
+  \tikzstyle{v-o} = [circle, draw, fill=vOrange,inner sep=0pt, 
+  minimum size=6mm]
+    \tikzstyle{v-y} = [circle, draw, fill=vYellow,inner sep=0pt, 
+  minimum size=6mm]
+\tikzstyle{v-gr} = [circle, draw, fill=midgray,inner sep=0pt, 
+  minimum size=6mm]
+  
+
+%% Edge colors
+%%
+\definecolor{eRed}{rgb}{1,0,0}      % Cayley diagram edges
+\definecolor{eBlue}{rgb}{0,0,1}     % Cayley diagram edges
+\definecolor{eGreen}{HTML}{7EC636}  % Goodnotes green (a little darker)
+\definecolor{eGreen}{HTML}{3CAC13}  % I like this a litte better
+\definecolor{ePurple}{HTML}{D287FF} % Close to goodnotes 
+\colorlet{eOrange}{orange}
+
+%% Edge styles 
+%%
+\tikzset{r/.style={draw, very thick, eRed, -stealth}}  % Red -->
+\tikzset{rr/.style={draw, very thick, eRed}}           % Red ---
+\tikzset{r2/.style={draw, very thick, eRed,stealth'-stealth'}} % Red <-->
+\tikzset{b/.style={draw, very thick, eBlue, -stealth}} % Blue -->
+\tikzset{bb/.style={draw, very thick, eBlue}}          % Blue ---
+\tikzset{b2/.style={draw, very thick, eBlue,stealth'-stealth'}} % Blue <-->
+\tikzset{g/.style={draw, very thick, eGreen, -stealth}} % Green -->
+\tikzset{gg/.style={draw, very thick, eGreen}}          % Green ---
+\tikzset{g2/.style={draw, very thick, eGreen,stealth'-stealth'}} % Green <-->
+\tikzset{p/.style={draw, very thick, ePurple, -stealth}} % Purple -->
+\tikzset{pp/.style={draw, very thick, ePurple}}           % Purple ---
+\tikzset{p2/.style={draw, very thick, ePurple,stealth'-stealth'}} % Purple <-->
+\tikzset{o/.style={draw, very thick, eOrange, -stealth}} % Orange -->
+\tikzset{oo/.style={draw, very thick, eOrange}}           % Orange ---
+\tikzset{o2/.style={draw, very thick, eOrange,stealth'-stealth'}} % Orange <-->
+%%
+\tikzstyle{cy2} = [draw,very thick]           %% cycle graph edges
+
+%%---------------------------------------------------------------------------
+%%
+%% CAYLEY GRAPH COLORS, FADED EDGES
+%%
+
+%% Faded Edges
+%%
+\definecolor{faded}{rgb}{.75,.75,.75}
+\colorlet{fRed}{red!30!white}      
+\colorlet{fBlue}{blue!30!white}
+\definecolor{fGreen}{rgb}{.733, .843, .714}
+\definecolor{fPurple}{rgb}{.84, .76, .95}
+\colorlet{fOrange}{orange!40!white} 
+
+\tikzstyle{f} = [faded]                         % This is used all the time
+\tikzset{rFaded/.style={draw, very thick, fRed, -stealth}}  % Red -->
+\tikzset{rrFaded/.style={draw, very thick, fRed}}           % Red ---
+\tikzset{bFaded/.style={draw, very thick, fBlue, -stealth}} % Blue -->
+\tikzset{bbFaded/.style={draw, very thick, fBlue}}          % Blue ---
+\tikzset{gFaded/.style={draw, very thick, fGreen, -stealth}} % Green -->
+\tikzset{ggFaded/.style={draw, very thick, fGreen}}          % Green ---
+\tikzset{pFaded/.style={draw, very thick, fPurple, -stealth}} % Purple -->
+\tikzset{ppFaded/.style={draw, very thick, fPurple}}           % Purple ---
+\tikzset{oFaded/.style={draw, very thick, fOrange, -stealth}} % Purple -->
+\tikzset{ooFaded/.style={draw, very thick, fOrange}}           % Purple ---
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR VERTICES (e.g., cycle graphs)
+%%
+\colorlet{vRed}{red!50!white}
+\definecolor{vBlue}{rgb}{.60, .75, 1}
+\definecolor{vGreen}{rgb}{.733, .843, .714}
+\definecolor{vPurple}{HTML}{E4B7FF}
+\colorlet{vYellow}{yellow!30!white}
+\definecolor{vOrange}{HTML}{FFD4B7}  % same as coOrange
+\definecolor{vGray}{rgb}{.5,.5,.5}
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR CAYLEY TABLES  
+%%
+\colorlet{tRed}{red!70!white}
+\colorlet{tBlue}{blue!60!white}     %(higher number is more faded)
+\colorlet{tGreen}{green!75!black}   %(higher number is brighter)
+\colorlet{tYellow}{yellow!60!white}
+\colorlet{tLime}{green!80!white}
+\colorlet{tPink}{pink}
+\definecolor{tPurple}{rgb}{0.7 0.45 0.9} 
+\colorlet{tOrange}{orange}
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR BOXES: COSET & CONJUGACY CLASS PARTITIONS
+%%
+\colorlet{boxRed}{red!25!white}         %% Cosets not in the normalizer
+\colorlet{boxBlue}{blue!25!white}       %% Cosets in the normalizer
+\definecolor{boxPurple}{HTML}{E4B7FF}   %% Central elements
+\definecolor{boxOrange}{HTML}{FFD4B7}   %% Non-central elements
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR COSET BUBBBLES 
+%%
+\colorlet{cosetGray}{gray!15!white}
+\colorlet{cosetBlue}{blue!15!white}
+\colorlet{cosetRed}{red!15!white}
+\definecolor{cosetPurple}{rgb}{.9 .84 .965}
+\definecolor{cosetGreen}{rgb}{.863 .92 .855}
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR ACTIONS: "binary-squares" and Chapter 1 rectangle & triangles
+%%
+\colorlet{actRed}{red!50!white}             
+\definecolor{actBlue}{rgb}{0.60, 0.75, 1}   
+\colorlet{actGreen}{green!40!white}         
+\colorlet{actYellow}{yellow!30!white}       
+\definecolor{actPurple}{rgb}{0.7 0.45 0.9}  %% Purple in "binary squares"
+\colorlet{actOrange}{orange!50!white}       %% Orange in "binary squares"
+
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR SUBRING LATTICES
+%%
+\colorlet{Ideal}{xBlue}
+\colorlet{Subring}{xRed}
+\definecolor{Subgroup}{rgb}{.6,.6,.6}
+
+
+
+%%---------------------------------------------------------------------------
+%%
+%% USEFUL MATH MACROS
+%%
+%% Math formatting 
+\def\ds{\displaystyle}
+\def\bold{\bm}     % Change ``bm'' to ''mathbf'' for upright boldface.
+
+%% Basic math commands
+\newcommand{\ceil}[1] {\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1] {\left\lfloor #1 \right\rfloor}
+\DeclareMathOperator\del{\nabla}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator\Lcm{lcm}
+\newcommand{\rddots}{\rotatebox{90}{$\ddots$}}
+\def\setmin{-}
+\newcommand{\Mod}[1]{\ \textup{mod}\ #1}
+\newcommand{\Pmod}[1]{\ (\textup{mod}\ #1)}
+\def\lleq{\preccurlyeq}
+\def\Cdots{\cdot\!\cdot\!\cdot}
+\DeclareMathOperator\curl{curl}
+
+%% Linear algebra
+\DeclareMathOperator\Mat{Mat}
+\DeclareMathOperator\Span{Span}
+\DeclareMathOperator\Trace{tr}
+\newcommand{\vv}[2]{\begin{bmatrix} #1 \\ #2 \end{bmatrix}}
+\newcommand{\vvv}[3]{\begin{bmatrix} #1 \\ #2 \\ #3 \end{bmatrix}}
+\newcommand{\vvvv}[4]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \end{bmatrix}}
+\newcommand{\vvvvv}[5]{\begin{bmatrix} #1 \\ #2 \\ #3 \\ #4 \\ #5 \end{bmatrix}}
+
+%% Sums, products, union & intersections, limits
+\def\Sum{\sum\limits}
+\def\Prod{\prod\limits}
+\def\Cap{\mathop\cap\limits}
+\def\Cup{\mathop\cup\limits}
+\def\Times{\mathop\times\limits}
+\def\Oplus{\mathop\oplus\limits}
+\def\Lim{\mathop\lim\limits}
+\newcommand*{\medcap}{\mathbin{\scalebox{.75}{\ensuremath{\bigcap}}}}%
+\newcommand{\freeprod}{\mathop{\Huge \mathlarger{\mathlarger{\ast}}}}
+
+%% Boolean functions
+\def\And{\wedge}
+\def\Or{\vee}
+\def\Not{\neg}
+
+%% Maps
+\def\longto{\longrightarrow}
+\def\into{\hookrightarrow}
+\def\longinto{\longhookrightarrow}
+\def\onto{\twoheadrightarrow}
+\DeclareRobustCommand\longonto{\relbar\joinrel\twoheadrightarrow}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator\Ker{Ker}
+\DeclareMathOperator{\Id}{Id}
+
+%% Sets and Rings
+\def\A{\mathbb{A}}
+\def\C{\mathbb{C}}
+\def\E{\mathbb{E}}
+\def\F{\mathbb{F}}
+\def\HH{\mathbb{H}}
+\def\N{\mathbb{N}}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\Z{\mathbb{Z}}
+
+%% Abstract algebra commands
+\def\normal{\lhd}
+\def\normaleq{\unlhd}
+\def\nnormal{\ntriangleleft}
+\def\nnormaleq{\ntrianglelefteq}
+%\def\subgroup{\leqslant}
+%\def\nsubgroup{\nleqslant}
+%\def\normal{\leqslant}
+%\def\nnormal{\nleqslant}
+\def\Dot{\bm{.}}
+\def\<{\langle}
+\def\>{\rangle}
+%%
+\makeatletter
+\DeclareRobustCommand{\properideal}{\mathrel{\text{$\m@th\proper@ideal$}}}
+\newcommand{\proper@ideal}{%
+  \ooalign{$\lneq$\cr\raise.22ex\hbox{$\lhd$}\cr}%
+}
+\makeatother
+  
+%% Basic algebra commands
+\DeclareMathOperator\Aut{Aut}
+\DeclareMathOperator\Char{char}
+\DeclareMathOperator\cl{cl}
+\DeclareMathOperator\Conj{Conj}
+\DeclareMathOperator\Inn{Inn}
+\DeclareMathOperator\Gal{Gal}
+\DeclareMathOperator\Out{Out}
+\DeclareMathOperator\orb{orb}
+\DeclareMathOperator\Orb{Orb}
+\DeclareMathOperator\Perm{Perm}
+\DeclareMathOperator\stab{stab}
+\DeclareMathOperator\Stab{Stab}
+\DeclareMathOperator\fix{fix}
+\DeclareMathOperator\Fix{Fix}
+\DeclareMathOperator\Syl{Syl}
+\DeclareMathOperator\Sym{Sym}
+\newcommand{\Nil}{\mathfrak{N}}
+\DeclareMathOperator\jac{jac}
+\DeclareMathOperator\Jac{Jac}
+\DeclareMathOperator\Eq{Eq}
+
+%% Special Groups
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\So}{SO}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator\PGL{PGL}
+\DeclareMathOperator\PSL{PSL}
+\DeclareMathOperator\PSU{PSU}
+\DeclareMathOperator\PSP{PsP}
+\DeclareMathOperator{\AGL}{AGL}
+\DeclareMathOperator\Heis{Heis}
+\DeclareMathOperator\Dic{Dic}
+\DeclareMathOperator{\SA}{SA}
+\DeclareMathOperator{\SD}{SD}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\DQ}{DQ}
+\DeclareMathOperator{\QD}{QD}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator\BinTet{2T}
+\DeclareMathOperator\BinOct{2O}
+\DeclareMathOperator\BinIcos{2I}
+\DeclareMathOperator\Aff{Aff}
+
+
+%% Categories
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\Ob{Ob}
+\newcommand{\catname}[1]{{\normalfont\textbf{#1}}}
+\newcommand{\Ab}{\catname{Ab}}
+\newcommand{\Field}{\catname{Field}}
+\newcommand{\Set}{\catname{Set}}
+\newcommand{\Grp}{\catname{Grp}}
+\newcommand{\Semi}{\catname{Sgp}}
+\newcommand{\Ring}{\catname{Ring}}
+\newcommand{\Rng}{\catname{Rng}}
+\newcommand{\Top}{\catname{Top}}
+\newcommand{\Vect}{\catname{Vect}}
+%\newcommand{\Nil}{\catname{Nil}}    % Need to change!
+\newcommand{\Svl}{\catname{Svl}}
+\newcommand\cat{\mathcal{C}}
+\newcommand\dat{\mathcal{D}}
+\newcommand\eat{\mathcal{E}}
+\newcommand\fun{\mathcal{F}}
+\DeclareMathOperator\ad{ad}
+\def\0{\mathbf{0}}
+\def\1{\mathbf{1}}
+\def\e{\bm{e}}
+
+
+%% Book-specific commands
+\DeclareMathOperator\Frieze{\mathbf{Frz}}
+\DeclareMathOperator\Braid{\mathbf{Braid}}
+\DeclareMathOperator\Rect{\mathbf{Rect}}
+\DeclareMathOperator\Tri{\mathbf{Tri}}
+\DeclareMathOperator\Sq{\mathbf{Sq}}
+\DeclareMathOperator\Hex{\mathbf{Hex}}
+\DeclareMathOperator\Coin{\mathbf{Coin}}
+\DeclareMathOperator\BOX{\mathbf{Box}}
+\DeclareMathOperator\Light{\mathbf{Light}}
+\DeclareMathOperator\Rubik{\mathbf{Rubik}}
+\DeclareMathOperator{\Deg}{Deg}
+
+
+%% Ideals
+\newcommand{\MFa}{\mathfrak{a}}
+\newcommand{\MFb}{\mathfrak{b}}
+\newcommand{\MFc}{\mathfrak{c}}
+\newcommand{\MFm}{\mathfrak{m}}
+\newcommand{\MFp}{\mathfrak{p}}
+\newcommand{\MFq}{\mathfrak{q}}
+\newcommand{\MFr}{\mathfrak{r}}
+\newcommand{\MFs}{\mathfrak{s}}
