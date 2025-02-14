@@ -780,7 +780,11 @@
 
 %%====================================================================
 
-\begin{frame}{Your turn: handout}
+\section{Your turn!}
+
+%%====================================================================  
+
+\begin{frame}{Your turn!}
   Find all the left and right cosets of a different subgroup,
   \Balert{$N=\<r\>$}.
 
@@ -869,6 +873,140 @@
 
 %%====================================================================  
 
+\begin{frame}{Your turn!}
+  Now try:
+  \begin{itemize}
+    \item The other cyclic subgroups of $D_4$
+    \item $K = \<r^2, f\> \leq D_4$
+  \end{itemize} \Pause
+
+  \begin{exampleblock}{Observations?} \Pause
+    \begin{itemize}
+      \item Cosets never overlap
+      \item All the cosets are always the same size as the original subgroup
+      \item Cosets always cover the whole group
+      \item Any time there are just two cosets, each left coset is a right coset
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Equality of sets vs.\ equality of elements}
+
+  \begin{alertblock}{Caveat!}
+    An equality of cosets $xK=Kx$ as sets \emph{does not} imply (or require) an
+    equality of elements $xk=kx$.
+  \end{alertblock}
+  
+  \Pause
+  
+  %% Two left cosets of D_4, and the ``box partition'' of elements by them.
+  \[
+  \begin{tikzpicture}[scale=.7,auto]
+    %%
+    \tikzstyle{every node}=[font=\small]
+    \tikzstyle{v-faded} = [circle, draw, gray, fill=lightgray,inner sep=0pt, 
+      minimum size=4mm]
+    \tikzstyle{bbFaded} = [draw, thick, fBlue]
+    \tikzstyle{rFaded} = [draw, thick, fRed, -stealth]
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \node (e) at (0:2) [v-y] {$1$};
+      \node (r) at (90:2) [v-faded] {$r$};
+      \node (r2) at (180:2) [v-y] {$r^2$};
+      \node (r3) at (270:2) [v-faded] {$r^3$};
+      \node (f) at (0:1) [v-y] {$f$};
+      \node (rf) at (90:1) [v-faded] {$rf$};
+      \node (r2f) at (180:1) [v-y] {$r^2\!f$};
+      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
+      \draw [rFaded] (e) to [bend right] (r);
+      \draw [rFaded] (r) to [bend right] (r2);
+      \draw [rFaded] (r2) to [bend right] (r3);
+      \draw [rFaded] (r3) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left] (r3f);
+      \draw [rFaded] (r3f) to [bend left] (r2f);
+      \draw [rFaded] (r2f) to [bend left] (rf);
+      \draw [rFaded] (rf) to [bend left] (f);
+      \draw [bb] (e) to (f);
+      \draw [bbFaded] (r) to (rf);
+      \draw [bb] (r2) to (r2f);
+      \draw [bbFaded] (r3) to (r3f);
+      \draw [ggFaded] (rf) to [bend right] (r3f);
+      \draw [ggFaded] (r) to [bend left] (r3);
+      \draw [gg] (f) to [bend right] (r2f);
+      \draw [gg] (e) to [bend left] (r2);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(5.5,0)}]
+      \node (e) at (0:2) [v-faded] {$1$};
+      \node (r) at (90:2) [v-y] {$r$};
+      \node (r2) at (180:2) [v-faded] {$r^2$};
+      \node (r3) at (270:2) [v-y] {$r^3$};
+      \node (f) at (0:1) [v-faded] {$f$};
+      \node (rf) at (90:1) [v-y] {$rf$};
+      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
+      \node (r3f) at (270:1) [v-y] {$r^3\!f$};
+      \draw [rFaded] (e) to [bend right] (r);
+      \draw [rFaded] (r) to [bend right] (r2);
+      \draw [rFaded] (r2) to [bend right] (r3);
+      \draw [rFaded] (r3) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left] (r3f);
+      \draw [rFaded] (r3f) to [bend left] (r2f);
+      \draw [rFaded] (r2f) to [bend left] (rf);
+      \draw [rFaded] (rf) to [bend left] (f);
+      \draw [bbFaded] (e) to (f);
+      \draw [bb] (r) to (rf);
+      \draw [bbFaded] (r2) to (r2f);
+      \draw [bb] (r3) to (r3f);
+      \draw [ggFaded] (f) to [bend right] (r2f);
+      \draw [ggFaded] (e) to [bend left] (r2);
+      \draw [gg] (rf) to [bend right] (r3f);
+      \draw [gg] (r) to [bend left] (r3);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(9.5,.5)},scale=.9]
+      \draw[thin,fill=boxBlue] (0,0) rectangle (4,1);
+      \draw[thin,fill=boxBlue] (0,1) rectangle (4,2);
+      \node[anchor=south] at (.5,1.20) {$r$};
+      \node[anchor=south] at (.5,.20) {$1$};
+      \node[anchor=south] at (1.5,1.20) {$r^3$};
+      \node[anchor=south] at (1.5,.20) {$r^2$};
+      \node[anchor=south] at (2.5,1.20) {$rf$};
+      \node[anchor=south] at (2.5,.20) {$f$};
+      \node[anchor=south] at (3.5,1.20) {$r^3f$};
+      \node[anchor=south] at (3.5,.20) {$r^2f$};
+      \node[anchor=east] at (-.3,1.5) {$\bm{rK}$}; 
+      \node[anchor=east] at (-.3,.5) {$\bm{K}$}; 
+    \end{scope}
+    %%
+    \begin{scope}[shift={(9.5,-2.5)},scale=.9]
+      \draw[thin,fill=boxBlue] (0,0) rectangle (4,1);
+      \draw[thin,fill=boxBlue] (0,1) rectangle (4,2);
+      \node[anchor=south] at (.5,1.20) {$r$};
+      \node[anchor=south] at (.5,.20) {$1$};
+      \node[anchor=south] at (1.5,1.20) {$r^3$};
+      \node[anchor=south] at (1.5,.20) {$r^2$};
+      \node[anchor=south] at (2.5,1.20) {$fr$};
+      \node[anchor=south] at (2.5,.20) {$f$};
+      \node[anchor=south] at (3.5,1.20) {$fr^3$};
+      \node[anchor=south] at (3.5,.20) {$fr^2$};
+      \node[anchor=west] at (4.3,1.5) {$\bm{Kr}$}; 
+      \node[anchor=west] at (4.3,.5) {$\bm{K}$}; 
+    \end{scope}    
+  \end{tikzpicture}
+  \]
+  
+  $rK$ and $Kr$ are the same \Alert{as sets}, even though the elements occur in a different order.
+\end{frame}
+
+
+%%====================================================================  
+
+\section{Properties of cosets!}
+
+%%====================================================================  
+
 \begin{frame}{Basic properties of cosets}
   
   The following results are ``visually clear'' from the Cayley
@@ -949,6 +1087,8 @@
   
 \end{frame}
 
+%%====================================================================
+\section{Lagrange's theorem!}
 %%====================================================================
 
 \begin{frame}{Lagrange's theorem}
@@ -1244,6 +1384,258 @@
 \end{frame}
 
 %%====================================================================
+\section{Normal subgroups!}
+%%====================================================================
+
+
+%%====================================================================
+
+\begin{frame}{Normal subgroups and normalizers}
+
+  Given a subgroup $H$ of $G$, it is natural to ask the following
+  question:
+  \[
+  \text{``\emph{How many left cosets of $H$ are right cosets?}''}
+  \]
+
+  \vspace{-2mm}\Pause
+  
+  %% Generic box partition of G by the left and right cosets of H
+  \[
+  \begin{tikzpicture}[scale=.75,xscale=1.1]
+    %%
+    \tikzstyle{every node}=[font=\small]
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \draw[thin,fill=boxBlue] (0,0) rectangle (.7,2);
+      \draw[thin,fill=boxBlue] (.7,0) rectangle (1.4,2);
+      \draw[thin,fill=boxRed] (1.4,0) rectangle (2.1,2);
+      \draw[thin,fill=boxBlue] (3.5,0) rectangle (4.2,2);
+      \draw[thin] (0,0) rectangle (4.2,2);
+      \draw[thin] (.7,0) -- (.7,2);
+      \node at (.35,1) {$H$};
+      \node at (1.05,1) {$g_2H$};
+      \draw[thin] (1.4,0) -- (1.4,2);
+      \node at (1.75,1) {$g_3H$};
+      \draw[thin] (2.1,0) -- (2.1,2);
+      \draw[thin] (3.5,0) -- (3.5,2);
+      \node at (3.85,1) {$g_nH$};
+      \node at (2.8,1) {\normalsize $\dots$};
+      \node at (2.2,-.4) {\emph{Partition of $G$ by the}};
+      \node at (2.2,-.7) {\emph{left cosets of $H$}};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6.5,0)}]
+      \draw[thin,fill=boxBlue] (0,0) rectangle (.7,2);
+      \draw[thin,fill=boxBlue] (.7,0) rectangle (1.4,2);
+      \draw[thin,fill=boxBlue] (3.5,0) rectangle (4.2,2);
+      \draw[thin,fill=boxRed] (1.4,0) rectangle (3.5,.6);
+      \draw[thin] (0,0) rectangle (4.2,2);
+      \draw[thin] (.7,0) -- (.7,2);
+      \node at (.35,1) {$H$};
+      \node at (1.05,1) {$Hg_2$};
+      \draw[thin] (1.4,0) -- (1.4,2);
+      \node at (2.4,.28) {$Hg_3$};
+      \draw[thin] (1.4,.6) -- (3.5,.6);
+      \draw[thin] (3.5,0) -- (3.5,2);
+      \node at (3.85,1) {$Hg_n$};
+      \node at (2.4,1.3) {\normalsize $\vdots$};
+      \node at (2.2,-.4) {\emph{Partition of $G$ by the}};
+      \node at (2.2,-.7) {\emph{right cosets of $H$}};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+  \vspace{-2mm}\Pause
+  
+  \begin{itemize}
+  \item ``Best case'' scenario: all of them \Pause
+  \item ``Worst case'' scenario: only $H$ \Pause
+  \item In general: somewhere between these two extremes
+  \end{itemize}
+  
+  \vspace{-2mm}\Pause
+  
+  \begin{block}{Definition}
+    A subgroup $H$ is a \Alert{normal subgroup} of $G$ if
+    $gH=Hg$ for \emph{all} $g\in G$. We write $H\normaleq G$. \medskip\Pause
+    
+    The \Alert{normalizer} of $H$, denoted
+    $N_G(H)$, is the set of elements $g\in G$ such that \Balert{$gH=Hg$}:
+    \[
+    N_G(H)=\big\{g\in G\mid gH=Hg\big\},
+    \]
+    i.e., the \Balert{union of left cosets that are also right cosets}. 
+  \end{block}
+  
+\end{frame}
+
+
+%%====================================================================
+
+\begin{frame}{Examples of normal sugroups}
+  
+  We've seen cases where we know a subgroup will be normal
+  without having to check. \medskip\Pause
+  
+  \begin{enumerate}
+  \item The subgroup $H=G$ is always normal in $G$. \Pause The only left coset is also
+    the only right coset:
+    \[
+    eG=G=Ge.
+    \] \vspace{-4mm}\Pause
+  \item The subgroup $H=\{e\}$ is always normal. \Pause The left and
+    right cosets are singleton sets:
+    \[
+    gH=\{g\}=Hg.
+    \]
+    \vspace{-4mm}\Pause
+  \item Subgroups $H$ of index $2$ are normal. \Pause The two cosets
+    (left or right) are $H$ and $G\setmin H$. \medskip\Pause
+  \item Subgroups of \emph{abelian groups} are always normal,
+    because for any $H\leq G$, 
+    \[
+    aH=\big\{ah\mid h\in H\big\}\Pause=\big\{ha\mid h\in H\big\}\Pause=Ha.
+    \] \vspace{-4mm}\Pause
+  \item The center $Z(G)$ is always normal, for the same reason as above. \Pause
+  \item Relatedly, any subgroup of $Z(G)$ is always normal.
+  \end{enumerate}
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Normal subgroups in $D_4$}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \[
+      \begin{tikzpicture}[shorten >= -2pt,
+        shorten <= -2pt]
+        \node (D4) at (0,4) {$D_4$};
+        \node (r2-f) at (-1.25,3) {$\<r^2,f\>$};
+        \node (r) at (0,3) {$\<r\>$};
+        \node (r2-rf) at (1.25,3) {$\<r^2,rf\>$};
+        \node (f) at (-2.5,2) {$\<f\>$};
+        \node (r2f) at (-1.25,2) {$\<r^2f\>$};
+        \node (r2) at (0,2) {$\<r^2\>$};
+        \node (r3f) at (1.25,2) {$\<r^3f\>$};
+        \node (rf) at (2.5,2) {$\<rf\>$};
+        \node (1) at (0,1) {$\<1\>$};
+        %%
+        \draw (D4) to (r2-f); \draw (D4) to (r); \draw (D4) to (r2-rf);
+        \draw (r2-f) to (f); \draw (r2-f) to (r2f); \draw (r2-f) to (r2);
+        \draw (r2-rf) to (rf); \draw (r2-rf) to (r3f); \draw (r2-rf) to (r2);
+        \draw (r2) to (r);
+        \draw (r2) to (1);
+        \draw (f) to (1);
+        \draw (r2f) to (1); \draw (r3f) to (1); \draw (rf) to (1);
+      \end{tikzpicture}
+      \]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      From our explorations, we found:\Pause
+      \begin{itemize}
+        \item $\<r\> \normal D_4$ \Pause (because it has index 2!) \Pause
+        \item $\<r^2, f\> \normal D_4$ \Pause (index 2!) \Pause
+        \item $\<r^2, rf\> \normal D_4$ \Pause (index 2!)
+        \item $\<r^2\> \normal D_4$ \Pause (because it is $Z(D_4)$!)
+      \end{itemize} \Pause
+    \end{column}
+  \end{columns}
+
+  \medskip
+
+  \[
+  \begin{tikzpicture}[scale=0.6]
+    \tikzstyle{every node}=[font=\small]
+    \tikzstyle{v-faded} = [circle, draw, gray, fill=lightgray,inner sep=0pt, 
+      minimum size=4mm]
+    \tikzstyle{bbFaded} = [draw, thick, fBlue]
+    \tikzstyle{rFaded} = [draw, thick, fRed, -stealth]
+    %%
+    %% <r>
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \node (e) at (0:2) [v-g] {$1$};
+      \node (r) at (90:2) [v-g] {$r$};
+      \node (r2) at (180:2) [v-g] {$r^2$};
+      \node (r3) at (270:2) [v-g] {$r^3$};
+      \node (f) at (0:1) [v-faded] {$f$};
+      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
+      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
+      \node (rf) at (90:1) [v-faded] {$rf$};
+      \draw [r] (e) to [bend right] (r);
+      \draw [r] (r) to [bend right] (r2);
+      \draw [r] (r2) to [bend right] (r3);
+      \draw [r] (r3) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left=20] (r3f);
+      \draw [rFaded] (r3f) to [bend left=20] (r2f);
+      \draw [rFaded] (r2f) to [bend left=20] (rf);
+      \draw [rFaded] (rf) to [bend left=20] (f);
+      \draw [bbFaded] (e) to (f);
+      \draw [bbFaded] (r) to (rf);
+      \draw [bbFaded] (r2) to (r2f);
+      \draw [bbFaded] (r3) to (r3f);
+    \end{scope}
+    %%
+    %% Z(D_4)
+    %%
+    \begin{scope}[shift={(6,0)}]
+      \node (e) at (0:2) [v-y] {$1$};
+      \node (r) at (90:2) [v-faded] {$r$};
+      \node (r2) at (180:2) [v-y] {$r^2$};
+      \node (r3) at (270:2) [v-faded] {$r^3$};
+      \node (f) at (0:1) [v-y] {$f$};
+      \node (rf) at (90:1) [v-faded] {$rf$};
+      \node (r2f) at (180:1) [v-y] {$r^2\!f$};
+      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
+      \draw [rFaded] (e) to [bend right] (r);
+      \draw [rFaded] (r) to [bend right] (r2);
+      \draw [rFaded] (r2) to [bend right] (r3);
+      \draw [rFaded] (r3) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left] (r3f);
+      \draw [rFaded] (r3f) to [bend left] (r2f);
+      \draw [rFaded] (r2f) to [bend left] (rf);
+      \draw [rFaded] (rf) to [bend left] (f);
+      \draw [bb] (e) to (f);
+      \draw [bbFaded] (r) to (rf);
+      \draw [bb] (r2) to (r2f);
+      \draw [bbFaded] (r3) to (r3f);
+      \draw [ggFaded] (rf) to [bend right] (r3f);
+      \draw [ggFaded] (r) to [bend left] (r3);
+      \draw [gg] (f) to [bend right] (r2f);
+      \draw [gg] (e) to [bend left] (r2);
+    \end{scope}
+    %%
+    %% < r^2 >
+    %%
+    \begin{scope}[shift={(12,0)}]
+      \node (e) at (0:2) [v-g] {$1$};
+      \node (r) at (90:2) [v-faded] {$r$};
+      \node (r2) at (180:2) [v-g] {$r^2$};
+      \node (r3) at (270:2) [v-faded] {$r^3$};
+      \node (f) at (0:1) [v-faded] {$f$};
+      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
+      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
+      \node (rf) at (90:1) [v-faded] {$rf$};
+      \draw [r] (e) to [bend right] (r2);
+      \draw [r] (r2) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left=20] (r3f);
+      \draw [rFaded] (r3f) to [bend left=20] (r2f);
+      \draw [rFaded] (r2f) to [bend left=20] (rf);
+      \draw [rFaded] (rf) to [bend left=20] (f);
+      \draw [bbFaded] (e) to (f);
+      \draw [bbFaded] (r) to (rf);
+      \draw [bbFaded] (r2) to (r2f);
+      \draw [bbFaded] (r3) to (r3f);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+\end{frame}
+
+
+
+%%====================================================================
 \section{The end!}
 \end{document}
 
@@ -1352,121 +1744,6 @@
 
 %%====================================================================
 
-\begin{frame}{Equality of sets vs.\ equality of elements}
-
-  \begin{alertblock}{Caveat!}
-    An equality of cosets $xH=Hx$ as sets \emph{does not} imply an
-    equality of elements $xh=hx$.
-  \end{alertblock}
-  
-  \Pause
-  
-  %% Two left cosets of D_4, and the ``box partition'' of elements by them.
-  \[
-  \begin{tikzpicture}[scale=.7,auto]
-    %%
-    \tikzstyle{every node}=[font=\small]
-    \tikzstyle{v-faded} = [circle, draw, gray, fill=lightgray,inner sep=0pt, 
-      minimum size=4mm]
-    \tikzstyle{bbFaded} = [draw, thick, fBlue]
-    \tikzstyle{rFaded} = [draw, thick, fRed, -stealth]
-    %%
-    \begin{scope}[shift={(0,0)}]
-      \node (e) at (0:2) [v-y] {$1$};
-      \node (r) at (90:2) [v-faded] {$r$};
-      \node (r2) at (180:2) [v-y] {$r^2$};
-      \node (r3) at (270:2) [v-faded] {$r^3$};
-      \node (f) at (0:1) [v-y] {$f$};
-      \node (rf) at (90:1) [v-faded] {$rf$};
-      \node (r2f) at (180:1) [v-y] {$r^2\!f$};
-      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
-      \draw [rFaded] (e) to [bend right] (r);
-      \draw [rFaded] (r) to [bend right] (r2);
-      \draw [rFaded] (r2) to [bend right] (r3);
-      \draw [rFaded] (r3) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left] (r3f);
-      \draw [rFaded] (r3f) to [bend left] (r2f);
-      \draw [rFaded] (r2f) to [bend left] (rf);
-      \draw [rFaded] (rf) to [bend left] (f);
-      \draw [bb] (e) to (f);
-      \draw [bbFaded] (r) to (rf);
-      \draw [bb] (r2) to (r2f);
-      \draw [bbFaded] (r3) to (r3f);
-      \draw [ggFaded] (rf) to [bend right] (r3f);
-      \draw [ggFaded] (r) to [bend left] (r3);
-      \draw [gg] (f) to [bend right] (r2f);
-      \draw [gg] (e) to [bend left] (r2);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(5.5,0)}]
-      \node (e) at (0:2) [v-faded] {$1$};
-      \node (r) at (90:2) [v-y] {$r$};
-      \node (r2) at (180:2) [v-faded] {$r^2$};
-      \node (r3) at (270:2) [v-y] {$r^3$};
-      \node (f) at (0:1) [v-faded] {$f$};
-      \node (rf) at (90:1) [v-y] {$rf$};
-      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
-      \node (r3f) at (270:1) [v-y] {$r^3\!f$};
-      \draw [rFaded] (e) to [bend right] (r);
-      \draw [rFaded] (r) to [bend right] (r2);
-      \draw [rFaded] (r2) to [bend right] (r3);
-      \draw [rFaded] (r3) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left] (r3f);
-      \draw [rFaded] (r3f) to [bend left] (r2f);
-      \draw [rFaded] (r2f) to [bend left] (rf);
-      \draw [rFaded] (rf) to [bend left] (f);
-      \draw [bbFaded] (e) to (f);
-      \draw [bb] (r) to (rf);
-      \draw [bbFaded] (r2) to (r2f);
-      \draw [bb] (r3) to (r3f);
-      \draw [ggFaded] (f) to [bend right] (r2f);
-      \draw [ggFaded] (e) to [bend left] (r2);
-      \draw [gg] (rf) to [bend right] (r3f);
-      \draw [gg] (r) to [bend left] (r3);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(9.5,.5)},scale=.9]
-      \draw[thin,fill=boxBlue] (0,0) rectangle (4,1);
-      \draw[thin,fill=boxBlue] (0,1) rectangle (4,2);
-      \node[anchor=south] at (.5,1.20) {$r$};
-      \node[anchor=south] at (.5,.20) {$1$};
-      \node[anchor=south] at (1.5,1.20) {$r^3$};
-      \node[anchor=south] at (1.5,.20) {$r^2$};
-      \node[anchor=south] at (2.5,1.20) {$rf$};
-      \node[anchor=south] at (2.5,.20) {$f$};
-      \node[anchor=south] at (3.5,1.20) {$r^3f$};
-      \node[anchor=south] at (3.5,.20) {$r^2f$};
-      \node[anchor=east] at (-.3,1.5) {$\bm{rH}$}; 
-      \node[anchor=east] at (-.3,.5) {$\bm{H}$}; 
-    \end{scope}
-    %%
-    \begin{scope}[shift={(9.5,-2.5)},scale=.9]
-      \draw[thin,fill=boxBlue] (0,0) rectangle (4,1);
-      \draw[thin,fill=boxBlue] (0,1) rectangle (4,2);
-      \node[anchor=south] at (.5,1.20) {$r$};
-      \node[anchor=south] at (.5,.20) {$1$};
-      \node[anchor=south] at (1.5,1.20) {$r^3$};
-      \node[anchor=south] at (1.5,.20) {$r^2$};
-      \node[anchor=south] at (2.5,1.20) {$fr$};
-      \node[anchor=south] at (2.5,.20) {$f$};
-      \node[anchor=south] at (3.5,1.20) {$fr^3$};
-      \node[anchor=south] at (3.5,.20) {$fr^2$};
-      \node[anchor=west] at (4.3,1.5) {$\bm{Hr}$}; 
-      \node[anchor=west] at (4.3,.5) {$\bm{H}$}; 
-    \end{scope}    
-  \end{tikzpicture}
-  \]
-
-  \Pause
-  
-  \begin{block}{Proposition}
-    If $[G:H]=2$, then both left cosets of $H$ are also right cosets. 
-  \end{block}
-  
-\end{frame}
-
-%%====================================================================
-
 \begin{frame}{The center of a group}
 
   Even though $xH=Hx$ does not imply $xh=hx$ for all $h\in H$, the
@@ -1545,118 +1822,6 @@
 
 \end{frame}
 
-%%====================================================================
-
-\begin{frame}{Normal subgroups and normalizers}
-
-  Given a subgroup $H$ of $G$, it is natural to ask the following
-  question:
-  \[
-  \text{``\emph{How many left cosets of $H$ are right cosets?}''}
-  \]
-
-  \vspace{-2mm}\Pause
-  
-  %% Generic box partition of G by the left and right cosets of H
-  \[
-  \begin{tikzpicture}[scale=.75,xscale=1.1]
-    %%
-    \tikzstyle{every node}=[font=\small]
-    %%
-    \begin{scope}[shift={(0,0)}]
-      \draw[thin,fill=boxBlue] (0,0) rectangle (.7,2);
-      \draw[thin,fill=boxBlue] (.7,0) rectangle (1.4,2);
-      \draw[thin,fill=boxRed] (1.4,0) rectangle (2.1,2);
-      \draw[thin,fill=boxBlue] (3.5,0) rectangle (4.2,2);
-      \draw[thin] (0,0) rectangle (4.2,2);
-      \draw[thin] (.7,0) -- (.7,2);
-      \node at (.35,1) {$H$};
-      \node at (1.05,1) {$g_2H$};
-      \draw[thin] (1.4,0) -- (1.4,2);
-      \node at (1.75,1) {$g_3H$};
-      \draw[thin] (2.1,0) -- (2.1,2);
-      \draw[thin] (3.5,0) -- (3.5,2);
-      \node at (3.85,1) {$g_nH$};
-      \node at (2.8,1) {\normalsize $\dots$};
-      \node at (2.2,-.4) {\emph{Partition of $G$ by the}};
-      \node at (2.2,-.7) {\emph{left cosets of $H$}};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(6.5,0)}]
-      \draw[thin,fill=boxBlue] (0,0) rectangle (.7,2);
-      \draw[thin,fill=boxBlue] (.7,0) rectangle (1.4,2);
-      \draw[thin,fill=boxBlue] (3.5,0) rectangle (4.2,2);
-      \draw[thin,fill=boxRed] (1.4,0) rectangle (3.5,.6);
-      \draw[thin] (0,0) rectangle (4.2,2);
-      \draw[thin] (.7,0) -- (.7,2);
-      \node at (.35,1) {$H$};
-      \node at (1.05,1) {$Hg_2$};
-      \draw[thin] (1.4,0) -- (1.4,2);
-      \node at (2.4,.28) {$Hg_3$};
-      \draw[thin] (1.4,.6) -- (3.5,.6);
-      \draw[thin] (3.5,0) -- (3.5,2);
-      \node at (3.85,1) {$Hg_n$};
-      \node at (2.4,1.3) {\normalsize $\vdots$};
-      \node at (2.2,-.4) {\emph{Partition of $G$ by the}};
-      \node at (2.2,-.7) {\emph{right cosets of $H$}};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-
-  \vspace{-2mm}\Pause
-  
-  \begin{itemize}
-  \item ``Best case'' scenario: all of them \Pause
-  \item ``Worst case'' scenario: only $H$ \Pause
-  \item In general: somewhere between these two extremes
-  \end{itemize}
-  
-  \vspace{-2mm}\Pause
-  
-  \begin{block}{Definition}
-    A subgroup $H$ is a \Alert{normal subgroup} of $G$ if
-    $gH=Hg$ for \emph{all} $g\in G$. We write $H\normaleq G$. \medskip\Pause
-    
-    The \Alert{normalizer} of $H$, denoted
-    $N_G(H)$, is the set of elements $g\in G$ such that \Balert{$gH=Hg$}:
-    \[
-    N_G(H)=\big\{g\in G\mid gH=Hg\big\},
-    \]
-    i.e., the \Balert{union of left cosets that are also right cosets}. 
-  \end{block}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Examples of normal sugroups}
-  
-  We've seen cases where we know a subgroup will be normal
-  without having to check. \medskip\Pause
-  
-  \begin{enumerate}
-  \item The subgroup $H=G$ is always normal. \Pause The only left coset is also
-    the only right coset:
-    \[
-    eG=G=Ge.
-    \] \vspace{-4mm}\Pause
-  \item The subgroup $H=\{e\}$ is always normal. \Pause The left and
-    right cosets are singletons sets:
-    \[
-    gH=\{g\}=Hg.
-    \]
-    \vspace{-4mm}\Pause
-  \item Subgroups $H$ of index $2$ are normal. \Pause The two cosets
-    (left or right) are $H$ and $G\setmin H$. \medskip\Pause
-  \item Subgroups of \emph{abelian groups} are always normal,
-    because for any $H\leq G$, 
-    \[
-    aH=\big\{ah\mid h\in H\big\}\Pause=\big\{ha\mid h\in H\big\}\Pause=Ha.
-    \] \vspace{-4mm}\Pause
-  \item Subgroups $H\leq Z(G)$ are always normal, for the same reason as above.
-  \end{enumerate}
-  
-\end{frame}
 
 %%====================================================================
 
