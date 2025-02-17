@@ -1578,7 +1578,7 @@
       \draw [bbFaded] (r3) to (r3f);
     \end{scope}
     %%
-    %% Z(D_4)
+    %% <r^2, f>
     %%
     \begin{scope}[shift={(6,0)}]
       \node (e) at (0:2) [v-y] {$1$};
@@ -1601,33 +1601,35 @@
       \draw [bbFaded] (r) to (rf);
       \draw [bb] (r2) to (r2f);
       \draw [bbFaded] (r3) to (r3f);
-      \draw [ggFaded] (rf) to [bend right] (r3f);
-      \draw [ggFaded] (r) to [bend left] (r3);
       \draw [gg] (f) to [bend right] (r2f);
       \draw [gg] (e) to [bend left] (r2);
     \end{scope}
     %%
-    %% < r^2 >
+    %% <r^2, rf>
     %%
     \begin{scope}[shift={(12,0)}]
-      \node (e) at (0:2) [v-g] {$1$};
+      \node (e) at (0:2) [v-y] {$1$};
       \node (r) at (90:2) [v-faded] {$r$};
-      \node (r2) at (180:2) [v-g] {$r^2$};
+      \node (r2) at (180:2) [v-y] {$r^2$};
       \node (r3) at (270:2) [v-faded] {$r^3$};
       \node (f) at (0:1) [v-faded] {$f$};
-      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
+      \node (rf) at (90:1) [v-y] {$rf$};
       \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
-      \node (rf) at (90:1) [v-faded] {$rf$};
-      \draw [r] (e) to [bend right] (r2);
-      \draw [r] (r2) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left=20] (r3f);
-      \draw [rFaded] (r3f) to [bend left=20] (r2f);
-      \draw [rFaded] (r2f) to [bend left=20] (rf);
-      \draw [rFaded] (rf) to [bend left=20] (f);
-      \draw [bbFaded] (e) to (f);
+      \node (r3f) at (270:1) [v-y] {$r^3\!f$};
+      \draw [rFaded] (e) to [bend right] (r);
+      \draw [rFaded] (r) to [bend right] (r2);
+      \draw [rFaded] (r2) to [bend right] (r3);
+      \draw [rFaded] (r3) to [bend right] (e);
+      \draw [rFaded] (f) to [bend left] (r3f);
+      \draw [rFaded] (r3f) to [bend left] (r2f);
+      \draw [rFaded] (r2f) to [bend left] (rf);
+      \draw [rFaded] (rf) to [bend left] (f);
+      \draw [bb] (e) to (rf);
       \draw [bbFaded] (r) to (rf);
-      \draw [bbFaded] (r2) to (r2f);
+      \draw [bb] (r2) to (r3f);
       \draw [bbFaded] (r3) to (r3f);
+      \draw [gg] (rf) to (r3f);
+      \draw [gg] (e) to  (r2);
     \end{scope}
   \end{tikzpicture}
   \]
