@@ -1016,7 +1016,7 @@
   \end{alertblock}
 
   \begin{enumerate}
-    \item $N$ is the only subgroup of its size in the subgroup lattice of $A_4$, \\
+    \item $N$ is the \Palert{only subgroup of its size} in the subgroup lattice of $A_4$, \\
     so definitely $gNg\inv = N$ \Pause
     \item $N_{A_4}(N)$ has to be between $N$ and $A_4$ in the lattice, so it's either $N$ itself or all of $A_4$.
     \begin{itemize}
@@ -1025,6 +1025,389 @@
   \end{enumerate}
 
 \end{frame}
+
+%%====================================================================
+
+\begin{frame}{Unicorn subgroups}
+
+  Suppose we conjugate $G=D_4$ by some element $x\in D_4$. \vspace{-2mm}
+  
+  %% Subgroup lattice of D_4 and conjugating it by an element x
+  \[
+  \begin{tikzpicture}[scale=.92]
+    %%
+    \tikzstyle{every node}=[font=\small]
+    %%
+    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
+      \node (D4) at (0,4) {\Palert{$D_4$}};
+      \node (r2-f) at (-1.25,3) {$\<r^2,f\>$};
+      \node (r) at (0,3) {\Palert{$\<r\>$}};
+      \node (r2-rf) at (1.25,3) {$\<r^2,rf\>$};
+      \node (f) at (-2.5,2) {$\<f\>$};
+      \node (r2f) at (-1.25,2) {$\<r^2f\>$};
+      \node (r2) at (0,2) {\Palert{$\<r^2\>$}};
+      \node (r3f) at (1.25,2) {$\<r^3f\>$};
+      \node (rf) at (2.5,2) {$\<rf\>$};
+      \node (1) at (0,1) {\Palert{$\<1\>$}};
+      %%
+      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
+      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
+      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
+      \draw[f] (r2-rf) to (r2);
+      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
+      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
+      \draw[dashed,midgray] (0,4) circle [x radius=.4cm, y radius=.3cm];
+      \draw[dashed,midgray] (-1.25,3) circle [x radius=.6cm, y radius=.3cm];
+      \draw[dashed,midgray] (1.25,3) circle [x radius=.6cm, y radius=.3cm];
+      \draw[dashed,midgray] (0,3) circle [x radius=.4cm, y radius=.3cm];
+      \draw[dashed,midgray] (0,2) circle [x radius=.4cm, y radius=.3cm];
+      \draw[dashed,midgray] (0,1) circle [x radius=.4cm, y radius=.3cm];
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6.25,0)},shorten >= -3pt, shorten <= -3pt]
+      \node (D4) at (0,4) {\Palert{$xD_4x^{-1}$}};
+      \node (r2-f) at (-1.25,3) {$x\<r^2,f\>x^{-1}$};
+      \node (r) at (0,3) {\Palert{$x\<r\>x^{-1}$}};
+      \node (r2-rf) at (1.25,3) {$x\<r^2,rf\>x^{-1}$};
+      \node (f) at (-2.5,2) {$x\<f\>x^{-1}$};
+      \node (r2f) at (-1.25,2) {$x\<r^2f\>x^{-1}$};
+      \node (r2) at (0,2) {\Palert{$x\<r^2\>x^{-1}$}};
+      \node (r3f) at (1.25,2) {$x\<r^3f\>x^{-1}$};
+      \node (rf) at (2.5,2) {$x\<rf\>x^{-1}$};
+      \node (1) at (0,1) {\Palert{$x\<1\>x^{-1}$}};
+      %%
+      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
+      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
+      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
+      \draw[f] (r2-rf) to (r2);
+      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
+      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  \Pause Subgroups at a unique ``lattice neighborhood'' are called
+  \Palert{unicorns}, and must be normal. \medskip\Pause
+  
+  For example, $\Palert{\<r^2\>}=\Palert{x\<r^2\>x^{-1}}$ is the only 
+  size-$2$ subgroup ``\emph{\Balert{with $3$ parents}}.'' \medskip\Pause
+  
+  The groups \Palert{$G$} and \Palert{$\<1\>$} are always
+  unicorns, and hence normal. \medskip\Pause
+  
+  The index-$2$ subgroups $\<r^2,f\>$, \Palert{$\<r\>$}, and
+  $\<r^2,rf\>$ must be normal. 
+  
+  \smallskip\Pause
+  
+  \begin{exampleblock}{Remark}
+    Conjugating a normal subgroup $N\leq G$ by $x\in G$ shuffles its
+    elements and subgroups. \Pause
+
+    In particular, this includes conjugating all of $G$ by some $x\in G$.
+  \end{exampleblock}
+  
+\end{frame}
+
+%%====================================================================
+
+
+\begin{frame}{The conjugacy class of a subgroup}
+  
+  \begin{block}{Proposition}
+    \Alert{Conjugation} is an \Balert{equivalence relation} on the set of
+    subgroups of $G$.
+  \end{block}
+  
+  \begin{exampleblock}{Proof} \Pause
+    We need to show that conjugacy is reflexive, symmetric, and
+    transitive. \Pause
+    
+    \begin{itemize}
+    \item \textbf{Reflexive}: \Pause $eHe^{-1}=H$. \qquad
+      $\hfill\checkmark$ \smallskip\Pause
+      
+    \item \textbf{Symmetric}: \Pause Suppose $H$ is conjugate to $K$, 
+      by $aHa^{-1}=K$. \Pause Then $K$ is conjugate to $H$:
+      \[
+      a^{-1}Ka\Pause=a^{-1}(aHa^{-1})a\Pause=H. \tag*{$\checkmark$}
+      \] \vspace{-4mm}\Pause
+    \item \textbf{Transitive}: \Pause Suppose $aHa^{-1}=K$ and
+      $bKb^{-1}=L$. \Pause Then $H$ is conjugate to $L$:
+      \[
+      (ba)H(ba)^{-1}\Pause=b(aHa^{-1})b^{-1}\Pause=bKb^{-1}\Pause=L.
+      \tag*{$\checkmark$}
+      \] \vspace{-4mm}
+    \end{itemize}
+  \end{exampleblock}
+  
+  \Pause
+
+  \begin{block}{Definition}
+    The set of all subgroups conjugate to $H$ is its
+    \Alert{conjugacy class}, denoted
+    \[
+    \cl_G(H)=\big\{gHg^{-1}\mid g\in G\big\}.
+    \]
+  \end{block}
+
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{The subgroup lattice of $A_5$} \vspace{-8mm}
+  
+
+  %% Subgroup lattice of A_5
+  \[
+  %%
+  \hspace*{7mm}
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.5,auto,xscale=1.1]
+    %%
+    \newcommand\Hh{16} % height of A_5
+    \newcommand\Hg{9.5} % height of A_4
+    \newcommand\Hf{8} % height of D_10
+    \newcommand\He{7} % height of S_3
+    \newcommand\Hd{5.6} % height of C_5
+    \newcommand\Hc{5} % height of V_4
+    \newcommand\Hb{3} % height of C_3
+    \newcommand\Ha{2} % height of C_2  
+    \tikzstyle{every node}=[font=\footnotesize]
+    %%
+    \node (A5) at (0,\Hh) {\small $A_5$};
+    \draw[dashed,midgray] (0,\Hh) circle [x radius=.4cm, y radius=.3cm];
+    %%
+    \node (12-1)at(-2,\Hg) {$A_4$};
+    \node (12-2)at(-1.5,\Hg){$A_4$};
+    \node (12-3)at(-1,\Hg) {$A_4$};
+    \node (12-4)at(-.5,\Hg) {$A_4$};
+    \node (12-5)at(0,\Hg) {$A_4$};
+    \draw[dashed,midgray] (-1,\Hg) circle [x radius=1.5cm, y radius=.5cm];
+    %%
+    \node (10-1)at(6,\Hf) {$D_5$}; \node (10-2)at(6.5,\Hf) {$D_5$};
+    \node (10-3)at(7,\Hf) {$D_5$}; \node (10-4)at(7.5,\Hf) {$D_5$};
+    \node (10-5)at(8,\Hf) {$D_5$}; \node (10-6)at(8.5,\Hf) {$D_5$};
+    \draw[dashed,midgray] (7.25,\Hf) circle [x radius=1.7cm, y radius=.55cm];
+    %%
+    \node (6-1)at(-10.5,\He){$S_3$}; \node (6-2)at(-10,\He){$S_3$};
+    \node (6-3)at(-9.5,\He){$S_3$}; \node (6-4)at(-9,\He) {$S_3$};
+    \node (6-5)at(-8.5,\He){$S_3$}; \node (6-6)at(-8,\He) {$S_3$};
+    \node (6-7)at(-7.5,\He) {$S_3$}; \node (6-8)at(-7,\He) {$S_3$};
+    \node (6-9)at(-6.5,\He) {$S_3$}; \node (6-10)at(-6,\He) {$S_3$};
+    \draw[dashed,midgray] (-8.25,\He) circle [x radius=2.7cm, y radius=.5cm];
+    %%
+    \node (5-1)at(6,\Hd) {$C_5$}; \node (5-2)at(6.5,\Hd) {$C_5$};
+    \node (5-3)at(7,\Hd) {$C_5$}; \node (5-4)at(7.5,\Hd) {$C_5$};
+    \node (5-5)at(8,\Hd) {$C_5$}; \node (5-6)at(8.5,\Hd) {$C_5$};
+    \draw[dashed,midgray] (7.25,\Hd) circle [x radius=1.7cm, y radius=.55cm];
+    %%
+    \node (4-1)at(-2,\Hc) {$V_4$};
+    \node (4-2)at(-1.5,\Hc) {$V_4$};
+    \node (4-3)at(-1,\Hc) {$V_4$};
+    \node (4-4)at(-.5,\Hc) {$V_4$};
+    \node (4-5)at(0,\Hc) {$V_4$};
+    \draw[dashed,midgray] (-1,\Hc) circle [x radius=1.5cm, y radius=.5cm];
+    %%
+    \node (3-1)at(-10.5,\Hb) {$C_3$}; \node (3-2)at(-10,\Hb){$C_3$};
+    \node (3-3)at(-9.5,\Hb) {$C_3$}; \node (3-4)at(-9,\Hb) {$C_3$};
+    \node (3-5)at(-8.5,\Hb) {$C_3$}; \node (3-6)at(-8,\Hb) {$C_3$};
+    \node (3-7)at(-7.5,\Hb) {$C_3$}; \node (3-8)at(-7,\Hb) {$C_3$};
+    \node (3-9)at(-6.5,\Hb) {$C_3$}; \node (3-10)at(-6,\Hb) {$C_3$};
+    \draw[dashed,midgray] (-8.25,\Hb) circle [x radius=2.7cm, y radius=.5cm];
+    %%  
+    \node (2-1)at(-3.8,\Ha) {$C_2$};
+    \node (2-2)at(-3.4,2) {$C_2$};
+    \node (2-3)at(-3,\Ha) {$C_2$};
+    \node (2-4)at(-2.6,\Ha){$C_2$};
+    \node (2-5)at(-2.2,\Ha) {$C_2$};
+    \node (2-6)at(-1.8,\Ha){$C_2$};
+    \node (2-7)at(-1.4,\Ha) {$C_2$};
+    \node (2-8)at(-1,\Ha) {$C_2$};
+    \node (2-9)at(-.6,\Ha) {$C_2$};
+    \node (2-10)at(-.2,\Ha) {$C_2$};
+    \node (2-11)at(.2,\Ha) {$C_2$};
+    \node (2-12)at(.6,\Ha){$C_2$};
+    \node (2-13)at(1,\Ha) {$C_2$};
+    \node (2-14)at(1.4,\Ha) {$C_2$};
+    \node (2-15)at(1.8,\Ha) {$C_2$};
+    \draw[dashed,midgray] (-.95,\Ha) circle [x radius=3.25cm, y radius=.5cm];
+    %%  
+    \node (e)at(0,-.5) {\small $\<e\>$};
+    \draw[dashed,midgray] (0,-.5) circle [x radius=.4cm, y radius=.3cm];
+    %%
+    \draw[f] (2-1) to (e); \draw[f] (2-2) to (e); \draw[f] (2-3) to (e);
+    \draw[f] (2-4) to (e); \draw[f] (2-5) to (e); \draw[f] (2-6) to (e);
+    \draw[f] (2-7) to (e); \draw[f] (2-8) to (e); \draw[f] (2-9) to (e);
+    \draw[f] (2-10) to (e); \draw[f] (2-11) to (e); \draw[f] (2-12) to (e);
+    \draw[f] (2-13) to (e); \draw[f] (2-14) to (e); \draw[f] (2-15) to (e);
+    %%
+    \draw[f] (3-1) -- (e) node[midway,left,midgray]{\footnotesize $3\;\;\;\;\;\;\;$};
+    \draw[f] (3-2) to (e); \draw[f] (3-3) to (e);
+    \draw[f] (3-4) to (e); \draw[f] (3-5) to (e); \draw[f] (3-6) to (e);
+    \draw[f] (3-7) to (e); \draw[f] (3-8) to (e); \draw[f] (3-9) to (e);
+    \draw[f] (3-10) to (e); 
+    %%
+    \draw[f] (5-1) -- (e); \draw[f] (5-2) to (e); \draw[f] (5-3) to (e);
+    \draw[f] (5-4) to (e); \draw[f] (5-5) to (e);
+    \draw[f] (5-6) -- (e) node[midway,right,midgray]{\footnotesize $\;\;\;5$};
+    %%
+    \draw[f] (5-1) -- (10-1); \draw[f] (5-2) to (10-2);
+    \draw[f] (5-3) to (10-3);
+    \draw[f] (5-4) to (10-4); \draw[f] (5-5) to (10-5);
+    \draw[f] (5-6) -- (10-6) node[midway,right,midgray]{\footnotesize $2$};
+    %%
+    \draw[f] (6-1) -- (3-1) node[midway,left,midgray]{\footnotesize $2\;$};
+    \draw[f] (6-2) to (3-2); \draw[f] (6-3) to (3-3);
+    \draw[f] (6-4) to (3-4); \draw[f] (6-5) to (3-5); \draw[f] (6-6) to (3-6);
+    \draw[f] (6-7) to (3-7); \draw[f] (6-8) to (3-8); \draw[f] (6-9) to (3-9);
+    \draw[f] (6-10) to (3-10);
+    %%
+    \draw[f] (A5) to (12-1); \draw[f] (A5) to (12-2);
+    \draw[f] (A5) to (12-3); \draw[f] (A5) to (12-4);
+    \draw[f] (A5) -- (12-5) node[midway,right,midgray]{\footnotesize $5$};
+    \draw[f] (A5) to (10-1); \draw[f] (A5) to (10-2); \draw[f] (A5) to (10-3);
+    \draw[f] (A5) to (10-4); \draw[f] (A5) to (10-5);
+    \draw[f] (A5) -- (10-6) node[midway,right,midgray]{\footnotesize $\;\;6$};
+    \draw[f] (A5) -- (6-1) node[midway,left,midgray]{\footnotesize $10\;$};
+    \draw[f] (A5) to (6-2); \draw[f] (A5) to (6-3);
+    \draw[f] (A5) to (6-4); \draw[f] (A5) to (6-5); \draw[f] (A5) to (6-6);
+    \draw[f] (A5) to (6-7); \draw[f] (A5) to (6-8); \draw[f] (A5) to (6-9);
+    \draw[f] (A5) to (6-10); 
+    %%
+    \draw[f] (2-1) -- (10-2) node[pos=.65,left,midgray]{\footnotesize $5\;\;$};
+    \draw[f] (2-1) -- (10-6);
+    \draw[f] (2-2) -- (10-3); \draw[f] (2-2) -- (10-5);
+    \draw[f] (2-3) -- (10-1); \draw[f] (2-3) -- (10-4);
+    \draw[f] (2-4) -- (10-2); \draw[f] (2-4) -- (10-5);
+    \draw[f] (2-5) -- (10-4); \draw[f] (2-5) -- (10-6);
+    \draw[f] (2-6) -- (10-1); \draw[f] (2-6) -- (10-3);
+    \draw[f] (2-7) -- (10-4); \draw[f] (2-7) -- (10-5);
+    \draw[f] (2-8) -- (10-2); \draw[f] (2-8) -- (10-3);
+    \draw[f] (2-9) -- (10-1); \draw[f] (2-9) -- (10-6);
+    \draw[f] (2-10) -- (10-3); \draw[f] (2-10) -- (10-4);
+    \draw[f] (2-11) -- (10-5); \draw[f] (2-11) -- (10-6);
+    \draw[f] (2-12) -- (10-1); \draw[f] (2-12) -- (10-2);
+    \draw[f] (2-13) -- (10-3); \draw[f] (2-13) -- (10-6);
+    \draw[f] (2-14) -- (10-2); \draw[f] (2-14) -- (10-4);
+    \draw[f] (2-15) -- (10-1); \draw[f] (2-15) -- (10-5);
+    %%
+    \draw[f] (3-1) -- (12-1) node[pos=.8,left,midgray]{\footnotesize $4\;\;$};
+    \draw[f] (3-1) -- (12-5);
+    \draw[f] (3-2) -- (12-1); \draw[f] (3-2) -- (12-4);
+    \draw[f] (3-3) -- (12-1); \draw[f] (3-3) -- (12-3);
+    \draw[f] (3-4) -- (12-1); \draw[f] (3-4) -- (12-2);
+    \draw[f] (3-5) -- (12-4); \draw[f] (3-5) -- (12-5);
+    \draw[f] (3-6) -- (12-3); \draw[f] (3-6) -- (12-5);
+    \draw[f] (3-7) -- (12-2); \draw[f] (3-7) -- (12-5);
+    \draw[f] (3-8) -- (12-3); \draw[f] (3-8) -- (12-4);
+    \draw[f] (3-9) -- (12-2); \draw[f] (3-9) -- (12-4);
+    \draw[f] (3-10) -- (12-2); \draw[f] (3-10) -- (12-3);
+    %%
+    \draw[f] (2-1) -- (6-5); \draw[f] (2-1) -- (6-10);
+    \draw[f] (2-2) -- (6-6); \draw[f] (2-2) -- (6-9);
+    \draw[f] (2-3) -- (6-7); \draw[f] (2-3) -- (6-8);
+    \draw[f] (2-4) -- (6-1); \draw[f] (2-4) -- (6-8);
+    \draw[f] (2-5) -- (6-2); \draw[f] (2-5) -- (6-6);
+    \draw[f] (2-6) -- (6-3); \draw[f] (2-6) -- (6-5);
+    \draw[f] (2-7) -- (6-4); \draw[f] (2-7) -- (6-5);
+    \draw[f] (2-8) -- (6-2); \draw[f] (2-8) -- (6-7);
+    \draw[f] (2-9) -- (6-1); \draw[f] (2-9) -- (6-9);
+    \draw[f] (2-10) -- (6-1); \draw[f] (2-10) -- (6-10);
+    \draw[f] (2-11) -- (6-3); \draw[f] (2-11) -- (6-7);
+    \draw[f] (2-12) -- (6-4); \draw[f] (2-12) -- (6-6);
+    \draw[f] (2-13) -- (6-4); \draw[f] (2-13) -- (6-8);
+    \draw[f] (2-14) -- (6-3); \draw[f] (2-14) -- (6-9);
+    \draw[f] (2-15) -- (6-2); 
+    \draw[f] (2-15) -- (6-10) node[pos=.68,right,midgray]{\footnotesize $\;\;3$};
+    \draw[f] (4-1) to (2-1); \draw[f] (4-1) to (2-2); \draw[f] (4-1) to (2-3);
+    \draw[f] (4-2) to (2-4); \draw[f] (4-2) to (2-5); \draw[f] (4-2) to (2-6);
+    \draw[f] (4-3) to (2-7); \draw[f] (4-3) to (2-8); \draw[f] (4-3) to (2-9);
+    \draw[f] (4-4) to (2-10); \draw[f] (4-4) to (2-11); \draw[f] (4-4) to (2-12);
+    \draw[f] (4-5) to (2-13); \draw[f] (4-5) to (2-14); 
+    \draw[f] (4-5) -- (2-15) node[midway,right,midgray]{$\;2$};
+    %%
+    \draw[f] (12-1) -- (4-1); \draw[f] (12-2) to (4-2);
+    \draw[f] (12-3) to (4-3); \draw[f] (12-4) to (4-4);
+    \draw[f] (12-5) -- (4-5) node[midway,right,midgray]{$3$};
+    %%
+    \end{tikzpicture}
+  \]
+
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{``Reducing'' subgroup lattices}
+  Sometimes it is convenient to collapse conjugacy classes into single
+  nodes in the lattice. \medskip\pause
+  
+  Left-subscripts denote size. We call this a \Alert{subgroup diagram} (bc it might not actually be a lattice.)
+
+  %% Subgroup DIAGRAM of A_5
+  \[
+  %%
+  \hspace*{7mm}
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.75,auto,xscale=1.1]
+    %%
+    \newcommand\Hh{8} % height of A_5
+    \newcommand\Hg{7} % height of A_4
+    \newcommand\Hf{6} % height of D_10
+    \newcommand\He{5} % height of S_3
+    \newcommand\Hd{4} % height of C_5
+    \newcommand\Hc{3} % height of V_4
+    \newcommand\Hb{2} % height of C_3
+    \newcommand\Ha{1} % height of C_2  
+    \tikzstyle{every node}=[font=\footnotesize]
+    %%
+    \node (A5) at (0,\Hh) {\small $A_5$};
+    %%
+    \node (12)at(0,\Hg) {$_{5}A_4$};
+    %%
+    \node (10)at(3,\Hf) {$_{6}D_5$};
+    \node (6)at(-3,\He){$_{10}S_3$};
+    %%
+    \node (5)at(3,\Hd) {$_{6}C_5$};
+    %%
+    \node (4)at(0,\Hc) {$_{5}V_4$};
+    %%
+    \node (3)at(-3,\Hb) {$_{10}C_3$};
+    %%  
+    \node (2)at(0,\Ha) {$_{15}C_2$};
+    %%  
+    \node (e)at(0,0) {\small $\<e\>$};
+    %%
+    \draw[f] (2) to (e);
+    %%
+    \draw[f] (3) -- (e) node[midway,left,midgray]{\footnotesize $3\;\;\;\;\;\;\;$};
+    %%
+    \draw[f] (5) -- (e) node[midway,right,midgray]{\footnotesize $\;\;\;5$};
+    %%
+    \draw[f] (5) -- (10) node[midway,right,midgray]{\footnotesize $2$};
+    %%
+    \draw[f] (6) -- (3) node[midway,left,midgray]{\footnotesize $2\;$};
+    %%
+    \draw[f] (A5) -- (12) node[midway,right,midgray]{\footnotesize $5$};
+    \draw[f] (A5) -- (10) node[midway,right,midgray]{\footnotesize $\;\;6$};
+    \draw[f] (A5) -- (6) node[midway,left,midgray]{\footnotesize $10\;$}; 
+    %%
+    \draw[f] (2) -- (10) node[pos=.65,left,midgray]{\footnotesize $5\;\;$};
+    %%
+    \draw[f] (3) -- (12) node[pos=.8,left,midgray]{\footnotesize $4\;\;$};
+    %%
+    \draw[f] (2) -- (6) node[pos=.68,right,midgray]{\footnotesize $\;\;3$};
+    %%
+    \draw[f] (4) -- (2) node[midway,right,midgray]{$\;2$};
+    %%
+    \draw[f] (12) -- (4) node[midway,right,midgray]{$3$};
+    %%
+    \end{tikzpicture}
+  \]
+\end{frame}
+
+
+%%====================================================================
+\section{The end!}
+\end{document}
+
 
 %%====================================================================
 
@@ -1234,54 +1617,6 @@
   
 \end{frame}
 
-%%====================================================================
-
-
-\begin{frame}{The conjugacy class of a subgroup}
-  
-  \begin{block}{Proposition}
-    \Alert{Conjugation} is an \Balert{equivalence relation} on the set of
-    subgroups of $G$.
-  \end{block}
-  
-  \begin{exampleblock}{Proof} \Pause
-    We need to show that conjugacy is reflexive, symmetric, and
-    transitive. \Pause
-    
-    \begin{itemize}
-    \item \textbf{Reflexive}: \Pause $eHe^{-1}=H$. \qquad
-      $\hfill\checkmark$ \smallskip\Pause
-      
-    \item \textbf{Symmetric}: \Pause Suppose $H$ is conjugate to $K$, 
-      by $aHa^{-1}=K$. \Pause Then $K$ is conjugate to $H$:
-      \[
-      a^{-1}Ka\Pause=a^{-1}(aHa^{-1})a\Pause=H. \tag*{$\checkmark$}
-      \] \vspace{-4mm}\Pause
-    \item \textbf{Transitive}: \Pause Suppose $aHa^{-1}=K$ and
-      $bKb^{-1}=L$. \Pause Then $H$ is conjugate to $L$:
-      \[
-      (ba)H(ba)^{-1}\Pause=b(aHa^{-1})b^{-1}\Pause=bKb^{-1}\Pause=L.
-      \tag*{$\checkmark$}
-      \] \vspace{-4mm}
-    \end{itemize}
-  \end{exampleblock}
-  
-  \Pause
-
-  \begin{block}{Definition}
-    The set of all subgroups conjugate to $H$ is its
-    \Alert{conjugacy class}, denoted
-    \[
-    \cl_G(H)=\big\{gHg^{-1}\mid g\in G\big\}.
-    \]
-  \end{block}
-
-\end{frame}
-
-
-%%====================================================================
-\section{The end!}
-\end{document}
 
 %%====================================================================
 
@@ -1816,85 +2151,6 @@
   
 \end{frame}
 
-%%====================================================================
-
-\begin{frame}{Unicorn subgroups}
-
-  Suppose we conjugate $G=D_4$ by some element $x\in D_4$. \vspace{-2mm}
-  
-  %% Subgroup lattice of D_4 and conjugating it by an element x
-  \[
-  \begin{tikzpicture}[scale=.92]
-    %%
-    \tikzstyle{every node}=[font=\small]
-    %%
-    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
-      \node (D4) at (0,4) {\Palert{$D_4$}};
-      \node (r2-f) at (-1.25,3) {$\<r^2,f\>$};
-      \node (r) at (0,3) {\Palert{$\<r\>$}};
-      \node (r2-rf) at (1.25,3) {$\<r^2,rf\>$};
-      \node (f) at (-2.5,2) {$\<f\>$};
-      \node (r2f) at (-1.25,2) {$\<r^2f\>$};
-      \node (r2) at (0,2) {\Palert{$\<r^2\>$}};
-      \node (r3f) at (1.25,2) {$\<r^3f\>$};
-      \node (rf) at (2.5,2) {$\<rf\>$};
-      \node (1) at (0,1) {\Palert{$\<1\>$}};
-      %%
-      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
-      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
-      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
-      \draw[f] (r2-rf) to (r2);
-      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
-      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
-      \draw[dashed,midgray] (0,4) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (-1.25,3) circle [x radius=.6cm, y radius=.3cm];
-      \draw[dashed,midgray] (1.25,3) circle [x radius=.6cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,3) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,2) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,1) circle [x radius=.4cm, y radius=.3cm];
-    \end{scope}
-    %%
-    \begin{scope}[shift={(6.25,0)},shorten >= -3pt, shorten <= -3pt]
-      \node (D4) at (0,4) {\Palert{$xD_4x^{-1}$}};
-      \node (r2-f) at (-1.25,3) {$x\<r^2,f\>x^{-1}$};
-      \node (r) at (0,3) {\Palert{$x\<r\>x^{-1}$}};
-      \node (r2-rf) at (1.25,3) {$x\<r^2,rf\>x^{-1}$};
-      \node (f) at (-2.5,2) {$x\<f\>x^{-1}$};
-      \node (r2f) at (-1.25,2) {$x\<r^2f\>x^{-1}$};
-      \node (r2) at (0,2) {\Palert{$x\<r^2\>x^{-1}$}};
-      \node (r3f) at (1.25,2) {$x\<r^3f\>x^{-1}$};
-      \node (rf) at (2.5,2) {$x\<rf\>x^{-1}$};
-      \node (1) at (0,1) {\Palert{$x\<1\>x^{-1}$}};
-      %%
-      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
-      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
-      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
-      \draw[f] (r2-rf) to (r2);
-      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
-      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  \Pause Subgroups at a unique ``lattice neighborhood'' are called
-  \Palert{unicorns}, and must be normal. \medskip\Pause
-  
-  For example, $\Palert{\<r^2\>}=\Palert{x\<r^2\>x^{-1}}$ is the only 
-  size-$2$ subgroup ``\emph{\Balert{with $3$ parents}}.'' \medskip\Pause
-  
-  The groups \Palert{$G$} and \Palert{$\<1\>$} are always
-  unicorns, and hence normal. \medskip\Pause
-  
-  The index-$2$ subgroups $\<r^2,f\>$, \Palert{$\<r\>$}, and
-  $\<r^2,rf\>$ must be normal. 
-  
-  \smallskip\Pause
-  
-  \begin{exampleblock}{Remark}
-    Conjugating a normal subgroup $N\leq G$ by $x\in G$ shuffles its
-    elements and subgroups.
-  \end{exampleblock}
-  
-\end{frame}
 
 %%====================================================================
 
@@ -2708,188 +2964,6 @@
   
   \emph{This places strong restrictions on the lattice structure of
     any \Balert{simple group}!}
-
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{The smallest nonabelian simple group} \vspace{-8mm}
-  
-
-  %% Subgroup lattice of A_5
-  \[
-  %%
-  \hspace*{7mm}
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.5,auto,xscale=1.1]
-    %%
-    \newcommand\Hh{16} % height of A_5
-    \newcommand\Hg{9.5} % height of A_4
-    \newcommand\Hf{8} % height of D_10
-    \newcommand\He{7} % height of S_3
-    \newcommand\Hd{5.6} % height of C_5
-    \newcommand\Hc{5} % height of V_4
-    \newcommand\Hb{3} % height of C_3
-    \newcommand\Ha{2} % height of C_2  
-    \tikzstyle{every node}=[font=\footnotesize]
-    %%
-    \node (A5) at (0,\Hh) {\small $A_5$};
-    \draw[dashed,midgray] (0,\Hh) circle [x radius=.4cm, y radius=.3cm];
-    %%
-    \node (12-1)at(-2,\Hg) {$A_4$};
-    \node (12-2)at(-1.5,\Hg){$A_4$};
-    \node (12-3)at(-1,\Hg) {$A_4$};
-    \node (12-4)at(-.5,\Hg) {$A_4$};
-    \node (12-5)at(0,\Hg) {$A_4$};
-    \draw[dashed,midgray] (-1,\Hg) circle [x radius=1.5cm, y radius=.5cm];
-    %%
-    \node (10-1)at(6,\Hf) {$D_5$}; \node (10-2)at(6.5,\Hf) {$D_5$};
-    \node (10-3)at(7,\Hf) {$D_5$}; \node (10-4)at(7.5,\Hf) {$D_5$};
-    \node (10-5)at(8,\Hf) {$D_5$}; \node (10-6)at(8.5,\Hf) {$D_5$};
-    \draw[dashed,midgray] (7.25,\Hf) circle [x radius=1.7cm, y radius=.55cm];
-    %%
-    \node (6-1)at(-10.5,\He){$S_3$}; \node (6-2)at(-10,\He){$S_3$};
-    \node (6-3)at(-9.5,\He){$S_3$}; \node (6-4)at(-9,\He) {$S_3$};
-    \node (6-5)at(-8.5,\He){$S_3$}; \node (6-6)at(-8,\He) {$S_3$};
-    \node (6-7)at(-7.5,\He) {$S_3$}; \node (6-8)at(-7,\He) {$S_3$};
-    \node (6-9)at(-6.5,\He) {$S_3$}; \node (6-10)at(-6,\He) {$S_3$};
-    \draw[dashed,midgray] (-8.25,\He) circle [x radius=2.7cm, y radius=.5cm];
-    %%
-    \node (5-1)at(6,\Hd) {$C_5$}; \node (5-2)at(6.5,\Hd) {$C_5$};
-    \node (5-3)at(7,\Hd) {$C_5$}; \node (5-4)at(7.5,\Hd) {$C_5$};
-    \node (5-5)at(8,\Hd) {$C_5$}; \node (5-6)at(8.5,\Hd) {$C_5$};
-    \draw[dashed,midgray] (7.25,\Hd) circle [x radius=1.7cm, y radius=.55cm];
-    %%
-    \node (4-1)at(-2,\Hc) {$V_4$};
-    \node (4-2)at(-1.5,\Hc) {$V_4$};
-    \node (4-3)at(-1,\Hc) {$V_4$};
-    \node (4-4)at(-.5,\Hc) {$V_4$};
-    \node (4-5)at(0,\Hc) {$V_4$};
-    \draw[dashed,midgray] (-1,\Hc) circle [x radius=1.5cm, y radius=.5cm];
-    %%
-    \node (3-1)at(-10.5,\Hb) {$C_3$}; \node (3-2)at(-10,\Hb){$C_3$};
-    \node (3-3)at(-9.5,\Hb) {$C_3$}; \node (3-4)at(-9,\Hb) {$C_3$};
-    \node (3-5)at(-8.5,\Hb) {$C_3$}; \node (3-6)at(-8,\Hb) {$C_3$};
-    \node (3-7)at(-7.5,\Hb) {$C_3$}; \node (3-8)at(-7,\Hb) {$C_3$};
-    \node (3-9)at(-6.5,\Hb) {$C_3$}; \node (3-10)at(-6,\Hb) {$C_3$};
-    \draw[dashed,midgray] (-8.25,\Hb) circle [x radius=2.7cm, y radius=.5cm];
-    %%  
-    \node (2-1)at(-3.8,\Ha) {$C_2$};
-    \node (2-2)at(-3.4,2) {$C_2$};
-    \node (2-3)at(-3,\Ha) {$C_2$};
-    \node (2-4)at(-2.6,\Ha){$C_2$};
-    \node (2-5)at(-2.2,\Ha) {$C_2$};
-    \node (2-6)at(-1.8,\Ha){$C_2$};
-    \node (2-7)at(-1.4,\Ha) {$C_2$};
-    \node (2-8)at(-1,\Ha) {$C_2$};
-    \node (2-9)at(-.6,\Ha) {$C_2$};
-    \node (2-10)at(-.2,\Ha) {$C_2$};
-    \node (2-11)at(.2,\Ha) {$C_2$};
-    \node (2-12)at(.6,\Ha){$C_2$};
-    \node (2-13)at(1,\Ha) {$C_2$};
-    \node (2-14)at(1.4,\Ha) {$C_2$};
-    \node (2-15)at(1.8,\Ha) {$C_2$};
-    \draw[dashed,midgray] (-.95,\Ha) circle [x radius=3.25cm, y radius=.5cm];
-    %%  
-    \node (e)at(0,-.5) {\small $\<e\>$};
-    \draw[dashed,midgray] (0,-.5) circle [x radius=.4cm, y radius=.3cm];
-    %%
-    \draw[f] (2-1) to (e); \draw[f] (2-2) to (e); \draw[f] (2-3) to (e);
-    \draw[f] (2-4) to (e); \draw[f] (2-5) to (e); \draw[f] (2-6) to (e);
-    \draw[f] (2-7) to (e); \draw[f] (2-8) to (e); \draw[f] (2-9) to (e);
-    \draw[f] (2-10) to (e); \draw[f] (2-11) to (e); \draw[f] (2-12) to (e);
-    \draw[f] (2-13) to (e); \draw[f] (2-14) to (e); \draw[f] (2-15) to (e);
-    %%
-    \draw[f] (3-1) -- (e) node[midway,left,midgray]{\footnotesize $3\;\;\;\;\;\;\;$};
-    \draw[f] (3-2) to (e); \draw[f] (3-3) to (e);
-    \draw[f] (3-4) to (e); \draw[f] (3-5) to (e); \draw[f] (3-6) to (e);
-    \draw[f] (3-7) to (e); \draw[f] (3-8) to (e); \draw[f] (3-9) to (e);
-    \draw[f] (3-10) to (e); 
-    %%
-    \draw[f] (5-1) -- (e); \draw[f] (5-2) to (e); \draw[f] (5-3) to (e);
-    \draw[f] (5-4) to (e); \draw[f] (5-5) to (e);
-    \draw[f] (5-6) -- (e) node[midway,right,midgray]{\footnotesize $\;\;\;5$};
-    %%
-    \draw[f] (5-1) -- (10-1); \draw[f] (5-2) to (10-2);
-    \draw[f] (5-3) to (10-3);
-    \draw[f] (5-4) to (10-4); \draw[f] (5-5) to (10-5);
-    \draw[f] (5-6) -- (10-6) node[midway,right,midgray]{\footnotesize $2$};
-    %%
-    \draw[f] (6-1) -- (3-1) node[midway,left,midgray]{\footnotesize $2\;$};
-    \draw[f] (6-2) to (3-2); \draw[f] (6-3) to (3-3);
-    \draw[f] (6-4) to (3-4); \draw[f] (6-5) to (3-5); \draw[f] (6-6) to (3-6);
-    \draw[f] (6-7) to (3-7); \draw[f] (6-8) to (3-8); \draw[f] (6-9) to (3-9);
-    \draw[f] (6-10) to (3-10);
-    %%
-    \draw[f] (A5) to (12-1); \draw[f] (A5) to (12-2);
-    \draw[f] (A5) to (12-3); \draw[f] (A5) to (12-4);
-    \draw[f] (A5) -- (12-5) node[midway,right,midgray]{\footnotesize $5$};
-    \draw[f] (A5) to (10-1); \draw[f] (A5) to (10-2); \draw[f] (A5) to (10-3);
-    \draw[f] (A5) to (10-4); \draw[f] (A5) to (10-5);
-    \draw[f] (A5) -- (10-6) node[midway,right,midgray]{\footnotesize $\;\;6$};
-    \draw[f] (A5) -- (6-1) node[midway,left,midgray]{\footnotesize $10\;$};
-    \draw[f] (A5) to (6-2); \draw[f] (A5) to (6-3);
-    \draw[f] (A5) to (6-4); \draw[f] (A5) to (6-5); \draw[f] (A5) to (6-6);
-    \draw[f] (A5) to (6-7); \draw[f] (A5) to (6-8); \draw[f] (A5) to (6-9);
-    \draw[f] (A5) to (6-10); 
-    %%
-    \draw[f] (2-1) -- (10-2) node[pos=.65,left,midgray]{\footnotesize $5\;\;$};
-    \draw[f] (2-1) -- (10-6);
-    \draw[f] (2-2) -- (10-3); \draw[f] (2-2) -- (10-5);
-    \draw[f] (2-3) -- (10-1); \draw[f] (2-3) -- (10-4);
-    \draw[f] (2-4) -- (10-2); \draw[f] (2-4) -- (10-5);
-    \draw[f] (2-5) -- (10-4); \draw[f] (2-5) -- (10-6);
-    \draw[f] (2-6) -- (10-1); \draw[f] (2-6) -- (10-3);
-    \draw[f] (2-7) -- (10-4); \draw[f] (2-7) -- (10-5);
-    \draw[f] (2-8) -- (10-2); \draw[f] (2-8) -- (10-3);
-    \draw[f] (2-9) -- (10-1); \draw[f] (2-9) -- (10-6);
-    \draw[f] (2-10) -- (10-3); \draw[f] (2-10) -- (10-4);
-    \draw[f] (2-11) -- (10-5); \draw[f] (2-11) -- (10-6);
-    \draw[f] (2-12) -- (10-1); \draw[f] (2-12) -- (10-2);
-    \draw[f] (2-13) -- (10-3); \draw[f] (2-13) -- (10-6);
-    \draw[f] (2-14) -- (10-2); \draw[f] (2-14) -- (10-4);
-    \draw[f] (2-15) -- (10-1); \draw[f] (2-15) -- (10-5);
-    %%
-    \draw[f] (3-1) -- (12-1) node[pos=.8,left,midgray]{\footnotesize $4\;\;$};
-    \draw[f] (3-1) -- (12-5);
-    \draw[f] (3-2) -- (12-1); \draw[f] (3-2) -- (12-4);
-    \draw[f] (3-3) -- (12-1); \draw[f] (3-3) -- (12-3);
-    \draw[f] (3-4) -- (12-1); \draw[f] (3-4) -- (12-2);
-    \draw[f] (3-5) -- (12-4); \draw[f] (3-5) -- (12-5);
-    \draw[f] (3-6) -- (12-3); \draw[f] (3-6) -- (12-5);
-    \draw[f] (3-7) -- (12-2); \draw[f] (3-7) -- (12-5);
-    \draw[f] (3-8) -- (12-3); \draw[f] (3-8) -- (12-4);
-    \draw[f] (3-9) -- (12-2); \draw[f] (3-9) -- (12-4);
-    \draw[f] (3-10) -- (12-2); \draw[f] (3-10) -- (12-3);
-    %%
-    \draw[f] (2-1) -- (6-5); \draw[f] (2-1) -- (6-10);
-    \draw[f] (2-2) -- (6-6); \draw[f] (2-2) -- (6-9);
-    \draw[f] (2-3) -- (6-7); \draw[f] (2-3) -- (6-8);
-    \draw[f] (2-4) -- (6-1); \draw[f] (2-4) -- (6-8);
-    \draw[f] (2-5) -- (6-2); \draw[f] (2-5) -- (6-6);
-    \draw[f] (2-6) -- (6-3); \draw[f] (2-6) -- (6-5);
-    \draw[f] (2-7) -- (6-4); \draw[f] (2-7) -- (6-5);
-    \draw[f] (2-8) -- (6-2); \draw[f] (2-8) -- (6-7);
-    \draw[f] (2-9) -- (6-1); \draw[f] (2-9) -- (6-9);
-    \draw[f] (2-10) -- (6-1); \draw[f] (2-10) -- (6-10);
-    \draw[f] (2-11) -- (6-3); \draw[f] (2-11) -- (6-7);
-    \draw[f] (2-12) -- (6-4); \draw[f] (2-12) -- (6-6);
-    \draw[f] (2-13) -- (6-4); \draw[f] (2-13) -- (6-8);
-    \draw[f] (2-14) -- (6-3); \draw[f] (2-14) -- (6-9);
-    \draw[f] (2-15) -- (6-2); 
-    \draw[f] (2-15) -- (6-10) node[pos=.68,right,midgray]{\footnotesize $\;\;3$};
-    \draw[f] (4-1) to (2-1); \draw[f] (4-1) to (2-2); \draw[f] (4-1) to (2-3);
-    \draw[f] (4-2) to (2-4); \draw[f] (4-2) to (2-5); \draw[f] (4-2) to (2-6);
-    \draw[f] (4-3) to (2-7); \draw[f] (4-3) to (2-8); \draw[f] (4-3) to (2-9);
-    \draw[f] (4-4) to (2-10); \draw[f] (4-4) to (2-11); \draw[f] (4-4) to (2-12);
-    \draw[f] (4-5) to (2-13); \draw[f] (4-5) to (2-14); 
-    \draw[f] (4-5) -- (2-15) node[midway,right,midgray]{$\;2$};
-    %%
-    \draw[f] (12-1) -- (4-1); \draw[f] (12-2) to (4-2);
-    \draw[f] (12-3) to (4-3); \draw[f] (12-4) to (4-4);
-    \draw[f] (12-5) -- (4-5) node[midway,right,midgray]{$3$};
-    %%
-    \end{tikzpicture}
-  \]
 
 \end{frame}
 

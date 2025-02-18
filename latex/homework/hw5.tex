@@ -1,0 +1,139 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+%%---------------------------------------------------------------------------
+%% included from visualalgebra.sty (see the beamer folder)
+%% TEXT COLORS
+%%
+\definecolor{xRed}{rgb}{.9,0,0}       
+\definecolor{xBlue}{rgb}{0,0,.9}      
+\definecolor{xGreen}{HTML}{009000}   %% "Islamic green"
+\definecolor{xPurple}{HTML}{D14FFF}  
+\definecolor{xOrange}{HTML}{F56600}  %% "Clemson orange"
+
+\newcommand{\Alert}[1]{\textcolor{xRed}{#1}}
+\newcommand{\Balert}[1]{\textcolor{xBlue}{#1}}
+\newcommand{\Galert}[1]{\textcolor{xGreen}{#1}}
+\newcommand{\Palert}[1]{\textcolor{xPurple}{#1}}
+\newcommand{\Oalert}[1]{\textcolor{xOrange}{#1}}
+\newcommand{\Walert}[1]{\textcolor{white}{#1}}
+
+%% vertices in cayley graphs
+\tikzset{v/.style={circle, draw, fill=lightgray,inner sep=0pt, 
+  minimum size=6mm}}
+
+%% Edge colors
+%%
+\definecolor{eRed}{rgb}{1,0,0}      % Cayley diagram edges
+\definecolor{eBlue}{rgb}{0,0,1}     % Cayley diagram edges
+\definecolor{eGreen}{HTML}{7EC636}  % Goodnotes green (a little darker)
+\definecolor{eGreen}{HTML}{3CAC13}  % I like this a litte better
+\definecolor{ePurple}{HTML}{D287FF} % Close to goodnotes 
+\colorlet{eOrange}{orange}
+
+%% Edge styles 
+%%
+\tikzset{r/.style={draw, very thick, eRed, -stealth}}  % Red -->
+\tikzset{rr/.style={draw, very thick, eRed}}           % Red ---
+\tikzset{b/.style={draw, very thick, eBlue, -stealth}} % Blue -->
+\tikzset{bb/.style={draw, very thick, eBlue}}          % Blue ---
+\tikzset{g/.style={draw, very thick, eGreen, -stealth}} % Green -->
+\tikzset{gg/.style={draw, very thick, eGreen}}          % Green ---
+%%---------------------------------------------------------------------------
+
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+\def\<{\langle}
+\def\>{\rangle}
+\DeclareMathOperator\Rect{\mathbf{Rect}}
+\DeclareMathOperator\Tri{\mathbf{Tri}}
+\DeclareMathOperator\Sq{\mathbf{Sq}}
+\DeclareMathOperator\Light{\mathbf{Light}}
+\DeclareMathOperator{\lcm}{lcm}
+%% Abstract algebra commands
+\def\normal{\lhd}
+\def\normaleq{\unlhd}
+\def\nnormal{\ntriangleleft}
+\def\nnormaleq{\ntrianglelefteq}
+
+\newenvironment{red}{\color{red}}{\ignorespacesafterend}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+% all the stuff above this line is called the preamble...
+%##################################################################
+\begin{document} % this is always the first line of what's actually produced
+\section{Homework \#5} % notice that if you want the character # to appear, you have to "escape" it with a backslash
+
+HW due Sunday 2/23 by pdf upload to Canvas; .tex source on the \href{https://github.com/rhinopotamus/math312}{MATH 312 github repo}.
+
+\subsection*{Stuff from class slides that I promised would be on the homework}
+
+\begin{problem}
+    Prove that $N_G(H) \leq G$.
+\end{problem}
+
+\begin{problem}
+    Prove that $H\normaleq N_G(H)$. (So, first prove that $H$ is a subgroup of its normalizer, and then prove that it's a \textit{normal} subgroup of its normalizer.)
+\end{problem}
+
+\begin{problem}
+    Let $H\leq G$. Prove that if $ghg\inv \in H$ for all $h\in H$ and $g\in G$, then $gHg\inv = H$ for all $g\in G$.
+\end{problem}
+
+\begin{problem}
+    Let $H\leq G$ and $g\in G$. Prove that the conjugate, $gHg\inv$, is a subgroup of $G$.
+\end{problem}
+
+\end{document}
+
