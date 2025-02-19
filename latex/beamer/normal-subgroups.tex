@@ -1031,6 +1031,15 @@
 \begin{frame}{Unicorn subgroups}
 
   Suppose we conjugate $G=D_4$ by some element $x\in D_4$. \vspace{-2mm}
+
+  \smallskip \Pause
+  
+  \begin{exampleblock}{Very useful idea}
+    Conjugating a normal subgroup $N\leq G$ by $x\in G$ shuffles its
+    elements and subgroups. \Pause
+
+    In particular, this includes conjugating all of $G$ by some $x\in G$.
+  \end{exampleblock} \Pause
   
   %% Subgroup lattice of D_4 and conjugating it by an element x
   \[
@@ -1097,17 +1106,433 @@
   The index-$2$ subgroups $\<r^2,f\>$, \Palert{$\<r\>$}, and
   $\<r^2,rf\>$ must be normal. 
   
-  \smallskip\Pause
-  
-  \begin{exampleblock}{Remark}
-    Conjugating a normal subgroup $N\leq G$ by $x\in G$ shuffles its
-    elements and subgroups. \Pause
+\end{frame}
 
-    In particular, this includes conjugating all of $G$ by some $x\in G$.
-  \end{exampleblock}
+%%====================================================================
+
+\begin{frame}{Unicorns in the diquaternion group} %\Pause
+  
+  Our definition of \Palert{unicorn} could be strengthened, but we
+  want to keep things simple. \medskip\Pause
+
+  Here's the lattice for a group called $\DQ_8$, which has order 16.
+  
+  Are any of the $C_4$ subgroups of $\DQ_8$ unicorns, i.e.,
+  ``not like the others''? 
+  
+  %% Subgroup lattice of DQ_8
+  \[
+  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.15]
+    \begin{scope}[shift={(0,0)}]
+      \node (G) at (0,3) {$\DQ_8$};
+      \node (C4xC2-1) at (-3,2) {$C_4\times C_2$}; % 010,001,011
+      \node (D4-1) at (-2,2) {$D_4$}; % 100,001,101    
+      \node (C4xC2-2) at (-1,2) {$C_4\times C_2$}; % 100,010,110
+      \node (D4-2) at (0,2) {$D_4$};  % 100,011,111
+      \node (C4xC2-3) at (1,2) {$C_4\times C_2$};  % 010,101,111
+      \node (D4-3) at (2,2) {$D_4$};  % 110,001,111
+      \node (Q8) at (3,2) {$Q_8$};  % 110,011,101
+      %%
+      \node (V4-12) at (-3,1) {$V_4$};
+      \node (V4-13) at (-2,1) {$V_4$};
+      \node (V4-23) at (-1,1) {$V_4$};
+      \node (Z) at (0,1) {$C_4$};
+      \node (C4-1) at (1,1) {$C_4$};
+      \node (C4-2) at (2,1) {$C_4$};
+      \node (C4-3) at (3,1) {$C_4$};
+      %%
+      \node (C2-11) at (-3.25,0) {$C_2$};
+      \node (C2-12) at (-2.75,0) {$C_2$};
+      \node (C2-21) at (-2.25,0) {$C_2$};
+      \node (C2-22) at (-1.75,0) {$C_2$};
+      \node (C2-31) at (-1.25,0) {$C_2$};
+      \node (C2-32) at (-0.75,0) {$C_2$};    
+      \node (-I) at (1,0) {$C_2$};
+      %%
+      \node (I) at (0,-1) {$\<I\>$};
+      %%
+      %%
+      \draw[f] (C4xC2-1) to (G); \draw[f] (D4-1) to (G);
+      \draw[f] (C4xC2-2) to (G);
+      \draw[f] (D4-2) to (G); \draw[f] (C4xC2-3) to (G);
+      \draw[f] (D4-3) to (G); \draw[f] (Q8) to (G);
+      %%
+      \draw[f] (C4xC2-1) to (Z); \draw[f] (C4xC2-2) to (Z);
+      \draw[f] (C4xC2-3) to (Z); \draw[f] (V4-12) to (D4-1);
+      \draw[f] (V4-12) to (D4-2); \draw[f] (V4-12) to (C4xC2-3);
+      \draw[f] (V4-13) to (D4-1); \draw[f] (V4-13) to (D4-3);
+      \draw[f] (V4-13) to (C4xC2-2); \draw[f] (V4-23) to (D4-2);
+      \draw[f] (V4-23) to (D4-3); \draw[f] (V4-23) to (C4xC2-1);
+      %%
+      \draw[f] (C4-1) to (C4xC2-1); \draw[f] (C4-1) to (D4-1);
+      \draw[f] (C4-2) to (C4xC2-2); \draw[f] (C4-2) to (D4-2);
+      \draw[f] (C4-3) to (C4xC2-3); \draw[f] (C4-3) to (D4-3);
+      %%
+      \draw[f] (Q8) to (C4-1); \draw[f] (Q8) to (C4-2); \draw[f] (Q8) to (C4-3);
+      %%
+      \draw[f] (V4-12) to (C2-11); \draw[f] (V4-12) to (C2-12); 
+      \draw[f] (V4-13) to (C2-21); \draw[f] (V4-13) to (C2-22); 
+      \draw[f] (V4-23) to (C2-31); \draw[f] (V4-23) to (C2-32); 
+      %%
+      \draw[f] (-I) to (V4-12); \draw[f] (-I) to (V4-13);
+      \draw[f] (-I) to (V4-23); \draw[f] (-I) to (C4-1);
+      \draw[f] (-I) to (C4-2); \draw[f] (-I) to (C4-3);
+      \draw[f] (-I) to (Z);
+      %%
+      \draw[f] (C2-11) to (I); \draw[f] (C2-12) to (I); 
+      \draw[f] (C2-21) to (I); \draw[f] (C2-22) to (I); 
+      \draw[f] (C2-31) to (I); \draw[f] (C2-32) to (I);
+      \draw[f] (-I) to (I);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  (Preview: What can we say about the \Balert{conjugacy classes} of the subgroups of
+  $\DQ_8$ just from the lattice?)
   
 \end{frame}
 
+%%====================================================================
+
+\begin{frame}{A mystery group of order $16$} %\Pause
+
+  Here is the subgroup lattice for some actual group of order $16$ but I'm not telling you which one it is. Find as many \Palert{unicorns} as you can.
+  %%
+  %% Subgroup lattice of a mystery group of order 16
+  \[
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.75]
+    \begin{scope}[shift={(0,0)}]
+      \node(G) at (3.5,6) {\Palert{$G$}};
+      \node(rs) at (3.5,4.5) {$\<rs\>$};
+      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
+      \node(r) at (5.25,4.5) {$\<r\>$};
+      \node(r4-s) at (0,3) {$\<r^4,s\>$};
+      \node(r2s) at (1.75,3) {$\<r^2s\>$};
+      \node(r2) at (3.5,3) {$\<r^2\>$};
+      \node(s) at (-1.75,1.5) {$\<s\>$};
+      \node(r4s) at (0,1.5) {$\<r^4s\>$};
+      \node(r4) at (1.75,1.5) {$\<r^4\>$};
+      \node(1) at (0,0) {\Palert{$\<1\>$}};
+      \draw[f]  (1) to (s);
+      \draw[f]  (1) to (r4s);
+      \draw[f]  (1) to (r4);
+      \draw[f]  (s) to (r4-s);
+      \draw[f]  (r4s) to (r4-s);
+      \draw[f]  (r4) to (r4-s);
+      \draw[f]  (r4) to (r2s);
+      \draw[f]  (r4) to (r2);
+      \draw[f]  (r4-s) to (r2-s);
+      \draw[f]  (r2s) to (r2-s);
+      \draw[f]  (r2) to (r2-s);
+      \draw[f]  (r2) to (r);
+      \draw[f]  (r2) to (rs);
+      \draw[f]  (r2-s) to (G);
+      \draw[f]  (r) to (G);
+      \draw[f]  (rs) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{A mystery group of order $16$} %\Pause
+
+  \Palert{Unicorns} are purple.
+  %%
+  %% Subgroup lattice of a mystery group of order 16
+  \[
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.65]
+    \begin{scope}[shift={(0,0)}]
+      \node(G) at (3.5,6) {\Palert{$G$}};
+      \node(rs) at (3.5,4.5) {$\<rs\>$};
+      \node(r2-s) at (1.75,4.5) {\Palert{$\<r^2,s\>$}};
+      \node(r) at (5.25,4.5) {$\<r\>$};
+      \node(r4-s) at (0,3) {\Palert{$\<r^4,s\>$}};
+      \node(r2s) at (1.75,3) {\Palert{$\<r^2s\>$}};
+      \node(r2) at (3.5,3) {\Palert{$\<r^2\>$}};
+      \node(s) at (-1.75,1.5) {$\<s\>$};
+      \node(r4s) at (0,1.5) {$\<r^4s\>$};
+      \node(r4) at (1.75,1.5) {\Palert{$\<r^4\>$}};
+      \node(1) at (0,0) {\Palert{$\<1\>$}};
+      \draw[f]  (1) to (s);
+      \draw[f]  (1) to (r4s);
+      \draw[f]  (1) to (r4);
+      \draw[f]  (s) to (r4-s);
+      \draw[f]  (r4s) to (r4-s);
+      \draw[f]  (r4) to (r4-s);
+      \draw[f]  (r4) to (r2s);
+      \draw[f]  (r4) to (r2);
+      \draw[f]  (r4-s) to (r2-s);
+      \draw[f]  (r2s) to (r2-s);
+      \draw[f]  (r2) to (r2-s);
+      \draw[f]  (r2) to (r);
+      \draw[f]  (r2) to (rs);
+      \draw[f]  (r2-s) to (G);
+      \draw[f]  (r) to (G);
+      \draw[f]  (rs) to (G);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(8,0)}]
+      %%
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \node(G) at (3.5,6) {\Palert{$xGx^{-1}$}};
+      \node(rs) at (3.5,4.5) {$x\<rs\>x^{-1}$};
+      \node(r2-s) at (1.75,4.5) {\Palert{$x\<r^2,s\>x^{-1}$}};
+      \node(r) at (5.25,4.5) {$x\<r\>x^{-1}$};
+      \node(r4-s) at (0,3) {\Palert{$x\<r^4,s\>x^{-1}$}};
+      \node(r2s) at (1.75,3) {\Palert{$x\<r^2s\>x^{-1}$}};
+      \node(r2) at (3.5,3) {\Palert{$x\<r^2\>x^{-1}$}};
+      \node(s) at (-1.75,1.5) {$x\<s\>x^{-1}$};
+      \node(r4s) at (0,1.5) {$x\<r^4s\>x^{-1}$};
+      \node(r4) at (1.75,1.5) {\Palert{$x\<r^4\>x^{-1}$}};
+      \node(1) at (0,0) {\Palert{$x\<1\>x^{-1}$}};
+      \draw[f]  (1) to (s);
+      \draw[f]  (1) to (r4s);
+      \draw[f]  (1) to (r4);
+      \draw[f]  (s) to (r4-s);
+      \draw[f]  (r4s) to (r4-s);
+      \draw[f]  (r4) to (r4-s);
+      \draw[f]  (r4) to (r2s);
+      \draw[f]  (r4) to (r2);
+      \draw[f]  (r4-s) to (r2-s);
+      \draw[f]  (r2s) to (r2-s);
+      \draw[f]  (r2) to (r2-s);
+      \draw[f]  (r2) to (r);
+      \draw[f]  (r2) to (rs);
+      \draw[f]  (r2-s) to (G);
+      \draw[f]  (r) to (G);
+      \draw[f]  (rs) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+  \vspace{-2mm}\Pause
+
+  We can deduce that every subgroup is normal, except possibly
+  $\<s\>$ and $\<r^4s\>$. \medskip\Pause
+
+  There are two cases: \smallskip
+  \begin{itemize}
+    \item $\<s\>$ and $\<r^4s\>$ are normal \Pause $\Rightarrow$ $s\in Z(G)$
+      \Pause $\Rightarrow$ $G$ is abelian. \smallskip\Pause
+    \item $\<s\>$ and $\<r^4s\>$ are not normal \Pause $\Rightarrow$
+      $\cl_G(\<s\>)=\big\{\<s\>,\<r^4s\>\big\}$ \Pause $\Rightarrow$ $G$ is
+      nonabelian. \smallskip\Pause
+  \end{itemize}
+
+  \emph{This doesn't necessarily mean that both of these are actually
+    possible\dots}
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{A mystery group of order $16$} 
+
+  It's straightforward to check that this is the subgroup lattice of
+  \[
+  C_8\times C_2=\big\<r,s\mid r^8=s^2=1, srs=r\big\>.
+  \]
+
+  Let \Alert{$r=(a,1)$} and \Balert{$s=(1,b)$}, and so $C_8\times
+  C_2=\<r,s\>=\big\<(a,1),(1,b)\big\>$.
+  
+  %% Cayley graph and subgroup lattice of C8xC2
+  \[
+  \begin{tikzpicture}[scale=1.1,auto]
+    %%
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      %%
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [R-in] (s) to (rs);
+      \draw [R-in] (rs) to (r2s);
+      \draw [R-in] (r2s) to (r3s);
+      \draw [R-in] (r3s) to (r4s);
+      \draw [R-in] (r4s) to (r5s);
+      \draw [R-in] (r5s) to (r6s);
+      \draw [R-in] (r6s) to (r7s);
+      \draw [R-in] (r7s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $C_8\times C_2$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
+      %%
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node(G) at (3.5,6) {$\small \<(a,1),(1,b)\>$};
+      \node(rs) at (3.5,4.5) {$\<(a,b)\>$};
+      \node(r2-s) at (1.75,4.5) {$\<(a^2,b)\>$};
+      \node(r) at (5.25,4.5) {$\<(a,1)\>$};
+      \node(r4-s) at (0,3) {$\<(1,b),(a^4,1)\>$};
+      \node(r2s) at (1.75,3) {$\<(a^2,b)\>$};
+      \node(r2) at (3.5,3) {$\<(a^2,1)\>$};
+      \node(s) at (-1.75,1.5) {$\<(1,b)\>$};
+      \node(r4s) at (0,1.5) {$\<(a^4,b)\>$};
+      \node(r4) at (1.75,1.5) {$\<(a^4,1)\>$};
+      \node(1) at (0,0) {$\<(1,1)\>$};
+      \draw[f] (1) to (s);
+      \draw[f] (1) to (r4s);
+      \draw[f] (1) to (r4);
+      \draw[f] (s) to (r4-s);
+      \draw[f] (r4s) to (r4-s);
+      \draw[f] (r4) to (r4-s);
+      \draw[f] (r4) to (r2s);
+      \draw[f] (r4) to (r2);
+      \draw[f] (r4-s) to (r2-s);
+      \draw[f] (r2s) to (r2-s);
+      \draw[f] (r2) to (r2-s);
+      \draw[f] (r2) to (r);
+      \draw[f] (r2) to (rs);
+      \draw[f] (r2-s) to (G);
+      \draw[f] (r) to (G);
+      \draw[f] (rs) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{A mystery group of order $16$}
+
+  However, the nonabelian case is possible as well! 
+  The following also works: 
+  \[
+  \SA_8=\big\<r,s\mid r^8=s^2=1, srs=r^5\big\>.
+  \]
+  
+  %% Cayley graph and subgroup lattice of SA_8
+  \[
+  \begin{tikzpicture}[scale=1.1,auto]
+    %%
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      %%
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
+      \node(G) at (3.5,6) {$\<r,s\>$};
+      \node(rs) at (3.5,4.5) {$\<rs\>$};
+      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
+      \node(r) at (5.25,4.5) {$\<r\>$};
+      \node(r4-s) at (0,3) {$\<r^4,s\>$};
+      \node(r2s) at (1.75,3) {$\<r^2s\>$};
+      \node(r2) at (3.5,3) {$\<r^2\>$};
+      \node(s) at (-1.75,1.5) {$\<s\>$};
+      \node(r4s) at (0,1.5) {$\<r^4s\>$};
+      \node(r4) at (1.75,1.5) {$\<r^4\>$};
+      \node(1) at (0,0) {$\<1\>$};
+      \draw[f] (1) to (s);
+      \draw[f] (1) to (r4s);
+      \draw[f] (1) to (r4);
+      \draw[f] (s) to (r4-s);
+      \draw[f] (r4s) to (r4-s);
+      \draw[f] (r4) to (r4-s);
+      \draw[f] (r4) to (r2s);
+      \draw[f] (r4) to (r2);
+      \draw[f] (r4-s) to (r2-s);
+      \draw[f] (r2s) to (r2-s);
+      \draw[f] (r2) to (r2-s);
+      \draw[f] (r2) to (r);
+      \draw[f] (r2) to (rs);
+      \draw[f] (r2-s) to (G);
+      \draw[f] (r) to (G);
+      \draw[f] (rs) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+\section{Conjugacy classes!}
 %%====================================================================
 
 
@@ -1340,22 +1765,22 @@
   Sometimes it is convenient to collapse conjugacy classes into single
   nodes in the lattice. \medskip\pause
   
-  Left-subscripts denote size. We call this a \Alert{subgroup diagram} (bc it might not actually be a lattice.)
+  Left-subscripts denote the size of the conjugacy class. We call this a \Alert{subgroup diagram}. \\ (In some circumstances it might not actually be a lattice.)
 
   %% Subgroup DIAGRAM of A_5
   \[
   %%
   \hspace*{7mm}
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.75,auto,xscale=1.1]
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.4,auto,xscale=2]
     %%
-    \newcommand\Hh{8} % height of A_5
-    \newcommand\Hg{7} % height of A_4
-    \newcommand\Hf{6} % height of D_10
-    \newcommand\He{5} % height of S_3
-    \newcommand\Hd{4} % height of C_5
-    \newcommand\Hc{3} % height of V_4
-    \newcommand\Hb{2} % height of C_3
-    \newcommand\Ha{1} % height of C_2  
+    \newcommand\Hh{16} % height of A_5
+    \newcommand\Hg{9.5} % height of A_4
+    \newcommand\Hf{8} % height of D_10
+    \newcommand\He{7} % height of S_3
+    \newcommand\Hd{5.6} % height of C_5
+    \newcommand\Hc{5} % height of V_4
+    \newcommand\Hb{3} % height of C_3
+    \newcommand\Ha{2} % height of C_2  
     \tikzstyle{every node}=[font=\footnotesize]
     %%
     \node (A5) at (0,\Hh) {\small $A_5$};
@@ -1398,7 +1823,27 @@
     \draw[f] (4) -- (2) node[midway,right,midgray]{$\;2$};
     %%
     \draw[f] (12) -- (4) node[midway,right,midgray]{$3$};
+    %% 
     %%
+    \node at (5, \Hh) {\textbf{Order} $= 60$}; 
+    \node at (5, \Hg) {12};
+    \node at (5, \Hf) {10};
+    \node at (5, \He) {6};
+    \node at (5, \Hd) {5};
+    \node at (5, \Hc) {4};
+    \node at (5, \Hb) {3};
+    \node at (5, \Ha) {2};
+    \node at (5, 0) {1};
+    %%
+    \node at (-5, \Hh) {\textbf{Index} $= 1$}; 
+    \node at (-5, \Hg) {5};
+    \node at (-5, \Hf) {6};
+    \node at (-5, \He) {10};
+    \node at (-5, \Hd) {12};
+    \node at (-5, \Hc) {15};
+    \node at (-5, \Hb) {20};
+    \node at (-5, \Ha) {30};
+    \node at (-5, 0) {60};
     \end{tikzpicture}
   \]
 \end{frame}
@@ -2521,385 +2966,6 @@
       normalizers simply by inspection!}
     \end{itemize}
   \end{exampleblock}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Unicorns in the diquaternion group} %\Pause
-  
-  Our definition of \Palert{unicorn} could be strengthened, but we
-  want to keep things simple. \medskip\Pause
-  
-  Are any of the $C_4$ subgroups of $\DQ_8$ unicorns, i.e.,
-  ``not like the others''? 
-  
-  %% Subgroup lattice of DQ_8
-  \[
-  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.15]
-    \begin{scope}[shift={(0,0)}]
-      \node (G) at (0,3) {$\DQ_8$};
-      \node (C4xC2-1) at (-3,2) {$C_4\times C_2$}; % 010,001,011
-      \node (D4-1) at (-2,2) {$D_4$}; % 100,001,101    
-      \node (C4xC2-2) at (-1,2) {$C_4\times C_2$}; % 100,010,110
-      \node (D4-2) at (0,2) {$D_4$};  % 100,011,111
-      \node (C4xC2-3) at (1,2) {$C_4\times C_2$};  % 010,101,111
-      \node (D4-3) at (2,2) {$D_4$};  % 110,001,111
-      \node (Q8) at (3,2) {$Q_8$};  % 110,011,101
-      %%
-      \node (V4-12) at (-3,1) {$V_4$};
-      \node (V4-13) at (-2,1) {$V_4$};
-      \node (V4-23) at (-1,1) {$V_4$};
-      \node (Z) at (0,1) {$C_4$};
-      \node (C4-1) at (1,1) {$C_4$};
-      \node (C4-2) at (2,1) {$C_4$};
-      \node (C4-3) at (3,1) {$C_4$};
-      %%
-      \node (C2-11) at (-3.25,0) {$C_2$};
-      \node (C2-12) at (-2.75,0) {$C_2$};
-      \node (C2-21) at (-2.25,0) {$C_2$};
-      \node (C2-22) at (-1.75,0) {$C_2$};
-      \node (C2-31) at (-1.25,0) {$C_2$};
-      \node (C2-32) at (-0.75,0) {$C_2$};    
-      \node (-I) at (1,0) {$C_2$};
-      %%
-      \node (I) at (0,-1) {$\<I\>$};
-      %%
-      %%
-      \draw[f] (C4xC2-1) to (G); \draw[f] (D4-1) to (G);
-      \draw[f] (C4xC2-2) to (G);
-      \draw[f] (D4-2) to (G); \draw[f] (C4xC2-3) to (G);
-      \draw[f] (D4-3) to (G); \draw[f] (Q8) to (G);
-      %%
-      \draw[f] (C4xC2-1) to (Z); \draw[f] (C4xC2-2) to (Z);
-      \draw[f] (C4xC2-3) to (Z); \draw[f] (V4-12) to (D4-1);
-      \draw[f] (V4-12) to (D4-2); \draw[f] (V4-12) to (C4xC2-3);
-      \draw[f] (V4-13) to (D4-1); \draw[f] (V4-13) to (D4-3);
-      \draw[f] (V4-13) to (C4xC2-2); \draw[f] (V4-23) to (D4-2);
-      \draw[f] (V4-23) to (D4-3); \draw[f] (V4-23) to (C4xC2-1);
-      %%
-      \draw[f] (C4-1) to (C4xC2-1); \draw[f] (C4-1) to (D4-1);
-      \draw[f] (C4-2) to (C4xC2-2); \draw[f] (C4-2) to (D4-2);
-      \draw[f] (C4-3) to (C4xC2-3); \draw[f] (C4-3) to (D4-3);
-      %%
-      \draw[f] (Q8) to (C4-1); \draw[f] (Q8) to (C4-2); \draw[f] (Q8) to (C4-3);
-      %%
-      \draw[f] (V4-12) to (C2-11); \draw[f] (V4-12) to (C2-12); 
-      \draw[f] (V4-13) to (C2-21); \draw[f] (V4-13) to (C2-22); 
-      \draw[f] (V4-23) to (C2-31); \draw[f] (V4-23) to (C2-32); 
-      %%
-      \draw[f] (-I) to (V4-12); \draw[f] (-I) to (V4-13);
-      \draw[f] (-I) to (V4-23); \draw[f] (-I) to (C4-1);
-      \draw[f] (-I) to (C4-2); \draw[f] (-I) to (C4-3);
-      \draw[f] (-I) to (Z);
-      %%
-      \draw[f] (C2-11) to (I); \draw[f] (C2-12) to (I); 
-      \draw[f] (C2-21) to (I); \draw[f] (C2-22) to (I); 
-      \draw[f] (C2-31) to (I); \draw[f] (C2-32) to (I);
-      \draw[f] (-I) to (I);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  What can we say about the conjugacy classes of the subgroups of
-  $\DQ_8$ just from the lattice?
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$} %\Pause
-
-  Let's repeat a previous exercise, for this lattice of an
-  actual group. \Palert{Unicorns} are purple.
-  %%
-  %% Subgroup lattice of a mystery group of order 16
-  \[
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.65]
-    \begin{scope}[shift={(0,0)}]
-      \node(G) at (3.5,6) {\Palert{$G$}};
-      \node(rs) at (3.5,4.5) {$\<rs\>$};
-      \node(r2-s) at (1.75,4.5) {\Palert{$\<r^2,s\>$}};
-      \node(r) at (5.25,4.5) {$\<r\>$};
-      \node(r4-s) at (0,3) {\Palert{$\<r^4,s\>$}};
-      \node(r2s) at (1.75,3) {\Palert{$\<r^2s\>$}};
-      \node(r2) at (3.5,3) {\Palert{$\<r^2\>$}};
-      \node(s) at (-1.75,1.5) {$\<s\>$};
-      \node(r4s) at (0,1.5) {$\<r^4s\>$};
-      \node(r4) at (1.75,1.5) {\Palert{$\<r^4\>$}};
-      \node(1) at (0,0) {\Palert{$\<1\>$}};
-      \draw[f]  (1) to (s);
-      \draw[f]  (1) to (r4s);
-      \draw[f]  (1) to (r4);
-      \draw[f]  (s) to (r4-s);
-      \draw[f]  (r4s) to (r4-s);
-      \draw[f]  (r4) to (r4-s);
-      \draw[f]  (r4) to (r2s);
-      \draw[f]  (r4) to (r2);
-      \draw[f]  (r4-s) to (r2-s);
-      \draw[f]  (r2s) to (r2-s);
-      \draw[f]  (r2) to (r2-s);
-      \draw[f]  (r2) to (r);
-      \draw[f]  (r2) to (rs);
-      \draw[f]  (r2-s) to (G);
-      \draw[f]  (r) to (G);
-      \draw[f]  (rs) to (G);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(8,0)}]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node(G) at (3.5,6) {\Palert{$xGx^{-1}$}};
-      \node(rs) at (3.5,4.5) {$x\<rs\>x^{-1}$};
-      \node(r2-s) at (1.75,4.5) {\Palert{$x\<r^2,s\>x^{-1}$}};
-      \node(r) at (5.25,4.5) {$x\<r\>x^{-1}$};
-      \node(r4-s) at (0,3) {\Palert{$x\<r^4,s\>x^{-1}$}};
-      \node(r2s) at (1.75,3) {\Palert{$x\<r^2s\>x^{-1}$}};
-      \node(r2) at (3.5,3) {\Palert{$x\<r^2\>x^{-1}$}};
-      \node(s) at (-1.75,1.5) {$x\<s\>x^{-1}$};
-      \node(r4s) at (0,1.5) {$x\<r^4s\>x^{-1}$};
-      \node(r4) at (1.75,1.5) {\Palert{$x\<r^4\>x^{-1}$}};
-      \node(1) at (0,0) {\Palert{$x\<1\>x^{-1}$}};
-      \draw[f]  (1) to (s);
-      \draw[f]  (1) to (r4s);
-      \draw[f]  (1) to (r4);
-      \draw[f]  (s) to (r4-s);
-      \draw[f]  (r4s) to (r4-s);
-      \draw[f]  (r4) to (r4-s);
-      \draw[f]  (r4) to (r2s);
-      \draw[f]  (r4) to (r2);
-      \draw[f]  (r4-s) to (r2-s);
-      \draw[f]  (r2s) to (r2-s);
-      \draw[f]  (r2) to (r2-s);
-      \draw[f]  (r2) to (r);
-      \draw[f]  (r2) to (rs);
-      \draw[f]  (r2-s) to (G);
-      \draw[f]  (r) to (G);
-      \draw[f]  (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-
-  \vspace{-2mm}\Pause
-
-  We can deduce that every subgroup is normal, except possibly
-  $\<s\>$ and $\<r^4s\>$. \medskip\Pause
-
-  There are two cases: \smallskip
-  \begin{itemize}
-    \item $\<s\>$ and $\<r^4s\>$ are normal \Pause $\Rightarrow$ $s\in Z(G)$
-      \Pause $\Rightarrow$ $G$ is abelian. \smallskip\Pause
-    \item $\<s\>$ and $\<r^4s\>$ are not normal \Pause $\Rightarrow$
-      $\cl_G(\<s\>)=\big\{\<s\>,\<r^4s\>\big\}$ \Pause $\Rightarrow$ $G$ is
-      nonabelian. \smallskip\Pause
-  \end{itemize}
-
-  \emph{This doesn't necessarily mean that both of these are actually
-    possible\dots}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$} 
-
-  It's straightforward to check that this is the subgroup lattice of
-  \[
-  C_8\times C_2=\big\<r,s\mid r^8=s^2=1, srs=r\big\>.
-  \]
-
-  Let \Alert{$r=(a,1)$} and \Balert{$s=(1,b)$}, and so $C_8\times
-  C_2=\<r,s\>=\big\<(a,1),(1,b)\big\>$.
-  
-  %% Cayley graph and subgroup lattice of C8xC2
-  \[
-  \begin{tikzpicture}[scale=1.1,auto]
-    %%
-    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
-    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (s) at (0:1.1) [v] {$s$};
-      \node (rs) at (45:1.15) [v] {$rs$};
-      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
-      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
-      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
-      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
-      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
-      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
-      %%
-      \node (1) at (0:2) [v] {$1$};
-      \node (r) at (45:2) [v] {$r$};
-      \node (r2) at (90:2) [v] {$r^2$};
-      \node (r3) at (135:2) [v] {$r^3$};
-      \node (r4) at (180:2) [v] {$r^4$};
-      \node (r5) at (225:2) [v] {$r^5$};
-      \node (r6) at (270:2) [v] {$r^6$};
-      \node (r7) at (315:2) [v] {$r^7$};
-      %%
-      \draw [R-out] (1) to (r);
-      \draw [R-out] (r) to (r2);
-      \draw [R-out] (r2) to (r3);
-      \draw [R-out] (r3) to (r4);
-      \draw [R-out] (r4) to (r5);
-      \draw [R-out] (r5) to (r6);
-      \draw [R-out] (r6) to (r7);
-      \draw [R-out] (r7) to (1);
-      %%
-      \draw [R-in] (s) to (rs);
-      \draw [R-in] (rs) to (r2s);
-      \draw [R-in] (r2s) to (r3s);
-      \draw [R-in] (r3s) to (r4s);
-      \draw [R-in] (r4s) to (r5s);
-      \draw [R-in] (r5s) to (r6s);
-      \draw [R-in] (r6s) to (r7s);
-      \draw [R-in] (r7s) to (s);
-      %%
-      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
-      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
-      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
-      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
-      %%
-      \node at (0,0) {\normalsize $C_8\times C_2$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node(G) at (3.5,6) {$\small \<(a,1),(1,b)\>$};
-      \node(rs) at (3.5,4.5) {$\<(a,b)\>$};
-      \node(r2-s) at (1.75,4.5) {$\<(a^2,b)\>$};
-      \node(r) at (5.25,4.5) {$\<(a,1)\>$};
-      \node(r4-s) at (0,3) {$\<(1,b),(a^4,1)\>$};
-      \node(r2s) at (1.75,3) {$\<(a^2,b)\>$};
-      \node(r2) at (3.5,3) {$\<(a^2,1)\>$};
-      \node(s) at (-1.75,1.5) {$\<(1,b)\>$};
-      \node(r4s) at (0,1.5) {$\<(a^4,b)\>$};
-      \node(r4) at (1.75,1.5) {$\<(a^4,1)\>$};
-      \node(1) at (0,0) {$\<(1,1)\>$};
-      \draw[f] (1) to (s);
-      \draw[f] (1) to (r4s);
-      \draw[f] (1) to (r4);
-      \draw[f] (s) to (r4-s);
-      \draw[f] (r4s) to (r4-s);
-      \draw[f] (r4) to (r4-s);
-      \draw[f] (r4) to (r2s);
-      \draw[f] (r4) to (r2);
-      \draw[f] (r4-s) to (r2-s);
-      \draw[f] (r2s) to (r2-s);
-      \draw[f] (r2) to (r2-s);
-      \draw[f] (r2) to (r);
-      \draw[f] (r2) to (rs);
-      \draw[f] (r2-s) to (G);
-      \draw[f] (r) to (G);
-      \draw[f] (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$}
-
-  However, the nonabelian case is possible as well! 
-  The following also works: 
-  \[
-  \SA_8=\big\<r,s\mid r^8=s^2=1, srs=r^5\big\>.
-  \]
-  
-  %% Cayley graph and subgroup lattice of SA_8
-  \[
-  \begin{tikzpicture}[scale=1.1,auto]
-    %%
-    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
-    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node (s) at (0:1.1) [v] {$s$};
-      \node (rs) at (45:1.15) [v] {$rs$};
-      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
-      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
-      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
-      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
-      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
-      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
-      %%
-      \node (1) at (0:2) [v] {$1$};
-      \node (r) at (45:2) [v] {$r$};
-      \node (r2) at (90:2) [v] {$r^2$};
-      \node (r3) at (135:2) [v] {$r^3$};
-      \node (r4) at (180:2) [v] {$r^4$};
-      \node (r5) at (225:2) [v] {$r^5$};
-      \node (r6) at (270:2) [v] {$r^6$};
-      \node (r7) at (315:2) [v] {$r^7$};
-      %%
-      \draw [R-out] (1) to (r);
-      \draw [R-out] (r) to (r2);
-      \draw [R-out] (r2) to (r3);
-      \draw [R-out] (r3) to (r4);
-      \draw [R-out] (r4) to (r5);
-      \draw [R-out] (r5) to (r6);
-      \draw [R-out] (r6) to (r7);
-      \draw [R-out] (r7) to (1);
-      %%
-      \draw [r] (s) to (r5s);
-      \draw [r] (r5s) to (r2s);
-      \draw [r] (r2s) to (r7s);
-      \draw [r] (r7s) to (r4s);
-      \draw [r] (r4s) to (rs);
-      \draw [r] (rs) to (r6s);
-      \draw [r] (r6s) to (r3s);
-      \draw [r] (r3s) to (s);
-      %%
-      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
-      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
-      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
-      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
-      %%
-      \node at (0,0) {\normalsize $\SA_8$}; 
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
-      \node(G) at (3.5,6) {$\<r,s\>$};
-      \node(rs) at (3.5,4.5) {$\<rs\>$};
-      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
-      \node(r) at (5.25,4.5) {$\<r\>$};
-      \node(r4-s) at (0,3) {$\<r^4,s\>$};
-      \node(r2s) at (1.75,3) {$\<r^2s\>$};
-      \node(r2) at (3.5,3) {$\<r^2\>$};
-      \node(s) at (-1.75,1.5) {$\<s\>$};
-      \node(r4s) at (0,1.5) {$\<r^4s\>$};
-      \node(r4) at (1.75,1.5) {$\<r^4\>$};
-      \node(1) at (0,0) {$\<1\>$};
-      \draw[f] (1) to (s);
-      \draw[f] (1) to (r4s);
-      \draw[f] (1) to (r4);
-      \draw[f] (s) to (r4-s);
-      \draw[f] (r4s) to (r4-s);
-      \draw[f] (r4) to (r4-s);
-      \draw[f] (r4) to (r2s);
-      \draw[f] (r4) to (r2);
-      \draw[f] (r4-s) to (r2-s);
-      \draw[f] (r2s) to (r2-s);
-      \draw[f] (r2) to (r2-s);
-      \draw[f] (r2) to (r);
-      \draw[f] (r2) to (rs);
-      \draw[f] (r2-s) to (G);
-      \draw[f] (r) to (G);
-      \draw[f] (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
   
 \end{frame}
 
