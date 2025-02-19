@@ -9,11 +9,13 @@
 \theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
 
 % pretty colors!
 \usepackage[dvipsnames]{xcolor}
 \colorlet{darkgrey}{black!70}
 \colorlet{darkgreen}{green!50!black}
+
 
 \usepackage{tikz} % for drawing diagrams
 \usetikzlibrary{arrows,automata,positioning} 
@@ -52,14 +54,36 @@
 \definecolor{ePurple}{HTML}{D287FF} % Close to goodnotes 
 \colorlet{eOrange}{orange}
 
-%% Edge styles 
+% Edge styles 
 %%
 \tikzset{r/.style={draw, very thick, eRed, -stealth}}  % Red -->
 \tikzset{rr/.style={draw, very thick, eRed}}           % Red ---
+\tikzset{r2/.style={draw, very thick, eRed,stealth'-stealth'}} % Red <-->
 \tikzset{b/.style={draw, very thick, eBlue, -stealth}} % Blue -->
 \tikzset{bb/.style={draw, very thick, eBlue}}          % Blue ---
+\tikzset{b2/.style={draw, very thick, eBlue,stealth'-stealth'}} % Blue <-->
 \tikzset{g/.style={draw, very thick, eGreen, -stealth}} % Green -->
 \tikzset{gg/.style={draw, very thick, eGreen}}          % Green ---
+\tikzset{g2/.style={draw, very thick, eGreen,stealth'-stealth'}} % Green <-->
+\tikzset{p/.style={draw, very thick, ePurple, -stealth}} % Purple -->
+\tikzset{pp/.style={draw, very thick, ePurple}}           % Purple ---
+\tikzset{p2/.style={draw, very thick, ePurple,stealth'-stealth'}} % Purple <-->
+\tikzset{o/.style={draw, very thick, eOrange, -stealth}} % Orange -->
+\tikzset{oo/.style={draw, very thick, eOrange}}           % Orange ---
+\tikzset{o2/.style={draw, very thick, eOrange,stealth'-stealth'}} % Orange <-->
+%%
+\tikzstyle{cy2} = [draw,very thick]           %% cycle graph edges
+\definecolor{faded}{rgb}{.75,.75,.75}
+\tikzstyle{f} = [faded]                         % This is used all the time
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR COSET BUBBBLES 
+%%
+\colorlet{cosetGray}{gray!15!white}
+\colorlet{cosetBlue}{blue!15!white}
+\colorlet{cosetRed}{red!15!white}
+\definecolor{cosetPurple}{rgb}{.9 .84 .965}
+\definecolor{cosetGreen}{rgb}{.863 .92 .855}
 %%---------------------------------------------------------------------------
 
 \usepackage{graphicx} % for inserting figures with \includegraphics
@@ -117,22 +141,823 @@
 
 HW due Sunday 2/23 by pdf upload to Canvas; .tex source on the \href{https://github.com/rhinopotamus/math312}{MATH 312 github repo}.
 
+In all the following, let $H$ be a generic subgroup of a generic group $G$; that is, let $H \leq G$.
+
+%%======================================================================
 \subsection*{Stuff from class slides that I promised would be on the homework}
 
 \begin{problem}
-    Prove that $N_G(H) \leq G$.
+    Prove that $N_G(H) \leq G$. (Here and elsewhere, hooray for the one-step subgroup test.)
+\end{problem}
+
+\begin{problem} A problem in two parts:
+    \begin{enumerate}[(a)]
+        \item Prove that $H \leq N_G(H)$.
+        \item Prove that $H\normaleq N_G(H)$. (Careful: you only have to coset by stuff in $N_G(H)$, not stuff in the wider universe of $G$.)
+    \end{enumerate} 
+\end{problem}
+
+\begin{remark}
+    By stapling together the results of Problem 1 and Problem 2, we get a useful corollary: $N_G(H)$ has to be somewhere between $H$ and $G$ (inclusive) in the subgroup lattice of $G$.
+\end{remark} 
+
+\begin{problem}
+    Prove that if $ghg\inv \in H$ for all $h\in H$ and $g\in G$, then $gHg\inv = H$ for all $g\in G$.
+
+    Hint: Our favorite tool for proving that two sets $A$ and $B$ are equal is to show that $A \subseteq B$ and also that $A \supseteq B$. For $\subseteq$: Let $a\in A$. Blah blah blah, therefore $a\in B$. For $\supseteq$: vice versa. \\ (Our second favorite tool is to establish a bijection between $A$ and $B$.)
 \end{problem}
 
 \begin{problem}
-    Prove that $H\normaleq N_G(H)$. (So, first prove that $H$ is a subgroup of its normalizer, and then prove that it's a \textit{normal} subgroup of its normalizer.)
+    Let $g\in G$. Prove that $gHg\inv \leq G$, and thus that $gHg\inv$ deserves to be called a ``conjugate \Balert{subgroup}.''
+\end{problem}
+
+%%======================================================================
+\subsection*{Immediate corollaries of Lagrange's theorem}
+
+\begin{problem}
+    Show that if $G$ is a finite group and $x\in G$, then the order of $x$ divides the order of $G$. (Moral: it is reasonable for us to use the same word ``order'' for these two ideas.)
 \end{problem}
 
 \begin{problem}
-    Let $H\leq G$. Prove that if $ghg\inv \in H$ for all $h\in H$ and $g\in G$, then $gHg\inv = H$ for all $g\in G$.
+    Show that if $|G| = p$ a prime, then $G$ is cyclic.
 \end{problem}
 
 \begin{problem}
-    Let $H\leq G$ and $g\in G$. Prove that the conjugate, $gHg\inv$, is a subgroup of $G$.
+    Show that if $[G:H] = p$ a prime, then either $N_G(H) = H$ or $H \normal G$. \\(Hint: use the tower law.)
+\end{problem}
+
+\vfill
+
+Hint: All the problems on this page can be resolved in like two or three lines.
+
+\pagebreak
+%%======================================================================
+\subsection*{Exploring cosets}
+
+\begin{problem}\label{4Z}
+    So far we have been looking exclusively at cosets in groups written multiplicatively, where they look like $gH = \{g\cdot h \mid h\in H\}$. Let's look at cosets in $(\Z, +)$, where we shift by \textit{adding} instead of by \textit{multiplying}.
+    \begin{enumerate}[(a)]
+        \item Consider the subgroup $4\Z = \{\ldots -4, 0, 4, 8, \ldots\} = \<4\>$. Find all of its cosets. \\
+        (Hint: you will be unsurprised about how many of them there are.)
+        \item What is $[\Z:4\Z]$? (Hint: the answer is unsurprising and also it is not $\frac{\infty}{\infty}$.)
+        \item Suppose that $p > 2$ is a prime number. (2 is an annoying exception to \textit{many} theorems about prime numbers.) Which cosets is it possible for $p$ to live in?
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}\label{A4-cosets}
+    Here's an extended problem where you can explore the relationship between left cosets, right cosets, conjugate subgroups, and normalizers.
+
+    Below are three Cayley diagrams of $A_4$, each highlighting the left cosets of a different subgroup. These are the subgroups $N$, $H$, and $K$ from slide 17 of the normal-subgroups slides from class on Wednesday. To make the notation suck less and the Cayley diagrams more readable, we can take $\Alert{a=(123)}$, $\Palert{b=(134)}$, $\Balert{x=(12)(34)}$, and $\Galert{z=(13)(24)}$; arrows in the Cayley diagrams are color-coded appropriately. Then:
+    \[N = \<\Balert{x}, \Galert{z}\>; \qquad H = \<\Alert{a}\>; \qquad K = \<\Balert{x}\>.\]
+    \vspace{-15mm}
+
+    \[
+    \hspace*{-3mm}
+    \begin{tikzpicture}[scale=1.05]
+        \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=5mm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %% N version
+        \begin{scope}[shift={(0,-1.1)},scale=.7] 
+            \draw[cosetBlue, fill=cosetBlue] (.75,.75) circle (15mm);
+            \draw[cosetBlue, fill=cosetBlue] (4.25,.75) circle (15mm);
+            \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+            \node (e) at (1.75,4.5) [v] {$e$};
+            \node (x) at (3.25,4.5) [v] {$x$};
+            \node (z) at (1.75,3) [v] {$z$};
+            \node (y) at (3.25,3) [v] {$y$};
+            \node (a) at (3.5,1.5) [v] {$a$};
+            \node (c) at (5,1.5) [v] {$c$};
+            \node (d) at (3.5,0) [v] {$d$};
+            \node (b) at (5,0) [v] {$b$};
+            \node (dd) at (1.5,0) [v] {$d^2$};
+            \node (bb) at (1.5,1.5) [v] {$b^2$};
+            \node (aa) at (0,1.5) [v] {$a^2$};
+            \node (cc) at (0,0) [v] {$c^2$};
+            \draw [r] (x) to [bend left=50] (b);
+            \draw [r] (e) to [bend left=60] (a);
+            \draw [r] (z) to [bend left=60] (c);
+            \draw [r] (y) to [bend left=60] (d);
+            \draw [r] (a) to [bend left] (aa);
+            \draw [r] (b) to [bend left=35] (cc);
+            \draw [r] (c) to [bend left=65] (dd);
+            \draw [r] (d) to [bend left=40] (bb);
+            \draw [r] (aa) to [bend left] (e);
+            \draw [r] (bb) to [bend left=40] (y);
+            \draw [r] (cc) to [bend left=25] (x);
+            \draw [r] (dd) to [bend left] (z);
+            \node at (1.75,4.5) [v] {$e$};
+            \node at (.85,4.5) {\normalsize$N$};
+            \draw [bb] (e) to (x);
+            \draw [bb] (z) to (y);
+            \draw [gg] (e) to (z);
+            \draw [gg] (x) to (y);
+            \draw [bb] (a) to (c);
+            \draw [bb] (d) to (b);
+            \draw [gg] (a) to (d);
+            \draw [gg] (c) to (b);
+            \draw [bb] (aa) to (bb);
+            \draw [bb] (cc) to (dd);
+            \draw [gg] (aa) to (cc);
+            \draw [gg] (bb) to (dd);
+        \end{scope}
+        %% K version
+        \begin{scope}[shift={(12.5,0)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \draw[color=cosetRed,fill=cosetRed] (-1.407,-.8125)
+            circle [x radius=.7cm, y radius=1.05cm, rotate=-60];
+            \draw[color=cosetRed,fill=cosetRed] (1.407,-.8125)
+            circle [x radius=.7cm, y radius=1.05cm, rotate=60];
+            \draw[cosetBlue, fill=cosetBlue] (0,-2.5) ellipse (3.3 and .85);
+            \draw[color=cosetRed,fill=cosetRed] (2.273,1.3125)
+            circle [x radius=.9cm, y radius=3.3cm, rotate=30];
+            \draw[color=cosetRed,fill=cosetRed] (-2.273,1.3125)
+            circle [x radius=.9cm, y radius=3.3cm, rotate=-30];
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        %% H version
+        \begin{scope}[shift={(7.25,.3)},scale=.65]
+            \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+            \draw[cosetRed, fill=cosetRed] (1.2,0) circle (1.2);
+            \draw[cosetRed, fill=cosetRed] (0,2.7) ellipse (3.4 and 1.05);
+            \draw[cosetRed, fill=cosetRed] (0,-2.7) ellipse (3.4 and 1.05);
+            \node (a2) at (45:1) [v] {$b$};
+            \node (a4) at (135:1) [v] {$e$}; %{$\tiny *$};
+            \node (a6) at (225:1) [v] {$a$};
+            \node (a8) at (315:1) [v] {$x$};
+            \node (b1) at (0:2) [v] {$c^2$};
+            \node (b3) at (90:2) [v] {$b^2$};
+            \node (b5) at (180:2) [v] {$a^2$};
+            \node (b7) at (270:2) [v] {$d^2$};
+            \node (c2) at (45:4) [v] {$d$};
+            \node (c4) at (135:4) [v] {$y$};
+            \node (c6) at (225:4) [v] {$c$};
+            \node (c8) at (315:4) [v] {$z$};
+            \node at (-1.4,1.2) {\normalsize$H$};
+            \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+            \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+            \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+            \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+            \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+            \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+            \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+            \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+        \end{scope}
+    \end{tikzpicture}
+    \]
+    \begin{enumerate}[(a)]
+        \item Label each of the ``coset bubbles'' in each diagram above with which left coset it is. For instance, $\{a, c, b, d\}$ is certainly $aN$.
+        \item For each subgroup shown above, partition $A_4$ into its right
+        cosets. (Work smarter not harder: think about which elements you actually need to bother shifting by!)
+        Write the right cosets as subsets of $A_4$, consisting of permutations
+        in cycle notation. Also, highlight them by colors on a fresh copy
+        of the Cayley diagrams -- see the next page.
+        \item Conjecture as to why I made some of the bubbles blue and some of them red. Relatedly, find $N_{A_4}(N)$, $N_{A_4}(H)$, and $N_{A_4}(K)$.
+        \item For each (non-identity) left coset $gH$, illustrate the construction of the
+        conjugate subgroup $gHg^{-1}$ on a fresh copy of the Cayley
+        diagram -- see next page. Repeat this for $N$ and $K$. \\
+    \end{enumerate}
+\end{problem}
+
+%%======================================================================
+\subsection*{Fresh Cayley diagrams for Problem \ref{A4-cosets}}
+
+Please please \textit{please} print this out and draw your coset bubbles by hand (or by marking up a pdf on a tablet). I promise that it would suck \textit{so much} to do this in tikz.
+
+\vspace{5mm}
+
+For part (b):
+\[
+    \hspace*{-3mm}
+    \begin{tikzpicture}[scale=1.05]
+        \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=5mm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %% N version
+        \begin{scope}[shift={(0,-1.1)},scale=.7] 
+            \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+            \node (e) at (1.75,4.5) [v] {$e$};
+            \node (x) at (3.25,4.5) [v] {$x$};
+            \node (z) at (1.75,3) [v] {$z$};
+            \node (y) at (3.25,3) [v] {$y$};
+            \node (a) at (3.5,1.5) [v] {$a$};
+            \node (c) at (5,1.5) [v] {$c$};
+            \node (d) at (3.5,0) [v] {$d$};
+            \node (b) at (5,0) [v] {$b$};
+            \node (dd) at (1.5,0) [v] {$d^2$};
+            \node (bb) at (1.5,1.5) [v] {$b^2$};
+            \node (aa) at (0,1.5) [v] {$a^2$};
+            \node (cc) at (0,0) [v] {$c^2$};
+            \draw [r] (x) to [bend left=50] (b);
+            \draw [r] (e) to [bend left=60] (a);
+            \draw [r] (z) to [bend left=60] (c);
+            \draw [r] (y) to [bend left=60] (d);
+            \draw [r] (a) to [bend left] (aa);
+            \draw [r] (b) to [bend left=35] (cc);
+            \draw [r] (c) to [bend left=65] (dd);
+            \draw [r] (d) to [bend left=40] (bb);
+            \draw [r] (aa) to [bend left] (e);
+            \draw [r] (bb) to [bend left=40] (y);
+            \draw [r] (cc) to [bend left=25] (x);
+            \draw [r] (dd) to [bend left] (z);
+            \node at (1.75,4.5) [v] {$e$};
+            \node at (.85,4.5) {\normalsize$N$};
+            \draw [bb] (e) to (x);
+            \draw [bb] (z) to (y);
+            \draw [gg] (e) to (z);
+            \draw [gg] (x) to (y);
+            \draw [bb] (a) to (c);
+            \draw [bb] (d) to (b);
+            \draw [gg] (a) to (d);
+            \draw [gg] (c) to (b);
+            \draw [bb] (aa) to (bb);
+            \draw [bb] (cc) to (dd);
+            \draw [gg] (aa) to (cc);
+            \draw [gg] (bb) to (dd);
+        \end{scope}
+        %% K version
+        \begin{scope}[shift={(12.5,0)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        %% H version
+        \begin{scope}[shift={(7.25,.3)},scale=.65]
+            \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+            \node (a2) at (45:1) [v] {$b$};
+            \node (a4) at (135:1) [v] {$e$}; %{$\tiny *$};
+            \node (a6) at (225:1) [v] {$a$};
+            \node (a8) at (315:1) [v] {$x$};
+            \node (b1) at (0:2) [v] {$c^2$};
+            \node (b3) at (90:2) [v] {$b^2$};
+            \node (b5) at (180:2) [v] {$a^2$};
+            \node (b7) at (270:2) [v] {$d^2$};
+            \node (c2) at (45:4) [v] {$d$};
+            \node (c4) at (135:4) [v] {$y$};
+            \node (c6) at (225:4) [v] {$c$};
+            \node (c8) at (315:4) [v] {$z$};
+            \node at (-1.4,1.2) {\normalsize$H$};
+            \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+            \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+            \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+            \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+            \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+            \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+            \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+            \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+        \end{scope}
+    \end{tikzpicture}
+\]
+
+For part (d), subgroup $H$ (3 copies bc $[A_4:H] = 4$ and I don't care about one of 'em):
+
+\[
+    \hspace*{-3mm}
+    \begin{tikzpicture}[scale=1.05]
+        \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=5mm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %% H version
+        \begin{scope}[shift={(0,.3)},scale=.65]
+            \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+            \node (a2) at (45:1) [v] {$b$};
+            \node (a4) at (135:1) [v] {$e$}; %{$\tiny *$};
+            \node (a6) at (225:1) [v] {$a$};
+            \node (a8) at (315:1) [v] {$x$};
+            \node (b1) at (0:2) [v] {$c^2$};
+            \node (b3) at (90:2) [v] {$b^2$};
+            \node (b5) at (180:2) [v] {$a^2$};
+            \node (b7) at (270:2) [v] {$d^2$};
+            \node (c2) at (45:4) [v] {$d$};
+            \node (c4) at (135:4) [v] {$y$};
+            \node (c6) at (225:4) [v] {$c$};
+            \node (c8) at (315:4) [v] {$z$};
+            \node at (-1.4,1.2) {\normalsize$H$};
+            \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+            \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+            \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+            \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+            \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+            \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+            \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+            \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+        \end{scope}
+        %% H version
+        \begin{scope}[shift={(5,.3)},scale=.65]
+            \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+            \node (a2) at (45:1) [v] {$b$};
+            \node (a4) at (135:1) [v] {$e$}; %{$\tiny *$};
+            \node (a6) at (225:1) [v] {$a$};
+            \node (a8) at (315:1) [v] {$x$};
+            \node (b1) at (0:2) [v] {$c^2$};
+            \node (b3) at (90:2) [v] {$b^2$};
+            \node (b5) at (180:2) [v] {$a^2$};
+            \node (b7) at (270:2) [v] {$d^2$};
+            \node (c2) at (45:4) [v] {$d$};
+            \node (c4) at (135:4) [v] {$y$};
+            \node (c6) at (225:4) [v] {$c$};
+            \node (c8) at (315:4) [v] {$z$};
+            \node at (-1.4,1.2) {\normalsize$H$};
+            \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+            \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+            \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+            \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+            \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+            \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+            \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+            \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+        \end{scope}
+        %% H version
+        \begin{scope}[shift={(10,.3)},scale=.65]
+            \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+            \node (a2) at (45:1) [v] {$b$};
+            \node (a4) at (135:1) [v] {$e$}; %{$\tiny *$};
+            \node (a6) at (225:1) [v] {$a$};
+            \node (a8) at (315:1) [v] {$x$};
+            \node (b1) at (0:2) [v] {$c^2$};
+            \node (b3) at (90:2) [v] {$b^2$};
+            \node (b5) at (180:2) [v] {$a^2$};
+            \node (b7) at (270:2) [v] {$d^2$};
+            \node (c2) at (45:4) [v] {$d$};
+            \node (c4) at (135:4) [v] {$y$};
+            \node (c6) at (225:4) [v] {$c$};
+            \node (c8) at (315:4) [v] {$z$};
+            \node at (-1.4,1.2) {\normalsize$H$};
+            \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+            \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+            \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+            \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+            \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+            \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+            \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+            \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+        \end{scope}
+    \end{tikzpicture}
+\]
+
+For part (d), subgroup $N$ (note $[A_4:N] = 3$):
+
+\[
+    \hspace*{-3mm}
+    \begin{tikzpicture}[scale=1.05]
+        \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=5mm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %% N version
+        \begin{scope}[shift={(0,-1.1)},scale=.7] 
+            \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+            \node (e) at (1.75,4.5) [v] {$e$};
+            \node (x) at (3.25,4.5) [v] {$x$};
+            \node (z) at (1.75,3) [v] {$z$};
+            \node (y) at (3.25,3) [v] {$y$};
+            \node (a) at (3.5,1.5) [v] {$a$};
+            \node (c) at (5,1.5) [v] {$c$};
+            \node (d) at (3.5,0) [v] {$d$};
+            \node (b) at (5,0) [v] {$b$};
+            \node (dd) at (1.5,0) [v] {$d^2$};
+            \node (bb) at (1.5,1.5) [v] {$b^2$};
+            \node (aa) at (0,1.5) [v] {$a^2$};
+            \node (cc) at (0,0) [v] {$c^2$};
+            \draw [r] (x) to [bend left=50] (b);
+            \draw [r] (e) to [bend left=60] (a);
+            \draw [r] (z) to [bend left=60] (c);
+            \draw [r] (y) to [bend left=60] (d);
+            \draw [r] (a) to [bend left] (aa);
+            \draw [r] (b) to [bend left=35] (cc);
+            \draw [r] (c) to [bend left=65] (dd);
+            \draw [r] (d) to [bend left=40] (bb);
+            \draw [r] (aa) to [bend left] (e);
+            \draw [r] (bb) to [bend left=40] (y);
+            \draw [r] (cc) to [bend left=25] (x);
+            \draw [r] (dd) to [bend left] (z);
+            \node at (1.75,4.5) [v] {$e$};
+            \node at (.85,4.5) {\normalsize$N$};
+            \draw [bb] (e) to (x);
+            \draw [bb] (z) to (y);
+            \draw [gg] (e) to (z);
+            \draw [gg] (x) to (y);
+            \draw [bb] (a) to (c);
+            \draw [bb] (d) to (b);
+            \draw [gg] (a) to (d);
+            \draw [gg] (c) to (b);
+            \draw [bb] (aa) to (bb);
+            \draw [bb] (cc) to (dd);
+            \draw [gg] (aa) to (cc);
+            \draw [gg] (bb) to (dd);
+        \end{scope}
+        \begin{scope}[shift={(6,-1.1)},scale=.7] 
+            \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+            \node (e) at (1.75,4.5) [v] {$e$};
+            \node (x) at (3.25,4.5) [v] {$x$};
+            \node (z) at (1.75,3) [v] {$z$};
+            \node (y) at (3.25,3) [v] {$y$};
+            \node (a) at (3.5,1.5) [v] {$a$};
+            \node (c) at (5,1.5) [v] {$c$};
+            \node (d) at (3.5,0) [v] {$d$};
+            \node (b) at (5,0) [v] {$b$};
+            \node (dd) at (1.5,0) [v] {$d^2$};
+            \node (bb) at (1.5,1.5) [v] {$b^2$};
+            \node (aa) at (0,1.5) [v] {$a^2$};
+            \node (cc) at (0,0) [v] {$c^2$};
+            \draw [r] (x) to [bend left=50] (b);
+            \draw [r] (e) to [bend left=60] (a);
+            \draw [r] (z) to [bend left=60] (c);
+            \draw [r] (y) to [bend left=60] (d);
+            \draw [r] (a) to [bend left] (aa);
+            \draw [r] (b) to [bend left=35] (cc);
+            \draw [r] (c) to [bend left=65] (dd);
+            \draw [r] (d) to [bend left=40] (bb);
+            \draw [r] (aa) to [bend left] (e);
+            \draw [r] (bb) to [bend left=40] (y);
+            \draw [r] (cc) to [bend left=25] (x);
+            \draw [r] (dd) to [bend left] (z);
+            \node at (1.75,4.5) [v] {$e$};
+            \node at (.85,4.5) {\normalsize$N$};
+            \draw [bb] (e) to (x);
+            \draw [bb] (z) to (y);
+            \draw [gg] (e) to (z);
+            \draw [gg] (x) to (y);
+            \draw [bb] (a) to (c);
+            \draw [bb] (d) to (b);
+            \draw [gg] (a) to (d);
+            \draw [gg] (c) to (b);
+            \draw [bb] (aa) to (bb);
+            \draw [bb] (cc) to (dd);
+            \draw [gg] (aa) to (cc);
+            \draw [gg] (bb) to (dd);
+        \end{scope}
+    \end{tikzpicture}
+\]
+
+Ran outta room, see next page
+\pagebreak
+
+For part (d), subgroup $K$ (why am I giving you 5 copies?):
+
+\[
+    \hspace*{-3mm}
+    \begin{tikzpicture}[scale=1.05]
+        \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=5mm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %% K version
+        \begin{scope}[shift={(0,0)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        \begin{scope}[shift={(6,0)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        \begin{scope}[shift={(12,0)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        \begin{scope}[shift={(3,-5)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+        \begin{scope}[shift={(9,-5)},scale=.6]
+            \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+            \node (l1) at (0,2.25) [v] {$x$};
+            \node (l2) at (-.866,3.75) [v] {$b$};
+            \node (t1) at (0,1) [v] {$e$};
+            \node (t2) at (-.866,-.5) [v] {$a^2$};
+            \node (t3) at (.866,-.5) [v] {$a$};
+            \node (l3) at (.866,3.75) [v] {$c^2$};
+            \node (r1) at (3.68,-1.125) [v] {$d^2$};
+            \node (r2) at (2.814,-2.5) [v] {$z$};
+            \node (r3) at (1.948,-1.125) [v] {$c$};
+            \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+            \node (m1) at (-3.68,-1.125) [v] {$d$};
+            \node (m3) at (-2.814,-2.5) [v] {$y$};
+            \node at (.7,1.625) {\normalsize$K$};
+            \draw [bb] (l2) to (m1);
+            \draw [bb] (m2) to (t2);
+            \draw [bb] (r2) to (m3);
+            \draw [bb] (l1) to (t1);
+            \draw [bb] (l3) to (r1);
+            \draw [bb] (r3) to (t3);
+            \draw [r] (l1) to (l2);
+            \draw [r] (l2) to (l3);
+            \draw [r] (l3) to (l1);
+            \draw [r] (t1) to (t3);
+            \draw [r] (t2) to (t1);
+            \draw [r] (t3) to (t2);
+            \draw [r] (r1) to (r2);
+            \draw [r] (r2) to (r3);
+            \draw [r] (r3) to (r1);
+            \draw [r] (m1) to (m2);
+            \draw [r] (m2) to (m3);
+            \draw [r] (m3) to (m1);
+        \end{scope}
+    \end{tikzpicture}
+    \]
+
+\pagebreak
+%%======================================================================
+\subsection*{Finding unicorns and normal subgroups}
+
+\begin{problem}
+    Here is the subgroup lattice for $Q_8$:
+    \[\begin{tikzpicture}
+      \begin{scope}[shorten >= -2pt,shorten <= -2pt,scale=1.5]
+        \node(Q8) at (0,2.8) {$Q_8$};
+        \node(i) at (-1,1.9) { $C_4$};
+        \node(j) at (0,1.9) { $C_4$};
+        \node(k) at (1,1.9) { $C_4$};
+        \node(-1) at (0,1) { $C_2$};
+        \node(1) at (0,.2) { $\left\<1\right\>$};
+        \draw [f] (Q8)--(i); \draw [f] (Q8)--(j); \draw [f] (Q8)--(k);
+        \draw [f] (-1)--(i); \draw [f] (-1)--(j); \draw [f] (-1)--(k);
+        \draw [f] (1)--(-1); 
+      \end{scope}
+    \end{tikzpicture}\]
+
+    \textit{Without doing any quaternion calculations}, prove that every subgroup of $Q_8$ is normal. (!!)
+\end{problem}
+
+\begin{problem}
+    The subgroup lattice of some weird group called $C_4\rtimes C_4$ is shown below. This is a ``semidirect product'' -- it is kinda like a direct product but the copies of $C_4$ that went in the inflated nodes of $C_4$ are ``rewired.'' All you need to know about it is that, like the direct product, elements are ordered pairs, so $|C_4 \rtimes C_4| = 16$.
+    \[
+    \hspace*{-3em}
+    \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,xscale=1]
+      \tikzstyle{every node}=[font=\normalsize]
+      \begin{scope}[shift={(0,0)},scale=1.5]
+        \node (G) at (0,4) {$C_4\rtimes C_4$};
+        \node (C4xC2-1) at (-1.5,3) {$C_4\times C_2$};
+        \node (C4xC2-2) at (0,3) {$C_4\times C_2$};
+        \node (C4xC2-3) at (1.5,3) {$C_4\times C_2$};
+        \node (C4-1) at (-3,2) {$C_4$};
+        \node (C4-2) at (-2,2) {$C_4$};
+        \node (C4-3) at (-1.33,2) {$C_4$};
+        \node (C4-4) at (-.67,2) {$C_4$};
+        \node (C4-5) at (1.5,2) {$C_4$};
+        \node (C4-6) at (3,2) {$C_4$};
+        \node (V4) at (0,2) {$V_4$};
+        \node (C2-1) at (-1.5,1) {$C_2$};
+        \node (C2-2) at (0,1) {$C_2$};
+        \node (C2-3) at (1.5,1) {$C_2$};
+        \node (1) at (0,0) {$\<1\>$};
+        \draw[f] (G) to (C4xC2-1); \draw[f] (G) to (C4xC2-2);
+        \draw[f] (G) to (C4xC2-3);
+        \draw[f] (C4xC2-1) to (C4-1);
+        \draw[f] (C4xC2-1) to (C4-2);
+        \draw[f] (C4xC2-1) to (V4);
+        \draw[f] (C4xC2-2) to (C4-3);
+        \draw[f] (C4xC2-2) to (C4-4);
+        \draw[f] (C4xC2-2) to (V4); 
+        \draw[f] (C4xC2-3) to (C4-5);
+        \draw[f] (C4xC2-3) to (C4-6);
+        \draw[f] (C4xC2-3) to (V4);
+        \draw[f] (C4-1) to (C2-1); \draw[f] (C4-2) to (C2-1);
+        \draw[f] (C4-3) to (C2-1); \draw[f] (C4-4) to (C2-1);
+        \draw[f] (V4) to (C2-1); \draw[f] (V4) to (C2-2);
+        \draw[f] (V4) to (C2-3);
+        \draw[f] (C4-5) to (C2-3); \draw[f] (C4-6) to (C2-3);
+        \draw[f] (C2-1) to (1); \draw[f] (C2-2) to (1); \draw[f] (C2-3) to (1);
+      \end{scope}
+    \end{tikzpicture}
+    \]
+    \begin{enumerate}[(a)]
+        \item Identify as many unicorns as you can. Write a sentence or two explaining how you know each one is a unicorn.
+        \item Identify as many normal subgroups as you can. Write a sentence or two about each one.
+        \item See if that adds any more unicorns to your initial list of unicorns.
+    \end{enumerate}
+\end{problem}
+
+\pagebreak
+
+%%==============================================================
+
+\subsection*{Challenges}
+
+All problems in this section are optional.
+
+\newtheorem*{oq}{Open question}
+\begin{oq}
+    Can you make / find a group that has an \textit{interesting} subgroup lattice in which every subgroup is a unicorn? (It is easy to do this in a \textit{boring} way: for instance, consider the subgroup lattice of $C_6$.)
+\end{oq}
+
+\begin{problem} Here we shall track down the details from our discussion of the mystery group of order 16 from class on Wednesday.
+    \begin{enumerate}[(a)]
+        \item Let $g\in G$ and suppose that $\<g\>$ is a normal subgroup of order 2. Prove that $g\in Z(G)$.
+        \item Suppose that $G$ is generated by two generators, say $G = \<g, h \mid \ldots \>$. Prove that if $g\in Z(G)$, then $h\in Z(G)$.
+        \item Let $G$ be a finitely generated group, say $G = \<g_1, \ldots, g_n \mid \ldots\>$. (Note that $G$ doesn't have to be finite -- the integers, for example, are finitely generated.) Prove that if all the generators $g_i \in Z(G)$, then $G$ is abelian.
+        \item Now, getting more specific: in the mystery group, we knew that $s^2 = r^8 = 1$. How did we know those two things?
+        \item Suppose that $\<s\>$ and $\<r^4s\>$ \textit{aren't} normal; therefore they must be conjugate. Prove that $srs = r^5$. (Hint: conjugate by $r$.)
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Screw around with the LMFDB database of abstract groups linked on Canvas. Find something fun / interesting and tell me about it.
+\end{problem}
+
+\begin{problem}
+    Write down a full proof of Lagrange's theorem: 
+    
+    \begin{center}
+        if $H\leq G$, then $|H|$ divides $|G|$, and further, $|G| = [G:H]\cdot |H|$.
+    \end{center}
+    
+    (This just entails stringing together the arguments we made on the slides before the Lagrange's theorem slide, but I think it's moderately nice to see it all written out.)
+\end{problem}
+
+\begin{problem}
+    State the converse of (the first sentence of) Lagrange's theorem. Prove it or find a counterexample. 
+\end{problem}
+
+\begin{problem}
+    Repeat Problem \ref{4Z}, but for the subgroup $6\Z$, and increase $p$ to be $p > 3$. 
+\end{problem}
+\begin{problem}
+    Repeat again but for $8\Z$, and tell me what the correct lower bound on $p$ is.
+\end{problem}
+\begin{problem}
+    Prove that $|\operatorname{cl}_G(H)| = [G:N_G(H)]$. \\
+    (This is easier than you think; translate this sentence into human words and you are like 71\% there.)
+\end{problem}
+\begin{problem}
+    Come up with a reasonable definition for how to quantify ``how normal'' slash ``how unnormal'' a subgroup is. For instance, in Problem \ref{A4-cosets}, $N$ should be yes 100\% normal, $K$ should be moderately un-normal, and $H$ should be as un-normal as possible.
 \end{problem}
 
 \end{document}
