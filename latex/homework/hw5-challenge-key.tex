@@ -1,0 +1,210 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+%%---------------------------------------------------------------------------
+%% included from visualalgebra.sty (see the beamer folder)
+%% TEXT COLORS
+%%
+\definecolor{xRed}{rgb}{.9,0,0}       
+\definecolor{xBlue}{rgb}{0,0,.9}      
+\definecolor{xGreen}{HTML}{009000}   %% "Islamic green"
+\definecolor{xPurple}{HTML}{D14FFF}  
+\definecolor{xOrange}{HTML}{F56600}  %% "Clemson orange"
+
+\newcommand{\Alert}[1]{\textcolor{xRed}{#1}}
+\newcommand{\Balert}[1]{\textcolor{xBlue}{#1}}
+\newcommand{\Galert}[1]{\textcolor{xGreen}{#1}}
+\newcommand{\Palert}[1]{\textcolor{xPurple}{#1}}
+\newcommand{\Oalert}[1]{\textcolor{xOrange}{#1}}
+\newcommand{\Walert}[1]{\textcolor{white}{#1}}
+
+%% vertices in cayley graphs
+\tikzset{v/.style={circle, draw, fill=lightgray,inner sep=0pt, 
+  minimum size=6mm}}
+
+%% Edge colors
+%%
+\definecolor{eRed}{rgb}{1,0,0}      % Cayley diagram edges
+\definecolor{eBlue}{rgb}{0,0,1}     % Cayley diagram edges
+\definecolor{eGreen}{HTML}{7EC636}  % Goodnotes green (a little darker)
+\definecolor{eGreen}{HTML}{3CAC13}  % I like this a litte better
+\definecolor{ePurple}{HTML}{D287FF} % Close to goodnotes 
+\colorlet{eOrange}{orange}
+
+% Edge styles 
+%%
+\tikzset{r/.style={draw, very thick, eRed, -stealth}}  % Red -->
+\tikzset{rr/.style={draw, very thick, eRed}}           % Red ---
+\tikzset{r2/.style={draw, very thick, eRed,stealth'-stealth'}} % Red <-->
+\tikzset{b/.style={draw, very thick, eBlue, -stealth}} % Blue -->
+\tikzset{bb/.style={draw, very thick, eBlue}}          % Blue ---
+\tikzset{b2/.style={draw, very thick, eBlue,stealth'-stealth'}} % Blue <-->
+\tikzset{g/.style={draw, very thick, eGreen, -stealth}} % Green -->
+\tikzset{gg/.style={draw, very thick, eGreen}}          % Green ---
+\tikzset{g2/.style={draw, very thick, eGreen,stealth'-stealth'}} % Green <-->
+\tikzset{p/.style={draw, very thick, ePurple, -stealth}} % Purple -->
+\tikzset{pp/.style={draw, very thick, ePurple}}           % Purple ---
+\tikzset{p2/.style={draw, very thick, ePurple,stealth'-stealth'}} % Purple <-->
+\tikzset{o/.style={draw, very thick, eOrange, -stealth}} % Orange -->
+\tikzset{oo/.style={draw, very thick, eOrange}}           % Orange ---
+\tikzset{o2/.style={draw, very thick, eOrange,stealth'-stealth'}} % Orange <-->
+%%
+\tikzstyle{cy2} = [draw,very thick]           %% cycle graph edges
+\definecolor{faded}{rgb}{.75,.75,.75}
+\tikzstyle{f} = [faded]                         % This is used all the time
+%%---------------------------------------------------------------------------
+%%
+%% COLORS FOR COSET BUBBBLES 
+%%
+\colorlet{cosetGray}{gray!15!white}
+\colorlet{cosetBlue}{blue!15!white}
+\colorlet{cosetRed}{red!15!white}
+\definecolor{cosetPurple}{rgb}{.9 .84 .965}
+\definecolor{cosetGreen}{rgb}{.863 .92 .855}
+%%---------------------------------------------------------------------------
+
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+\def\<{\langle}
+\def\>{\rangle}
+\DeclareMathOperator\Rect{\mathbf{Rect}}
+\DeclareMathOperator\Tri{\mathbf{Tri}}
+\DeclareMathOperator\Sq{\mathbf{Sq}}
+\DeclareMathOperator\Light{\mathbf{Light}}
+\DeclareMathOperator{\lcm}{lcm}
+%% Abstract algebra commands
+\def\normal{\lhd}
+\def\normaleq{\unlhd}
+\def\nnormal{\ntriangleleft}
+\def\nnormaleq{\ntrianglelefteq}
+
+\newenvironment{red}{\color{red}}{\ignorespacesafterend}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+% all the stuff above this line is called the preamble...
+%##################################################################
+\begin{document} % this is always the first line of what's actually produced
+\section{Homework \#5 - \Alert{Challenges key}} % notice that if you want the character # to appear, you have to "escape" it with a backslash
+
+Here are proofs for each of the parts of the challenge problems that are proof-based. I have written them to purposefully be a bit annoying; your job is to use the data-claim-warrant structure to validate the proofs, and also to say what is annoying about them.
+
+At least one of these proofs has a subtle error in it (that I originally made by honest accident but then decided to leave in for pedagogical purposes). Can you find it?
+
+\begin{problem} Here we shall track down the details from our discussion of the mystery group of order 16 from class on Wednesday.
+    \begin{enumerate}[(a)]
+        \item Let $g\in G$ and suppose that $\<g\>$ is a normal subgroup of order 2. Prove that $g\in Z(G)$.
+        \begin{proof}
+            Let $x\in G$. $x\<g\>x\inv = \<g\>$, so either $xgx\inv = e$, in which case $xg = x$, so $g = 1$, which certainly isn't true, or else $xgx\inv = g$. Then $xg = gx$, so $g \in Z(G)$.
+        \end{proof}
+        \item Suppose that $G$ is generated by two generators, say $G = \<g, h \mid \ldots \>$. Prove that if $g\in Z(G)$, then $h\in Z(G)$.
+        \begin{proof}
+            A generic element of $G$ looks like $s_1^{p_1} s_2^{p_2} \ldots s_k^{p_k}$, where $p_i \in \Z$ and each $s_i$ is either $g$ or $h$. Therefore, it's enough to show that $h\cdot g^p = g^p \cdot h$. But since $g\in Z(G)$, $hg = gh$, so $hg^p = g^ph$. Therefore, $h\in Z(G)$.
+        \end{proof}
+        \item Let $G$ be a finitely generated group, say $G = \<g_1, \ldots, g_n \mid \ldots\>$. (Note that $G$ doesn't have to be finite -- the integers, for example, are finitely generated.) Prove that if all the generators $g_i \in Z(G)$, then $G$ is abelian.
+        \begin{proof}
+            A generic element of $G$ looks like $s_1^{p_1} s_2^{p_2} \ldots s_k^{p_k}$, where $p_i \in \Z$ and each $s_i$ is one of the generators $g_i$. Therefore, it's enough to show for generic generators $g_i$ and $g_j$ that $g_i \cdot g_j^p = g_j^p \cdot g_i$. Since $g_i \in Z(G)$, $g_i g_j = g_j g_i$. Therefore, $g_i g_j^p = g_j^p g_i$, so $G$ is abelian.
+        \end{proof}
+        \item Now, getting more specific: in the mystery group, we knew that $s^2 = r^8 = 1$. How did we know those two things?
+
+        \begin{proof}
+            (Well, not really a proof, more of just an observation.) \\
+            By looking at the lattice, $|\<s\>| = 2$ and $|\<r\>| = 8$.
+        \end{proof}
+        \item Suppose that $\<s\>$ and $\<r^4s\>$ \textit{aren't} normal; therefore they must be conjugate. Prove that $srs = r^5$. (Hint: conjugate by $r$.)
+
+        \begin{proof}
+            First, note that $r\not\in \<r^4s\>$. Therefore, $r\<r^4s\>r\inv = \<s\>$. Either $r(r^4s)r\inv = s$, in which case $r^5s = sr$ so $r^5 = srs$, or $r(r^4s)r\inv = 1$, in which case $r^5s = r$, so $s = r^4$. But $s$ certainly doesn't equal $r^4$, so $srs = r^5$.
+        \end{proof}
+    \end{enumerate}
+\end{problem}
+
+\pagebreak
+
+\begin{problem}
+    Write down a full proof of Lagrange's theorem: 
+    
+    \begin{center}
+        if $H\leq G$, then $|H|$ divides $|G|$, and further, $|G| = [G:H]\cdot |H|$.
+    \end{center}
+    
+    (This just entails stringing together the arguments we made on the slides before the Lagrange's theorem slide, but I think it's moderately nice to see it all written out.)
+
+    \begin{proof}
+        It's nice to split this proof up into three little lemmas:
+        \begin{itemize}
+            \item First, note that for any $g\in G$, $|gH| = |H|$. To prove this, consider the function $\phi:gH \to H$ defined by $\phi(gh) = h$. This function is injective (aka 1-1): if $gh_1 = gh_2$, then $h_1 = h_2$, so $\phi(gh_1) = \phi(gh_2)$. This function is also surjective (aka onto): if $h\in H$, then $\phi(gh) = h$. Therefore, this function is a bijection, so $|gH| = |H|$.
+            \item Next, note that distinct cosets are disjoint. For suppose $g\in g_1H$ and $g\in g_2H$. Then there exist $h_1, h_2\in H$ such that $g_1h_1 = g = g_2h_2$. Therefore, $g_1 = g_2(h_2 h_1\inv)$, so $g_1H = g_2H$.
+            \item Finally, note that the cosets cover all of $G$, because if $g\in G$, then $g\in gH$.
+        \end{itemize}
+        So: if $|H| = m$ and $[G:H]=n$, then $G$ is made up of $n$ sets of $m$ elements, so $|G| = mn$.
+    \end{proof}
+\end{problem}
+\begin{problem}
+    Prove that $|\operatorname{cl}_G(H)| = [G:N_G(H)]$.
+    \begin{proof}
+        The human-words translation of this sentence is that the number of subgroups conjugate to $H$ is the same as the number of cosets of $N_G(H)$. Because I am already annoyed at typing $N_G(H)$ repeatedly, let's just call it $N$. 
+        
+        Let's establish a bijection between cosets of $N$ and conjugate subgroups of $H$; specifically, let's map $xN$ to $xHx\inv$. 
+        \begin{itemize}
+            \item This map is clearly surjective.
+            \item This map is injective: if $xHx\inv = yHy\inv$, then $(y\inv x) H (y\inv x)\inv = H$, so $y\inv x \in N$. This means that the coset $y\inv x N$ is the identity coset $N$. Therefore, $yN = y\left(y\inv xN\right) = xN$.
+            \item (A secret third thing should be here. Do you know what it is?)
+        \end{itemize}
+    \end{proof}
+\end{problem}
+
+\end{document}
+
