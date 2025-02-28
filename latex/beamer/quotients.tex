@@ -297,232 +297,26 @@
 \begin{frame}{Normalizers!}
   \begin{block}{Definition}
     The \Alert{normalizer} of $H$, denoted
-    $N_G(H)$, is the set of elements $g\in G$ such that \Balert{$gH=Hg$}:
-    \[
-    N_G(H)=\big\{g\in G\mid gH=Hg\big\}
-    \]
+    $N_G(H)$, is the set of elements $g\in G$ that ``normalize'' $H$:
+    \begin{align*}
+      N_G(H)&=\big\{g\in G\mid gH=Hg\big\} \\ \pause
+      &=\big\{g\in G\mid gHg\inv=H\big\}
+    \end{align*}
   \end{block} \pause
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Examples of normal sugroups}
-  
-  We've seen cases where we know a subgroup will be normal
-  without having to check. \medskip\Pause
-  
-  \begin{enumerate}
-  \item The subgroup $H=G$ is always normal in $G$. \Pause The only left coset is also
-    the only right coset:
-    \[
-    eG=G=Ge.
-    \] \vspace{-4mm}\Pause
-  \item The subgroup $H=\{e\}$ is always normal. \Pause The left and
-    right cosets are singleton sets:
-    \[
-    gH=\{g\}=Hg.
-    \]
-    \vspace{-4mm}\Pause
-  \item Subgroups $H$ of index $2$ are normal. \Pause The two cosets
-    (left or right) are $H$ and $G\setmin H$. \medskip\Pause
-  \item Subgroups of \emph{abelian groups} are always normal,
-    because for any $H\leq G$, 
-    \[
-    aH=\big\{ah\mid h\in H\big\}\Pause=\big\{ha\mid h\in H\big\}\Pause=Ha.
-    \] \vspace{-4mm}\Pause
-  \item The center $Z(G)$ is always normal, for the same reason as above. \Pause
-  \item Relatedly, any subgroup of $Z(G)$ is always normal.
-  \end{enumerate}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Normal subgroups in $D_4$}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \[
-      \begin{tikzpicture}[shorten >= -2pt,
-        shorten <= -2pt]
-        \node (D4) at (0,4) {$D_4$};
-        \node (r2-f) at (-1.25,3) {$\<r^2,f\>$};
-        \node (r) at (0,3) {$\<r\>$};
-        \node (r2-rf) at (1.25,3) {$\<r^2,rf\>$};
-        \node (f) at (-2.5,2) {$\<f\>$};
-        \node (r2f) at (-1.25,2) {$\<r^2f\>$};
-        \node (r2) at (0,2) {$\<r^2\>$};
-        \node (r3f) at (1.25,2) {$\<r^3f\>$};
-        \node (rf) at (2.5,2) {$\<rf\>$};
-        \node (1) at (0,1) {$\<1\>$};
-        %%
-        \draw (D4) to (r2-f); \draw (D4) to (r); \draw (D4) to (r2-rf);
-        \draw (r2-f) to (f); \draw (r2-f) to (r2f); \draw (r2-f) to (r2);
-        \draw (r2-rf) to (rf); \draw (r2-rf) to (r3f); \draw (r2-rf) to (r2);
-        \draw (r2) to (r);
-        \draw (r2) to (1);
-        \draw (f) to (1);
-        \draw (r2f) to (1); \draw (r3f) to (1); \draw (rf) to (1);
-      \end{tikzpicture}
-      \]
-    \end{column}
-    \begin{column}{0.5\textwidth}
-      From our explorations, we found:\Pause
-      \begin{itemize}
-        \item $\<r\> \normal D_4$ \Pause (because it has index 2!) \Pause
-        \item $\<r^2, f\> \normal D_4$ \Pause (index 2!) \Pause
-        \item $\<r^2, rf\> \normal D_4$ \Pause (index 2!)
-        \item $\<r^2\> \normal D_4$ \Pause (because it is $Z(D_4)$!)
-        \begin{itemize}
-          \item (Also, it's the only guy who's a subgroup of 3 different groups)
-        \end{itemize}
-      \end{itemize} \Pause
-    \end{column}
-  \end{columns}
-
-  \medskip
-
-  \[
-  \begin{tikzpicture}[scale=0.6]
-    \tikzstyle{every node}=[font=\small]
-    \tikzstyle{v-faded} = [circle, draw, gray, fill=lightgray,inner sep=0pt, 
-      minimum size=4mm]
-    \tikzstyle{bbFaded} = [draw, thick, fBlue]
-    \tikzstyle{rFaded} = [draw, thick, fRed, -stealth]
-    %%
-    %% <r>
-    %%
-    \begin{scope}[shift={(0,0)}]
-      \node (e) at (0:2) [v-g] {$1$};
-      \node (r) at (90:2) [v-g] {$r$};
-      \node (r2) at (180:2) [v-g] {$r^2$};
-      \node (r3) at (270:2) [v-g] {$r^3$};
-      \node (f) at (0:1) [v-faded] {$f$};
-      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
-      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
-      \node (rf) at (90:1) [v-faded] {$rf$};
-      \draw [r] (e) to [bend right] (r);
-      \draw [r] (r) to [bend right] (r2);
-      \draw [r] (r2) to [bend right] (r3);
-      \draw [r] (r3) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left=20] (r3f);
-      \draw [rFaded] (r3f) to [bend left=20] (r2f);
-      \draw [rFaded] (r2f) to [bend left=20] (rf);
-      \draw [rFaded] (rf) to [bend left=20] (f);
-      \draw [bbFaded] (e) to (f);
-      \draw [bbFaded] (r) to (rf);
-      \draw [bbFaded] (r2) to (r2f);
-      \draw [bbFaded] (r3) to (r3f);
-    \end{scope}
-    %%
-    %% <r^2, f>
-    %%
-    \begin{scope}[shift={(6,0)}]
-      \node (e) at (0:2) [v-y] {$1$};
-      \node (r) at (90:2) [v-faded] {$r$};
-      \node (r2) at (180:2) [v-y] {$r^2$};
-      \node (r3) at (270:2) [v-faded] {$r^3$};
-      \node (f) at (0:1) [v-y] {$f$};
-      \node (rf) at (90:1) [v-faded] {$rf$};
-      \node (r2f) at (180:1) [v-y] {$r^2\!f$};
-      \node (r3f) at (270:1) [v-faded] {$r^3\!f$};
-      \draw [rFaded] (e) to [bend right] (r);
-      \draw [rFaded] (r) to [bend right] (r2);
-      \draw [rFaded] (r2) to [bend right] (r3);
-      \draw [rFaded] (r3) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left] (r3f);
-      \draw [rFaded] (r3f) to [bend left] (r2f);
-      \draw [rFaded] (r2f) to [bend left] (rf);
-      \draw [rFaded] (rf) to [bend left] (f);
-      \draw [bb] (e) to (f);
-      \draw [bbFaded] (r) to (rf);
-      \draw [bb] (r2) to (r2f);
-      \draw [bbFaded] (r3) to (r3f);
-      \draw [gg] (f) to [bend right] (r2f);
-      \draw [gg] (e) to [bend left] (r2);
-    \end{scope}
-    %%
-    %% <r^2, rf>
-    %%
-    \begin{scope}[shift={(12,0)}]
-      \node (e) at (0:2) [v-y] {$1$};
-      \node (r) at (90:2) [v-faded] {$r$};
-      \node (r2) at (180:2) [v-y] {$r^2$};
-      \node (r3) at (270:2) [v-faded] {$r^3$};
-      \node (f) at (0:1) [v-faded] {$f$};
-      \node (rf) at (90:1) [v-y] {$rf$};
-      \node (r2f) at (180:1) [v-faded] {$r^2\!f$};
-      \node (r3f) at (270:1) [v-y] {$r^3\!f$};
-      \draw [rFaded] (e) to [bend right] (r);
-      \draw [rFaded] (r) to [bend right] (r2);
-      \draw [rFaded] (r2) to [bend right] (r3);
-      \draw [rFaded] (r3) to [bend right] (e);
-      \draw [rFaded] (f) to [bend left] (r3f);
-      \draw [rFaded] (r3f) to [bend left] (r2f);
-      \draw [rFaded] (r2f) to [bend left] (rf);
-      \draw [rFaded] (rf) to [bend left] (f);
-      \draw [bb] (e) to (rf);
-      \draw [bbFaded] (r) to (rf);
-      \draw [bb] (r2) to (r3f);
-      \draw [bbFaded] (r3) to (r3f);
-      \draw [gg] (rf) to (r3f);
-      \draw [gg] (e) to  (r2);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-\end{frame}
-
-
-
-%%====================================================================
-\section{Tricks for spotting normal subgroups!}
-%%====================================================================
-
-\begin{frame}{How to check if a subgroup is normal} %\Pause
-
-  If \alert{$gH=Hg$}, then right-multiplying both sides by $g^{-1}$ yields
-  $gHg^{-1}=H$.
-  
-  \medskip\Pause
-  
-  This gives us a new way to check whether a subgroup $H$ is
-  \alert{normal} in $G$.
-  
-  \medskip\Pause
-
-  \begin{alertblock}{Useful remark}
-    The following are equivalent (``TFAE'') to a subgroup $H\leq
-    G$ being normal: \smallskip\Pause
-    \begin{enumerate}[(i)]
-    \item $gH=Hg$ for all $g\in G$; \hfill (``\emph{left cosets are right
-      cosets}'') \smallskip\Pause
-    \item $gHg^{-1}=H$ for all $g\in G$; \hfill (``\emph{only one \Balert{conjugate
-      subgroup}}'') \smallskip\Pause
-    \item $ghg^{-1}\in H$ for all $h\in H$, $g\in G$; \hfill (``\emph{closed under
-      conjugation}'')
-    \end{enumerate}
+  \begin{alertblock}{The normalizer of $H$ always / sometimes / never:}
+    \begin{itemize}
+      \item An element of $G$ \pause
+      \item A subset of $G$ \pause
+      \item A subgroup of $G$ \pause
+      \item Equal to $H$ \pause
+      \item Contains $H$
+    \end{itemize}
   \end{alertblock}
-  \begin{exampleblock}{Proof}
-    (i) $\Leftrightarrow$ (ii): Boringly obvious. \Pause
-    (ii) $\Rightarrow$ (iii): Also boringly obvious. 
-
-    \smallskip\Pause
-    (iii) $\Rightarrow$ (ii): Interesting; homework. :)
-  \end{exampleblock}
-  
-  \medskip\Pause
-  
-  Sometimes, one of these methods is \emph{much} easier than the others!
-
-  \begin{itemize}
-    \item to show $H \Balert{\ntrianglelefteq} G$, find \emph{just one element} $h\in H$ for which $ghg^{-1}\not\in H$ for some $g\in G$.
-    \item if $G$ has a unique subgroup of size $|H|$, then $H$ \emph{must} be normal. (Why?)
-  \end{itemize}
-  
 \end{frame}
 
 %%====================================================================
 
-\begin{frame}{The subgroup lattice of $A_4$} 
+\begin{frame}{Three subgroups of $A_4$ (from Problem 9)}
 
   I am highlighting the following three subgroups of $A_4$:
   \begin{align*}
@@ -585,862 +379,1853 @@
     \end{scope}
   \end{tikzpicture}
   \]
-
-  Who could possibly be conjugate to $\Balert{N}$? to $\Alert{H}$? to $\Palert{K}$?
-
-  Who could possibly be $N_{A_4}(\Balert{N})$?  $N_{A_4}(\Alert{H})$?  $N_{A_4}(\Palert{K})$?
   
 \end{frame}
 
 %%====================================================================
 
-\begin{frame}{Two pretty good reasons why $N$ is normal} \Pause
-  \begin{alertblock}{Useful remark}
-    The following are equivalent (``TFAE'') to a subgroup $H\leq
-    G$ being normal: \smallskip
-    \begin{enumerate}[(i)]
-    \item $gH=Hg$ for all $g\in G$; \hfill (``\emph{left cosets are right
-      cosets}'') \smallskip
-    \item $gHg^{-1}=H$ for all $g\in G$; \hfill (``\emph{only one \Balert{conjugate
-      subgroup}}'') \smallskip
-    \item $ghg^{-1}\in H$ for all $h\in H$, $g\in G$; \hfill (``\emph{closed under
-      conjugation}'')
-    \end{enumerate}
-  \end{alertblock}
+\begin{frame}{Three subgroups of $A_4$ (from Problem 9)}
+  Take $\Alert{a=(123)}$, $\Palert{b=(134)}$, $\Balert{x=(12)(34)}$, and $\Galert{z=(13)(24)}$. Then:
+    \[N = \<\Balert{x}, \Galert{z}\>; \qquad H = \<\Alert{a}\>; \qquad K = \<\Balert{x}\>.\]
 
-  \begin{enumerate}
-    \item $N$ is the \Palert{only subgroup of its size} in the subgroup lattice of $A_4$, \\
-    so definitely $gNg\inv = N$ \Pause
-    \item $N_{A_4}(N)$ has to be between $N$ and $A_4$ in the lattice, so it's either $N$ itself or all of $A_4$.
-    \begin{itemize}
-      \item So, pick something outside of $N$ and see if it normalizes $N$.
-    \end{itemize}
-  \end{enumerate}
-
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Unicorn subgroups}
-
-  Suppose we conjugate $G=D_4$ by some element $x\in D_4$. \vspace{-2mm}
-
-  \smallskip \Pause
-  
-  \begin{exampleblock}{Very useful idea}
-    Conjugating a normal subgroup $N\leq G$ by $x\in G$ shuffles its
-    elements and subgroups. \Pause
-
-    In particular, this includes conjugating all of $G$ by some $x\in G$.
-  \end{exampleblock} \Pause
-  
-  %% Subgroup lattice of D_4 and conjugating it by an element x
+    \vspace{-5mm}
+    %% Partition of cosets in Cayley graphs, and coset partitions
+  %%
   \[
-  \begin{tikzpicture}[scale=.92]
+    \begin{tikzpicture}[scale=.7,auto]
+      %%
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+        minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \begin{scope}[shift={(0,-1.1)},scale=.7] 
+        \draw[cosetBlue, fill=cosetBlue] (.75,.75) circle (15mm);
+        \draw[cosetBlue, fill=cosetBlue] (4.25,.75) circle (15mm);
+        \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+        \node (e) at (1.75,4.5) [v] {$e$};
+        \node (x) at (3.25,4.5) [v] {$x$};
+        \node (z) at (1.75,3) [v] {$z$};
+        \node (y) at (3.25,3) [v] {$y$};
+        \node (a) at (3.5,1.5) [v] {$a$};
+        \node (c) at (5,1.5) [v] {$c$};
+        \node (d) at (3.5,0) [v] {$d$};
+        \node (b) at (5,0) [v] {$b$};
+        \node (dd) at (1.5,0) [v] {$d^2$};
+        \node (bb) at (1.5,1.5) [v] {$b^2$};
+        \node (aa) at (0,1.5) [v] {$a^2$};
+        \node (cc) at (0,0) [v] {$c^2$};
+        \draw [r] (x) to [bend left=50] (b);
+        \draw [r] (e) to [bend left=60] (a);
+        \draw [r] (z) to [bend left=60] (c);
+        \draw [r] (y) to [bend left=60] (d);
+        \draw [r] (a) to [bend left] (aa);
+        \draw [r] (b) to [bend left=35] (cc);
+        \draw [r] (c) to [bend left=65] (dd);
+        \draw [r] (d) to [bend left=40] (bb);
+        \draw [r] (aa) to [bend left] (e);
+        \draw [r] (bb) to [bend left=40] (y);
+        \draw [r] (cc) to [bend left=25] (x);
+        \draw [r] (dd) to [bend left] (z);
+        \node at (1.75,4.5) [v] {$e$};
+        \node at (.85,4.5) {\normalsize$\bm{N}$};
+        \draw [bb] (e) to (x);
+        \draw [bb] (z) to (y);
+        \draw [gg] (e) to (z);
+        \draw [gg] (x) to (y);
+        \draw [bb] (a) to (c);
+        \draw [bb] (d) to (b);
+        \draw [gg] (a) to (d);
+        \draw [gg] (c) to (b);
+        \draw [bb] (aa) to (bb);
+        \draw [bb] (cc) to (dd);
+        \draw [gg] (aa) to (cc);
+        \draw [gg] (bb) to (dd);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(7.5,0)},scale=.6]
+        \draw[cosetBlue, fill=cosetBlue] (0,1.625) ellipse (.7 and 1.05);
+        \draw[color=cosetRed,fill=cosetRed] (-1.407,-.8125)
+        circle [x radius=.7cm, y radius=1.05cm, rotate=-60];
+        \draw[color=cosetRed,fill=cosetRed] (1.407,-.8125)
+        circle [x radius=.7cm, y radius=1.05cm, rotate=60];
+        \draw[cosetBlue, fill=cosetBlue] (0,-2.5) ellipse (3.3 and .85);
+        \draw[color=cosetRed,fill=cosetRed] (2.273,1.3125)
+        circle [x radius=.9cm, y radius=3.3cm, rotate=30];
+        \draw[color=cosetRed,fill=cosetRed] (-2.273,1.3125)
+        circle [x radius=.9cm, y radius=3.3cm, rotate=-30];
+        \node (l1) at (0,2.25) [v] {$x$};
+        \node (l2) at (-.866,3.75) [v] {$b$};
+        \node (t1) at (0,1) [v] {$e$};
+        \node (t2) at (-.866,-.5) [v] {$a^2$};
+        \node (t3) at (.866,-.5) [v] {$a$};
+        \node (l3) at (.866,3.75) [v] {$c^2$};
+        \node (r1) at (3.68,-1.125) [v] {$d^2$};
+        \node (r2) at (2.814,-2.5) [v] {$z$};
+        \node (r3) at (1.948,-1.125) [v] {$c$};
+        \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+        \node (m1) at (-3.68,-1.125) [v] {$d$};
+        \node (m3) at (-2.814,-2.5) [v] {$y$};
+        \node at (.7,1.625) {\normalsize$\bm{K}$};
+        \draw [bb] (l2) to (m1);
+        \draw [bb] (m2) to (t2);
+        \draw [bb] (r2) to (m3);
+        \draw [bb] (l1) to (t1);
+        \draw [bb] (l3) to (r1);
+        \draw [bb] (r3) to (t3);
+        \draw [r] (l1) to (l2);
+        \draw [r] (l2) to (l3);
+        \draw [r] (l3) to (l1);
+        \draw [r] (t1) to (t3);
+        \draw [r] (t2) to (t1);
+        \draw [r] (t3) to (t2);
+        \draw [r] (r1) to (r2);
+        \draw [r] (r2) to (r3);
+        \draw [r] (r3) to (r1);
+        \draw [r] (m1) to (m2);
+        \draw [r] (m2) to (m3);
+        \draw [r] (m3) to (m1);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(12.75,.3)},scale=.65]
+        \draw[cosetBlue, fill=cosetBlue] (-1.2,0) circle (1.2);
+        \draw[cosetRed, fill=cosetRed] (1.2,0) circle (1.2);
+        \draw[cosetRed, fill=cosetRed] (0,2.7) ellipse (3.4 and 1.05);
+        \draw[cosetRed, fill=cosetRed] (0,-2.7) ellipse (3.4 and 1.05);
+        \node (a2) at (45:1) [v] {$b$};
+        \node (a4) at (135:1) [v] {$e$};
+        \node (a6) at (225:1) [v] {$a$};
+        \node (a8) at (315:1) [v] {$x$};
+        \node (b1) at (0:2) [v] {$c^2$};
+        \node (b3) at (90:2) [v] {$b^2$};
+        \node (b5) at (180:2) [v] {$a^2$};
+        \node (b7) at (270:2) [v] {$d^2$};
+        \node (c2) at (45:4) [v] {$d$};
+        \node (c4) at (135:4) [v] {$y$};
+        \node (c6) at (225:4) [v] {$c$};
+        \node (c8) at (315:4) [v] {$z$};
+        \node at (-1.4,1.2) {\normalsize$\bm{H}$};
+        \draw [r] (b1) to (a8); \draw [r] (a8) to (a2); \draw [r] (a2) to (b1);
+        \draw [r] (a4) to (a6); \draw [r] (a6) to (b5); \draw [r] (b5) to (a4);
+        \draw [r] (c2) to (b3); \draw [r] (b3) to (c4); \draw [r] (c4) to (c2);
+        \draw [r] (c6) to (b7); \draw [r] (b7) to (c8); \draw [r] (c8) to (c6);
+        \draw [p] (b1) to (c2); \draw [p] (c2) to (c8); \draw [p] (c8) to (b1);
+        \draw [p] (b5) to (c6); \draw [p] (c6) to (c4); \draw [p] (c4) to (b5);
+        \draw [p] (b3) to (a2); \draw [p] (a2) to (a4); \draw [p] (a4) to (b3);
+        \draw [p] (a6) to (a8); \draw [p] (a8) to (b7); \draw [p] (b7) to (a6);
+      \end{scope}
+      %%
+      %% Tables of cosets partitions
+      %%
+      \tikzstyle{every node}=[font=\scriptsize]
+      %%
+      \begin{scope}[shift={(-.5,-6)},scale=1.12]
+        \draw[thin,fill=boxBlue] (0,0) rectangle (4,2.4);
+        \draw[thin] (0,.8) to (4,.8); \draw[thin] (0,1.6) to (4,1.6);
+        \node at (.5,.4) {$e$};
+        \node at (1.5,.4) {$(12)(34)$};
+        \node at (2.5,.4) {$(13)(24)$};
+        \node at (3.5,.4) {$(14)(23)$};
+        \node at (.5,1.2) {$(123)$};
+        \node at (1.5,1.2) {$(243)$};
+        \node at (2.5,1.2) {$(142)$};
+        \node at (3.5,1.2) {$(134)$};
+        \node at (.5,2) {$(124)$};
+        \node at (1.5,2) {$(234)$};
+        \node at (2.5,2) {$(143)$};
+        \node at (3.5,2) {$(132)$};
+        \node at (2,-.5) {\small $[A_4:N_{A_4}(N)]=1$};
+        \node at (2,-.9) {\small ``\Balert{normal}''};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(5.25,-6)},scale=1.12]
+        \draw[thin,fill=boxBlue] (0,0) rectangle (4,.8);
+        \draw[thin,fill=boxRed] (0,.8) rectangle (4,2.4);
+        \draw[thin] (0,.8) to (4,.8); \draw[thin] (0,1.6) to (4,1.6);
+        \draw[thin] (2,0) to (2,2.4);
+        \node at (.5,.4) {$e$};
+        \node at (1.45,.4) {$(12)(34)$};
+        \node at (2.55,.4) {$(13)(24)$};
+        \node at (3.5,.4) {$(14)(23)$};
+        \node at (.5,1.2) {$(123)$};
+        \node at (1.45,1.2) {$(243)$};
+        \node at (2.55,1.2) {$(142)$};
+        \node at (3.5,1.2) {$(134)$};
+        \node at (.5,2) {$(124)$};
+        \node at (1.45,2) {$(234)$};
+        \node at (2.55,2) {$(143)$};
+        \node at (3.5,2) {$(132)$};
+        \node at (2,-.5) {\small $[A_4:N_{A_4}(K)]=3$};
+        \node at (2,-.9) {\small ``\Palert{moderately unnormal}''};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(11.1,-6)},scale=1.12]
+        \draw[thin,fill=boxBlue] (0,0) rectangle (3,.8);
+        \draw[thin,fill=boxRed] (0,.8) rectangle (3,3.2);
+        \draw[thin] (0,.8) to (3,.8); \draw[thin] (0,1.6) to (3,1.6);
+        \draw[thin] (0,2.4) to (3,2.4);
+        \node at (.5,.4) {$e$};
+        \node at (1.5,.4) {$(123)$};
+        \node at (2.5,.4) {$(132)$};
+        \node at (.5,1.2) {$(12)(34)$};
+        \node at (1.5,1.2) {$(134)$};
+        \node at (2.5,1.2) {$(234)$};
+        \node at (.5,2) {$(13)(24)$};
+        \node at (1.5,2) {$(243)$};
+        \node at (2.5,2) {$(124)$};
+        \node at (.5,2.8) {$(14)(23)$};
+        \node at (1.5,2.8) {$(142)$};
+        \node at (2.5,2.8) {$(143)$};
+        \node at (1.5,-.5) {\small $[A_4:N_{A_4}(H)]=4$};
+        \node at (1.5,-.9) {\small ``\Alert{fully unnormal}''};
+      \end{scope}
+    \end{tikzpicture}
+    \]
+\end{frame}
+
+%%====================================================================
+\section{Quotients!}
+%%====================================================================
+
+
+
+
+%%====================================================================
+
+\begin{frame}[t]{Quotients} 
+  
+  We have already kinda bumped into the concept a quotient of a group by a subgroup:
+  
+  \[
+  \begin{tikzpicture}[scale=.7]
     %%
     \tikzstyle{every node}=[font=\small]
     %%
-    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
-      \node (D4) at (0,4) {\Palert{$D_4$}};
-      \node (r2-f) at (-1.25,3) {$\<r^2,f\>$};
-      \node (r) at (0,3) {\Palert{$\<r\>$}};
-      \node (r2-rf) at (1.25,3) {$\<r^2,rf\>$};
-      \node (f) at (-2.5,2) {$\<f\>$};
-      \node (r2f) at (-1.25,2) {$\<r^2f\>$};
-      \node (r2) at (0,2) {\Palert{$\<r^2\>$}};
-      \node (r3f) at (1.25,2) {$\<r^3f\>$};
-      \node (rf) at (2.5,2) {$\<rf\>$};
-      \node (1) at (0,1) {\Palert{$\<1\>$}};
+    \begin{scope}[shift={(0,0)},scale=1.5]
+      \node (1) at (135:1) [v] {$1$};
+      \node (i) at (45:1) [v] {$i$};
+      \node (k) at (-45:1) [v] {$k$};
+      \node (j) at (-135:1) [v] {$j$};
+      \node (-1) at (135:2) [v] {$-1$};
+      \node (-i) at (45:2) [v] {$-i$};
+      \node (-k) at (-45:2) [v] {$-k$};
+      \node (-j) at (-135:2) [v] {$-j$};
       %%
-      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
-      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
-      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
-      \draw[f] (r2-rf) to (r2);
-      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
-      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
-      \draw[dashed,midgray] (0,4) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (-1.25,3) circle [x radius=.6cm, y radius=.3cm];
-      \draw[dashed,midgray] (1.25,3) circle [x radius=.6cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,3) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,2) circle [x radius=.4cm, y radius=.3cm];
-      \draw[dashed,midgray] (0,1) circle [x radius=.4cm, y radius=.3cm];
+      \path[r] (1) to (i);
+      \path[r] (i) to (-1);
+      \path[r] (-1) to (-i);
+      \path[r] (-i) to (1);
+      %%
+      \path[r] (k) to (j);
+      \path[r] (j) to (-k);
+      \path[r] (-k) to (-j);
+      \path[r] (-j) to (k);
+      %%
+      \path[b] (i) to (k);
+      \path[b] (k) to (-i);
+      \path[b] (-i) to (-k);
+      \path[b] (-k) to (i);
+      %%
+      \path[b] (1) to (j);
+      \path[b] (j) to (-1);
+      \path[b] (-1) to (-j);
+      \path[b] (-j) to (1);
+      %%
+      \path[gg] (1) to (-1);
+      \path[gg] (j) to (-j);
+      \path[gg] (i) to (-i);
+      \path[gg] (k) to (-k);
+      \node at (0,0) {\normalsize $Q_8$};
     \end{scope}
     %%
-    \begin{scope}[shift={(6.25,0)},shorten >= -3pt, shorten <= -3pt]
-      \node (D4) at (0,4) {\Palert{$xD_4x^{-1}$}};
-      \node (r2-f) at (-1.25,3) {$x\<r^2,f\>x^{-1}$};
-      \node (r) at (0,3) {\Palert{$x\<r\>x^{-1}$}};
-      \node (r2-rf) at (1.25,3) {$x\<r^2,rf\>x^{-1}$};
-      \node (f) at (-2.5,2) {$x\<f\>x^{-1}$};
-      \node (r2f) at (-1.25,2) {$x\<r^2f\>x^{-1}$};
-      \node (r2) at (0,2) {\Palert{$x\<r^2\>x^{-1}$}};
-      \node (r3f) at (1.25,2) {$x\<r^3f\>x^{-1}$};
-      \node (rf) at (2.5,2) {$x\<rf\>x^{-1}$};
-      \node (1) at (0,1) {\Palert{$x\<1\>x^{-1}$}};
+    \begin{scope}[scale=.6,shift={(6.5,-5.5)}]
+      \colorlet{color_1}{tGreen}
+      \colorlet{color_-1}{tGreen}
+      \colorlet{color_i}{tRed}
+      \colorlet{color_-i}{tRed}
+      \colorlet{color_j}{tBlue}
+      \colorlet{color_-j}{tBlue}
+      \colorlet{color_k}{tYellow}
+      \colorlet{color_-k}{tYellow}
+      \newcommand*{\n}{9}
       %%
-      \draw[f] (D4) to (r2-f); \draw[f] (D4) to (r); \draw[f] (D4) to (r2-rf);
-      \draw[f] (r2-f) to (f); \draw[f] (r2-f) to (r2f); \draw[f] (r2-f) to (r2);
-      \draw[f] (r2-rf) to (rf); \draw[f] (r2-rf) to (r3f);
-      \draw[f] (r2-rf) to (r2);
-      \draw[f] (r2) to (r); \draw[f] (r2) to (1); \draw[f] (f) to (1);
-      \draw[f] (r2f) to (1); \draw[f] (r3f) to (1); \draw[f] (rf) to (1);
+      %% Left column of table (header)
+      \path[fill=color_1] (-.1,8) rectangle ++(1,1);
+      \path[fill=color_-1] (-.1,7) rectangle ++(1,1);
+      \path[fill=color_i] (-.1,6) rectangle ++(1,1);
+      \path[fill=color_-i] (-.1,5) rectangle ++(1,1);
+      \path[fill=color_j] (-.1,4) rectangle ++(1,1);
+      \path[fill=color_-j] (-.1,3) rectangle ++(1,1);
+      \path[fill=color_k] (-.1,2) rectangle ++(1,1);
+      \path[fill=color_-k] (-.1,1) rectangle ++(1,1);
+      %% Top row of table (header)
+      \path[fill=color_1] (1,9.1) rectangle ++(1,1);
+      \path[fill=color_-1] (2,9.1) rectangle ++(1,1);
+      \path[fill=color_i] (3,9.1) rectangle ++(1,1);
+      \path[fill=color_-i] (4,9.1) rectangle ++(1,1);
+      \path[fill=color_j] (5,9.1) rectangle ++(1,1);
+      \path[fill=color_-j] (6,9.1) rectangle ++(1,1);
+      \path[fill=color_k] (7,9.1) rectangle ++(1,1);
+      \path[fill=color_-k] (8,9.1) rectangle ++(1,1);
+      %% Top row of table
+      \path[fill=color_1] (1,8) rectangle ++(1,1);
+      \path[fill=color_-1] (2,8) rectangle ++(1,1);
+      \path[fill=color_i] (3,8) rectangle ++(1,1);
+      \path[fill=color_-i] (4,8) rectangle ++(1,1);
+      \path[fill=color_j] (5,8) rectangle ++(1,1);
+      \path[fill=color_-j] (6,8) rectangle ++(1,1);
+      \path[fill=color_k] (7,8) rectangle ++(1,1);
+      \path[fill=color_-k] (8,8) rectangle ++(1,1);
+      %%
+      \path[fill=color_-1] (1,7) rectangle ++(1,1);
+      \path[fill=color_1] (2,7) rectangle ++(1,1);
+      \path[fill=color_-i] (3,7) rectangle ++(1,1);
+      \path[fill=color_i] (4,7) rectangle ++(1,1);
+      \path[fill=color_-j] (5,7) rectangle ++(1,1);
+      \path[fill=color_j] (6,7) rectangle ++(1,1);
+      \path[fill=color_-k] (7,7) rectangle ++(1,1);
+      \path[fill=color_k] (8,7) rectangle ++(1,1);
+      %%
+      \path[fill=color_i] (1,6) rectangle ++(1,1);
+      \path[fill=color_-i] (2,6) rectangle ++(1,1);
+      \path[fill=color_-1] (3,6) rectangle ++(1,1);
+      \path[fill=color_1] (4,6) rectangle ++(1,1);
+      \path[fill=color_k] (5,6) rectangle ++(1,1);
+      \path[fill=color_-k] (6,6) rectangle ++(1,1);
+      \path[fill=color_-j] (7,6) rectangle ++(1,1);
+      \path[fill=color_j] (8,6) rectangle ++(1,1);
+      %%
+      \path[fill=color_-i] (1,5) rectangle ++(1,1);
+      \path[fill=color_i] (2,5) rectangle ++(1,1);
+      \path[fill=color_1] (3,5) rectangle ++(1,1);
+      \path[fill=color_-1] (4,5) rectangle ++(1,1);
+      \path[fill=color_-k] (5,5) rectangle ++(1,1);
+      \path[fill=color_k] (6,5) rectangle ++(1,1);
+      \path[fill=color_j] (7,5) rectangle ++(1,1);
+      \path[fill=color_-j] (8,5) rectangle ++(1,1);
+      %%
+      \path[fill=color_j] (1,4) rectangle ++(1,1);
+      \path[fill=color_-j] (2,4) rectangle ++(1,1);
+      \path[fill=color_-k] (3,4) rectangle ++(1,1);
+      \path[fill=color_k] (4,4) rectangle ++(1,1);
+      \path[fill=color_-1] (5,4) rectangle ++(1,1);
+      \path[fill=color_1] (6,4) rectangle ++(1,1);
+      \path[fill=color_i] (7,4) rectangle ++(1,1);
+      \path[fill=color_-i] (8,4) rectangle ++(1,1);
+      %%
+      \path[fill=color_-j] (1,3) rectangle ++(1,1);
+      \path[fill=color_j] (2,3) rectangle ++(1,1);
+      \path[fill=color_k] (3,3) rectangle ++(1,1);
+      \path[fill=color_-k] (4,3) rectangle ++(1,1);
+      \path[fill=color_1] (5,3) rectangle ++(1,1);
+      \path[fill=color_-1] (6,3) rectangle ++(1,1);
+      \path[fill=color_-i] (7,3) rectangle ++(1,1);
+      \path[fill=color_i] (8,3) rectangle ++(1,1);
+      %%
+      \path[fill=color_k] (1,2) rectangle ++(1,1);
+      \path[fill=color_-k] (2,2) rectangle ++(1,1);
+      \path[fill=color_j] (3,2) rectangle ++(1,1);
+      \path[fill=color_-j] (4,2) rectangle ++(1,1);
+      \path[fill=color_-i] (5,2) rectangle ++(1,1);
+      \path[fill=color_i] (6,2) rectangle ++(1,1);
+      \path[fill=color_-1] (7,2) rectangle ++(1,1);
+      \path[fill=color_1] (8,2) rectangle ++(1,1);
+      %%
+      \path[fill=color_-k] (1,1) rectangle ++(1,1);
+      \path[fill=color_k] (2,1) rectangle ++(1,1);
+      \path[fill=color_-j] (3,1) rectangle ++(1,1);
+      \path[fill=color_j] (4,1) rectangle ++(1,1);
+      \path[fill=color_i] (5,1) rectangle ++(1,1);
+      \path[fill=color_-i] (6,1) rectangle ++(1,1);
+      \path[fill=color_1] (7,1) rectangle ++(1,1);
+      \path[fill=color_-1] (8,1) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,\n} {
+        \draw [very thin] (\i,1) -- (\i,\n); 
+        \draw [very thin] (\i,\n+.1) -- (\i,\n+1.1); 
+        \draw [very thin] (1,\i) -- (\n,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      }
+      \draw [very thin] (1,\n+.1) rectangle (\n,\n+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,\n);
+      %%
+      \node at (0.4,8.5) {$1$};
+      \node at (0.4,7.5) {$-1$};
+      \node at (0.4,6.5) {$i$};
+      \node at (0.4,5.5) {$-i$}; 
+      \node at (0.4,4.5) {$j$}; 
+      \node at (0.4,3.5) {$-j$};
+      \node at (0.4,2.5) {$k$};
+      \node at (0.4,1.5) {$-k$};
+      %% 
+      \node at (1.5,9.6) {$1$};
+      \node at (2.5,9.6) {$-1$};
+      \node at (3.5,9.6) {$i$};
+      \node at (4.5,9.6) {$-i$}; 
+      \node at (5.5,9.6) {$j$}; 
+      \node at (6.5,9.6) {$-j$};
+      \node at (7.5,9.6) {$k$};
+      \node at (8.5,9.6) {$-k$};
+      %%
+      \node at (1.5,8.5) {$1$};
+      \node at (1.5,7.5) {$-1$};
+      \node at (1.5,6.5) {$i$};
+      \node at (1.5,5.5) {$-i$}; 
+      \node at (1.5,4.5) {$j$}; 
+      \node at (1.5,3.5) {$-j$};
+      \node at (1.5,2.5) {$k$};
+      \node at (1.5,1.5) {$-k$};
+      %%
+      \node at (2.5,8.5) {$-1$};
+      \node at (2.5,7.5) {$1$};
+      \node at (2.5,6.5) {$-i$};
+      \node at (2.5,5.5) {$i$}; 
+      \node at (2.5,4.5) {$-j$}; 
+      \node at (2.5,3.5) {$j$};
+      \node at (2.5,2.5) {$-k$};
+      \node at (2.5,1.5) {$k$};
+      %%
+      \node at (3.5,8.5) {$i$};
+      \node at (3.5,7.5) {$-i$};
+      \node at (3.5,6.5) {$-1$};
+      \node at (3.5,5.5) {$1$}; 
+      \node at (3.5,4.5) {$-k$}; 
+      \node at (3.5,3.5) {$k$};
+      \node at (3.5,2.5) {$j$};
+      \node at (3.5,1.5) {$-j$};
+      %%
+      \node at (4.5,8.5) {$-i$};
+      \node at (4.5,7.5) {$i$};
+      \node at (4.5,6.5) {$1$};
+      \node at (4.5,5.5) {$-1$}; 
+      \node at (4.5,4.5) {$k$}; 
+      \node at (4.5,3.5) {$-k$};
+      \node at (4.5,2.5) {$-j$};
+      \node at (4.5,1.5) {$j$};
+      %%
+      \node at (5.5,8.5) {$j$};
+      \node at (5.5,7.5) {$-j$};
+      \node at (5.5,6.5) {$k$};
+      \node at (5.5,5.5) {$-k$}; 
+      \node at (5.5,4.5) {$-1$}; 
+      \node at (5.5,3.5) {$1$};
+      \node at (5.5,2.5) {$-i$};
+      \node at (5.5,1.5) {$i$};
+      %%
+      \node at (6.5,8.5) {$-j$};
+      \node at (6.5,7.5) {$j$};
+      \node at (6.5,6.5) {$-k$};
+      \node at (6.5,5.5) {$k$}; 
+      \node at (6.5,4.5) {$1$}; 
+      \node at (6.5,3.5) {$-1$};
+      \node at (6.5,2.5) {$i$};
+      \node at (6.5,1.5) {$-i$};
+      %%
+      \node at (7.5,8.5) {$k$};
+      \node at (7.5,7.5) {$-k$};
+      \node at (7.5,6.5) {$-j$};
+      \node at (7.5,5.5) {$j$}; 
+      \node at (7.5,4.5) {$i$}; 
+      \node at (7.5,3.5) {$-i$};
+      \node at (7.5,2.5) {$-1$};
+      \node at (7.5,1.5) {$1$};
+      %%
+      \node at (8.5,8.5) {$-k$};
+      \node at (8.5,7.5) {$k$};
+      \node at (8.5,6.5) {$j$};
+      \node at (8.5,5.5) {$-j$}; 
+      \node at (8.5,4.5) {$-i$}; 
+      \node at (8.5,3.5) {$i$};
+      \node at (8.5,2.5) {$1$};
+      \node at (8.5,1.5) {$-1$};
+    \end{scope}
+    %%
+    \begin{scope}[scale=.6,shift={(18,-4.5)},box/.style={anchor=south}]
+      %%
+      \newcommand*{\m}{5}
+      \colorlet{color-e}{tGreen}
+      \colorlet{color-v}{tRed}
+      \colorlet{color-h}{tBlue}
+      \colorlet{color-vh}{tYellow}
+      %%
+      \node at (2.5,7) {\normalsize $Q_8/\<-1\>\cong V_4$};
+      %%
+      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
+      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
+      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
+      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
+      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
+      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,4) rectangle ++(1,1);
+      \path[fill=color-e] (2,3) rectangle ++(1,1);
+      \path[fill=color-e] (3,2) rectangle ++(1,1);
+      \path[fill=color-e] (4,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-v] (1,3) rectangle ++(1,1);
+      \path[fill=color-v] (2,4) rectangle ++(1,1);
+      \path[fill=color-v] (3,1) rectangle ++(1,1);
+      \path[fill=color-v] (4,2) rectangle ++(1,1);
+      %%
+      \path[fill=color-h] (1,2) rectangle ++(1,1);
+      \path[fill=color-h] (2,1) rectangle ++(1,1);
+      \path[fill=color-h] (3,4) rectangle ++(1,1);
+      \path[fill=color-h] (4,3) rectangle ++(1,1);
+      %%
+      \path[fill=color-vh] (1,1) rectangle ++(1,1);
+      \path[fill=color-vh] (2,2) rectangle ++(1,1);
+      \path[fill=color-vh] (3,3) rectangle ++(1,1);
+      \path[fill=color-vh] (4,4) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,\m} {
+        \draw [very thin] (\i,1) -- (\i,\m); 
+        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
+        \draw [very thin] (1,\i) -- (\m,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,\m); 
+      %%
+      \node [box] at (0.4,4) {$\pm 1$}; 
+      \node [box] at (0.4,3) {$\pm i$};
+      \node [box] at (0.4,2) {$\pm j$};
+      \node [box] at (0.4,1) {$\pm k$};
+      \node [box] at (1.5,5.1) {$\pm 1$}; 
+      \node [box] at (2.5,5.1) {$\pm i$};
+      \node [box] at (3.5,5.1) {$\pm j$};
+      \node [box] at (4.5,5.1) {$\pm k$};
+      %%
+      \node [box] at (1.5,4) {$\pm 1$}; 
+      \node [box] at (1.5,3) {$\pm i$};
+      \node [box] at (1.5,2) {$\pm j$};
+      \node [box] at (1.5,1) {$\pm k$};
+      %%
+      \node [box] at (2.5,4) {$\pm i$}; 
+      \node [box] at (2.5,3) {$\pm 1$};
+      \node [box] at (2.5,2) {$\pm k$};
+      \node [box] at (2.5,1) {$\pm j$};
+      %%
+      \node [box] at (3.5,4) {$\pm j$}; 
+      \node [box] at (3.5,3) {$\pm k$};
+      \node [box] at (3.5,2) {$\pm 1$};
+      \node [box] at (3.5,1) {$\pm i$};
+      %%
+      \node [box] at (4.5,4) {$\pm k$}; 
+      \node [box] at (4.5,3) {$\pm j$};
+      \node [box] at (4.5,2) {$\pm i$};
+      \node [box] at (4.5,1) {$\pm 1$};
     \end{scope}
   \end{tikzpicture}
   \]
-  \Pause Subgroups at a unique ``lattice neighborhood'' are called
-  \Palert{unicorns}, and must be normal. \medskip\Pause
   
-  For example, $\Palert{\<r^2\>}=\Palert{x\<r^2\>x^{-1}}$ is the only 
-  size-$2$ subgroup ``\emph{\Balert{with $3$ parents}}.'' \medskip\Pause
+  \smallskip
   
-  The groups \Palert{$G$} and \Palert{$\<1\>$} are always
-  unicorns, and hence normal. \medskip\Pause
-  
-  The index-$2$ subgroups $\<r^2,f\>$, \Palert{$\<r\>$}, and
-  $\<r^2,rf\>$ must be normal. 
+  We now know enough algebra to be able to formalize this, but first some examples based on vibes. \medskip\Pause
+
+  \begin{alertblock}{Key idea}
+    The quotient of $G$ by a subgroup $H$ exists when the
+    (left) cosets of $H$ form a group.
+  \end{alertblock}
   
 \end{frame}
 
 %%====================================================================
 
-\begin{frame}{Unicorns in the diquaternion group} %\Pause
+\begin{frame}[t]{Quotients}
   
-  Our definition of \Palert{unicorn} could be strengthened, but we
-  want to keep things simple. \medskip\Pause
-
-  Here's the lattice for a group called $\DQ_8$, which has order 16.
-  
-  Are any of the $C_4$ subgroups of $\DQ_8$ unicorns, i.e.,
-  ``not like the others''? 
-  
-  %% Subgroup lattice of DQ_8
-  \[
-  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.15]
-    \begin{scope}[shift={(0,0)}]
-      \node (G) at (0,3) {$\DQ_8$};
-      \node (C4xC2-1) at (-3,2) {$C_4\times C_2$}; % 010,001,011
-      \node (D4-1) at (-2,2) {$D_4$}; % 100,001,101    
-      \node (C4xC2-2) at (-1,2) {$C_4\times C_2$}; % 100,010,110
-      \node (D4-2) at (0,2) {$D_4$};  % 100,011,111
-      \node (C4xC2-3) at (1,2) {$C_4\times C_2$};  % 010,101,111
-      \node (D4-3) at (2,2) {$D_4$};  % 110,001,111
-      \node (Q8) at (3,2) {$Q_8$};  % 110,011,101
-      %%
-      \node (V4-12) at (-3,1) {$V_4$};
-      \node (V4-13) at (-2,1) {$V_4$};
-      \node (V4-23) at (-1,1) {$V_4$};
-      \node (Z) at (0,1) {$C_4$};
-      \node (C4-1) at (1,1) {$C_4$};
-      \node (C4-2) at (2,1) {$C_4$};
-      \node (C4-3) at (3,1) {$C_4$};
-      %%
-      \node (C2-11) at (-3.25,0) {$C_2$};
-      \node (C2-12) at (-2.75,0) {$C_2$};
-      \node (C2-21) at (-2.25,0) {$C_2$};
-      \node (C2-22) at (-1.75,0) {$C_2$};
-      \node (C2-31) at (-1.25,0) {$C_2$};
-      \node (C2-32) at (-0.75,0) {$C_2$};    
-      \node (-I) at (1,0) {$C_2$};
-      %%
-      \node (I) at (0,-1) {$\<I\>$};
-      %%
-      %%
-      \draw[f] (C4xC2-1) to (G); \draw[f] (D4-1) to (G);
-      \draw[f] (C4xC2-2) to (G);
-      \draw[f] (D4-2) to (G); \draw[f] (C4xC2-3) to (G);
-      \draw[f] (D4-3) to (G); \draw[f] (Q8) to (G);
-      %%
-      \draw[f] (C4xC2-1) to (Z); \draw[f] (C4xC2-2) to (Z);
-      \draw[f] (C4xC2-3) to (Z); \draw[f] (V4-12) to (D4-1);
-      \draw[f] (V4-12) to (D4-2); \draw[f] (V4-12) to (C4xC2-3);
-      \draw[f] (V4-13) to (D4-1); \draw[f] (V4-13) to (D4-3);
-      \draw[f] (V4-13) to (C4xC2-2); \draw[f] (V4-23) to (D4-2);
-      \draw[f] (V4-23) to (D4-3); \draw[f] (V4-23) to (C4xC2-1);
-      %%
-      \draw[f] (C4-1) to (C4xC2-1); \draw[f] (C4-1) to (D4-1);
-      \draw[f] (C4-2) to (C4xC2-2); \draw[f] (C4-2) to (D4-2);
-      \draw[f] (C4-3) to (C4xC2-3); \draw[f] (C4-3) to (D4-3);
-      %%
-      \draw[f] (Q8) to (C4-1); \draw[f] (Q8) to (C4-2); \draw[f] (Q8) to (C4-3);
-      %%
-      \draw[f] (V4-12) to (C2-11); \draw[f] (V4-12) to (C2-12); 
-      \draw[f] (V4-13) to (C2-21); \draw[f] (V4-13) to (C2-22); 
-      \draw[f] (V4-23) to (C2-31); \draw[f] (V4-23) to (C2-32); 
-      %%
-      \draw[f] (-I) to (V4-12); \draw[f] (-I) to (V4-13);
-      \draw[f] (-I) to (V4-23); \draw[f] (-I) to (C4-1);
-      \draw[f] (-I) to (C4-2); \draw[f] (-I) to (C4-3);
-      \draw[f] (-I) to (Z);
-      %%
-      \draw[f] (C2-11) to (I); \draw[f] (C2-12) to (I); 
-      \draw[f] (C2-21) to (I); \draw[f] (C2-22) to (I); 
-      \draw[f] (C2-31) to (I); \draw[f] (C2-32) to (I);
-      \draw[f] (-I) to (I);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  (Preview: What can we say about the \Balert{conjugacy classes} of the subgroups of
-  $\DQ_8$ just from the lattice?)
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$} %\Pause
-
-  Here is the subgroup lattice for some actual group of order $16$ but I'm not telling you which one it is. Find as many \Palert{unicorns} as you can.
-  %%
-  %% Subgroup lattice of a mystery group of order 16
-  \[
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.75]
-    \begin{scope}[shift={(0,0)}]
-      \node(G) at (3.5,6) {\Palert{$G$}};
-      \node(rs) at (3.5,4.5) {$\<rs\>$};
-      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
-      \node(r) at (5.25,4.5) {$\<r\>$};
-      \node(r4-s) at (0,3) {$\<r^4,s\>$};
-      \node(r2s) at (1.75,3) {$\<r^2s\>$};
-      \node(r2) at (3.5,3) {$\<r^2\>$};
-      \node(s) at (-1.75,1.5) {$\<s\>$};
-      \node(r4s) at (0,1.5) {$\<r^4s\>$};
-      \node(r4) at (1.75,1.5) {$\<r^4\>$};
-      \node(1) at (0,0) {\Palert{$\<1\>$}};
-      \draw[f]  (1) to (s);
-      \draw[f]  (1) to (r4s);
-      \draw[f]  (1) to (r4);
-      \draw[f]  (s) to (r4-s);
-      \draw[f]  (r4s) to (r4-s);
-      \draw[f]  (r4) to (r4-s);
-      \draw[f]  (r4) to (r2s);
-      \draw[f]  (r4) to (r2);
-      \draw[f]  (r4-s) to (r2-s);
-      \draw[f]  (r2s) to (r2-s);
-      \draw[f]  (r2) to (r2-s);
-      \draw[f]  (r2) to (r);
-      \draw[f]  (r2) to (rs);
-      \draw[f]  (r2-s) to (G);
-      \draw[f]  (r) to (G);
-      \draw[f]  (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$} %\Pause
-
-  \Palert{Unicorns} are purple.
-  %%
-  %% Subgroup lattice of a mystery group of order 16
-  \[
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.65]
-    \begin{scope}[shift={(0,0)}]
-      \node(G) at (3.5,6) {\Palert{$G$}};
-      \node(rs) at (3.5,4.5) {$\<rs\>$};
-      \node(r2-s) at (1.75,4.5) {\Palert{$\<r^2,s\>$}};
-      \node(r) at (5.25,4.5) {$\<r\>$};
-      \node(r4-s) at (0,3) {\Palert{$\<r^4,s\>$}};
-      \node(r2s) at (1.75,3) {\Palert{$\<r^2s\>$}};
-      \node(r2) at (3.5,3) {\Palert{$\<r^2\>$}};
-      \node(s) at (-1.75,1.5) {$\<s\>$};
-      \node(r4s) at (0,1.5) {$\<r^4s\>$};
-      \node(r4) at (1.75,1.5) {\Palert{$\<r^4\>$}};
-      \node(1) at (0,0) {\Palert{$\<1\>$}};
-      \draw[f]  (1) to (s);
-      \draw[f]  (1) to (r4s);
-      \draw[f]  (1) to (r4);
-      \draw[f]  (s) to (r4-s);
-      \draw[f]  (r4s) to (r4-s);
-      \draw[f]  (r4) to (r4-s);
-      \draw[f]  (r4) to (r2s);
-      \draw[f]  (r4) to (r2);
-      \draw[f]  (r4-s) to (r2-s);
-      \draw[f]  (r2s) to (r2-s);
-      \draw[f]  (r2) to (r2-s);
-      \draw[f]  (r2) to (r);
-      \draw[f]  (r2) to (rs);
-      \draw[f]  (r2-s) to (G);
-      \draw[f]  (r) to (G);
-      \draw[f]  (rs) to (G);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(8,0)}]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node(G) at (3.5,6) {\Palert{$xGx^{-1}$}};
-      \node(rs) at (3.5,4.5) {$x\<rs\>x^{-1}$};
-      \node(r2-s) at (1.75,4.5) {\Palert{$x\<r^2,s\>x^{-1}$}};
-      \node(r) at (5.25,4.5) {$x\<r\>x^{-1}$};
-      \node(r4-s) at (0,3) {\Palert{$x\<r^4,s\>x^{-1}$}};
-      \node(r2s) at (1.75,3) {\Palert{$x\<r^2s\>x^{-1}$}};
-      \node(r2) at (3.5,3) {\Palert{$x\<r^2\>x^{-1}$}};
-      \node(s) at (-1.75,1.5) {$x\<s\>x^{-1}$};
-      \node(r4s) at (0,1.5) {$x\<r^4s\>x^{-1}$};
-      \node(r4) at (1.75,1.5) {\Palert{$x\<r^4\>x^{-1}$}};
-      \node(1) at (0,0) {\Palert{$x\<1\>x^{-1}$}};
-      \draw[f]  (1) to (s);
-      \draw[f]  (1) to (r4s);
-      \draw[f]  (1) to (r4);
-      \draw[f]  (s) to (r4-s);
-      \draw[f]  (r4s) to (r4-s);
-      \draw[f]  (r4) to (r4-s);
-      \draw[f]  (r4) to (r2s);
-      \draw[f]  (r4) to (r2);
-      \draw[f]  (r4-s) to (r2-s);
-      \draw[f]  (r2s) to (r2-s);
-      \draw[f]  (r2) to (r2-s);
-      \draw[f]  (r2) to (r);
-      \draw[f]  (r2) to (rs);
-      \draw[f]  (r2-s) to (G);
-      \draw[f]  (r) to (G);
-      \draw[f]  (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-
-  \vspace{-2mm}\Pause
-
-  We can deduce that every subgroup is normal, except possibly
-  $\<s\>$ and $\<r^4s\>$. \medskip\Pause
-
-  There are two cases: \smallskip
-  \begin{itemize}
-    \item $\<s\>$ and $\<r^4s\>$ are normal \Pause $\Rightarrow$ $s\in Z(G)$
-      \Pause $\Rightarrow$ $G$ is abelian. \smallskip\Pause
-    \item $\<s\>$ and $\<r^4s\>$ are not normal \Pause $\Rightarrow$
-      $\cl_G(\<s\>)=\big\{\<s\>,\<r^4s\>\big\}$ \Pause $\Rightarrow$ $G$ is
-      nonabelian. \smallskip\Pause
-  \end{itemize}
-
-  \emph{This doesn't necessarily mean that both of these are actually
-    possible\dots}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$} 
-
-  It's straightforward to check that this is the subgroup lattice of
-  \[
-  C_8\times C_2=\big\<r,s\mid r^8=s^2=1, srs=r\big\>.
-  \]
-
-  Let \Alert{$r=(a,1)$} and \Balert{$s=(1,b)$}, and so $C_8\times
-  C_2=\<r,s\>=\big\<(a,1),(1,b)\big\>$.
-  
-  %% Cayley graph and subgroup lattice of C8xC2
-  \[
-  \begin{tikzpicture}[scale=1.1,auto]
-    %%
-    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
-    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (s) at (0:1.1) [v] {$s$};
-      \node (rs) at (45:1.15) [v] {$rs$};
-      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
-      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
-      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
-      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
-      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
-      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
-      %%
-      \node (1) at (0:2) [v] {$1$};
-      \node (r) at (45:2) [v] {$r$};
-      \node (r2) at (90:2) [v] {$r^2$};
-      \node (r3) at (135:2) [v] {$r^3$};
-      \node (r4) at (180:2) [v] {$r^4$};
-      \node (r5) at (225:2) [v] {$r^5$};
-      \node (r6) at (270:2) [v] {$r^6$};
-      \node (r7) at (315:2) [v] {$r^7$};
-      %%
-      \draw [R-out] (1) to (r);
-      \draw [R-out] (r) to (r2);
-      \draw [R-out] (r2) to (r3);
-      \draw [R-out] (r3) to (r4);
-      \draw [R-out] (r4) to (r5);
-      \draw [R-out] (r5) to (r6);
-      \draw [R-out] (r6) to (r7);
-      \draw [R-out] (r7) to (1);
-      %%
-      \draw [R-in] (s) to (rs);
-      \draw [R-in] (rs) to (r2s);
-      \draw [R-in] (r2s) to (r3s);
-      \draw [R-in] (r3s) to (r4s);
-      \draw [R-in] (r4s) to (r5s);
-      \draw [R-in] (r5s) to (r6s);
-      \draw [R-in] (r6s) to (r7s);
-      \draw [R-in] (r7s) to (s);
-      %%
-      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
-      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
-      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
-      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
-      %%
-      \node at (0,0) {\normalsize $C_8\times C_2$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node(G) at (3.5,6) {$\small \<(a,1),(1,b)\>$};
-      \node(rs) at (3.5,4.5) {$\<(a,b)\>$};
-      \node(r2-s) at (1.75,4.5) {$\<(a^2,b)\>$};
-      \node(r) at (5.25,4.5) {$\<(a,1)\>$};
-      \node(r4-s) at (0,3) {$\<(1,b),(a^4,1)\>$};
-      \node(r2s) at (1.75,3) {$\<(a^2,b)\>$};
-      \node(r2) at (3.5,3) {$\<(a^2,1)\>$};
-      \node(s) at (-1.75,1.5) {$\<(1,b)\>$};
-      \node(r4s) at (0,1.5) {$\<(a^4,b)\>$};
-      \node(r4) at (1.75,1.5) {$\<(a^4,1)\>$};
-      \node(1) at (0,0) {$\<(1,1)\>$};
-      \draw[f] (1) to (s);
-      \draw[f] (1) to (r4s);
-      \draw[f] (1) to (r4);
-      \draw[f] (s) to (r4-s);
-      \draw[f] (r4s) to (r4-s);
-      \draw[f] (r4) to (r4-s);
-      \draw[f] (r4) to (r2s);
-      \draw[f] (r4) to (r2);
-      \draw[f] (r4-s) to (r2-s);
-      \draw[f] (r2s) to (r2-s);
-      \draw[f] (r2) to (r2-s);
-      \draw[f] (r2) to (r);
-      \draw[f] (r2) to (rs);
-      \draw[f] (r2-s) to (G);
-      \draw[f] (r) to (G);
-      \draw[f] (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A mystery group of order $16$}
-
-  However, the nonabelian case is possible as well! 
-  The following also works: 
-  \[
-  \SA_8=\big\<r,s\mid r^8=s^2=1, srs=r^5\big\>.
-  \]
-  
-  %% Cayley graph and subgroup lattice of SA_8
-  \[
-  \begin{tikzpicture}[scale=1.1,auto]
-    %%
-    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
-    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \node (s) at (0:1.1) [v] {$s$};
-      \node (rs) at (45:1.15) [v] {$rs$};
-      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
-      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
-      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
-      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
-      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
-      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
-      %%
-      \node (1) at (0:2) [v] {$1$};
-      \node (r) at (45:2) [v] {$r$};
-      \node (r2) at (90:2) [v] {$r^2$};
-      \node (r3) at (135:2) [v] {$r^3$};
-      \node (r4) at (180:2) [v] {$r^4$};
-      \node (r5) at (225:2) [v] {$r^5$};
-      \node (r6) at (270:2) [v] {$r^6$};
-      \node (r7) at (315:2) [v] {$r^7$};
-      %%
-      \draw [R-out] (1) to (r);
-      \draw [R-out] (r) to (r2);
-      \draw [R-out] (r2) to (r3);
-      \draw [R-out] (r3) to (r4);
-      \draw [R-out] (r4) to (r5);
-      \draw [R-out] (r5) to (r6);
-      \draw [R-out] (r6) to (r7);
-      \draw [R-out] (r7) to (1);
-      %%
-      \draw [r] (s) to (r5s);
-      \draw [r] (r5s) to (r2s);
-      \draw [r] (r2s) to (r7s);
-      \draw [r] (r7s) to (r4s);
-      \draw [r] (r4s) to (rs);
-      \draw [r] (rs) to (r6s);
-      \draw [r] (r6s) to (r3s);
-      \draw [r] (r3s) to (s);
-      %%
-      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
-      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
-      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
-      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
-      %%
-      \node at (0,0) {\normalsize $\SA_8$}; 
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt,shorten <= -2pt,scale=.7]
-      \node(G) at (3.5,6) {$\<r,s\>$};
-      \node(rs) at (3.5,4.5) {$\<rs\>$};
-      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
-      \node(r) at (5.25,4.5) {$\<r\>$};
-      \node(r4-s) at (0,3) {$\<r^4,s\>$};
-      \node(r2s) at (1.75,3) {$\<r^2s\>$};
-      \node(r2) at (3.5,3) {$\<r^2\>$};
-      \node(s) at (-1.75,1.5) {$\<s\>$};
-      \node(r4s) at (0,1.5) {$\<r^4s\>$};
-      \node(r4) at (1.75,1.5) {$\<r^4\>$};
-      \node(1) at (0,0) {$\<1\>$};
-      \draw[f] (1) to (s);
-      \draw[f] (1) to (r4s);
-      \draw[f] (1) to (r4);
-      \draw[f] (s) to (r4-s);
-      \draw[f] (r4s) to (r4-s);
-      \draw[f] (r4) to (r4-s);
-      \draw[f] (r4) to (r2s);
-      \draw[f] (r4) to (r2);
-      \draw[f] (r4-s) to (r2-s);
-      \draw[f] (r2s) to (r2-s);
-      \draw[f] (r2) to (r2-s);
-      \draw[f] (r2) to (r);
-      \draw[f] (r2) to (rs);
-      \draw[f] (r2-s) to (G);
-      \draw[f] (r) to (G);
-      \draw[f] (rs) to (G);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-\section{Conjugacy classes!}
-%%====================================================================
-
-
-\begin{frame}{The conjugacy class of a subgroup}
-  
-  \begin{block}{Proposition}
-    \Alert{Conjugation} is an \Balert{equivalence relation} on the set of
-    subgroups of $G$.
-  \end{block}
-  
-  \begin{exampleblock}{Proof} \Pause
-    We need to show that conjugacy is reflexive, symmetric, and
-    transitive. \Pause
-    
+  \begin{exampleblock}{Goals}
     \begin{itemize}
-    \item \textbf{Reflexive}: \Pause $eHe^{-1}=H$. \qquad
-      $\hfill\checkmark$ \smallskip\Pause
-      
-    \item \textbf{Symmetric}: \Pause Suppose $H$ is conjugate to $K$, 
-      by $aHa^{-1}=K$. \Pause Then $K$ is conjugate to $H$:
-      \[
-      a^{-1}Ka\Pause=a^{-1}(aHa^{-1})a\Pause=H. \tag*{$\checkmark$}
-      \] \vspace{-4mm}\Pause
-    \item \textbf{Transitive}: \Pause Suppose $aHa^{-1}=K$ and
-      $bKb^{-1}=L$. \Pause Then $H$ is conjugate to $L$:
-      \[
-      (ba)H(ba)^{-1}\Pause=b(aHa^{-1})b^{-1}\Pause=bKb^{-1}\Pause=L.
-      \tag*{$\checkmark$}
-      \] \vspace{-4mm}
+    \item Characterize \emph{when} a quotient exists. \Pause
+    \item Learn \emph{how} to formalize this algebraically (without Cayley
+      graphs or tables). \medskip\Pause
     \end{itemize}
   \end{exampleblock}
   
-  \Pause
+  First, let's interpret the ``\emph{\Balert{quotient process}}'' visually, in
+  terms of cosets.
+  
+  %% Quotient process of Q_8 by <-1> 
+  \[
+  \begin{tikzpicture}[scale=.65]
+    \begin{scope}[shift={(0,0)},scale=1.35]
+      %%
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \draw[cosetBlue, fill=cosetBlue] (45:1) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (135:1) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (-45:1) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (-135:1) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (45:2) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (135:2) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (-45:2) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue] (-135:2) circle (.35);
+      \draw[cosetBlue, fill=cosetBlue,rotate=45] (1,.35) rectangle (2,-.35);
+      \draw[cosetBlue, fill=cosetBlue,rotate=135] (1,.35) rectangle (2,-.35);
+      \draw[cosetBlue, fill=cosetBlue,rotate=-45] (1,.35) rectangle (2,-.35);
+      \draw[cosetBlue, fill=cosetBlue,rotate=-135] (1,.35) rectangle (2,-.35);
+      %%
+      \node (1) at (135:2) [v] {$1$};
+      \node (i) at (45:2) [v] {$i$};
+      \node (k) at (-45:2) [v] {$k$};
+      \node (j) at (-135:2) [v] {$j$};
+      \node (-1) at (135:1) [v] {$-1$};
+      \node (-i) at (45:1) [v] {$-i$};
+      \node (-k) at (-45:1) [v] {$-k$};
+      \node (-j) at (-135:1) [v] {$-j$};
+      %%
+      \path[r] (1) to (i);
+      \path[r] (i) to (-1);
+      \path[r] (-1) to (-i);
+      \path[r] (-i) to (1);
+      %%
+      \path[r] (-j) to (-k);
+      \path[r] (-k) to (j);
+      \path[r] (j) to (k);
+      \path[r] (k) to (-j);
+      %%
+      \path[b] (-k) to (-i);
+      \path[b] (-i) to (k);
+      \path[b] (k) to (i);
+      \path[b] (i) to (-k);
+      %% 
+      \path[b] (1) to (j);
+      \path[b] (j) to (-1);
+      \path[b] (-1) to (-j);
+      \path[b] (-j) to (1);
+      %%
+      \path[gg] (1) to (-1);
+      \path[gg] (j) to (-j);
+      \path[gg] (i) to (-i);
+      \path[gg] (k) to (-k);
+      %%
+      \node at (0,0) {\normalsize $Q_8$};
+      \node at (0,-1.9) {\small Cluster the};
+      \node at (0,-2.25) {\small left cosets of $N$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6,0)},scale=1.35]
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=6mm]
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node (e) at (135:1.5) [v] {$N$};
+      \node (h) at (45:1.5) [v] {$iN$};
+      \node (v) at (-135:1.5) [v] {$jN$};
+      \node (b) at (-45:1.5) [v] {$kN$};   
+      \draw [rr] (e) to (h);
+      \draw [rr] (v) to (b);
+      \draw [bb] (e) to (v);
+      \draw [bb] (h) to (b);
+      \node at (0,0) {\normalsize $Q_8/N$};
+      \node at (0,-1.9) {Collapse cosets};
+      \node at (0,-2.25) {into single nodes};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(10,-2.75)},scale=.75,box/.style={anchor=north}]
+      %%
+      \newcommand*{\m}{5}
+      \colorlet{color-e}{tGreen}
+      \colorlet{color-v}{tRed}
+      \colorlet{color-h}{tBlue}
+      \colorlet{color-vh}{tYellow}
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
+      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
+      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
+      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
+      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
+      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,4) rectangle ++(1,1);
+      \path[fill=color-e] (2,3) rectangle ++(1,1);
+      \path[fill=color-e] (3,2) rectangle ++(1,1);
+      \path[fill=color-e] (4,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-v] (1,3) rectangle ++(1,1);
+      \path[fill=color-v] (2,4) rectangle ++(1,1);
+      \path[fill=color-v] (3,1) rectangle ++(1,1);
+      \path[fill=color-v] (4,2) rectangle ++(1,1);
+      %%
+      \path[fill=color-h] (1,2) rectangle ++(1,1);
+      \path[fill=color-h] (2,1) rectangle ++(1,1);
+      \path[fill=color-h] (3,4) rectangle ++(1,1);
+      \path[fill=color-h] (4,3) rectangle ++(1,1);
+      %%
+      \path[fill=color-vh] (1,1) rectangle ++(1,1);
+      \path[fill=color-vh] (2,2) rectangle ++(1,1);
+      \path[fill=color-vh] (3,3) rectangle ++(1,1);
+      \path[fill=color-vh] (4,4) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,\m} {
+        \draw [very thin] (\i,1) -- (\i,\m); 
+        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
+        \draw [very thin] (1,\i) -- (\m,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,\m); 
+      %%
+      \node [box] at (0.4,4+.85) {$N$}; 
+      \node [box] at (0.4,3+.85) {$iN$};
+      \node [box] at (0.4,2+.85) {$jN$};
+      \node [box] at (0.4,1+.85) {$kN$};
+      \node [box] at (1.5,5.1+.85) {$N$}; 
+      \node [box] at (2.5,5.1+.85) {$iN$};
+      \node [box] at (3.5,5.1+.85) {$jN$};
+      \node [box] at (4.5,5.1+.85) {$kN$};
+      %%
+      \node [box] at (1.5,4+.85) {$N$}; 
+      \node [box] at (1.5,3+.85) {$iN$};
+      \node [box] at (1.5,2+.85) {$jN$};
+      \node [box] at (1.5,1+.85) {$kN$};
+      %%
+      \node [box] at (2.5,4+.85) {$iN$}; 
+      \node [box] at (2.5,3+.85) {$N$};
+      \node [box] at (2.5,2+.85) {$kN$};
+      \node [box] at (2.5,1+.85) {$jN$};
+      %%
+      \node [box] at (3.5,4+.85) {$jN$}; 
+      \node [box] at (3.5,3+.85) {$kN$};
+      \node [box] at (3.5,2+.85) {$N$};
+      \node [box] at (3.5,1+.85) {$iN$};
+      %%
+      \node [box] at (4.5,4+.85) {$kN$}; 
+      \node [box] at (4.5,3+.85) {$jN$};
+      \node [box] at (4.5,2+.85) {$iN$};
+      \node [box] at (4.5,1+.85) {$N$};
+      %%
+    \node at (2.5,0.25) {\small Elements of the quotient};
+    \node at (2.5,-.35) {\small are cosets of $N$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  Notice how taking a quotient generally \Balert{loses
+    information}. 
+    
+    (You are squashing cosets together: $iN$ and $-iN$ are the same node.)
+  
+\end{frame}
 
-  \begin{block}{Definition}
-    The set of all subgroups conjugate to $H$ is its
-    \Alert{conjugacy class}, denoted
+%%====================================================================
+
+\begin{frame}[t]{Quotients}
+
+  \vspace{-3mm}
+
+  %% Quotient of Z_6 by <2>
+  \[
+  \begin{tikzpicture}[scale=.6,auto]
+    \begin{scope}[shift={(0,0)}]
+      %%
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3mm]
+      %%
+      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,-.85) 
+      rectangle (3.8,.85);
+      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,1.7) 
+      rectangle (3.8,3.3);
+      \node (0) at (0,2.5) [v] {\mbox{\small $\,0\,$}};
+      \node (2) at (1.5,2.5) [v] {{\small $\,2\,$}};
+      \node (4) at (3,2.5) [v] {{\small $\,4\,$}};
+      \node (3) at (0,0) [v] {{\small $\,3\,$}};
+      \node (5) at (1.5,0) [v] {{\small $\,5\,$}};
+      \node (1) at (3,0) [v] {{\small $\,1\,$}};
+      \draw [r] (0) to (2);
+      \draw [r] (2) to (4);
+      \draw [r] (4) to [bend right] (0);
+      \draw [r] (3) to (5);
+      \draw [r] (5) to (1);
+      \draw [r] (1) to [bend left] (3);
+      \draw [bb] (0) to (3);
+      \draw [bb] (2) to (5);
+      \draw [bb] (4) to (1);
+      \node at (1.5,-1.3) {\small Cluster the};
+      \node at (1.5,-1.85) {\small left cosets of $H\leq \Z_6$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(7.5,0)}]
+      %%
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node (H) at (0,2.5) [v] {$H$};
+      \node (1H) at (0,0) [v] {$1\!+\!H$};
+      \draw [bb] (H) to (1H);
+      \node at (0,-1.3) {\small Collapse cosets};
+      \node at (0,-1.85) {\small into single nodes};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(11.5,-.9)},scale=.9,box/.style={anchor=south}]
+      %%
+      \tikzstyle{every node}=[font=\scriptsize]
+      \colorlet{color-1}{tRed}
+      \colorlet{color-0}{tBlue}
+      %%
+      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-0] (-.1,1) rectangle ++(1,1);
+      \path[fill=color-1] (1,3.1) rectangle ++(1,1);
+      \path[fill=color-0] (2,3.1) rectangle ++(1,1);
+      \path[fill=color-0] (1,2) rectangle ++(1,1);
+      \path[fill=color-0] (2,1) rectangle ++(1,1);
+      \path[fill=color-1] (1,1) rectangle ++(1,1);
+      \path[fill=color-1] (2,2) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,3} {
+        \draw [very thin] (\i,1) -- (\i,3); 
+        \draw [very thin] (\i,3+.1) -- (\i,3+1.1); 
+        \draw [very thin] (1,\i) -- (3,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,3+.1) rectangle (3,3+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,3); 
+      \node at (0.4,2.5) {$H$};
+      \node at (0.4,1.5) {$1\!+\!H$};
+      %%
+      \node at (1.5,3.6) {$H$};
+      \node at (2.5,3.6) {$1\!+\!H$};
+      %%
+      \node at (1.5,2.5) {$H$};
+      \node at (1.5,1.5) {$1\!+\!H$};
+      %%
+      \node at (2.5,2.5) {$1\!+\!H$};
+      \node at (2.5,1.5) {$H$};
+      %% 
+      \node at (1.5,-.6) {\small Elements of the quotient};
+      \node at (1.5,-1.1) {\small are cosets of $H$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  %%
+  %% Quotient of D_3 by <r>
+  \[
+  \begin{tikzpicture}[scale=.6,auto]
+    \begin{scope}[shift={(0,0)}]
+      %%
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3.5mm]
+      \tikzstyle{every node}=[font=\footnotesize]
+      %%
+      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,-.85) 
+      rectangle (3.8,.85);
+      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,1.7) 
+      rectangle (3.8,3.3);
+      \node (1) at (0,2.5) [v] {$1$};
+      \node (r) at (1.5,2.5) [v] {$r$};
+      \node (r2) at (3,2.5) [v] {$r^2$};
+      \node (f) at (0,0) [v] {$f$};
+      \node (r2f) at (1.5,0) [v] {$r^2\!f$};
+      \node (rf) at (3,0) [v] {$rf$};
+      \draw [r] (1) to (r);
+      \draw [r] (r) to (r2);
+      \draw [r] (r2) to [bend right] (1);
+      \draw [r] (f) to (r2f);
+      \draw [r] (r2f) to (rf);
+      \draw [r] (rf) to [bend left] (f);
+      \draw [bb] (1) to (f);
+      \draw [bb] (r) to (rf);
+      \draw [bb] (r2) to (r2f);
+      \node at (1.5,-1.3) {\small Cluster the};
+      \node at (1.5,-1.85) {\small left cosets of $N\leq D_3$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(7.5,0)}]
+      %%
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
+      \tikzstyle{every node}=[font=\normalsize]
+      %%
+      \node (H) at (0,2.5) [v] {$N$};
+      \node (1H) at (0,0) [v] {$fN$};
+      \draw [bb] (H) to (1H);
+      \node at (0,-1.3) {Collapse cosets};
+      \node at (0,-1.85) {into single nodes};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(11.5,-.9)},scale=.9,box/.style={anchor=south}]
+      %%
+      \tikzstyle{every node}=[font=\small]
+      \colorlet{color-1}{tRed}
+      \colorlet{color-0}{tBlue}
+      %%
+      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-0] (-.1,1) rectangle ++(1,1);
+      \path[fill=color-1] (1,3.1) rectangle ++(1,1);
+      \path[fill=color-0] (2,3.1) rectangle ++(1,1);
+      %%
+      \path[fill=color-0] (1,2) rectangle ++(1,1);
+      \path[fill=color-0] (2,1) rectangle ++(1,1);
+      \path[fill=color-1] (1,1) rectangle ++(1,1);
+      \path[fill=color-1] (2,2) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,3} {
+        \draw [very thin] (\i,1) -- (\i,3); 
+        \draw [very thin] (\i,3+.1) -- (\i,3+1.1); 
+        \draw [very thin] (1,\i) -- (3,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,3+.1) rectangle (3,3+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,3); 
+      \node at (0.4,2.5) {$N$};
+      \node at (0.4,1.5) {$fN$};
+      %%
+      \node at (1.5,3.6) {$N$};
+      \node at (2.5,3.6) {$fN$};
+      %%
+      \node at (1.5,2.5) {$N$};
+      \node at (1.5,1.5) {$fN$};
+      %%
+      \node at (2.5,2.5) {$fN$};
+      \node at (2.5,1.5) {$N$};
+      %% 
+      \node at (1.5,-.6) {\small Elements of the quotient};
+      \node at (1.5,-1.1) {\small are cosets of $N$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+  We say that $\Z_6/\<2\>\cong\Z_2$ and $D_3/\<r\>\cong C_2$.
+  
+\end{frame}
+
+%%====================================================================  
+
+\begin{frame}[t]{Quotients} 
+
+  The quotient process succeeds for the group
+  $N=\<(12)(34),(13)(24)\>$ of $A_4$.
+
+  \vspace{-2mm}
+  
+  %% Quotient of A_4
+  \[
+  \begin{tikzpicture}[scale=.65]
+    %%
+    \tikzstyle{every node}=[font=\small]
+    %%      
+    \begin{scope}[shift={(0,0)},scale=.75,bend angle=55]
+      %%
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
+        minimum size=3.25mm]
+      %%
+      \draw[cosetBlue, fill=cosetBlue] (.75,.75) circle (15mm);
+      \draw[cosetBlue, fill=cosetBlue] (4.25,.75) circle (15mm);
+      \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
+      \node (e) at (1.75,4.5) [v] {$e$};
+      \node (x) at (3.25,4.5) [v] {$x$};
+      \node (z) at (1.75,3) [v] {$z$};
+      \node (y) at (3.25,3) [v] {$y$};
+      \node (a) at (3.5,1.5) [v] {$a$};
+      \node (c) at (5,1.5) [v] {$c$};
+      \node (d) at (3.5,0) [v] {$d$};
+      \node (b) at (5,0) [v] {$b$};
+      \node (dd) at (1.5,0) [v] {$d^2$};
+      \node (bb) at (1.5,1.5) [v] {$b^2$};
+      \node (aa) at (0,1.5) [v] {$a^2$};
+      \node (cc) at (0,0) [v] {$c^2$};
+      \draw [r] (x) to [bend left] (b);
+      \draw [r] (e) to [bend left=60] (a);
+      \draw [r] (z) to [bend left] (c);
+      \draw [r] (y) to [bend left=60] (d);
+      \draw [r] (a) to [bend left] (aa);
+      \draw [r] (b) to [bend left] (cc);
+      \draw [r] (c) to [bend left=65] (dd);
+      \draw [r] (d) to [bend left=40] (bb);
+      \draw [r] (aa) to [bend left] (e);
+      \draw [r] (bb) to [bend left=50] (y);
+      \draw [r] (cc) to [bend left=25] (x);
+      \draw [r] (dd) to [bend left] (z);
+      \node at (1.75,4.5) [v] {$e$};
+      \draw [bb] (e) to (x);
+      \draw [bb] (z) to (y);
+      \draw [gg] (e) to (z);
+      \draw [gg] (x) to (y);
+      \draw [bb] (a) to (c);
+      \draw [bb] (d) to (b);
+      \draw [gg] (a) to (d);
+      \draw [gg] (c) to (b);
+      \draw [bb] (aa) to (bb);
+      \draw [bb] (cc) to (dd);
+      \draw [gg] (aa) to (cc);
+      \draw [gg] (bb) to (dd);
+      \node at (2.5,-2) {Cluster the left};
+      \node at (2.5,-2.6) {cosets of $H\leq A_4$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6,-.5)},scale=.75]
+      \node (aaH) at (.75,.75) [v] {$a^2\!H$};
+      \node (aH) at (4.25,.75) [v] {$\;aH\;$};
+      \node (H) at (2.5,3.75) [v] {$\;\;H\;\;$};
+      \draw [r] (H) to [bend left=25] (aH);
+      \draw [r] (aH) to [bend left=25] (aaH);
+      \draw [r] (aaH) to [bend left=25] (H);
+      \node at (2.5,-1.35) {Collapse cosets};
+      \node at (2.5,-1.95) {into single nodes};
+    \end{scope} 
+    %%
+    \begin{scope}[shift={(12,-1.15)},scale=.85,box/.style={anchor=north}]
+      %%
+      \newcommand*{\m}{4}
+      \colorlet{color-0}{tYellow}
+      \colorlet{color-1}{tRed}
+      \colorlet{color-2}{tBlue}
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \path[fill=color-0] (-.1,3) rectangle ++(1,1);
+      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-2] (-.1,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-0] (1,4.1) rectangle ++(1,1);
+      \path[fill=color-1] (2,4.1) rectangle ++(1,1);
+      \path[fill=color-2] (3,4.1) rectangle ++(1,1);
+      %%
+      \path[fill=color-0] (1,3) rectangle ++(1,1);
+      \path[fill=color-1] (2,3) rectangle ++(1,1);
+      \path[fill=color-2] (3,3) rectangle ++(1,1);
+      %%
+      \path[fill=color-1] (1,2) rectangle ++(1,1);
+      \path[fill=color-2] (2,2) rectangle ++(1,1);      
+      \path[fill=color-0] (3,2) rectangle ++(1,1);
+      %%
+      \path[fill=color-2] (1,1) rectangle ++(1,1);
+      \path[fill=color-0] (2,1) rectangle ++(1,1);      
+      \path[fill=color-1] (3,1) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,\m} {
+        \draw [very thin] (\i,1) -- (\i,\m); 
+        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
+        \draw [very thin] (1,\i) -- (\m,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,\m); 
+      %%
+      \node [box] at (0.4,3+.85) {$H$};
+      \node [box] at (0.4,2+.85) {$aH$};
+      \node [box] at (0.4,1+.85) {$a^2H$};
+      \node [box] at (1.5,4.1+.85) {$H$}; 
+      \node [box] at (2.5,4.1+.85) {$aH$};
+      \node [box] at (3.5,4.1+.85) {$a^2H$};
+      %%
+      \node [box] at (1.5,3+.85) {$H$};
+      \node [box] at (1.5,2+.85) {$aH$};
+      \node [box] at (1.5,1+.85) {$a^2H$};
+      %%
+      \node [box] at (2.5,3+.85) {$aH$}; 
+      \node [box] at (2.5,2+.85) {$a^2H$};
+      \node [box] at (2.5,1+.85) {$H$};
+      %%
+      \node [box] at (3.5,3+.85) {$a^2H$};
+      \node [box] at (3.5,2+.85) {$H$};
+      \node [box] at (3.5,1+.85) {$aH$};
+      %%
+      \node at (2,-.5) {\small Elements of the quotient};
+      \node at (2,-1.1) {\small are cosets of $H$};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  We denote the resulting group by $G/N=\big\{N,\;aN,\;a^2N\big\}\cong
+  C_3$. \Pause Since it's a group, there is a \Balert{binary operation
+    on the set of cosets of $N$}. \medskip\Pause
+  
+  \begin{exampleblock}{Questions}
+    \begin{itemize}
+    \item Do you see \emph{how} to define this binary operation? \Pause
+    \item Do you see \emph{why} this works for this particular $N\leq G$? \Pause
+    \item Can you think of examples where this ``quotient process''
+      would fail, and why? \Pause
+    \end{itemize}
+  \end{exampleblock}
+  
+\end{frame}
+
+%%====================================================================  
+
+\begin{frame}[t]{Quotients}
+
+  The quotient process fails for the group $H=\<(123)\>$ of $A_4$.
+  %%
+  %% Failure of the quotient process for H=<(123> in A_4
+  \[
+  \begin{tikzpicture}[scale=.50,auto,bend angle=55]
+    %%
+    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3.5mm]
+    %%
+    \begin{scope}[shift={(-9.5,0)},scale=1]
+      %%
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \draw[cosetBlue, fill=cosetBlue] (0,0) circle (1.4);
+      \node (l1) at (0,2.25) [v] {$x$};
+      \node (l2) at (-.866,3.75) [v] {$b$};
+      \node (l3) at (.866,3.75) [v] {$c^2$};
+      \node (t1) at (0,1) [v] {$e$};
+      \node (t2) at (-.866,-.5) [v] {$a^2$};
+      \node (t3) at (.866,-.5) [v] {$a$};
+      \node (r1) at (3.68,-1.125) [v] {$d^2$};
+      \node (r2) at (2.814,-2.5) [v] {$z$};
+      \node (r3) at (1.948,-1.125) [v] {$c$};
+      \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+      \node (m1) at (-3.68,-1.125) [v] {$d$};
+      \node (m3) at (-2.814,-2.5) [v] {$y$};
+      \draw [bb] (l2) to (m1);
+      \draw [bb] (m2) to (t2);
+      \draw [bb] (r2) to (m3);
+      \draw [bb] (l1) to (t1);
+      \draw [bb] (l3) to (r1);
+      \draw [bb] (r3) to (t3);
+      \draw [r] (l1) to (l2);
+      \draw [r] (l2) to (l3);
+      \draw [r] (l3) to (l1);
+      \draw [r] (t1) to (t3);
+      \draw [r] (t2) to (t1);
+      \draw [r] (t3) to (t2);
+      \draw [r] (r1) to (r2);
+      \draw [r] (r2) to (r3);
+      \draw [r] (r3) to (r1);
+      \draw [r] (m1) to (m2);
+      \draw [r] (m2) to (m3);
+      \draw [r] (m3) to (m1);
+      \node at (0,-3.75) {Here is $H = \<a\>$.};
+    \end{scope} \pause
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      %%
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \draw[cosetBlue, fill=cosetBlue] (0,0) circle (1.4);
+      \draw[cosetRed, fill=cosetRed] (0,3.25) circle (1.4);
+      \draw[cosetRed, fill=cosetRed] (2.814,-1.625) circle (1.4);
+      \draw[cosetRed, fill=cosetRed] (-2.814,-1.625) circle (1.4);
+      \node (l1) at (0,2.25) [v] {$x$};
+      \node (l2) at (-.866,3.75) [v] {$b$};
+      \node (l3) at (.866,3.75) [v] {$c^2$};
+      \node (t1) at (0,1) [v] {$e$};
+      \node (t2) at (-.866,-.5) [v] {$a^2$};
+      \node (t3) at (.866,-.5) [v] {$a$};
+      \node (r1) at (3.68,-1.125) [v] {$d^2$};
+      \node (r2) at (2.814,-2.5) [v] {$z$};
+      \node (r3) at (1.948,-1.125) [v] {$c$};
+      \node (m2) at (-1.948,-1.125) [v] {$b^2$};
+      \node (m1) at (-3.68,-1.125) [v] {$d$};
+      \node (m3) at (-2.814,-2.5) [v] {$y$};
+      \draw [bb] (l2) to (m1);
+      \draw [bb] (m2) to (t2);
+      \draw [bb] (r2) to (m3);
+      \draw [bb] (l1) to (t1);
+      \draw [bb] (l3) to (r1);
+      \draw [bb] (r3) to (t3);
+      \draw [r] (l1) to (l2);
+      \draw [r] (l2) to (l3);
+      \draw [r] (l3) to (l1);
+      \draw [r] (t1) to (t3);
+      \draw [r] (t2) to (t1);
+      \draw [r] (t3) to (t2);
+      \draw [r] (r1) to (r2);
+      \draw [r] (r2) to (r3);
+      \draw [r] (r3) to (r1);
+      \draw [r] (m1) to (m2);
+      \draw [r] (m2) to (m3);
+      \draw [r] (m3) to (m1);
+      \node at (0,-3.75) {Cluster the left cosets};
+      \node at (0,-4.4) {of $H=\<(123)\>$.};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6,-1)},scale=1.3]
+      %%
+      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=5mm]
+      %%
+      \node (l) at (0,0) [v] {$yH$};
+      \node (r) at (2.8,0) [v] {$zH$};
+      \node (m) at (1.4,.87) [v] {$H$};
+      \node (t) at (1.4,2.4) [v] {$xH$};
+      \draw [bb] (l) to (r);
+      \draw [bb] (l) to (m);
+      \draw [bb] (l) to (t);
+      \draw [bb] (r) to (m);
+      \draw [bb] (r) to (t);
+      \draw [bb] (t) to (m);
+      \node at (1.4,-2) {\small Collapse cosets};
+      \node at (1.4,-2.5) {\small into single nodes};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  We can still write $G/H:=\big\{H,\;xH,\;yH,\;zH\big\}$ for the set
+  of (left) cosets of $H$ in $G$. \bigskip\Pause
+
+  But now what in the hell are the \Balert{arrows}? \bigskip\pause
+
+  Apparently all of those arrows are \Balert{$x$} arrows, but that doesn't make sense; \pause this is no longer a legit Cayley graph!
+  
+\end{frame}
+
+%%====================================================================  
+
+\begin{frame}[t]{When and why the quotient process works}
+
+  To get some intuition, let's consider collapsing the left cosets of
+  a subgroup $H\leq G$. \medskip\Pause
+
+  In the following: \Balert{\emph{the right cosets $Hg$ are the ``arrowtips''}}.
+  %%
+  %% Collapsing cosets: failure and success
+  \[
+  \begin{tikzpicture}[scale=.85]
+    %%
+    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
+    %%
+    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
+      \draw (0,0)[fill=cosetRed] circle (.5); 
+      \draw (2,0)[fill=cosetRed] circle (.5);
+      \draw[fill=cosetBlue] (1,1.8) circle (.5);
+      \node at (-.3,.75)  {$aH$};
+      \node at (2.3,.75)  {$bH$};
+      \node at (.2,1.9) {$H$};
+      %%
+      \node at (.7,1.8) {\footnotesize $e$};
+      \node at (1.3,1.8) {\footnotesize $h$};
+      \node at (-.3,.1) {\footnotesize $g$};
+      \node at (.2,-.1) {\footnotesize $a$};
+      \node at (1.75,-.1) {\footnotesize $b$};
+      \node at (2.2,0) {\footnotesize $hg$};
+      \node (a1) at (.75,1.6) {\tiny $\bullet$};
+      \node (b1) at (.9,1.5) {\tiny $\bullet$};
+      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
+      \node (d1) at (1.25,1.6) {\tiny $\bullet$};
+      \node (a2) at (-.1,.2) {\tiny $\bullet$};
+      \node (b2) at (.2,.1) {\tiny $\bullet$};
+      \node (c3) at (1.8,.1) {\tiny $\bullet$};
+      \node (d3) at (2.1,.2) {\tiny $\bullet$};
+      \draw[b] (a1) to [bend right=10] (a2);
+      \draw[b] (b1) to [bend right=5] (b2);
+      \draw[b] (c1) to [bend left=5] (c3);
+      \draw[b] (d1) to [bend left=10] (d3);
+      %%
+      \node at (1,-.8) {\small Elements in the right coset $Hg$};
+      \node at (1,-1.2) {\small are in multiple left cosets};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4.5,0)}]
+      \node at (-1.1,1) {\small collapse};
+      \draw [very thick, -stealth] (-1.8,.75)--(-.2,.75);
+      \node at (-1.1,.5) {\small cosets};
+      \node (g1H) at (.6,1.5) [v] {\small $H$};
+      \node (g2H) at (0,0) [v] {\small $aH$};
+      \node (g3H) at (1.4,0) [v] {\small $bH$};
+      \draw[b] (g1H) to [bend right=5] (g2H);
+      \draw[b] (g1H) to [bend left=5] (g3H);
+      \node at (.8,-.8){\small not a valid};
+      \node at (.8,-1.2){\small Cayley graph};
+      \node at (0,-1.2) {};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(7.5,0)},shorten >= -3pt, shorten <= -3pt]
+      \draw (1,0)[fill=cosetBlue] circle (.5);
+      \draw[fill=cosetBlue] (1,1.8) circle (.5);
+      \node at (0,1.9) {$H$};
+      \node at (-.15,-.2) {$gH\!=\!Hg$};
+      \node at (.7,1.8) {\footnotesize $e$};
+      \node at (1.3,1.8) {\footnotesize $h$};
+      \node at (.75,-.15) {\footnotesize $g$};
+      \node at (1.25,-.15) {\footnotesize $hg$};
+      \node (a1) at (.65,1.6) {\tiny $\bullet$};
+      \node (b1) at (.9,1.5) {\tiny $\bullet$};
+      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
+      \node (d1) at (1.35,1.6) {\tiny $\bullet$};
+      \node (a2) at (.65,0) {\tiny $\bullet$};
+      \node (b2) at (.9,.2) {\tiny $\bullet$};
+      \node (c2) at (1.1,.2) {\tiny $\bullet$};
+      \node (d2) at (1.35,0) {\tiny $\bullet$};
+      \draw[b] (a1) to [bend right=5] (a2);
+      \draw[b] (b1) to [bend right=5] (b2);
+      \draw[b] (c1) to [bend left=5] (c2);
+      \draw[b] (d1) to [bend left=5] (d2);
+      \node at (1,-.8) {\small Elements in $Hg$};
+      \node at (1,-1.2) {\small all stay in $gH$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(11.5,0)},scale=.8]
+      \node at (-1.7,1) {\small collapse};
+      \draw [very thick, -stealth] (-2.5,.75)--(-.7,.75);
+      \node at (-1.7,.5) {\small cosets};
+      \node (g1H) at (0,2) [v] {\small $H$};
+      \node (g2H) at (0,0) [v] {\small $gH$};
+      \draw[b] (g1H) to (g2H);
+      \node at (0,-1){\small valid Cayley};
+      \node at (0,-1.4){\small graph};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  \Pause
+  \begin{alertblock}{Key idea}
+    For this process to work, the left cosets (nodes) and right cosets (arrows) must be \Balert{compatible}. \pause So if $H$ is a \Balert{normal subgroup} of $G$, then this process will work.
+  \end{alertblock} \pause
+  
+  \medskip\Pause
+  
+  If $H$ is not normal, then following the blue arrows from $H$ is
+  \Balert{ambiguous}.
+
+  \medskip\Pause
+  
+  In other words, it \Balert{depends on where we start within $H$}.
+
+  \medskip\Pause
+  
+  We still need to formalize this and prove it algebraically. 
+  
+  \end{frame}
+
+%%====================================================================
+
+\begin{frame}[t]{What does it mean to ``multiply'' two cosets?} 
+
+  \begin{block}{Quotient theorem}\label{thm3:quotient}
+    Consider the set of (left) cosets $G/H = \{eH, aH, bH, \ldots \}$.\pause
+
+    If $H\normaleq G$, then $G/H$ forms a group, with
+    binary operation 
     \[
-    \cl_G(H)=\big\{gHg^{-1}\mid g\in G\big\}.
+    aH\cdot bH:= abH. 
     \]
   \end{block}
 
+  \medskip\Pause
+  
+  It is clear that $G/H$ is closed under this operation. \medskip\Pause
+
+  We have to show that this operation is \Alert{well-defined}. 
+
+  \medskip\Pause
+
+  By that, we mean that it \Balert{\emph{does not depend on our choice of
+      coset representative}}.
+  
+  %% Collapsing cosets: failure and success
+  \[
+  \begin{tikzpicture}[scale=.85]
+    %%
+    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm] 
+    %%
+    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
+      \draw[fill=cosetRed] (0,0) circle (.5); 
+      \draw[fill=cosetRed] (2,0) circle (.5);
+      \draw[fill=cosetBlue] (1,1.8) circle (.5);
+      \node at (-.3,.75)  {$aH$};
+      \node at (2.3,.75)  {$bH$};
+      \node at (.2,1.9) {$H$};
+      %%
+      \node at (.7,1.8) {\footnotesize $e$};
+      \node at (1.3,1.8) {\footnotesize $h$};
+      \node at (-.3,.1) {\footnotesize $g$};
+      \node at (.2,-.1) {\footnotesize $a$};
+      \node at (1.75,-.1) {\footnotesize $b$};
+      \node at (2.2,0) {\footnotesize $hg$};
+      \node (a1) at (.75,1.6) {\tiny $\bullet$};
+      \node (b1) at (.9,1.5) {\tiny $\bullet$};
+      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
+      \node (d1) at (1.25,1.6) {\tiny $\bullet$};
+      \node (a2) at (-.1,.2) {\tiny $\bullet$};
+      \node (b2) at (.2,.1) {\tiny $\bullet$};
+      \node (c3) at (1.8,.1) {\tiny $\bullet$};
+      \node (d3) at (2.1,.2) {\tiny $\bullet$};
+      \draw[b] (a1) to [bend right=10] (a2);
+      \draw[b] (b1) to [bend right=5] (b2);
+      \draw[b] (c1) to [bend left=5] (c3);
+      \draw[b] (d1) to [bend left=10] (d3);
+      \node at (1,-.8) {\footnotesize our destination depends};
+      \node at (1,-1.2) {\footnotesize on where in $H$ we start};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4.5,0)}]
+      \node at (-1.1,1) {\small collapse};
+      \draw [very thick, -stealth] (-1.8,.75)--(-.2,.75);
+      \node at (-1.1,.5) {\small cosets};
+      \node (g1H) at (.6,1.5) [v] {\small $H$};
+      \node (g2H) at (0,0) [v] {\small $aH$};
+      \node (g3H) at (1.4,0) [v] {\small $bH$};
+      \draw[b] (g1H) to [bend right=5] (g2H);
+      \draw[b] (g1H) to [bend left=5] (g3H);
+      \node at (.8,-.8){\footnotesize the quotient process};
+      \node at (.8,-1.2){\footnotesize does not yield a group};
+      \node at (0,-1.2) {};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(7.5,0)},shorten >= -3pt, shorten <= -3pt]
+      \draw[fill=cosetBlue] (1,0) circle (.5);
+      \draw[fill=cosetBlue] (1,1.8) circle (.5);
+      \node at (0,1.9) {$H$};
+      \node at (-.15,-.2) {$gH\!=\!Hg$};
+      \node at (.7,1.8) {\footnotesize $e$};
+      \node at (1.3,1.8) {\footnotesize $h$};
+      \node at (.75,-.15) {\footnotesize $g$};
+      \node at (1.25,-.15) {\footnotesize $hg$};
+      \node (a1) at (.65,1.6) {\tiny $\bullet$};
+      \node (b1) at (.9,1.5) {\tiny $\bullet$};
+      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
+      \node (d1) at (1.35,1.6) {\tiny $\bullet$};
+      \node (a2) at (.65,0) {\tiny $\bullet$};
+      \node (b2) at (.9,.2) {\tiny $\bullet$};
+      \node (c2) at (1.1,.2) {\tiny $\bullet$};
+      \node (d2) at (1.35,0) {\tiny $\bullet$};
+      \draw[b] (a1) to [bend right=5] (a2);
+      \draw[b] (b1) to [bend right=5] (b2);
+      \draw[b] (c1) to [bend left=5] (c2);
+      \draw[b] (d1) to [bend left=5] (d2);
+      \node at (1,-.8) {\footnotesize destination doesn't depend};
+      \node at (1,-1.2) {\footnotesize on where we start in $H$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(11.5,0)},scale=.8]
+      \node at (-1.7,1) {\small collapse};
+      \draw [very thick, -stealth] (-2.5,.75)--(-.7,.75);
+      \node at (-1.7,.5) {\small cosets};
+      \node (g1H) at (0,2) [v] {\small $H$};
+      \node (g2H) at (0,0) [v] {\small $gH$};
+      \draw[b] (g1H) to (g2H);
+      \node at (0,-1){\footnotesize quotient process};
+      \node at (0,-1.4){\footnotesize succeeds};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+    
 \end{frame}
 
 %%====================================================================
 
-\begin{frame}{The subgroup lattice of $A_5$} \vspace{-8mm}
+\begin{frame}[t]{A familiar example}
+
+  Consider the subgroup $H=\<12\>=12\Z$ of $G=\Z$. \medskip
+
+  The cosets of $H$ are the \Balert{congruence classes} modulo $12$. \medskip
+
+  Since this group is additive, the condition $aH\cdot bH$ becomes
+  $(a+H)+(b+H)=a+b+H$: \smallskip
   
+  \begin{quote}
+    ``(the coset containing $a$) $+$ (the coset containing $b$)
+    $=$ the coset containing $a+b$.''
+  \end{quote}
 
-  %% Subgroup lattice of A_5
+  \vspace{-2mm}
+  
+  %% Quotient of Z by 12Z yielding Z/12Z (spiral)
   \[
-  %%
-  \hspace*{7mm}
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.5,auto,xscale=1.1]
+  \begin{tikzpicture}[box/.style={anchor=south}]
     %%
-    \newcommand\Hh{16} % height of A_5
-    \newcommand\Hg{9.5} % height of A_4
-    \newcommand\Hf{8} % height of D_10
-    \newcommand\He{7} % height of S_3
-    \newcommand\Hd{5.6} % height of C_5
-    \newcommand\Hc{5} % height of V_4
-    \newcommand\Hb{3} % height of C_3
-    \newcommand\Ha{2} % height of C_2  
-    \tikzstyle{every node}=[font=\footnotesize]
+    \tikzstyle{r} = [draw,very thick,eRed,-stealth,bend right=8]
+    \tikzstyle{every node}=[font=\scriptsize]
     %%
-    \node (A5) at (0,\Hh) {\small $A_5$};
-    \draw[dashed,midgray] (0,\Hh) circle [x radius=.4cm, y radius=.3cm];
+    \draw[cosetBlue, fill=cosetBlue] (0:2.6) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue] (0:1.4) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=0] (1.4,-.28) rectangle (2.6,.28);
     %%
-    \node (12-1)at(-2,\Hg) {$A_4$};
-    \node (12-2)at(-1.5,\Hg){$A_4$};
-    \node (12-3)at(-1,\Hg) {$A_4$};
-    \node (12-4)at(-.5,\Hg) {$A_4$};
-    \node (12-5)at(0,\Hg) {$A_4$};
-    \draw[dashed,midgray] (-1,\Hg) circle [x radius=1.5cm, y radius=.5cm];
+    \draw[cosetBlue, fill=cosetBlue,rotate=30] (0:2.65) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=30] (0:1.45) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=30] (1.45,-.28) rectangle (2.65,.28);
     %%
-    \node (10-1)at(6,\Hf) {$D_5$}; \node (10-2)at(6.5,\Hf) {$D_5$};
-    \node (10-3)at(7,\Hf) {$D_5$}; \node (10-4)at(7.5,\Hf) {$D_5$};
-    \node (10-5)at(8,\Hf) {$D_5$}; \node (10-6)at(8.5,\Hf) {$D_5$};
-    \draw[dashed,midgray] (7.25,\Hf) circle [x radius=1.7cm, y radius=.55cm];
+    \draw[cosetBlue, fill=cosetBlue,rotate=60] (0:2.7) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=60] (0:1.5) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=60] (1.5,-.28) rectangle (2.7,.28);
     %%
-    \node (6-1)at(-10.5,\He){$S_3$}; \node (6-2)at(-10,\He){$S_3$};
-    \node (6-3)at(-9.5,\He){$S_3$}; \node (6-4)at(-9,\He) {$S_3$};
-    \node (6-5)at(-8.5,\He){$S_3$}; \node (6-6)at(-8,\He) {$S_3$};
-    \node (6-7)at(-7.5,\He) {$S_3$}; \node (6-8)at(-7,\He) {$S_3$};
-    \node (6-9)at(-6.5,\He) {$S_3$}; \node (6-10)at(-6,\He) {$S_3$};
-    \draw[dashed,midgray] (-8.25,\He) circle [x radius=2.7cm, y radius=.5cm];
+    \draw[cosetBlue, fill=cosetBlue,rotate=90] (0:2.75) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=90] (0:1.55) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=90] (1.55,-.28) rectangle(2.75,.28);
     %%
-    \node (5-1)at(6,\Hd) {$C_5$}; \node (5-2)at(6.5,\Hd) {$C_5$};
-    \node (5-3)at(7,\Hd) {$C_5$}; \node (5-4)at(7.5,\Hd) {$C_5$};
-    \node (5-5)at(8,\Hd) {$C_5$}; \node (5-6)at(8.5,\Hd) {$C_5$};
-    \draw[dashed,midgray] (7.25,\Hd) circle [x radius=1.7cm, y radius=.55cm];
+    \draw[cosetBlue, fill=cosetBlue,rotate=120] (0:2.8) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=120] (0:1.6) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=120] (1.6,-.28) rectangle(2.8,.28);
     %%
-    \node (4-1)at(-2,\Hc) {$V_4$};
-    \node (4-2)at(-1.5,\Hc) {$V_4$};
-    \node (4-3)at(-1,\Hc) {$V_4$};
-    \node (4-4)at(-.5,\Hc) {$V_4$};
-    \node (4-5)at(0,\Hc) {$V_4$};
-    \draw[dashed,midgray] (-1,\Hc) circle [x radius=1.5cm, y radius=.5cm];
     %%
-    \node (3-1)at(-10.5,\Hb) {$C_3$}; \node (3-2)at(-10,\Hb){$C_3$};
-    \node (3-3)at(-9.5,\Hb) {$C_3$}; \node (3-4)at(-9,\Hb) {$C_3$};
-    \node (3-5)at(-8.5,\Hb) {$C_3$}; \node (3-6)at(-8,\Hb) {$C_3$};
-    \node (3-7)at(-7.5,\Hb) {$C_3$}; \node (3-8)at(-7,\Hb) {$C_3$};
-    \node (3-9)at(-6.5,\Hb) {$C_3$}; \node (3-10)at(-6,\Hb) {$C_3$};
-    \draw[dashed,midgray] (-8.25,\Hb) circle [x radius=2.7cm, y radius=.5cm];
-    %%  
-    \node (2-1)at(-3.8,\Ha) {$C_2$};
-    \node (2-2)at(-3.4,2) {$C_2$};
-    \node (2-3)at(-3,\Ha) {$C_2$};
-    \node (2-4)at(-2.6,\Ha){$C_2$};
-    \node (2-5)at(-2.2,\Ha) {$C_2$};
-    \node (2-6)at(-1.8,\Ha){$C_2$};
-    \node (2-7)at(-1.4,\Ha) {$C_2$};
-    \node (2-8)at(-1,\Ha) {$C_2$};
-    \node (2-9)at(-.6,\Ha) {$C_2$};
-    \node (2-10)at(-.2,\Ha) {$C_2$};
-    \node (2-11)at(.2,\Ha) {$C_2$};
-    \node (2-12)at(.6,\Ha){$C_2$};
-    \node (2-13)at(1,\Ha) {$C_2$};
-    \node (2-14)at(1.4,\Ha) {$C_2$};
-    \node (2-15)at(1.8,\Ha) {$C_2$};
-    \draw[dashed,midgray] (-.95,\Ha) circle [x radius=3.25cm, y radius=.5cm];
-    %%  
-    \node (e)at(0,-.5) {\small $\<e\>$};
-    \draw[dashed,midgray] (0,-.5) circle [x radius=.4cm, y radius=.3cm];
+    \draw[cosetBlue, fill=cosetBlue,rotate=150] (0:2.85) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=150] (0:1.65) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=150] (1.65,-.28) rectangle(2.85,.28);
     %%
-    \draw[f] (2-1) to (e); \draw[f] (2-2) to (e); \draw[f] (2-3) to (e);
-    \draw[f] (2-4) to (e); \draw[f] (2-5) to (e); \draw[f] (2-6) to (e);
-    \draw[f] (2-7) to (e); \draw[f] (2-8) to (e); \draw[f] (2-9) to (e);
-    \draw[f] (2-10) to (e); \draw[f] (2-11) to (e); \draw[f] (2-12) to (e);
-    \draw[f] (2-13) to (e); \draw[f] (2-14) to (e); \draw[f] (2-15) to (e);
+    \draw[cosetBlue, fill=cosetBlue,rotate=180] (0:2.9) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=180] (0:1.7) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=180] (1.7,-.28) rectangle (2.9,.28);
     %%
-    \draw[f] (3-1) -- (e) node[midway,left,midgray]{\footnotesize $3\;\;\;\;\;\;\;$};
-    \draw[f] (3-2) to (e); \draw[f] (3-3) to (e);
-    \draw[f] (3-4) to (e); \draw[f] (3-5) to (e); \draw[f] (3-6) to (e);
-    \draw[f] (3-7) to (e); \draw[f] (3-8) to (e); \draw[f] (3-9) to (e);
-    \draw[f] (3-10) to (e); 
+    \draw[cosetBlue, fill=cosetBlue,rotate=210] (0:2.95) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=210] (0:1.75) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=210] (1.75,-.28) rectangle(2.95,.28);
     %%
-    \draw[f] (5-1) -- (e); \draw[f] (5-2) to (e); \draw[f] (5-3) to (e);
-    \draw[f] (5-4) to (e); \draw[f] (5-5) to (e);
-    \draw[f] (5-6) -- (e) node[midway,right,midgray]{\footnotesize $\;\;\;5$};
+    \draw[cosetBlue, fill=cosetBlue,rotate=240] (0:2.4) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=240] (0:1.2) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=240] (1.2,-.28) rectangle (2.4,.28);
     %%
-    \draw[f] (5-1) -- (10-1); \draw[f] (5-2) to (10-2);
-    \draw[f] (5-3) to (10-3);
-    \draw[f] (5-4) to (10-4); \draw[f] (5-5) to (10-5);
-    \draw[f] (5-6) -- (10-6) node[midway,right,midgray]{\footnotesize $2$};
+    \draw[cosetBlue, fill=cosetBlue,rotate=270] (0:2.45) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=270] (0:1.25) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=270] (1.25,-.28) rectangle(2.45,.28);
     %%
-    \draw[f] (6-1) -- (3-1) node[midway,left,midgray]{\footnotesize $2\;$};
-    \draw[f] (6-2) to (3-2); \draw[f] (6-3) to (3-3);
-    \draw[f] (6-4) to (3-4); \draw[f] (6-5) to (3-5); \draw[f] (6-6) to (3-6);
-    \draw[f] (6-7) to (3-7); \draw[f] (6-8) to (3-8); \draw[f] (6-9) to (3-9);
-    \draw[f] (6-10) to (3-10);
+    \draw[cosetBlue, fill=cosetBlue,rotate=300] (0:2.5) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=300] (0:1.3) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=300] (1.3,-.28) rectangle (2.5,.28);
     %%
-    \draw[f] (A5) to (12-1); \draw[f] (A5) to (12-2);
-    \draw[f] (A5) to (12-3); \draw[f] (A5) to (12-4);
-    \draw[f] (A5) -- (12-5) node[midway,right,midgray]{\footnotesize $5$};
-    \draw[f] (A5) to (10-1); \draw[f] (A5) to (10-2); \draw[f] (A5) to (10-3);
-    \draw[f] (A5) to (10-4); \draw[f] (A5) to (10-5);
-    \draw[f] (A5) -- (10-6) node[midway,right,midgray]{\footnotesize $\;\;6$};
-    \draw[f] (A5) -- (6-1) node[midway,left,midgray]{\footnotesize $10\;$};
-    \draw[f] (A5) to (6-2); \draw[f] (A5) to (6-3);
-    \draw[f] (A5) to (6-4); \draw[f] (A5) to (6-5); \draw[f] (A5) to (6-6);
-    \draw[f] (A5) to (6-7); \draw[f] (A5) to (6-8); \draw[f] (A5) to (6-9);
-    \draw[f] (A5) to (6-10); 
+    \draw[cosetBlue, fill=cosetBlue,rotate=330] (0:2.55) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=330] (0:1.35) circle (.28);
+    \draw[cosetBlue, fill=cosetBlue,rotate=330] (1.35,-.28) rectangle(2.55,.28);
     %%
-    \draw[f] (2-1) -- (10-2) node[pos=.65,left,midgray]{\footnotesize $5\;\;$};
-    \draw[f] (2-1) -- (10-6);
-    \draw[f] (2-2) -- (10-3); \draw[f] (2-2) -- (10-5);
-    \draw[f] (2-3) -- (10-1); \draw[f] (2-3) -- (10-4);
-    \draw[f] (2-4) -- (10-2); \draw[f] (2-4) -- (10-5);
-    \draw[f] (2-5) -- (10-4); \draw[f] (2-5) -- (10-6);
-    \draw[f] (2-6) -- (10-1); \draw[f] (2-6) -- (10-3);
-    \draw[f] (2-7) -- (10-4); \draw[f] (2-7) -- (10-5);
-    \draw[f] (2-8) -- (10-2); \draw[f] (2-8) -- (10-3);
-    \draw[f] (2-9) -- (10-1); \draw[f] (2-9) -- (10-6);
-    \draw[f] (2-10) -- (10-3); \draw[f] (2-10) -- (10-4);
-    \draw[f] (2-11) -- (10-5); \draw[f] (2-11) -- (10-6);
-    \draw[f] (2-12) -- (10-1); \draw[f] (2-12) -- (10-2);
-    \draw[f] (2-13) -- (10-3); \draw[f] (2-13) -- (10-6);
-    \draw[f] (2-14) -- (10-2); \draw[f] (2-14) -- (10-4);
-    \draw[f] (2-15) -- (10-1); \draw[f] (2-15) -- (10-5);
+    \node [rotate=-17] (-17) at (200:1.2) {$\large\Alert{\mathbf{\ddots}}$};
+    \node (-16) at (240:1.2) [v] {$-\!16$};
+    \node (-15) at (270:1.25) [v] {$-\!15$};
+    \node (-14) at (300:1.3) [v] {$-\!14$};
+    \node (-13) at (330:1.35) [v] {$-\!13$};
+    \node (-12) at (0:1.4) [v] {$-\!12$};
+    \node (-11) at (30:1.45) [v] {$-\!11$};
+    \node (-10) at (60:1.5) [v] {$-\!10$};
+    \node (-9) at (90:1.55) [v] {$-9$};
+    \node (-8) at (120:1.6) [v] {$-8$};
+    \node (-7) at (150:1.65) [v] {$-7$};
+    \node (-6) at (180:1.7) [v] {$-6$};
+    \node (-5) at (210:1.75) [v] {$-5$};
+    \node (-4) at (240:1.8) [v] {$-4$};
+    \node (-3) at (270:1.85) [v] {$-3$};
+    \node (-2) at (300:1.9) [v] {$-2$};
+    \node (-1) at (330:1.95) [v] {$-1$};      
+    \node (0) at (0:2) [v] {$0$};
+    \node (1) at (30:2.05) [v] {$1$};
+    \node (2) at (60:2.1) [v] {$2$};
+    \node (3) at (90:2.15) [v] {$3$};
+    \node (4) at (120:2.2) [v] {$4$};
+    \node (5) at (150:2.25) [v] {$5$};
+    \node (6) at (180:2.3) [v] {$6$};
+    \node (7) at (210:2.35) [v] {$7$};
+    \node (8) at (240:2.4) [v] {$8$};
+    \node (9) at (270:2.45) [v] {$9$};
+    \node (10) at (300:2.5) [v] {$10$};
+    \node (11) at (330:2.55) [v] {$11$};
+    \node (12) at (0:2.6) [v] {$12$};
+    \node (13) at (30:2.65) [v] {$13$};
+    \node (14) at (60:2.7) [v] {$14$};
+    \node (15) at (90:2.75) [v] {$15$};
+    \node (16) at (120:2.8) [v] {$16$};
+    \node (17) at (150:2.85) [v] {$17$};
+    \node (18) at (180:2.9) [v] {$18$};
+    \node (19) at (210:2.95) [v] {$19$};
+    \node [rotate=-15]  (20) at (230:3.02) {$\Large\Alert{\mathbf{\ddots}}$};
     %%
-    \draw[f] (3-1) -- (12-1) node[pos=.8,left,midgray]{\footnotesize $4\;\;$};
-    \draw[f] (3-1) -- (12-5);
-    \draw[f] (3-2) -- (12-1); \draw[f] (3-2) -- (12-4);
-    \draw[f] (3-3) -- (12-1); \draw[f] (3-3) -- (12-3);
-    \draw[f] (3-4) -- (12-1); \draw[f] (3-4) -- (12-2);
-    \draw[f] (3-5) -- (12-4); \draw[f] (3-5) -- (12-5);
-    \draw[f] (3-6) -- (12-3); \draw[f] (3-6) -- (12-5);
-    \draw[f] (3-7) -- (12-2); \draw[f] (3-7) -- (12-5);
-    \draw[f] (3-8) -- (12-3); \draw[f] (3-8) -- (12-4);
-    \draw[f] (3-9) -- (12-2); \draw[f] (3-9) -- (12-4);
-    \draw[f] (3-10) -- (12-2); \draw[f] (3-10) -- (12-3);
-    %%
-    \draw[f] (2-1) -- (6-5); \draw[f] (2-1) -- (6-10);
-    \draw[f] (2-2) -- (6-6); \draw[f] (2-2) -- (6-9);
-    \draw[f] (2-3) -- (6-7); \draw[f] (2-3) -- (6-8);
-    \draw[f] (2-4) -- (6-1); \draw[f] (2-4) -- (6-8);
-    \draw[f] (2-5) -- (6-2); \draw[f] (2-5) -- (6-6);
-    \draw[f] (2-6) -- (6-3); \draw[f] (2-6) -- (6-5);
-    \draw[f] (2-7) -- (6-4); \draw[f] (2-7) -- (6-5);
-    \draw[f] (2-8) -- (6-2); \draw[f] (2-8) -- (6-7);
-    \draw[f] (2-9) -- (6-1); \draw[f] (2-9) -- (6-9);
-    \draw[f] (2-10) -- (6-1); \draw[f] (2-10) -- (6-10);
-    \draw[f] (2-11) -- (6-3); \draw[f] (2-11) -- (6-7);
-    \draw[f] (2-12) -- (6-4); \draw[f] (2-12) -- (6-6);
-    \draw[f] (2-13) -- (6-4); \draw[f] (2-13) -- (6-8);
-    \draw[f] (2-14) -- (6-3); \draw[f] (2-14) -- (6-9);
-    \draw[f] (2-15) -- (6-2); 
-    \draw[f] (2-15) -- (6-10) node[pos=.68,right,midgray]{\footnotesize $\;\;3$};
-    \draw[f] (4-1) to (2-1); \draw[f] (4-1) to (2-2); \draw[f] (4-1) to (2-3);
-    \draw[f] (4-2) to (2-4); \draw[f] (4-2) to (2-5); \draw[f] (4-2) to (2-6);
-    \draw[f] (4-3) to (2-7); \draw[f] (4-3) to (2-8); \draw[f] (4-3) to (2-9);
-    \draw[f] (4-4) to (2-10); \draw[f] (4-4) to (2-11); \draw[f] (4-4) to (2-12);
-    \draw[f] (4-5) to (2-13); \draw[f] (4-5) to (2-14); 
-    \draw[f] (4-5) -- (2-15) node[midway,right,midgray]{$\;2$};
-    %%
-    \draw[f] (12-1) -- (4-1); \draw[f] (12-2) to (4-2);
-    \draw[f] (12-3) to (4-3); \draw[f] (12-4) to (4-4);
-    \draw[f] (12-5) -- (4-5) node[midway,right,midgray]{$3$};
-    %%
-    \end{tikzpicture}
+    \draw [r] (-17) to (-16);
+    \draw [r] (-16) to (-15); \draw [r] (-15) to (-14);
+    \draw [r] (-14) to (-13); \draw [r] (-13) to (-12);
+    \draw [r] (-12) to (-11); \draw [r] (-11) to (-10);
+    \draw [r] (-10) to (-9); \draw [r] (-9) to (-8);
+    \draw [r] (-8) to (-7); \draw [r] (-7) to (-6);
+    \draw [r] (-6) to (-5); \draw [r] (-5) to (-4);
+    \draw [r] (-4) to (-3); \draw [r] (-3) to (-2);
+    \draw [r] (-2) to (-1); \draw [r] (-1) to (0);
+    \draw [r] (0) to (1); \draw [r] (1) to (2);
+    \draw [r] (2) to (3); \draw [r] (3) to (4);
+    \draw [r] (4) to (5); \draw [r] (5) to (6);
+    \draw [r] (6) to (7); \draw [r] (7) to (8);
+    \draw [r] (8) to (9); \draw [r] (9) to (10);
+    \draw [r] (10) to (11); \draw [r] (11) to (12); 
+    \draw [r] (12) to (13); \draw [r] (13) to (14);
+    \draw [r] (14) to (15); \draw [r] (15) to (16);
+    \draw [r] (16) to (17); \draw [r] (17) to (18);
+    \draw [r] (18) to (19); \draw [r] (19) to (20);
+    \node at (0,0) {\large $\Z/\<12\>$};
+  \end{tikzpicture}
   \]
-
+  
 \end{frame}
 
 %%====================================================================
 
-\begin{frame}{``Reducing'' subgroup lattices}
-  Sometimes it is convenient to collapse conjugacy classes into single
-  nodes in the lattice. \medskip\pause
-  
-  Left-subscripts denote the size of the conjugacy class. We call this a \Alert{subgroup diagram}. \\ (In some circumstances it might not actually be a lattice.)
+\begin{frame}{Quotient groups, algebraically}
 
-  %% Subgroup DIAGRAM of A_5
-  \[
-  %%
-  \hspace*{7mm}
-  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,scale=.4,auto,xscale=2]
-    %%
-    \newcommand\Hh{16} % height of A_5
-    \newcommand\Hg{9.5} % height of A_4
-    \newcommand\Hf{8} % height of D_10
-    \newcommand\He{7} % height of S_3
-    \newcommand\Hd{5.6} % height of C_5
-    \newcommand\Hc{5} % height of V_4
-    \newcommand\Hb{3} % height of C_3
-    \newcommand\Ha{2} % height of C_2  
-    \tikzstyle{every node}=[font=\footnotesize]
-    %%
-    \node (A5) at (0,\Hh) {\small $A_5$};
-    %%
-    \node (12)at(0,\Hg) {$_{5}A_4$};
-    %%
-    \node (10)at(3,\Hf) {$_{6}D_5$};
-    \node (6)at(-3,\He){$_{10}S_3$};
-    %%
-    \node (5)at(3,\Hd) {$_{6}C_5$};
-    %%
-    \node (4)at(0,\Hc) {$_{5}V_4$};
-    %%
-    \node (3)at(-3,\Hb) {$_{10}C_3$};
-    %%  
-    \node (2)at(0,\Ha) {$_{15}C_2$};
-    %%  
-    \node (e)at(0,0) {\small $\<e\>$};
-    %%
-    \draw[f] (2) to (e);
-    %%
-    \draw[f] (3) -- (e) node[midway,left,midgray]{\footnotesize $3\;\;\;\;\;\;\;$};
-    %%
-    \draw[f] (5) -- (e) node[midway,right,midgray]{\footnotesize $\;\;\;5$};
-    %%
-    \draw[f] (5) -- (10) node[midway,right,midgray]{\footnotesize $2$};
-    %%
-    \draw[f] (6) -- (3) node[midway,left,midgray]{\footnotesize $2\;$};
-    %%
-    \draw[f] (A5) -- (12) node[midway,right,midgray]{\footnotesize $5$};
-    \draw[f] (A5) -- (10) node[midway,right,midgray]{\footnotesize $\;\;6$};
-    \draw[f] (A5) -- (6) node[midway,left,midgray]{\footnotesize $10\;$}; 
-    %%
-    \draw[f] (2) -- (10) node[pos=.65,left,midgray]{\footnotesize $5\;\;$};
-    %%
-    \draw[f] (3) -- (12) node[pos=.8,left,midgray]{\footnotesize $4\;\;$};
-    %%
-    \draw[f] (2) -- (6) node[pos=.68,right,midgray]{\footnotesize $\;\;3$};
-    %%
-    \draw[f] (4) -- (2) node[midway,right,midgray]{$\;2$};
-    %%
-    \draw[f] (12) -- (4) node[midway,right,midgray]{$3$};
-    %% 
-    %%
-    \node at (5, \Hh) {\textbf{Order} $= 60$}; 
-    \node at (5, \Hg) {12};
-    \node at (5, \Hf) {10};
-    \node at (5, \He) {6};
-    \node at (5, \Hd) {5};
-    \node at (5, \Hc) {4};
-    \node at (5, \Hb) {3};
-    \node at (5, \Ha) {2};
-    \node at (5, 0) {1};
-    %%
-    \node at (-5, \Hh) {\textbf{Index} $= 1$}; 
-    \node at (-5, \Hg) {5};
-    \node at (-5, \Hf) {6};
-    \node at (-5, \He) {10};
-    \node at (-5, \Hd) {12};
-    \node at (-5, \Hc) {15};
-    \node at (-5, \Hb) {20};
-    \node at (-5, \Ha) {30};
-    \node at (-5, 0) {60};
-    \end{tikzpicture}
-  \]
+  \begin{block}{Lemma}
+    Let $H\normaleq G$. Multiplication of cosets is \alert{well-defined}: 
+    \[
+    \mbox{if $a_1H=a_2H$ and $b_1H=b_2H$, then $a_1H\cdot b_1H=\Pause
+      a_2H\cdot b_2H$.}
+    \]
+  \end{block}
+
+  \begin{exampleblock}{Proof} \Pause
+    Suppose that $H\normaleq G$, $a_1H=a_2H$ and $b_1H=b_2H$. \Pause
+    Then
+    
+    \begin{center}\def\arraystretch{1.3}
+      \begin{tabular}{rcllll}
+        \multicolumn{3}{c}{Claim} &&& Data / Warrant \\\hline \pause
+        $a_1H\cdot b_1H$ & $=$ & $a_1b_1H$ &&& \pause
+        (by definition) \pause \\ \vspace{1mm}
+        & $=$ & $a_1(b_2H)$ &&& \pause ($b_1H=b_2H$ by assumption) \pause \\
+        & $=$ & $(a_1H)b_2$ &&& \pause ($b_2H=Hb_2$ since $H\normaleq G$) \pause \\
+        & $=$ & $(a_2H)b_2$ &&& \pause ($a_1H=a_2H$ by assumption) \pause \\
+        & $=$ & $a_2b_2H$ &&& \pause ($b_2H=Hb_2$ since $H\normaleq G$) \\ \pause
+        & $=$ & $a_2H\cdot b_2H$ &&& \pause (\mbox{by definition}) 
+      \end{tabular}
+    \end{center}
+    
+    \Pause
+    
+    Thus, the binary operation on $G/H$ is well-defined. $\hfill\Box$
+  \end{exampleblock}
+  
 \end{frame}
 
+%%====================================================================
+
+\begin{frame}{Quotient groups, algebraically}
+  
+  \begin{block}{Quotient theorem (restated)} 
+    When $H\normaleq G$, the set of cosets $G/H$ forms a group.
+  \end{block}
+  
+  \begin{exampleblock}{Proof} \Pause
+    There is a well-defined binary operation on the set of left
+    (equivalently, right) cosets:
+    \[
+    \Alert{aH\cdot bH=abH}.
+    \]
+    \Pause We need to verify the three remaining properties of a group:
+    
+    \medskip\pause
+    
+    \textbf{Identity}. \Pause The coset $H=eH$ is the identity because
+    for any coset $aH\in G/H$, \Pause
+    \[
+    aH\cdot H\Pause=aH\cdot eH\Pause=
+    aeH\Pause=\Alert{aH}\Pause=eaH\Pause=eH\cdot aH\Pause=H\cdot aH.
+    \tag*{$\checkmark$}
+    \]
+
+    \vspace{-1mm}\pause
+
+    \textbf{Inverses}. \Pause Given a coset $aH$, its inverse is
+    $a^{-1}H$, because \Pause
+    \[
+    aH\cdot a^{-1}H\Pause=aa^{-1}H\Pause=
+    \Alert{eH}\Pause=a^{-1}aH\Pause=a^{-1}H\cdot aH.
+    \tag*{$\checkmark$}
+    \]
+
+    \vspace{-1mm}\pause
+
+    \textbf{Closure}. \Pause This is immediate, because $aH\cdot bH=abH$ is 
+    another coset in $G/H$. $\hfill\checkmark$
+  \end{exampleblock}
+
+\end{frame}
+
+
+%%====================================================================
+
+\begin{frame}{Quotient groups, algebraically}
+
+  We just learned that if $H\normaleq G$, then we can define a binary
+  operation on cosets by
+  \[
+  aH\cdot bH=abH,
+  \]
+  and \emph{this works}. \medskip\Pause
+
+  Here's another reason why this makes sense. \medskip\Pause
+  
+  Given any subgroup $H\leq G$, normal or not, define the
+  \Balert{product of left cosets}:
+  \[
+  xHyH=\big\{xh_1yh_2\mid h_1,h_2\in H\big\}.
+  \]
+
+  \vspace{-2mm}\Pause
+  
+  \begin{exampleblock}{Exercise}
+    If $H$ is normal, then the set $xHyH$ is equal to the left cosets
+    \[
+    xyH=\big\{xyh\mid h\in H\big\}.
+    \]
+  \end{exampleblock}
+
+  \smallskip\Pause
+  
+  To show that $\Alert{xHyH}=\Balert{xyH}$, it suffices to verify that
+  $\subseteq$ and $\supseteq$ both hold. That is: \Pause
+
+  \begin{itemize}
+  \item every element of the form $\Alert{xh_1yh_2}$ can be written as
+    $\Balert{xyh}$ for some $h\in H$. \smallskip\Pause
+  \item every element of the form $\Balert{xyh}$ can be written as
+    $\Alert{xh_1yh_2}$ for some $h_1,h_2\in H$. \smallskip\Pause
+  \end{itemize}
+  
+  Note that one containment is trivial. This will be left for homework. 
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{(One last word on quotients)}
+  
+  \begin{exampleblock}{Remark}
+    Do you think the following should be true or false, for subgroups
+    $H$ and $K$? \smallskip
+    \begin{enumerate}
+    \item Does $H\cong K$ imply $G/H\cong G/K$? \smallskip\Pause
+    \item Does $G/H\cong G/K$ imply $H\cong K$? \smallskip\Pause
+    \item Does $H\cong K$ and $G_1/H\cong G_2/K$ imply $G_1\cong G_2$?
+    \end{enumerate}
+  \end{exampleblock}
+  
+  \medskip\Pause
+  
+  \emph{All are false}. Counterexamples for all of these can be found using the
+  group $G=\Z_4\times\Z_2$:
+
+  %% Cayley graph of Z4xZ2, a V4-quotient, Cayley table, and subgroup lattice
+  \[
+  \begin{tikzpicture}[scale=.6]
+    %%
+    \tikzstyle{every node}=[font=\tiny]
+    %%
+    \begin{scope}[scale=1.75]
+      \node (00) at (0,3) [v-y] {$(0,0)$};
+      \node (10) at (0,2) [v-r] {$(1,0)$};
+      \node (20) at (0,1) [v-y] {$(2,0)$};
+      \node (30) at (0,0) [v-r] {$(3,0)$};
+      \node (01) at (1,3) [v-b] {$(0,1)$};
+      \node (11) at (1,2) [v-g] {$(1,1)$};
+      \node (21) at (1,1) [v-b] {$(2,1)$};
+      \node (31) at (1,0) [v-g] {$(3,1)$};
+      \node at (.5,1.5) {\small $\Z_4\!\times\!\Z_2$};
+      \draw [r] (00) to (10);
+      \draw [r] (10) to (20);
+      \draw [r] (20) to (30);
+      \draw [r] (30) to [bend left=25] (00);
+      \draw [r] (01) to (11);
+      \draw [r] (11) to (21);
+      \draw [r] (21) to (31);
+      \draw [r] (31) to [bend right=25] (01);
+      \draw [bb] (00) to (01);
+      \draw [bb] (10) to (11);
+      \draw [bb] (20) to (21);
+      \draw [bb] (30) to (31);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(3.75,1.2)},scale=2]
+      \tikzstyle{v-y} = [circle, draw, fill=vYellow,inner sep=0pt, 
+        minimum size=6.5mm]
+      \tikzstyle{v-r} = [circle, draw, fill=vRed,inner sep=0pt, 
+        minimum size=6.5mm]
+      \tikzstyle{v-b} = [circle, draw, fill=vBlue,inner sep=0pt, 
+        minimum size=6.5mm]
+      \tikzstyle{v-g} = [circle, draw, fill=vGreen,inner sep=0pt, 
+        minimum size=6.5mm]
+      %%
+      \node (H) at (0,1) [v-y] {$H$};
+      \node (10H) at (0,0) [v-r] {$(\!1,\!0\!)\!\!+\!\!H$};
+      \node (01H) at (1,1) [v-b] {$(0,\!1)\!\!+\!\!H$};
+      \node (11H) at (1,0) [v-g] {$(\!1,\!1\!)\!\!+\!\!H$};
+      \draw [rr] (H) to (10H);
+      \draw [rr] (01H) to (11H);
+      \draw [bb] (H) to (01H);
+      \draw [bb] (10H) to (11H);
+      \node at (.5,1.75) {\small $\Z_4\!\times\!\Z_2/\<(2,0)\>$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(7.5,-1.1)},scale=1,box/.style={anchor=north}]
+      %%
+      \newcommand*{\m}{5}
+      \colorlet{color-e}{tYellow}
+      \colorlet{color-v}{tRed}
+      \colorlet{color-h}{tBlue}
+      \colorlet{color-vh}{tGreen}
+      %%
+      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
+      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
+      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
+      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
+      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
+      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
+      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
+      %%
+      \path[fill=color-e] (1,4) rectangle ++(1,1);
+      \path[fill=color-e] (2,3) rectangle ++(1,1);
+      \path[fill=color-e] (3,2) rectangle ++(1,1);
+      \path[fill=color-e] (4,1) rectangle ++(1,1);
+      %%
+      \path[fill=color-v] (1,3) rectangle ++(1,1);
+      \path[fill=color-v] (2,4) rectangle ++(1,1);
+      \path[fill=color-v] (3,1) rectangle ++(1,1);
+      \path[fill=color-v] (4,2) rectangle ++(1,1);
+      %%
+      \path[fill=color-h] (1,2) rectangle ++(1,1);
+      \path[fill=color-h] (2,1) rectangle ++(1,1);
+      \path[fill=color-h] (3,4) rectangle ++(1,1);
+      \path[fill=color-h] (4,3) rectangle ++(1,1);
+      %%
+      \path[fill=color-vh] (1,1) rectangle ++(1,1);
+      \path[fill=color-vh] (2,2) rectangle ++(1,1);
+      \path[fill=color-vh] (3,3) rectangle ++(1,1);
+      \path[fill=color-vh] (4,4) rectangle ++(1,1);
+      %%
+      \foreach \i in {1,...,\m} {
+        \draw [very thin] (\i,1) -- (\i,\m); 
+        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
+        \draw [very thin] (1,\i) -- (\m,\i); 
+        \draw [very thin] (-.1,\i) -- (.9,\i); 
+      } 
+      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
+      \draw [very thin] (-.1,1) rectangle (.9,\m); 
+      %%
+      \node [box] at (0.4,4+.75) {$H$}; 
+      \node [box] at (0.4,3+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
+      \node [box] at (0.4,2+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
+      \node [box] at (0.4,1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      \node [box] at (1.5,5.1+.75) {$H$}; 
+      \node [box] at (2.5,5.1+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
+      \node [box] at (3.5,5.1+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
+      \node [box] at (4.5,5.1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      %%
+      \node [box] at (1.5,4+.75) {$H$}; 
+      \node [box] at (1.5,3+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
+      \node [box] at (1.5,2+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
+      \node [box] at (1.5,1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      %%
+      \node [box] at (2.5,4+.75) {$(\!1,\!0\!)\!\!+\!\!H$}; 
+      \node [box] at (2.5,3+.75) {$H$};
+      \node [box] at (2.5,2+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      \node [box] at (2.5,1+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
+      %%
+      \node [box] at (3.5,4+.75) {$(\!0,\!1\!)\!\!+\!\!H$}; 
+      \node [box] at (3.5,3+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      \node [box] at (3.5,2+.75) {$H$};
+      \node [box] at (3.5,1+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
+      %%
+      \node [box] at (4.5,4+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
+      \node [box] at (4.5,3+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
+      \node [box] at (4.5,2+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
+      \node [box] at (4.5,1+.75) {$H$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(13.75,-1)},shorten >= -3pt, shorten <= -3pt,scale=.9]
+      \node(G) at (3.5,6) {\footnotesize $\Z_4\times\Z_2$};
+      \node(10) at (5.25,4.5) {\scriptsize $\<(1,0)\>$};
+      \node(01-20) at (1.75,4.5) {\scriptsize $\<(0,1),(2,0)\>$};
+      \node(11) at (3.5,4.5) {\scriptsize $\<(1,1)\>$};
+      \node(01) at (0,3) {\scriptsize $\<(0,1)\>$};
+      \node(21) at (1.75,3) {\scriptsize $\<(2,1)\>$};
+      \node(20) at (3.5,3) {\scriptsize $\<(2,0)\>$};
+      \node(00) at (1.75,1.5) {\scriptsize $\<(0,0)\>$};
+      \draw(G)--(01-20); \draw(G)--(11); \draw(G)--(10);
+      \draw(01-20)--(01); \draw(01-20)--(21); \draw(01-20)--(20); 
+      \draw(11)--(20); \draw(10)--(20);
+      \draw(01)--(00); 
+      \draw(21)--(00); \draw(20)--(00);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+\end{frame}
 
 %%====================================================================
 \section{The end!}
@@ -3698,1607 +4483,6 @@
         then $AB\leq G$}}.  $\hfill\Box$
   \end{block}
   
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}[t]{Quotients} 
-  
-  We have already encountered the concept a quotient of a group by a subgroup:
-  
-  \[
-  \begin{tikzpicture}[scale=.7]
-    %%
-    \tikzstyle{every node}=[font=\small]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1.5]
-      \node (1) at (135:1) [v] {$1$};
-      \node (i) at (45:1) [v] {$i$};
-      \node (k) at (-45:1) [v] {$k$};
-      \node (j) at (-135:1) [v] {$j$};
-      \node (-1) at (135:2) [v] {$-1$};
-      \node (-i) at (45:2) [v] {$-i$};
-      \node (-k) at (-45:2) [v] {$-k$};
-      \node (-j) at (-135:2) [v] {$-j$};
-      %%
-      \path[r] (1) to (i);
-      \path[r] (i) to (-1);
-      \path[r] (-1) to (-i);
-      \path[r] (-i) to (1);
-      %%
-      \path[r] (k) to (j);
-      \path[r] (j) to (-k);
-      \path[r] (-k) to (-j);
-      \path[r] (-j) to (k);
-      %%
-      \path[b] (i) to (k);
-      \path[b] (k) to (-i);
-      \path[b] (-i) to (-k);
-      \path[b] (-k) to (i);
-      %%
-      \path[b] (1) to (j);
-      \path[b] (j) to (-1);
-      \path[b] (-1) to (-j);
-      \path[b] (-j) to (1);
-      %%
-      \path[gg] (1) to (-1);
-      \path[gg] (j) to (-j);
-      \path[gg] (i) to (-i);
-      \path[gg] (k) to (-k);
-      \node at (0,0) {\normalsize $Q_8$};
-    \end{scope}
-    %%
-    \begin{scope}[scale=.6,shift={(6.5,-5.5)}]
-      \colorlet{color_1}{tGreen}
-      \colorlet{color_-1}{tGreen}
-      \colorlet{color_i}{tRed}
-      \colorlet{color_-i}{tRed}
-      \colorlet{color_j}{tBlue}
-      \colorlet{color_-j}{tBlue}
-      \colorlet{color_k}{tYellow}
-      \colorlet{color_-k}{tYellow}
-      \newcommand*{\n}{9}
-      %%
-      %% Left column of table (header)
-      \path[fill=color_1] (-.1,8) rectangle ++(1,1);
-      \path[fill=color_-1] (-.1,7) rectangle ++(1,1);
-      \path[fill=color_i] (-.1,6) rectangle ++(1,1);
-      \path[fill=color_-i] (-.1,5) rectangle ++(1,1);
-      \path[fill=color_j] (-.1,4) rectangle ++(1,1);
-      \path[fill=color_-j] (-.1,3) rectangle ++(1,1);
-      \path[fill=color_k] (-.1,2) rectangle ++(1,1);
-      \path[fill=color_-k] (-.1,1) rectangle ++(1,1);
-      %% Top row of table (header)
-      \path[fill=color_1] (1,9.1) rectangle ++(1,1);
-      \path[fill=color_-1] (2,9.1) rectangle ++(1,1);
-      \path[fill=color_i] (3,9.1) rectangle ++(1,1);
-      \path[fill=color_-i] (4,9.1) rectangle ++(1,1);
-      \path[fill=color_j] (5,9.1) rectangle ++(1,1);
-      \path[fill=color_-j] (6,9.1) rectangle ++(1,1);
-      \path[fill=color_k] (7,9.1) rectangle ++(1,1);
-      \path[fill=color_-k] (8,9.1) rectangle ++(1,1);
-      %% Top row of table
-      \path[fill=color_1] (1,8) rectangle ++(1,1);
-      \path[fill=color_-1] (2,8) rectangle ++(1,1);
-      \path[fill=color_i] (3,8) rectangle ++(1,1);
-      \path[fill=color_-i] (4,8) rectangle ++(1,1);
-      \path[fill=color_j] (5,8) rectangle ++(1,1);
-      \path[fill=color_-j] (6,8) rectangle ++(1,1);
-      \path[fill=color_k] (7,8) rectangle ++(1,1);
-      \path[fill=color_-k] (8,8) rectangle ++(1,1);
-      %%
-      \path[fill=color_-1] (1,7) rectangle ++(1,1);
-      \path[fill=color_1] (2,7) rectangle ++(1,1);
-      \path[fill=color_-i] (3,7) rectangle ++(1,1);
-      \path[fill=color_i] (4,7) rectangle ++(1,1);
-      \path[fill=color_-j] (5,7) rectangle ++(1,1);
-      \path[fill=color_j] (6,7) rectangle ++(1,1);
-      \path[fill=color_-k] (7,7) rectangle ++(1,1);
-      \path[fill=color_k] (8,7) rectangle ++(1,1);
-      %%
-      \path[fill=color_i] (1,6) rectangle ++(1,1);
-      \path[fill=color_-i] (2,6) rectangle ++(1,1);
-      \path[fill=color_-1] (3,6) rectangle ++(1,1);
-      \path[fill=color_1] (4,6) rectangle ++(1,1);
-      \path[fill=color_k] (5,6) rectangle ++(1,1);
-      \path[fill=color_-k] (6,6) rectangle ++(1,1);
-      \path[fill=color_-j] (7,6) rectangle ++(1,1);
-      \path[fill=color_j] (8,6) rectangle ++(1,1);
-      %%
-      \path[fill=color_-i] (1,5) rectangle ++(1,1);
-      \path[fill=color_i] (2,5) rectangle ++(1,1);
-      \path[fill=color_1] (3,5) rectangle ++(1,1);
-      \path[fill=color_-1] (4,5) rectangle ++(1,1);
-      \path[fill=color_-k] (5,5) rectangle ++(1,1);
-      \path[fill=color_k] (6,5) rectangle ++(1,1);
-      \path[fill=color_j] (7,5) rectangle ++(1,1);
-      \path[fill=color_-j] (8,5) rectangle ++(1,1);
-      %%
-      \path[fill=color_j] (1,4) rectangle ++(1,1);
-      \path[fill=color_-j] (2,4) rectangle ++(1,1);
-      \path[fill=color_-k] (3,4) rectangle ++(1,1);
-      \path[fill=color_k] (4,4) rectangle ++(1,1);
-      \path[fill=color_-1] (5,4) rectangle ++(1,1);
-      \path[fill=color_1] (6,4) rectangle ++(1,1);
-      \path[fill=color_i] (7,4) rectangle ++(1,1);
-      \path[fill=color_-i] (8,4) rectangle ++(1,1);
-      %%
-      \path[fill=color_-j] (1,3) rectangle ++(1,1);
-      \path[fill=color_j] (2,3) rectangle ++(1,1);
-      \path[fill=color_k] (3,3) rectangle ++(1,1);
-      \path[fill=color_-k] (4,3) rectangle ++(1,1);
-      \path[fill=color_1] (5,3) rectangle ++(1,1);
-      \path[fill=color_-1] (6,3) rectangle ++(1,1);
-      \path[fill=color_-i] (7,3) rectangle ++(1,1);
-      \path[fill=color_i] (8,3) rectangle ++(1,1);
-      %%
-      \path[fill=color_k] (1,2) rectangle ++(1,1);
-      \path[fill=color_-k] (2,2) rectangle ++(1,1);
-      \path[fill=color_j] (3,2) rectangle ++(1,1);
-      \path[fill=color_-j] (4,2) rectangle ++(1,1);
-      \path[fill=color_-i] (5,2) rectangle ++(1,1);
-      \path[fill=color_i] (6,2) rectangle ++(1,1);
-      \path[fill=color_-1] (7,2) rectangle ++(1,1);
-      \path[fill=color_1] (8,2) rectangle ++(1,1);
-      %%
-      \path[fill=color_-k] (1,1) rectangle ++(1,1);
-      \path[fill=color_k] (2,1) rectangle ++(1,1);
-      \path[fill=color_-j] (3,1) rectangle ++(1,1);
-      \path[fill=color_j] (4,1) rectangle ++(1,1);
-      \path[fill=color_i] (5,1) rectangle ++(1,1);
-      \path[fill=color_-i] (6,1) rectangle ++(1,1);
-      \path[fill=color_1] (7,1) rectangle ++(1,1);
-      \path[fill=color_-1] (8,1) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,\n} {
-        \draw [very thin] (\i,1) -- (\i,\n); 
-        \draw [very thin] (\i,\n+.1) -- (\i,\n+1.1); 
-        \draw [very thin] (1,\i) -- (\n,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      }
-      \draw [very thin] (1,\n+.1) rectangle (\n,\n+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,\n);
-      %%
-      \node at (0.4,8.5) {$1$};
-      \node at (0.4,7.5) {$-1$};
-      \node at (0.4,6.5) {$i$};
-      \node at (0.4,5.5) {$-i$}; 
-      \node at (0.4,4.5) {$j$}; 
-      \node at (0.4,3.5) {$-j$};
-      \node at (0.4,2.5) {$k$};
-      \node at (0.4,1.5) {$-k$};
-      %% 
-      \node at (1.5,9.6) {$1$};
-      \node at (2.5,9.6) {$-1$};
-      \node at (3.5,9.6) {$i$};
-      \node at (4.5,9.6) {$-i$}; 
-      \node at (5.5,9.6) {$j$}; 
-      \node at (6.5,9.6) {$-j$};
-      \node at (7.5,9.6) {$k$};
-      \node at (8.5,9.6) {$-k$};
-      %%
-      \node at (1.5,8.5) {$1$};
-      \node at (1.5,7.5) {$-1$};
-      \node at (1.5,6.5) {$i$};
-      \node at (1.5,5.5) {$-i$}; 
-      \node at (1.5,4.5) {$j$}; 
-      \node at (1.5,3.5) {$-j$};
-      \node at (1.5,2.5) {$k$};
-      \node at (1.5,1.5) {$-k$};
-      %%
-      \node at (2.5,8.5) {$-1$};
-      \node at (2.5,7.5) {$1$};
-      \node at (2.5,6.5) {$-i$};
-      \node at (2.5,5.5) {$i$}; 
-      \node at (2.5,4.5) {$-j$}; 
-      \node at (2.5,3.5) {$j$};
-      \node at (2.5,2.5) {$-k$};
-      \node at (2.5,1.5) {$k$};
-      %%
-      \node at (3.5,8.5) {$i$};
-      \node at (3.5,7.5) {$-i$};
-      \node at (3.5,6.5) {$-1$};
-      \node at (3.5,5.5) {$1$}; 
-      \node at (3.5,4.5) {$-k$}; 
-      \node at (3.5,3.5) {$k$};
-      \node at (3.5,2.5) {$j$};
-      \node at (3.5,1.5) {$-j$};
-      %%
-      \node at (4.5,8.5) {$-i$};
-      \node at (4.5,7.5) {$i$};
-      \node at (4.5,6.5) {$1$};
-      \node at (4.5,5.5) {$-1$}; 
-      \node at (4.5,4.5) {$k$}; 
-      \node at (4.5,3.5) {$-k$};
-      \node at (4.5,2.5) {$-j$};
-      \node at (4.5,1.5) {$j$};
-      %%
-      \node at (5.5,8.5) {$j$};
-      \node at (5.5,7.5) {$-j$};
-      \node at (5.5,6.5) {$k$};
-      \node at (5.5,5.5) {$-k$}; 
-      \node at (5.5,4.5) {$-1$}; 
-      \node at (5.5,3.5) {$1$};
-      \node at (5.5,2.5) {$-i$};
-      \node at (5.5,1.5) {$i$};
-      %%
-      \node at (6.5,8.5) {$-j$};
-      \node at (6.5,7.5) {$j$};
-      \node at (6.5,6.5) {$-k$};
-      \node at (6.5,5.5) {$k$}; 
-      \node at (6.5,4.5) {$1$}; 
-      \node at (6.5,3.5) {$-1$};
-      \node at (6.5,2.5) {$i$};
-      \node at (6.5,1.5) {$-i$};
-      %%
-      \node at (7.5,8.5) {$k$};
-      \node at (7.5,7.5) {$-k$};
-      \node at (7.5,6.5) {$-j$};
-      \node at (7.5,5.5) {$j$}; 
-      \node at (7.5,4.5) {$i$}; 
-      \node at (7.5,3.5) {$-i$};
-      \node at (7.5,2.5) {$-1$};
-      \node at (7.5,1.5) {$1$};
-      %%
-      \node at (8.5,8.5) {$-k$};
-      \node at (8.5,7.5) {$k$};
-      \node at (8.5,6.5) {$j$};
-      \node at (8.5,5.5) {$-j$}; 
-      \node at (8.5,4.5) {$-i$}; 
-      \node at (8.5,3.5) {$i$};
-      \node at (8.5,2.5) {$1$};
-      \node at (8.5,1.5) {$-1$};
-    \end{scope}
-    %%
-    \begin{scope}[scale=.6,shift={(18,-4.5)},box/.style={anchor=south}]
-      %%
-      \newcommand*{\m}{5}
-      \colorlet{color-e}{tGreen}
-      \colorlet{color-v}{tRed}
-      \colorlet{color-h}{tBlue}
-      \colorlet{color-vh}{tYellow}
-      %%
-      \node at (2.5,7) {\normalsize $Q_8/\<-1\>\cong V_4$};
-      %%
-      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
-      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
-      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
-      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
-      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
-      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,4) rectangle ++(1,1);
-      \path[fill=color-e] (2,3) rectangle ++(1,1);
-      \path[fill=color-e] (3,2) rectangle ++(1,1);
-      \path[fill=color-e] (4,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-v] (1,3) rectangle ++(1,1);
-      \path[fill=color-v] (2,4) rectangle ++(1,1);
-      \path[fill=color-v] (3,1) rectangle ++(1,1);
-      \path[fill=color-v] (4,2) rectangle ++(1,1);
-      %%
-      \path[fill=color-h] (1,2) rectangle ++(1,1);
-      \path[fill=color-h] (2,1) rectangle ++(1,1);
-      \path[fill=color-h] (3,4) rectangle ++(1,1);
-      \path[fill=color-h] (4,3) rectangle ++(1,1);
-      %%
-      \path[fill=color-vh] (1,1) rectangle ++(1,1);
-      \path[fill=color-vh] (2,2) rectangle ++(1,1);
-      \path[fill=color-vh] (3,3) rectangle ++(1,1);
-      \path[fill=color-vh] (4,4) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,\m} {
-        \draw [very thin] (\i,1) -- (\i,\m); 
-        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
-        \draw [very thin] (1,\i) -- (\m,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,\m); 
-      %%
-      \node [box] at (0.4,4) {$\pm 1$}; 
-      \node [box] at (0.4,3) {$\pm i$};
-      \node [box] at (0.4,2) {$\pm j$};
-      \node [box] at (0.4,1) {$\pm k$};
-      \node [box] at (1.5,5.1) {$\pm 1$}; 
-      \node [box] at (2.5,5.1) {$\pm i$};
-      \node [box] at (3.5,5.1) {$\pm j$};
-      \node [box] at (4.5,5.1) {$\pm k$};
-      %%
-      \node [box] at (1.5,4) {$\pm 1$}; 
-      \node [box] at (1.5,3) {$\pm i$};
-      \node [box] at (1.5,2) {$\pm j$};
-      \node [box] at (1.5,1) {$\pm k$};
-      %%
-      \node [box] at (2.5,4) {$\pm i$}; 
-      \node [box] at (2.5,3) {$\pm 1$};
-      \node [box] at (2.5,2) {$\pm k$};
-      \node [box] at (2.5,1) {$\pm j$};
-      %%
-      \node [box] at (3.5,4) {$\pm j$}; 
-      \node [box] at (3.5,3) {$\pm k$};
-      \node [box] at (3.5,2) {$\pm 1$};
-      \node [box] at (3.5,1) {$\pm i$};
-      %%
-      \node [box] at (4.5,4) {$\pm k$}; 
-      \node [box] at (4.5,3) {$\pm j$};
-      \node [box] at (4.5,2) {$\pm i$};
-      \node [box] at (4.5,1) {$\pm 1$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  \smallskip
-  
-  We now know enough algebra to be able to formalize this. \medskip\Pause
-
-  \begin{alertblock}{Key idea}
-    The quotient of $G$ by a subgroup $H$ exists when the
-    (left) cosets of $H$ form a group.
-  \end{alertblock}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}[t]{Quotients}
-  
-  \begin{exampleblock}{Goals}
-    \begin{itemize}
-    \item Characterize \emph{when} a quotient exists. \Pause
-    \item Learn \emph{how} to formalize this algebraically (without Cayley
-      graphs or tables). \medskip\Pause
-    \end{itemize}
-  \end{exampleblock}
-  
-  First, let's interpret the ``\emph{\Balert{quotient process}}'' visually, in
-  terms of cosets.
-  
-  %% Quotient process of Q_8 by <-1> 
-  \[
-  \begin{tikzpicture}[scale=.65]
-    \begin{scope}[shift={(0,0)},scale=1.35]
-      %%
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \draw[cosetBlue, fill=cosetBlue] (45:1) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (135:1) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (-45:1) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (-135:1) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (45:2) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (135:2) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (-45:2) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue] (-135:2) circle (.35);
-      \draw[cosetBlue, fill=cosetBlue,rotate=45] (1,.35) rectangle (2,-.35);
-      \draw[cosetBlue, fill=cosetBlue,rotate=135] (1,.35) rectangle (2,-.35);
-      \draw[cosetBlue, fill=cosetBlue,rotate=-45] (1,.35) rectangle (2,-.35);
-      \draw[cosetBlue, fill=cosetBlue,rotate=-135] (1,.35) rectangle (2,-.35);
-      %%
-      \node (1) at (135:2) [v] {$1$};
-      \node (i) at (45:2) [v] {$i$};
-      \node (k) at (-45:2) [v] {$k$};
-      \node (j) at (-135:2) [v] {$j$};
-      \node (-1) at (135:1) [v] {$-1$};
-      \node (-i) at (45:1) [v] {$-i$};
-      \node (-k) at (-45:1) [v] {$-k$};
-      \node (-j) at (-135:1) [v] {$-j$};
-      %%
-      \path[r] (1) to (i);
-      \path[r] (i) to (-1);
-      \path[r] (-1) to (-i);
-      \path[r] (-i) to (1);
-      %%
-      \path[r] (-j) to (-k);
-      \path[r] (-k) to (j);
-      \path[r] (j) to (k);
-      \path[r] (k) to (-j);
-      %%
-      \path[b] (-k) to (-i);
-      \path[b] (-i) to (k);
-      \path[b] (k) to (i);
-      \path[b] (i) to (-k);
-      %% 
-      \path[b] (1) to (j);
-      \path[b] (j) to (-1);
-      \path[b] (-1) to (-j);
-      \path[b] (-j) to (1);
-      %%
-      \path[gg] (1) to (-1);
-      \path[gg] (j) to (-j);
-      \path[gg] (i) to (-i);
-      \path[gg] (k) to (-k);
-      %%
-      \node at (0,0) {\normalsize $Q_8$};
-      \node at (0,-1.9) {\small Cluster the};
-      \node at (0,-2.25) {\small left cosets of $N$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(6,0)},scale=1.35]
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=6mm]
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (e) at (135:1.5) [v] {$N$};
-      \node (h) at (45:1.5) [v] {$iN$};
-      \node (v) at (-135:1.5) [v] {$jN$};
-      \node (b) at (-45:1.5) [v] {$kN$};   
-      \draw [rr] (e) to (h);
-      \draw [rr] (v) to (b);
-      \draw [bb] (e) to (v);
-      \draw [bb] (h) to (b);
-      \node at (0,0) {\normalsize $Q_8/N$};
-      \node at (0,-1.9) {Collapse cosets};
-      \node at (0,-2.25) {into single nodes};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(10,-2.75)},scale=.75,box/.style={anchor=north}]
-      %%
-      \newcommand*{\m}{5}
-      \colorlet{color-e}{tGreen}
-      \colorlet{color-v}{tRed}
-      \colorlet{color-h}{tBlue}
-      \colorlet{color-vh}{tYellow}
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
-      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
-      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
-      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
-      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
-      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,4) rectangle ++(1,1);
-      \path[fill=color-e] (2,3) rectangle ++(1,1);
-      \path[fill=color-e] (3,2) rectangle ++(1,1);
-      \path[fill=color-e] (4,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-v] (1,3) rectangle ++(1,1);
-      \path[fill=color-v] (2,4) rectangle ++(1,1);
-      \path[fill=color-v] (3,1) rectangle ++(1,1);
-      \path[fill=color-v] (4,2) rectangle ++(1,1);
-      %%
-      \path[fill=color-h] (1,2) rectangle ++(1,1);
-      \path[fill=color-h] (2,1) rectangle ++(1,1);
-      \path[fill=color-h] (3,4) rectangle ++(1,1);
-      \path[fill=color-h] (4,3) rectangle ++(1,1);
-      %%
-      \path[fill=color-vh] (1,1) rectangle ++(1,1);
-      \path[fill=color-vh] (2,2) rectangle ++(1,1);
-      \path[fill=color-vh] (3,3) rectangle ++(1,1);
-      \path[fill=color-vh] (4,4) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,\m} {
-        \draw [very thin] (\i,1) -- (\i,\m); 
-        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
-        \draw [very thin] (1,\i) -- (\m,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,\m); 
-      %%
-      \node [box] at (0.4,4+.85) {$N$}; 
-      \node [box] at (0.4,3+.85) {$iN$};
-      \node [box] at (0.4,2+.85) {$jN$};
-      \node [box] at (0.4,1+.85) {$kN$};
-      \node [box] at (1.5,5.1+.85) {$N$}; 
-      \node [box] at (2.5,5.1+.85) {$iN$};
-      \node [box] at (3.5,5.1+.85) {$jN$};
-      \node [box] at (4.5,5.1+.85) {$kN$};
-      %%
-      \node [box] at (1.5,4+.85) {$N$}; 
-      \node [box] at (1.5,3+.85) {$iN$};
-      \node [box] at (1.5,2+.85) {$jN$};
-      \node [box] at (1.5,1+.85) {$kN$};
-      %%
-      \node [box] at (2.5,4+.85) {$iN$}; 
-      \node [box] at (2.5,3+.85) {$N$};
-      \node [box] at (2.5,2+.85) {$kN$};
-      \node [box] at (2.5,1+.85) {$jN$};
-      %%
-      \node [box] at (3.5,4+.85) {$jN$}; 
-      \node [box] at (3.5,3+.85) {$kN$};
-      \node [box] at (3.5,2+.85) {$N$};
-      \node [box] at (3.5,1+.85) {$iN$};
-      %%
-      \node [box] at (4.5,4+.85) {$kN$}; 
-      \node [box] at (4.5,3+.85) {$jN$};
-      \node [box] at (4.5,2+.85) {$iN$};
-      \node [box] at (4.5,1+.85) {$N$};
-      %%
-    \node at (2.5,0.25) {\small Elements of the quotient};
-    \node at (2.5,-.35) {\small are cosets of $N$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  Notice how taking a quotient generally \Balert{loses
-    information}. \medskip\Pause
-  
-  Can you think of two $G_1\not\cong G_2$ for which $G_1/N\cong G_2/N$?
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}[t]{Quotients}
-
-  \vspace{-3mm}
-
-  %% Quotient of Z_6 by <2>
-  \[
-  \begin{tikzpicture}[scale=.6,auto]
-    \begin{scope}[shift={(0,0)}]
-      %%
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3mm]
-      %%
-      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,-.85) 
-      rectangle (3.8,.85);
-      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,1.7) 
-      rectangle (3.8,3.3);
-      \node (0) at (0,2.5) [v] {\mbox{\small $\,0\,$}};
-      \node (2) at (1.5,2.5) [v] {{\small $\,2\,$}};
-      \node (4) at (3,2.5) [v] {{\small $\,4\,$}};
-      \node (3) at (0,0) [v] {{\small $\,3\,$}};
-      \node (5) at (1.5,0) [v] {{\small $\,5\,$}};
-      \node (1) at (3,0) [v] {{\small $\,1\,$}};
-      \draw [r] (0) to (2);
-      \draw [r] (2) to (4);
-      \draw [r] (4) to [bend right] (0);
-      \draw [r] (3) to (5);
-      \draw [r] (5) to (1);
-      \draw [r] (1) to [bend left] (3);
-      \draw [bb] (0) to (3);
-      \draw [bb] (2) to (5);
-      \draw [bb] (4) to (1);
-      \node at (1.5,-1.3) {\small Cluster the};
-      \node at (1.5,-1.85) {\small left cosets of $H\leq \Z_6$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7.5,0)}]
-      %%
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \node (H) at (0,2.5) [v] {$H$};
-      \node (1H) at (0,0) [v] {$1\!+\!H$};
-      \draw [bb] (H) to (1H);
-      \node at (0,-1.3) {\small Collapse cosets};
-      \node at (0,-1.85) {\small into single nodes};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(11.5,-.9)},scale=.9,box/.style={anchor=south}]
-      %%
-      \tikzstyle{every node}=[font=\scriptsize]
-      \colorlet{color-1}{tRed}
-      \colorlet{color-0}{tBlue}
-      %%
-      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-0] (-.1,1) rectangle ++(1,1);
-      \path[fill=color-1] (1,3.1) rectangle ++(1,1);
-      \path[fill=color-0] (2,3.1) rectangle ++(1,1);
-      \path[fill=color-0] (1,2) rectangle ++(1,1);
-      \path[fill=color-0] (2,1) rectangle ++(1,1);
-      \path[fill=color-1] (1,1) rectangle ++(1,1);
-      \path[fill=color-1] (2,2) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,3} {
-        \draw [very thin] (\i,1) -- (\i,3); 
-        \draw [very thin] (\i,3+.1) -- (\i,3+1.1); 
-        \draw [very thin] (1,\i) -- (3,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,3+.1) rectangle (3,3+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,3); 
-      \node at (0.4,2.5) {$H$};
-      \node at (0.4,1.5) {$1\!+\!H$};
-      %%
-      \node at (1.5,3.6) {$H$};
-      \node at (2.5,3.6) {$1\!+\!H$};
-      %%
-      \node at (1.5,2.5) {$H$};
-      \node at (1.5,1.5) {$1\!+\!H$};
-      %%
-      \node at (2.5,2.5) {$1\!+\!H$};
-      \node at (2.5,1.5) {$H$};
-      %% 
-      \node at (1.5,-.6) {\small Elements of the quotient};
-      \node at (1.5,-1.1) {\small are cosets of $H$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  %%
-  %% Quotient of D_3 by <r>
-  \[
-  \begin{tikzpicture}[scale=.6,auto]
-    \begin{scope}[shift={(0,0)}]
-      %%
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3.5mm]
-      \tikzstyle{every node}=[font=\footnotesize]
-      %%
-      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,-.85) 
-      rectangle (3.8,.85);
-      \draw[cosetBlue, rounded corners=5.5mm, fill=cosetBlue] (-.8,1.7) 
-      rectangle (3.8,3.3);
-      \node (1) at (0,2.5) [v] {$1$};
-      \node (r) at (1.5,2.5) [v] {$r$};
-      \node (r2) at (3,2.5) [v] {$r^2$};
-      \node (f) at (0,0) [v] {$f$};
-      \node (r2f) at (1.5,0) [v] {$r^2\!f$};
-      \node (rf) at (3,0) [v] {$rf$};
-      \draw [r] (1) to (r);
-      \draw [r] (r) to (r2);
-      \draw [r] (r2) to [bend right] (1);
-      \draw [r] (f) to (r2f);
-      \draw [r] (r2f) to (rf);
-      \draw [r] (rf) to [bend left] (f);
-      \draw [bb] (1) to (f);
-      \draw [bb] (r) to (rf);
-      \draw [bb] (r2) to (r2f);
-      \node at (1.5,-1.3) {\small Cluster the};
-      \node at (1.5,-1.85) {\small left cosets of $N\leq D_3$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7.5,0)}]
-      %%
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
-      \tikzstyle{every node}=[font=\normalsize]
-      %%
-      \node (H) at (0,2.5) [v] {$N$};
-      \node (1H) at (0,0) [v] {$fN$};
-      \draw [bb] (H) to (1H);
-      \node at (0,-1.3) {Collapse cosets};
-      \node at (0,-1.85) {into single nodes};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(11.5,-.9)},scale=.9,box/.style={anchor=south}]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      \colorlet{color-1}{tRed}
-      \colorlet{color-0}{tBlue}
-      %%
-      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-0] (-.1,1) rectangle ++(1,1);
-      \path[fill=color-1] (1,3.1) rectangle ++(1,1);
-      \path[fill=color-0] (2,3.1) rectangle ++(1,1);
-      %%
-      \path[fill=color-0] (1,2) rectangle ++(1,1);
-      \path[fill=color-0] (2,1) rectangle ++(1,1);
-      \path[fill=color-1] (1,1) rectangle ++(1,1);
-      \path[fill=color-1] (2,2) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,3} {
-        \draw [very thin] (\i,1) -- (\i,3); 
-        \draw [very thin] (\i,3+.1) -- (\i,3+1.1); 
-        \draw [very thin] (1,\i) -- (3,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,3+.1) rectangle (3,3+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,3); 
-      \node at (0.4,2.5) {$N$};
-      \node at (0.4,1.5) {$fN$};
-      %%
-      \node at (1.5,3.6) {$N$};
-      \node at (2.5,3.6) {$fN$};
-      %%
-      \node at (1.5,2.5) {$N$};
-      \node at (1.5,1.5) {$fN$};
-      %%
-      \node at (2.5,2.5) {$fN$};
-      \node at (2.5,1.5) {$N$};
-      %% 
-      \node at (1.5,-.6) {\small Elements of the quotient};
-      \node at (1.5,-1.1) {\small are cosets of $N$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-
-  We say that $\Z_6/\<2\>\cong\Z_2$ and $D_3/\<r\>\cong C_2$.
-  
-\end{frame}
-
-%%====================================================================  
-
-\begin{frame}[t]{Quotients} 
-
-  The quotient process succeeds for the group
-  $N=\<(12)(34),(13)(24)\>$ of $A_4$.
-
-  \vspace{-2mm}
-  
-  %% Quotient of A_4
-  \[
-  \begin{tikzpicture}[scale=.65]
-    %%
-    \tikzstyle{every node}=[font=\small]
-    %%      
-    \begin{scope}[shift={(0,0)},scale=.75,bend angle=55]
-      %%
-      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, 
-        minimum size=3.25mm]
-      %%
-      \draw[cosetBlue, fill=cosetBlue] (.75,.75) circle (15mm);
-      \draw[cosetBlue, fill=cosetBlue] (4.25,.75) circle (15mm);
-      \draw[cosetBlue, fill=cosetBlue] (2.5,3.75) circle (15mm);
-      \node (e) at (1.75,4.5) [v] {$e$};
-      \node (x) at (3.25,4.5) [v] {$x$};
-      \node (z) at (1.75,3) [v] {$z$};
-      \node (y) at (3.25,3) [v] {$y$};
-      \node (a) at (3.5,1.5) [v] {$a$};
-      \node (c) at (5,1.5) [v] {$c$};
-      \node (d) at (3.5,0) [v] {$d$};
-      \node (b) at (5,0) [v] {$b$};
-      \node (dd) at (1.5,0) [v] {$d^2$};
-      \node (bb) at (1.5,1.5) [v] {$b^2$};
-      \node (aa) at (0,1.5) [v] {$a^2$};
-      \node (cc) at (0,0) [v] {$c^2$};
-      \draw [r] (x) to [bend left] (b);
-      \draw [r] (e) to [bend left=60] (a);
-      \draw [r] (z) to [bend left] (c);
-      \draw [r] (y) to [bend left=60] (d);
-      \draw [r] (a) to [bend left] (aa);
-      \draw [r] (b) to [bend left] (cc);
-      \draw [r] (c) to [bend left=65] (dd);
-      \draw [r] (d) to [bend left=40] (bb);
-      \draw [r] (aa) to [bend left] (e);
-      \draw [r] (bb) to [bend left=50] (y);
-      \draw [r] (cc) to [bend left=25] (x);
-      \draw [r] (dd) to [bend left] (z);
-      \node at (1.75,4.5) [v] {$e$};
-      \draw [bb] (e) to (x);
-      \draw [bb] (z) to (y);
-      \draw [gg] (e) to (z);
-      \draw [gg] (x) to (y);
-      \draw [bb] (a) to (c);
-      \draw [bb] (d) to (b);
-      \draw [gg] (a) to (d);
-      \draw [gg] (c) to (b);
-      \draw [bb] (aa) to (bb);
-      \draw [bb] (cc) to (dd);
-      \draw [gg] (aa) to (cc);
-      \draw [gg] (bb) to (dd);
-      \node at (2.5,-2) {Cluster the left};
-      \node at (2.5,-2.6) {cosets of $H\leq A_4$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(6,-.5)},scale=.75]
-      \node (aaH) at (.75,.75) [v] {$a^2\!H$};
-      \node (aH) at (4.25,.75) [v] {$\;aH\;$};
-      \node (H) at (2.5,3.75) [v] {$\;\;H\;\;$};
-      \draw [r] (H) to [bend left=25] (aH);
-      \draw [r] (aH) to [bend left=25] (aaH);
-      \draw [r] (aaH) to [bend left=25] (H);
-      \node at (2.5,-1.35) {Collapse cosets};
-      \node at (2.5,-1.95) {into single nodes};
-    \end{scope} 
-    %%
-    \begin{scope}[shift={(12,-1.15)},scale=.85,box/.style={anchor=north}]
-      %%
-      \newcommand*{\m}{4}
-      \colorlet{color-0}{tYellow}
-      \colorlet{color-1}{tRed}
-      \colorlet{color-2}{tBlue}
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \path[fill=color-0] (-.1,3) rectangle ++(1,1);
-      \path[fill=color-1] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-2] (-.1,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-0] (1,4.1) rectangle ++(1,1);
-      \path[fill=color-1] (2,4.1) rectangle ++(1,1);
-      \path[fill=color-2] (3,4.1) rectangle ++(1,1);
-      %%
-      \path[fill=color-0] (1,3) rectangle ++(1,1);
-      \path[fill=color-1] (2,3) rectangle ++(1,1);
-      \path[fill=color-2] (3,3) rectangle ++(1,1);
-      %%
-      \path[fill=color-1] (1,2) rectangle ++(1,1);
-      \path[fill=color-2] (2,2) rectangle ++(1,1);      
-      \path[fill=color-0] (3,2) rectangle ++(1,1);
-      %%
-      \path[fill=color-2] (1,1) rectangle ++(1,1);
-      \path[fill=color-0] (2,1) rectangle ++(1,1);      
-      \path[fill=color-1] (3,1) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,\m} {
-        \draw [very thin] (\i,1) -- (\i,\m); 
-        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
-        \draw [very thin] (1,\i) -- (\m,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,\m); 
-      %%
-      \node [box] at (0.4,3+.85) {$H$};
-      \node [box] at (0.4,2+.85) {$aH$};
-      \node [box] at (0.4,1+.85) {$a^2H$};
-      \node [box] at (1.5,4.1+.85) {$H$}; 
-      \node [box] at (2.5,4.1+.85) {$aH$};
-      \node [box] at (3.5,4.1+.85) {$a^2H$};
-      %%
-      \node [box] at (1.5,3+.85) {$H$};
-      \node [box] at (1.5,2+.85) {$aH$};
-      \node [box] at (1.5,1+.85) {$a^2H$};
-      %%
-      \node [box] at (2.5,3+.85) {$aH$}; 
-      \node [box] at (2.5,2+.85) {$a^2H$};
-      \node [box] at (2.5,1+.85) {$H$};
-      %%
-      \node [box] at (3.5,3+.85) {$a^2H$};
-      \node [box] at (3.5,2+.85) {$H$};
-      \node [box] at (3.5,1+.85) {$aH$};
-      %%
-      \node at (2,-.5) {\small Elements of the quotient};
-      \node at (2,-1.1) {\small are cosets of $H$};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  We denote the resulting group by $G/N=\big\{N,\;aN,\;a^2N\big\}\cong
-  C_3$. \Pause Since it's a group, there is a \Balert{binary operation
-    on the set of cosets of $N$}. \medskip\Pause
-  
-  \begin{exampleblock}{Questions}
-    \begin{itemize}
-    \item Do you see \emph{how} to define this binary operation? \Pause
-    \item Do you see \emph{why} this works for this particular $N\leq G$? \Pause
-    \item Can you think of examples where this ``quotient process''
-      would fail, and why? \Pause
-    \end{itemize}
-  \end{exampleblock}
-  
-\end{frame}
-
-%%====================================================================  
-
-\begin{frame}[t]{Quotients}
-
-  The quotient process fails for the group $H=\<(123)\>$ of $A_4$.
-  %%
-  %% Failure of the quotienet process for H=<(123> in A_4
-  \[
-  \begin{tikzpicture}[scale=.50,auto,bend angle=55]
-    %%
-    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=3.5mm]
-    %%
-    \begin{scope}[shift={(0,0)},scale=1]
-      %%
-      \tikzstyle{every node}=[font=\small]
-      %%
-      \draw[cosetBlue, fill=cosetBlue] (0,0) circle (1.4);
-      \draw[cosetRed, fill=cosetRed] (0,3.25) circle (1.4);
-      \draw[cosetRed, fill=cosetRed] (2.814,-1.625) circle (1.4);
-      \draw[cosetRed, fill=cosetRed] (-2.814,-1.625) circle (1.4);
-      \node (l1) at (0,2.25) [v] {$x$};
-      \node (l2) at (-.866,3.75) [v] {$b$};
-      \node (l3) at (.866,3.75) [v] {$c^2$};
-      \node (t1) at (0,1) [v] {$e$};
-      \node (t2) at (-.866,-.5) [v] {$a^2$};
-      \node (t3) at (.866,-.5) [v] {$a$};
-      \node (r1) at (3.68,-1.125) [v] {$d^2$};
-      \node (r2) at (2.814,-2.5) [v] {$z$};
-      \node (r3) at (1.948,-1.125) [v] {$c$};
-      \node (m2) at (-1.948,-1.125) [v] {$b^2$};
-      \node (m1) at (-3.68,-1.125) [v] {$d$};
-      \node (m3) at (-2.814,-2.5) [v] {$y$};
-      \draw [bb] (l2) to (m1);
-      \draw [bb] (m2) to (t2);
-      \draw [bb] (r2) to (m3);
-      \draw [bb] (l1) to (t1);
-      \draw [bb] (l3) to (r1);
-      \draw [bb] (r3) to (t3);
-      \draw [r] (l1) to (l2);
-      \draw [r] (l2) to (l3);
-      \draw [r] (l3) to (l1);
-      \draw [r] (t1) to (t3);
-      \draw [r] (t2) to (t1);
-      \draw [r] (t3) to (t2);
-      \draw [r] (r1) to (r2);
-      \draw [r] (r2) to (r3);
-      \draw [r] (r3) to (r1);
-      \draw [r] (m1) to (m2);
-      \draw [r] (m2) to (m3);
-      \draw [r] (m3) to (m1);
-      \node at (0,-3.75) {Cluster the left};
-      \node at (0,-4.4) {cosets of $H=\<(123)\>$.};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(10,-1)},scale=1.3]
-      %%
-      \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=5mm]
-      %%
-      \node (l) at (0,0) [v] {$yH$};
-      \node (r) at (2.8,0) [v] {$zH$};
-      \node (m) at (1.4,.87) [v] {$H$};
-      \node (t) at (1.4,2.4) [v] {$xH$};
-      \draw [bb] (l) to (r);
-      \draw [bb] (l) to (m);
-      \draw [bb] (l) to (t);
-      \draw [bb] (r) to (m);
-      \draw [bb] (r) to (t);
-      \draw [bb] (t) to (m);
-      \node at (1.4,-2) {\small Collapse cosets};
-      \node at (1.4,-2.5) {\small into single nodes};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  We can still write $G/H:=\big\{H,\;xN,\;yH,\;zH\big\}$ for the set
-  of (left) cosets of $H$ in $G$. \bigskip\Pause
-
-  However, the resulting graph is not the Cayley graph of a
-  group. \bigskip\Pause
-
-  In other words, something goes wrong if we try to define a binary
-  operaton on $G/H$.
-  
-\end{frame}
-
-%%====================================================================  
-
-\begin{frame}[t]{When and why the quotient process works}
-
-  To get some intuition, let's consider collapsing the left cosets of
-  a subgroup $H\leq G$. \medskip\Pause
-
-  In the following: \Balert{\emph{the right coset $Hg$ are the ``arrowtips''}}.
-  %%
-  %% Collapsing cosets: failure and success
-  \[
-  \begin{tikzpicture}[scale=.85]
-    %%
-    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm]
-    %%
-    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
-      \draw (0,0)[fill=cosetRed] circle (.5); 
-      \draw (2,0)[fill=cosetRed] circle (.5);
-      \draw[fill=cosetBlue] (1,1.8) circle (.5);
-      \node at (-.3,.75)  {$aH$};
-      \node at (2.3,.75)  {$bH$};
-      \node at (.2,1.9) {$H$};
-      %%
-      \node at (.7,1.8) {\footnotesize $e$};
-      \node at (1.3,1.8) {\footnotesize $h$};
-      \node at (-.3,.1) {\footnotesize $g$};
-      \node at (.2,-.1) {\footnotesize $a$};
-      \node at (1.75,-.1) {\footnotesize $b$};
-      \node at (2.2,0) {\footnotesize $hg$};
-      \node (a1) at (.75,1.6) {\tiny $\bullet$};
-      \node (b1) at (.9,1.5) {\tiny $\bullet$};
-      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
-      \node (d1) at (1.25,1.6) {\tiny $\bullet$};
-      \node (a2) at (-.1,.2) {\tiny $\bullet$};
-      \node (b2) at (.2,.1) {\tiny $\bullet$};
-      \node (c3) at (1.8,.1) {\tiny $\bullet$};
-      \node (d3) at (2.1,.2) {\tiny $\bullet$};
-      \draw[b] (a1) to [bend right=10] (a2);
-      \draw[b] (b1) to [bend right=5] (b2);
-      \draw[b] (c1) to [bend left=5] (c3);
-      \draw[b] (d1) to [bend left=10] (d3);
-      %%
-      \node at (1,-.8) {\small Elements in the right coset $Hg$};
-      \node at (1,-1.2) {\small are in multiple left cosets};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.5,0)}]
-      \node at (-1.1,1) {\small collapse};
-      \draw [very thick, -stealth] (-1.8,.75)--(-.2,.75);
-      \node at (-1.1,.5) {\small cosets};
-      \node (g1H) at (.6,1.5) [v] {\small $H$};
-      \node (g2H) at (0,0) [v] {\small $aH$};
-      \node (g3H) at (1.4,0) [v] {\small $bH$};
-      \draw[b] (g1H) to [bend right=5] (g2H);
-      \draw[b] (g1H) to [bend left=5] (g3H);
-      \node at (.8,-.8){\small not a valid};
-      \node at (.8,-1.2){\small Cayley graph};
-      \node at (0,-1.2) {};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7.5,0)},shorten >= -3pt, shorten <= -3pt]
-      \draw (1,0)[fill=cosetBlue] circle (.5);
-      \draw[fill=cosetBlue] (1,1.8) circle (.5);
-      \node at (0,1.9) {$H$};
-      \node at (-.15,-.2) {$gH\!=\!Hg$};
-      \node at (.7,1.8) {\footnotesize $e$};
-      \node at (1.3,1.8) {\footnotesize $h$};
-      \node at (.75,-.15) {\footnotesize $g$};
-      \node at (1.25,-.15) {\footnotesize $hg$};
-      \node (a1) at (.65,1.6) {\tiny $\bullet$};
-      \node (b1) at (.9,1.5) {\tiny $\bullet$};
-      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
-      \node (d1) at (1.35,1.6) {\tiny $\bullet$};
-      \node (a2) at (.65,0) {\tiny $\bullet$};
-      \node (b2) at (.9,.2) {\tiny $\bullet$};
-      \node (c2) at (1.1,.2) {\tiny $\bullet$};
-      \node (d2) at (1.35,0) {\tiny $\bullet$};
-      \draw[b] (a1) to [bend right=5] (a2);
-      \draw[b] (b1) to [bend right=5] (b2);
-      \draw[b] (c1) to [bend left=5] (c2);
-      \draw[b] (d1) to [bend left=5] (d2);
-      \node at (1,-.8) {\small Elements in $Hg$};
-      \node at (1,-1.2) {\small all stay in $gH$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(11.5,0)},scale=.8]
-      \node at (-1.7,1) {\small collapse};
-      \draw [very thick, -stealth] (-2.5,.75)--(-.7,.75);
-      \node at (-1.7,.5) {\small cosets};
-      \node (g1H) at (0,2) [v] {\small $H$};
-      \node (g2H) at (0,0) [v] {\small $gH$};
-      \draw[b] (g1H) to (g2H);
-      \node at (0,-1){\small valid Cayley};
-      \node at (0,-1.4){\small graph};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-  
-  \Pause
-  
-  \begin{alertblock}{Key idea}
-    If $H$ is \Balert{normal subgroup} of $G$, then the quotient group
-    $G/H$ exists.
-  \end{alertblock}
-  
-  \medskip\Pause
-  
-  If $H$ is not normal, then following the blue arrows from $H$ is
-  \Balert{ambiguous}.
-
-  \medskip\Pause
-  
-  In other words, it \Balert{depends on our where we start within $H$}.
-
-  \medskip\Pause
-  
-  We still need to formalize this and prove it algebraically. 
-  
-  \end{frame}
-
-%%====================================================================
-
-\begin{frame}[t]{What does it mean to ``multiply'' two cosets?} 
-
-  \begin{block}{Quotient theorem}\label{thm3:quotient}
-    If $H\normaleq G$, the set of cosets $G/H$ forms a group, with
-    binary operation 
-    \[
-    aH\cdot bH:= abH. 
-    \]
-  \end{block}
-
-  \medskip\Pause
-  
-  It is clear that $G/H$ is closed under this operation. \medskip\Pause
-
-  We have to show that this operation is \Alert{well-defined}. 
-
-  \medskip\Pause
-
-  By that, we mean that it \Balert{\emph{does not depend on our choice of
-      coset representative}}.
-  
-  %% Collapsing cosets: failure and success
-  \[
-  \begin{tikzpicture}[scale=.85]
-    %%
-    \tikzstyle{v}=[circle,draw,fill=lightgray,inner sep=0pt,minimum size=7mm] 
-    %%
-    \begin{scope}[shift={(0,0)},shorten >= -3pt, shorten <= -3pt]
-      \draw[fill=cosetRed] (0,0) circle (.5); 
-      \draw[fill=cosetRed] (2,0) circle (.5);
-      \draw[fill=cosetBlue] (1,1.8) circle (.5);
-      \node at (-.3,.75)  {$aH$};
-      \node at (2.3,.75)  {$bH$};
-      \node at (.2,1.9) {$H$};
-      %%
-      \node at (.7,1.8) {\footnotesize $e$};
-      \node at (1.3,1.8) {\footnotesize $h$};
-      \node at (-.3,.1) {\footnotesize $g$};
-      \node at (.2,-.1) {\footnotesize $a$};
-      \node at (1.75,-.1) {\footnotesize $b$};
-      \node at (2.2,0) {\footnotesize $hg$};
-      \node (a1) at (.75,1.6) {\tiny $\bullet$};
-      \node (b1) at (.9,1.5) {\tiny $\bullet$};
-      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
-      \node (d1) at (1.25,1.6) {\tiny $\bullet$};
-      \node (a2) at (-.1,.2) {\tiny $\bullet$};
-      \node (b2) at (.2,.1) {\tiny $\bullet$};
-      \node (c3) at (1.8,.1) {\tiny $\bullet$};
-      \node (d3) at (2.1,.2) {\tiny $\bullet$};
-      \draw[b] (a1) to [bend right=10] (a2);
-      \draw[b] (b1) to [bend right=5] (b2);
-      \draw[b] (c1) to [bend left=5] (c3);
-      \draw[b] (d1) to [bend left=10] (d3);
-      \node at (1,-.8) {\footnotesize our destination depends};
-      \node at (1,-1.2) {\footnotesize on where in $H$ we start};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(4.5,0)}]
-      \node at (-1.1,1) {\small collapse};
-      \draw [very thick, -stealth] (-1.8,.75)--(-.2,.75);
-      \node at (-1.1,.5) {\small cosets};
-      \node (g1H) at (.6,1.5) [v] {\small $H$};
-      \node (g2H) at (0,0) [v] {\small $aH$};
-      \node (g3H) at (1.4,0) [v] {\small $bH$};
-      \draw[b] (g1H) to [bend right=5] (g2H);
-      \draw[b] (g1H) to [bend left=5] (g3H);
-      \node at (.8,-.8){\footnotesize the quotient process};
-      \node at (.8,-1.2){\footnotesize does not yield a group};
-      \node at (0,-1.2) {};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7.5,0)},shorten >= -3pt, shorten <= -3pt]
-      \draw[fill=cosetBlue] (1,0) circle (.5);
-      \draw[fill=cosetBlue] (1,1.8) circle (.5);
-      \node at (0,1.9) {$H$};
-      \node at (-.15,-.2) {$gH\!=\!Hg$};
-      \node at (.7,1.8) {\footnotesize $e$};
-      \node at (1.3,1.8) {\footnotesize $h$};
-      \node at (.75,-.15) {\footnotesize $g$};
-      \node at (1.25,-.15) {\footnotesize $hg$};
-      \node (a1) at (.65,1.6) {\tiny $\bullet$};
-      \node (b1) at (.9,1.5) {\tiny $\bullet$};
-      \node (c1) at (1.1,1.5) {\tiny $\bullet$};
-      \node (d1) at (1.35,1.6) {\tiny $\bullet$};
-      \node (a2) at (.65,0) {\tiny $\bullet$};
-      \node (b2) at (.9,.2) {\tiny $\bullet$};
-      \node (c2) at (1.1,.2) {\tiny $\bullet$};
-      \node (d2) at (1.35,0) {\tiny $\bullet$};
-      \draw[b] (a1) to [bend right=5] (a2);
-      \draw[b] (b1) to [bend right=5] (b2);
-      \draw[b] (c1) to [bend left=5] (c2);
-      \draw[b] (d1) to [bend left=5] (d2);
-      \node at (1,-.8) {\footnotesize destination doesn't depend};
-      \node at (1,-1.2) {\footnotesize on where we start in $H$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(11.5,0)},scale=.8]
-      \node at (-1.7,1) {\small collapse};
-      \draw [very thick, -stealth] (-2.5,.75)--(-.7,.75);
-      \node at (-1.7,.5) {\small cosets};
-      \node (g1H) at (0,2) [v] {\small $H$};
-      \node (g2H) at (0,0) [v] {\small $gH$};
-      \draw[b] (g1H) to (g2H);
-      \node at (0,-1){\footnotesize quotient process};
-      \node at (0,-1.4){\footnotesize succeeds};
-    \end{scope}
-  \end{tikzpicture}
-  \]
-    
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}[t]{A familiar example}
-
-  Consider the subgroup $H=\<12\>=12\Z$ of $G=\Z$. \medskip
-
-  The cosets of $H$ are the \Balert{congruence classes} modulo $12$. \medskip
-
-  Since this group is additive, the condition $aH\cdot bH$ becomes
-  $(a+H)+(b+H)=a+b+H$: \smallskip
-  
-  \begin{quote}
-    ``(the coset containing $a$) $+$ (the coset containing $b$)
-    $=$ the coset containing $a+b$.''
-  \end{quote}
-
-  \vspace{-2mm}
-  
-  %% Quotient of Z by 12Z yielding Z/12Z (spiral)
-  \[
-  \begin{tikzpicture}[box/.style={anchor=south}]
-    %%
-    \tikzstyle{r} = [draw,very thick,eRed,-stealth,bend right=8]
-    \tikzstyle{every node}=[font=\scriptsize]
-    %%
-    \draw[cosetBlue, fill=cosetBlue] (0:2.6) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue] (0:1.4) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=0] (1.4,-.28) rectangle (2.6,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=30] (0:2.65) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=30] (0:1.45) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=30] (1.45,-.28) rectangle (2.65,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=60] (0:2.7) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=60] (0:1.5) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=60] (1.5,-.28) rectangle (2.7,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=90] (0:2.75) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=90] (0:1.55) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=90] (1.55,-.28) rectangle(2.75,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=120] (0:2.8) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=120] (0:1.6) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=120] (1.6,-.28) rectangle(2.8,.28);
-    %%
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=150] (0:2.85) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=150] (0:1.65) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=150] (1.65,-.28) rectangle(2.85,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=180] (0:2.9) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=180] (0:1.7) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=180] (1.7,-.28) rectangle (2.9,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=210] (0:2.95) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=210] (0:1.75) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=210] (1.75,-.28) rectangle(2.95,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=240] (0:2.4) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=240] (0:1.2) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=240] (1.2,-.28) rectangle (2.4,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=270] (0:2.45) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=270] (0:1.25) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=270] (1.25,-.28) rectangle(2.45,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=300] (0:2.5) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=300] (0:1.3) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=300] (1.3,-.28) rectangle (2.5,.28);
-    %%
-    \draw[cosetBlue, fill=cosetBlue,rotate=330] (0:2.55) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=330] (0:1.35) circle (.28);
-    \draw[cosetBlue, fill=cosetBlue,rotate=330] (1.35,-.28) rectangle(2.55,.28);
-    %%
-    \node [rotate=-17] (-17) at (200:1.2) {$\large\Alert{\mathbf{\ddots}}$};
-    \node (-16) at (240:1.2) [v] {$-\!16$};
-    \node (-15) at (270:1.25) [v] {$-\!15$};
-    \node (-14) at (300:1.3) [v] {$-\!14$};
-    \node (-13) at (330:1.35) [v] {$-\!13$};
-    \node (-12) at (0:1.4) [v] {$-\!12$};
-    \node (-11) at (30:1.45) [v] {$-\!11$};
-    \node (-10) at (60:1.5) [v] {$-\!10$};
-    \node (-9) at (90:1.55) [v] {$-9$};
-    \node (-8) at (120:1.6) [v] {$-8$};
-    \node (-7) at (150:1.65) [v] {$-7$};
-    \node (-6) at (180:1.7) [v] {$-6$};
-    \node (-5) at (210:1.75) [v] {$-5$};
-    \node (-4) at (240:1.8) [v] {$-4$};
-    \node (-3) at (270:1.85) [v] {$-3$};
-    \node (-2) at (300:1.9) [v] {$-2$};
-    \node (-1) at (330:1.95) [v] {$-1$};      
-    \node (0) at (0:2) [v] {$0$};
-    \node (1) at (30:2.05) [v] {$1$};
-    \node (2) at (60:2.1) [v] {$2$};
-    \node (3) at (90:2.15) [v] {$3$};
-    \node (4) at (120:2.2) [v] {$4$};
-    \node (5) at (150:2.25) [v] {$5$};
-    \node (6) at (180:2.3) [v] {$6$};
-    \node (7) at (210:2.35) [v] {$7$};
-    \node (8) at (240:2.4) [v] {$8$};
-    \node (9) at (270:2.45) [v] {$9$};
-    \node (10) at (300:2.5) [v] {$10$};
-    \node (11) at (330:2.55) [v] {$11$};
-    \node (12) at (0:2.6) [v] {$12$};
-    \node (13) at (30:2.65) [v] {$13$};
-    \node (14) at (60:2.7) [v] {$14$};
-    \node (15) at (90:2.75) [v] {$15$};
-    \node (16) at (120:2.8) [v] {$16$};
-    \node (17) at (150:2.85) [v] {$17$};
-    \node (18) at (180:2.9) [v] {$18$};
-    \node (19) at (210:2.95) [v] {$19$};
-    \node [rotate=-15]  (20) at (230:3.02) {$\Large\Alert{\mathbf{\ddots}}$};
-    %%
-    \draw [r] (-17) to (-16);
-    \draw [r] (-16) to (-15); \draw [r] (-15) to (-14);
-    \draw [r] (-14) to (-13); \draw [r] (-13) to (-12);
-    \draw [r] (-12) to (-11); \draw [r] (-11) to (-10);
-    \draw [r] (-10) to (-9); \draw [r] (-9) to (-8);
-    \draw [r] (-8) to (-7); \draw [r] (-7) to (-6);
-    \draw [r] (-6) to (-5); \draw [r] (-5) to (-4);
-    \draw [r] (-4) to (-3); \draw [r] (-3) to (-2);
-    \draw [r] (-2) to (-1); \draw [r] (-1) to (0);
-    \draw [r] (0) to (1); \draw [r] (1) to (2);
-    \draw [r] (2) to (3); \draw [r] (3) to (4);
-    \draw [r] (4) to (5); \draw [r] (5) to (6);
-    \draw [r] (6) to (7); \draw [r] (7) to (8);
-    \draw [r] (8) to (9); \draw [r] (9) to (10);
-    \draw [r] (10) to (11); \draw [r] (11) to (12); 
-    \draw [r] (12) to (13); \draw [r] (13) to (14);
-    \draw [r] (14) to (15); \draw [r] (15) to (16);
-    \draw [r] (16) to (17); \draw [r] (17) to (18);
-    \draw [r] (18) to (19); \draw [r] (19) to (20);
-    \node at (0,0) {\large $\Z/\<12\>$};
-  \end{tikzpicture}
-  \]
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Quotient groups, algebraically}
-
-  \begin{block}{Lemma}
-    Let $H\normaleq G$. Multiplication of cosets is \alert{well-defined}: 
-    \[
-    \mbox{if $a_1H=a_2H$ and $b_1H=b_2H$, then $a_1H\cdot b_1H=\Pause
-      a_2H\cdot b_2H$.}
-    \]
-  \end{block}
-
-  \begin{exampleblock}{Proof} \Pause
-    Suppose that $H\normaleq G$, $a_1H=a_2H$ and $b_1H=b_2H$. \Pause
-    Then
-    
-    \begin{center}\def\arraystretch{1.3}
-      \begin{tabular}{rcllll}
-        $a_1H\cdot b_1H$ & $=$ & $a_1b_1H$ &&&
-        (by definition) \pause \\ \vspace{1mm}
-        & $=$ & $a_1(b_2H)$ &&& ($b_1H=b_2H$ by assumption) \pause \\
-        & $=$ & $(a_1H)b_2$ &&& ($b_2H=Hb_2$ since $H\normaleq G$) \pause \\
-        & $=$ & $(a_2H)b_2$ &&& ($a_1H=a_2H$ by assumption) \pause \\
-        & $=$ & $a_2b_2H$ &&& ($b_2H=Hb_2$ since $H\normaleq G$) \\ \pause
-        & $=$ & $a_2H\cdot b_2H$ &&& (\mbox{by definition}) 
-      \end{tabular}
-    \end{center}
-    
-    \Pause
-    
-    Thus, the binary operation on $G/H$ is well-defined. $\hfill\Box$
-  \end{exampleblock}
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Quotient groups, algebraically}
-  
-  \begin{block}{Quotient theorem (restated)} 
-    When $H\normaleq G$, the set of cosets $G/H$ forms a group.
-  \end{block}
-  
-  \begin{exampleblock}{Proof} \Pause
-    There is a well-defined binary operation on the set of left
-    (equivalently, right) cosets:
-    \[
-    \Alert{aH\cdot bH=abH}.
-    \]
-    \Pause We need to verify the three remaining properties of a group:
-    
-    \medskip\pause
-    
-    \textbf{Identity}. \Pause The coset $H=eH$ is the identity because
-    for any coset $aH\in G/H$, \Pause
-    \[
-    aH\cdot H\Pause=aH\cdot eH\Pause=
-    aeH\Pause=\Alert{aH}\Pause=eaH\Pause=eH\cdot aH\Pause=H\cdot aH.
-    \tag*{$\checkmark$}
-    \]
-
-    \vspace{-1mm}\pause
-
-    \textbf{Inverses}. \Pause Given a coset $aH$, its inverse is
-    $a^{-1}H$, because \Pause
-    \[
-    aH\cdot a^{-1}H\Pause=aa^{-1}H\Pause=
-    \Alert{eH}\Pause=a^{-1}aH\Pause=a^{-1}H\cdot aH.
-    \tag*{$\checkmark$}
-    \]
-
-    \vspace{-1mm}\pause
-
-    \textbf{Closure}. \Pause This is immediate, because $aH\cdot bH=abH$ is 
-    another coset in $G/H$. $\hfill\checkmark$
-  \end{exampleblock}
-
-\end{frame}
-
-
-%%====================================================================
-
-\begin{frame}{Quotient groups, algebraically}
-
-  We just learned that if $H\normaleq G$, then we can define a binary
-  operation on cosets by
-  \[
-  aH\cdot bH=abH,
-  \]
-  and \emph{this works}. \medskip\Pause
-
-  Here's another reason why this makes sense. \medskip\Pause
-  
-  Given any subgroup $H\leq G$, normal or not, define the
-  \Balert{product of left cosets}:
-  \[
-  xHyH=\big\{xh_1yh_2\mid h_1,h_2\in H\big\}.
-  \]
-
-  \vspace{-2mm}\Pause
-  
-  \begin{exampleblock}{Exercise}
-    If $H$ is normal, then the set $xHyH$ is equal to the left cosets
-    \[
-    xyH=\big\{xyh\mid h\in H\big\}.
-    \]
-  \end{exampleblock}
-
-  \smallskip\Pause
-  
-  To show that $\Alert{xHyH}=\Balert{xyH}$, it suffices to verify that
-  $\subseteq$ and $\supseteq$ both hold. That is: \Pause
-
-  \begin{itemize}
-  \item every element of the form $\Alert{xh_1yh_2}$ can be written as
-    $\Balert{xyh}$ for some $h\in H$. \smallskip\Pause
-  \item every element of the form $\Balert{xyh}$ can be written as
-    $\Alert{xh_1yh_2}$ for some $h_1,h_2\in H$. \smallskip\Pause
-  \end{itemize}
-  
-  Note that one containment is trivial. This will be left for homework. 
-  
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{Quotient groups, algebraically}
-  
-  \begin{exampleblock}{Remark}
-    Do you think the following should be true or false, for subgroups
-    $H$ and $K$? \smallskip
-    \begin{enumerate}
-    \item Does $H\cong K$ imply $G/H\cong G/K$? \smallskip\Pause
-    \item Does $G/H\cong G/K$ imply $H\cong K$? \smallskip\Pause
-    \item Does $H\cong K$ and $G_1/H\cong G_2/K$ imply $G_1\cong G_2$?
-    \end{enumerate}
-  \end{exampleblock}
-  
-  \medskip\Pause
-  
-  \emph{All are false}. Counterexamples for all of these can be found using the
-  group $G=\Z_4\times\Z_2$:
-
-  %% Cayley graph of Z4xZ2, a V4-quotient, Cayley table, and subgroup lattice
-  \[
-  \begin{tikzpicture}[scale=.6]
-    %%
-    \tikzstyle{every node}=[font=\tiny]
-    %%
-    \begin{scope}[scale=1.75]
-      \node (00) at (0,3) [v-y] {$(0,0)$};
-      \node (10) at (0,2) [v-r] {$(1,0)$};
-      \node (20) at (0,1) [v-y] {$(2,0)$};
-      \node (30) at (0,0) [v-r] {$(3,0)$};
-      \node (01) at (1,3) [v-b] {$(0,1)$};
-      \node (11) at (1,2) [v-g] {$(1,1)$};
-      \node (21) at (1,1) [v-b] {$(2,1)$};
-      \node (31) at (1,0) [v-g] {$(3,1)$};
-      \node at (.5,1.5) {\small $\Z_4\!\times\!\Z_2$};
-      \draw [r] (00) to (10);
-      \draw [r] (10) to (20);
-      \draw [r] (20) to (30);
-      \draw [r] (30) to [bend left=25] (00);
-      \draw [r] (01) to (11);
-      \draw [r] (11) to (21);
-      \draw [r] (21) to (31);
-      \draw [r] (31) to [bend right=25] (01);
-      \draw [bb] (00) to (01);
-      \draw [bb] (10) to (11);
-      \draw [bb] (20) to (21);
-      \draw [bb] (30) to (31);
-    \end{scope}
-    %%
-    \begin{scope}[shift={(3.75,1.2)},scale=2]
-      \tikzstyle{v-y} = [circle, draw, fill=vYellow,inner sep=0pt, 
-        minimum size=6.5mm]
-      \tikzstyle{v-r} = [circle, draw, fill=vRed,inner sep=0pt, 
-        minimum size=6.5mm]
-      \tikzstyle{v-b} = [circle, draw, fill=vBlue,inner sep=0pt, 
-        minimum size=6.5mm]
-      \tikzstyle{v-g} = [circle, draw, fill=vGreen,inner sep=0pt, 
-        minimum size=6.5mm]
-      %%
-      \node (H) at (0,1) [v-y] {$H$};
-      \node (10H) at (0,0) [v-r] {$(\!1,\!0\!)\!\!+\!\!H$};
-      \node (01H) at (1,1) [v-b] {$(0,\!1)\!\!+\!\!H$};
-      \node (11H) at (1,0) [v-g] {$(\!1,\!1\!)\!\!+\!\!H$};
-      \draw [rr] (H) to (10H);
-      \draw [rr] (01H) to (11H);
-      \draw [bb] (H) to (01H);
-      \draw [bb] (10H) to (11H);
-      \node at (.5,1.75) {\small $\Z_4\!\times\!\Z_2/\<(2,0)\>$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(7.5,-1.1)},scale=1,box/.style={anchor=north}]
-      %%
-      \newcommand*{\m}{5}
-      \colorlet{color-e}{tYellow}
-      \colorlet{color-v}{tRed}
-      \colorlet{color-h}{tBlue}
-      \colorlet{color-vh}{tGreen}
-      %%
-      \path[fill=color-e] (-.1,4) rectangle ++(1,1);
-      \path[fill=color-v] (-.1,3) rectangle ++(1,1);
-      \path[fill=color-h] (-.1,2) rectangle ++(1,1);
-      \path[fill=color-vh] (-.1,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,5.1) rectangle ++(1,1);
-      \path[fill=color-v] (2,5.1) rectangle ++(1,1);
-      \path[fill=color-h] (3,5.1) rectangle ++(1,1);
-      \path[fill=color-vh] (4,5.1) rectangle ++(1,1);
-      %%
-      \path[fill=color-e] (1,4) rectangle ++(1,1);
-      \path[fill=color-e] (2,3) rectangle ++(1,1);
-      \path[fill=color-e] (3,2) rectangle ++(1,1);
-      \path[fill=color-e] (4,1) rectangle ++(1,1);
-      %%
-      \path[fill=color-v] (1,3) rectangle ++(1,1);
-      \path[fill=color-v] (2,4) rectangle ++(1,1);
-      \path[fill=color-v] (3,1) rectangle ++(1,1);
-      \path[fill=color-v] (4,2) rectangle ++(1,1);
-      %%
-      \path[fill=color-h] (1,2) rectangle ++(1,1);
-      \path[fill=color-h] (2,1) rectangle ++(1,1);
-      \path[fill=color-h] (3,4) rectangle ++(1,1);
-      \path[fill=color-h] (4,3) rectangle ++(1,1);
-      %%
-      \path[fill=color-vh] (1,1) rectangle ++(1,1);
-      \path[fill=color-vh] (2,2) rectangle ++(1,1);
-      \path[fill=color-vh] (3,3) rectangle ++(1,1);
-      \path[fill=color-vh] (4,4) rectangle ++(1,1);
-      %%
-      \foreach \i in {1,...,\m} {
-        \draw [very thin] (\i,1) -- (\i,\m); 
-        \draw [very thin] (\i,\m+.1) -- (\i,\m+1.1); 
-        \draw [very thin] (1,\i) -- (\m,\i); 
-        \draw [very thin] (-.1,\i) -- (.9,\i); 
-      } 
-      \draw [very thin] (1,\m+.1) rectangle (\m,\m+1.1);
-      \draw [very thin] (-.1,1) rectangle (.9,\m); 
-      %%
-      \node [box] at (0.4,4+.75) {$H$}; 
-      \node [box] at (0.4,3+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
-      \node [box] at (0.4,2+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
-      \node [box] at (0.4,1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      \node [box] at (1.5,5.1+.75) {$H$}; 
-      \node [box] at (2.5,5.1+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
-      \node [box] at (3.5,5.1+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
-      \node [box] at (4.5,5.1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      %%
-      \node [box] at (1.5,4+.75) {$H$}; 
-      \node [box] at (1.5,3+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
-      \node [box] at (1.5,2+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
-      \node [box] at (1.5,1+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      %%
-      \node [box] at (2.5,4+.75) {$(\!1,\!0\!)\!\!+\!\!H$}; 
-      \node [box] at (2.5,3+.75) {$H$};
-      \node [box] at (2.5,2+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      \node [box] at (2.5,1+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
-      %%
-      \node [box] at (3.5,4+.75) {$(\!0,\!1\!)\!\!+\!\!H$}; 
-      \node [box] at (3.5,3+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      \node [box] at (3.5,2+.75) {$H$};
-      \node [box] at (3.5,1+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
-      %%
-      \node [box] at (4.5,4+.75) {$(\!1,\!1\!)\!\!+\!\!H$};
-      \node [box] at (4.5,3+.75) {$(\!0,\!1\!)\!\!+\!\!H$};
-      \node [box] at (4.5,2+.75) {$(\!1,\!0\!)\!\!+\!\!H$};
-      \node [box] at (4.5,1+.75) {$H$};
-    \end{scope}
-    %%
-    \begin{scope}[shift={(13.75,-1)},shorten >= -3pt, shorten <= -3pt,scale=.9]
-      \node(G) at (3.5,6) {\footnotesize $\Z_4\times\Z_2$};
-      \node(10) at (5.25,4.5) {\scriptsize $\<(1,0)\>$};
-      \node(01-20) at (1.75,4.5) {\scriptsize $\<(0,1),(2,0)\>$};
-      \node(11) at (3.5,4.5) {\scriptsize $\<(1,1)\>$};
-      \node(01) at (0,3) {\scriptsize $\<(0,1)\>$};
-      \node(21) at (1.75,3) {\scriptsize $\<(2,1)\>$};
-      \node(20) at (3.5,3) {\scriptsize $\<(2,0)\>$};
-      \node(00) at (1.75,1.5) {\scriptsize $\<(0,0)\>$};
-      \draw(G)--(01-20); \draw(G)--(11); \draw(G)--(10);
-      \draw(01-20)--(01); \draw(01-20)--(21); \draw(01-20)--(20); 
-      \draw(11)--(20); \draw(10)--(20);
-      \draw(01)--(00); 
-      \draw(21)--(00); \draw(20)--(00);
-    \end{scope}
-  \end{tikzpicture}
-  \]
-
 \end{frame}
 
 %%====================================================================
