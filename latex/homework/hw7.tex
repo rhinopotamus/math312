@@ -138,9 +138,7 @@
 % all the stuff above this line is called the preamble...
 %##################################################################
 \begin{document} % this is always the first line of what's actually produced
-\section{Hey, y'know, just some problems to think about during class} % notice that if you want the character # to appear, you have to "escape" it with a backslash
-
-I think that thinking your way through some problems is the best way to get comfortable with the idea of quotient groups. Have fun!
+\section{Homework \#7 (due Mar 9)} % notice that if you want the character # to appear, you have to "escape" it with a backslash
 
 \begin{definition}
     Let $H \leq G$. The set $G/H$ (we say ``$G$ mod $H$'') is the set of (left) cosets of $H$ in $G$: 
@@ -152,7 +150,7 @@ I think that thinking your way through some problems is the best way to get comf
 %%======================================================================
 \subsection*{Elements of quotient groups are cosets}
 
-It may help to look at the Cayley diagrams and/or subgroup lattices of the groups below.
+Do \Alert{a few of} Problems \ref{elements} and \ref{orders}. How many is \Alert{``a few''}? Idk. Make sure you do some that are written additively and some that are written multiplicatively. Part (j) is slightly harder but as a hint it is something we've seen before, perhapst in Homework 5? Hmmm
 
 \begin{problem}\label{elements}
     List out all the elements of the following quotient groups. (I promise that we're taking the quotient by a normal subgroup; no need to check.)
@@ -177,7 +175,7 @@ It may help to look at the Cayley diagrams and/or subgroup lattices of the group
     In particular, if $G$ is finite, then $|G/H| = |G| / |H|$.
 \end{problem}
 
-\begin{problem}
+\begin{problem}\label{orders}
     Find the order of the given element in the quotient group. (Again, I promise we're taking the quotient by a normal subgroup.)
     \begin{multicols}{2}
         \begin{enumerate}[(a)]
@@ -229,7 +227,7 @@ It may help to look at the Cayley diagrams and/or subgroup lattices of the group
 \end{problem}
 
 \begin{problem}
-    Explore this phenomenon in a bigger and weirder group. LMFDB calls this group $C_3 : C_4$. It's also called $Q_{12}$ because it is a ``generalized quaternion group.'' (If you look at the subgroup lattice I think you can kinda see why.)
+    Explore this phenomenon in a bigger and weirder group. LMFDB calls this group $C_3 : C_4$. Group Explorer calls it $\Z_3 \rtimes \Z_4$. It's also called $Q_{12}$ because it is a ``generalized quaternion group.'' (If you look at the subgroup lattice I think you can kinda see why.)
     %% Generalized quaternion group (dicyclic) of order 12.
     \tikzstyle{R6-out} = [draw, very thick, Red,-stealth,bend right=18]
     \tikzstyle{R6-in} = [draw, very thick, Red,-stealth,bend left=12]
@@ -297,6 +295,13 @@ It may help to look at the Cayley diagrams and/or subgroup lattices of the group
             \draw[f](r3)--(s); \draw[f](r3)--(r2s); \draw[f](r3)--(r4s);
             \draw[f](r)--(r2);
             \draw[f](1)--(r2); \draw[f](1)--(r3);
+            \node at (3.5, 5.5) {\textbf{Order}};
+            \node at (3.5, 5) {$12$};
+            \node at (3.5, 4) {$6$};
+            \node at (3.5, 3) {$4$};
+            \node at (3.5, 2) {$3$};
+            \node at (3.5, 1) {$2$};
+            \node at (3.5, 0) {$1$};
         \end{scope}
     \end{tikzpicture}
   \]
@@ -304,6 +309,7 @@ It may help to look at the Cayley diagrams and/or subgroup lattices of the group
     \item Looking at the subgroup lattice, which subgroups of $Q_{12}$ are normal? How do you know?
     \item List the elements of $Q_{12} / \<r^3\>$, draw a Cayley graph, and draw the subgroup lattice. Where do you see the subgroup lattice of $Q_{12}/\<r^3\>$ inside the subgroup lattice of $Q_{12}$?
     \item (Bonus) Do the same for $Q_{12}/\<r^2\>$.
+    \item (Also bonus) Calculating with presentations is fun. Use the presentation \[Q_{12} = \big\< r, s \mid r^6 = 1, s^4 = 1, s^2 = r^3, rs = sr\inv \big\>\] to show that all three of the order-4 subgroups are conjugate.
   \end{enumerate}
 \end{problem}
 
@@ -321,18 +327,34 @@ It may help to look at the Cayley diagrams and/or subgroup lattices of the group
 
 \begin{problem}\label{zqt}
     We previously proved that $Z(G) \normaleq G$. Show that if $G/Z(G)$ is cyclic, then $G$ is abelian.
+
+    Progressively hinty hints (decode at rot13.com):
+    \begin{itemize}
+        \item Gur pbfrgf bs n fhotebhc cnegvgvba gur tebhc.
+        \item Jung qb gur pbfrgf bs M(T) ybbx yvxr?
+        \item Fnl T/M(T) vf trarengrq ol tM(T). Nal ryrzrag k va T unf gb yvir va bar bs gur pbfrgf bs M(T).
+        \item Fnl T/M(T) vf trarengrq ol tM(T). Fubj gung nal ryrzrag k va T vf fbzr cbjre bs t zhygvcyvrq ol fbzr ryrzrag bs M(T).
+    \end{itemize}
 \end{problem}
 
-\begin{problem}
-    Is the converse of Problem \ref{abqt} true? Prove it, or provide a specific counterexample.
+\begin{problem}[Bonus]
+    Is the converse of Problem \ref{abqt} true? Prove it, or find a specific counterexample.
 \end{problem}
 
-\begin{problem}
-    Is the converse of Problem \ref{cyqt} true? Prove it, or provide a specific counterexample.
+\begin{problem}[Bonus]
+    Is the converse of Problem \ref{cyqt} true? Prove it, or find a specific counterexample.
 \end{problem}
 
-\begin{problem}
-    Is the converse of Problem \ref{zqt} true? Prove it, or provide a specific counterexample.
+\begin{problem}[Bonus]
+    Is the converse of Problem \ref{zqt} true? Prove it, or find a specific counterexample.
+\end{problem}
+
+\begin{problem}[Andrew]
+    Prove that $\Z/n\Z$ is cyclic of order $n$.
+
+    Another way to say this is the following useful fact: $\Z/n\Z \cong \Z_n$.
+
+    (This is actually a special case of Problem \ref{cyqt}.)
 \end{problem}
 
 \end{document}
