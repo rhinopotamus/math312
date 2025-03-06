@@ -1,0 +1,304 @@
+\documentclass[8pt, handout]{beamer} 
+
+
+%% Math packages
+%%
+\usepackage{amsmath,amsthm,amssymb}
+% Removes the "Too many math alphabets used in version normal" error.
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\usepackage[new]{old-arrows}
+\usepackage{cancel}
+\usepackage{mathdots}
+\usepackage{venndiagram}
+\usepackage{mathrsfs}          % Math script font
+
+% Graphics
+%%
+\graphicspath{{./}{figs/}}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{matrix}
+\usepackage{tikz-3dplot}
+\usepackage{tkz-graph}
+\usepackage{tikz-cd}
+
+%% Colors (most are in colors.tex file)
+%%
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{visualalgebra}  %% Put this *after* the TikZ packages
+\usepackage{visualalgebraslides}  %% Put this *after* "visualalgebra"
+
+%% Page layout packages
+%%
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[numbers,square,sort&compress]{natbib}
+
+%% Font and formatting packages
+%%
+\usepackage[english]{babel}    % Removing this causes compiler error
+\usepackage{alltt}             % Like verbatim, but excludes \ and { }
+\usepackage{enumerate}         % [shortlabels] option??
+\usepackage{comment}
+\usepackage{soul}              % strikeout text
+\usepackage{bm}                % Bold math
+\usepackage[T1]{fontenc}
+\usepackage{relsize}
+
+%% Fixes the \mathbf{} not working for fonts under 10pt
+\usepackage{cmbright}
+\fontencoding{OT1}\fontfamily{cmbr}\selectfont %to load ot1cmbr.fd
+\DeclareFontShape{OT1}{cmbr}{bx}{n}{% change bx definition
+<->cmbrbx10%
+}{}
+\normalfont
+
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+%%=======================================================================
+
+%% Beamer packages
+%%
+\mode<presentation>
+{
+  \usetheme{boadilla} 
+  \useinnertheme{rectangles}
+  \usecolortheme{dolphin}
+}
+
+\setbeamersize{text margin left=6mm}
+\setbeamersize{text margin right=6mm}
+\setbeamersize{sidebar width right=0mm}
+\setbeamersize{sidebar width left=0mm}
+\setbeamertemplate{navigation symbols}{}
+
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+% Other options: ball, circle, square 
+\setbeamertemplate{enumerate items}[default]
+%\setbeamercolor{enumerate subitem}{fg=red!80!black}
+\def\opacity{0.5}
+%setbeamercovered{transparent}
+\setbeamercovered{invisible}
+
+\newcommand{\Pause}{\pause}      %% Comment this out => lots more page breaks
+% \newcommand{\Pause}{}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+%%====================================================================
+
+\title[Homomorphisms!]{Isomorphisms!}
+\subtitle{(but first, homomorphisms!)}
+
+\author[\href{mailto:sbagley@westminsteru.edu}{S. Bagley}]
+       {\href{mailto:sbagley@westminsteru.edu}{Spencer Bagley}}
+
+\institute[Westminster] { 
+  \normalsize With many thanks to Matthew Macauley, \\
+  \url{http://www.math.clemson.edu/~macaule/}}
+
+\date[10 Mar 2025]{10 Mar 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%%====================================================================
+
+\begin{frame}{Goals for today:}
+  \begin{enumerate}
+    \item We have sure said the word ``isomorphic'' a lot
+    \item Let's figure out what that \Alert{actually} means
+    \item Lots of examples
+    \item Some problems to play with
+  \end{enumerate}
+\end{frame}
+
+
+%%====================================================================
+\section{Definition and notation time!}
+%%====================================================================
+
+\begin{frame}{Functions!}
+
+  Nothing on this slide is specific to abstract algebra. \pause
+  
+  \begin{block}{Extremely technical definition}
+    Let $A, B$ be two \Alert{sets}. \pause A \Alert{function} $f$ is a subset of the Cartesian product $A \times B$ such that: \pause
+    \begin{itemize}
+      \item for all $a\in A$, there exists $b\in B$ such that $(a, b) \in f$
+      \pause \hfill \emph{\Balert{(existence of images)}} \pause
+      \item if $(a, b) \in f$ and $(a, b') \in f$, then $b = b'$ \hfill \emph{\Balert{(uniqueness of images)}}
+    \end{itemize}
+  \end{block} \pause
+
+  This definition sucks and I hate it. \pause
+
+  \begin{block}{Less technical but more useful definition}
+    Let $A, B$ be two sets. A function $f$ is a \Alert{map} from $A$ to $B$ such that: \pause
+    \begin{itemize}
+      \item for all $a\in A$, there exists $b\in B$ such that $f(a) = b$
+      \pause \hfill \emph{\Balert{(existence of images)}} \pause
+      \item if $f(a) = b$ and $f(a) = b'$, then $b = b'$ \hfill \emph{\Balert{(uniqueness of images)}}
+    \end{itemize}
+  \end{block} \pause
+
+  (Just don't ask me to formally explain what a ``map'' is.) \pause
+
+  \begin{exampleblock}{Moral definition}
+    \begin{itemize}
+      \item $f$ sends elements of $A$ (inputs) to elements of $B$ (outputs)
+      \pause \hfill \emph{\Balert{(existence of images)}} \pause
+      \item and it does so \Alert{reproducibly}: the same input always gets sent to the same output. \pause \hfill \emph{\Balert{(uniqueness of images)}} \pause
+    \end{itemize} 
+  \end{exampleblock}
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Notation and vocabulary!}
+  Again, nothing on this slide is specific to abstract algebra. \pause
+  \begin{exampleblock}{Notation}
+    \begin{itemize}
+      \item To say $f$ is a function \Alert{from $A$} \Balert{to $B$}, we write $f:\Alert{A} \to \Balert{B}$ or $\Alert{A} \xrightarrow{f} \Balert{B}$ \pause
+      \begin{itemize}
+        \item (We are specifying the \emph{sets} that $f$ plays with) \pause
+      \end{itemize}
+      \item To denote that $f(a) = b$, we also write $f: a\mapsto b$  \pause
+      \begin{itemize}
+        \item or maybe even $a \mapsto b$ if it's clear what function we're talking about
+        \item (We are specifying the \emph{elements} that $f$ plays with)
+      \end{itemize}
+    \end{itemize}
+  \end{exampleblock}
+
+  \begin{block}{Definitions}
+    Let $f:\Alert{A} \to \Balert{B}$.
+    \begin{itemize}
+      \item The set $A$ is called the \Alert{domain} of $f$. \pause
+      \item The set $B$ is called the \Balert{codomain} of $f$. \pause
+      \item The \Palert{image} (or range) of $f$ is the set of all actual outputs:
+      \[\Image(f) := \{b\in B \mid f(a) = b \text{ for some } a\in A\}.\]
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{``Isomorphic''}
+  We can finally say what it means for two groups to be ``isomorphic''! \pause
+  \begin{block}{Definition}
+    Let $G$, $H$ be groups. $G$ is \Alert{isomorphic} to $H$ ($G\cong H$) if there exists an \Alert{isomorphism} $\phi: G\to H$.
+  \end{block} \pause 
+
+  \begin{block}{Okay, smartass, what's an isomorphism?} \pause
+    Let $G$, $H$ be groups. An \Alert{isomorphism} $\phi: G \to H$ is a bijective \Balert{homomorphism}.
+  \end{block} \pause
+
+  \begin{exampleblock}{Istg if you don't tell me right now what a homomorphism is --} \pause
+    A \Balert{homomorphism} is a \Balert{structure-preserving} function between groups.
+  \end{exampleblock}
+\end{frame}
+
+%%====================================================================
+\section{Homomorphisms!}
+%%====================================================================
+
+\begin{frame}{Homomorphisms are structure-preserving functions}
+  Since groups aren't just sets, they deserve maps that aren't just functions. \pause
+
+  \begin{block}{Formal definition}
+    Let $(G, \cdot)$ and $(H, \star)$ be two groups. A \Balert{homomorphism} is a function $\phi: G\to H$ that \Balert{respects the operations}:
+    \[\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)\]
+  \end{block} \pause
+  \begin{alertblock}{Hey, c'mere} \pause
+    \begin{itemize}
+      \item Circle everything in that definition that is an element of $G$. \pause
+      \item Box everything in that definition that is an element of $H$.
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{An example homomorphism} %\Pause
+
+  Here is $D_3$ but I'm highlighting a subgroup $\Z_3 \leq D_3$: \pause
+
+  \[
+    \begin{tikzpicture}
+      \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt, minimum size=3.5mm]
+      \tikzstyle{v-y} = [circle, draw, fill=vYellow,inner sep=0pt, minimum size=3.5mm]
+      \tikzstyle{vFaded} = [circle, draw, gray,fill=lightgray,inner sep=0pt, minimum size=3.5mm]
+      \tikzstyle{rFaded} = [draw, thick, fRed, -stealth]
+      \tikzstyle{bbFaded} = [draw, thick, fBlue]
+      \tikzstyle{to} = [draw, dashed, ultra thick, -stealth]
+      \tikzstyle{every node}=[font=\small]
+      \node (e) at (0,2) [v-y] {$1$};
+      \node (r) at (0,1) [v-y] {$r$};
+      \node (r2) at (0,0) [v-y] {$r^2$};
+      \node (f) at (1.25,2) [vFaded] {$f$};
+      \node (r2f) at (1.25,1) [vFaded] {$r^2\!f$};
+      \node (rf) at (1.25,0) [vFaded] {$rf$};
+      \draw [r] (e) to (r);
+      \draw [r] (r) to (r2);
+      \draw [r] (r2) to [bend left] (e);
+      \draw [rFaded] (f) to (r2f);
+      \draw [rFaded] (r2f) to (rf);
+      \draw [rFaded] (rf) to [bend right] (f);
+      \draw [bbFaded] (e) to (f); 
+      \draw [bbFaded] (r) to (rf); 
+      \draw [bbFaded] (r2) to (r2f);
+    \end{tikzpicture}
+  \]
+  
+  
+  
+  When we say $\Z_3\leq D_3$, we really mean that \emph{the structure of
+  $\Z_3$ appears in $D_3$}. \medskip\Pause
+
+  This can be formalized by a homomorphism $\phi\colon\Z_3\to D_3$, defined by
+  $\phi\colon n\mapsto r^n$. \medskip\Pause
+
+  Let's check that $\phi$ meets the definition of being a homomorphism, $\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)$:
+
+  \[\phi(n_1 + n_2) \pause 
+    = r^{n_1 + n_2} \pause
+    = r^{n_1} \cdot r^{n_2} \pause
+    = \phi(n_1) \cdot r^{n_2} \pause
+    = \phi(n_1) \cdot \phi(n_2)
+  \]
+  
+\end{frame}
+
+
+%%====================================================================
+\section{The end!}
+\end{document}
