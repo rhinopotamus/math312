@@ -219,7 +219,11 @@
   \end{block} \pause 
 
   \begin{block}{Okay, smartass, what's an isomorphism?} \pause
+<<<<<<< HEAD
     Let $G$, $H$ be groups. An \Alert{isomorphism} $\phi: G \to H$ is a \Palert{bijective} \Balert{homomorphism}.
+=======
+    Let $G$, $H$ be groups. An \Alert{isomorphism} $\phi: G \to H$ is a bijective \Balert{homomorphism}.
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
   \end{block} \pause
 
   \begin{exampleblock}{Istg if you don't tell me right now what a homomorphism is --} \pause
@@ -235,8 +239,13 @@
   Since groups aren't just sets, they deserve maps that aren't just functions. \pause
 
   \begin{block}{Formal definition}
+<<<<<<< HEAD
     Let $(G, \star)$ and $(H, \odot)$ be two groups. A \Balert{homomorphism} is a function $\phi: G\to H$ that \Balert{respects the operations}:
     \[\phi(g_1 \star g_2) = \phi(g_1) \odot \phi(g_2)\]
+=======
+    Let $(G, \cdot)$ and $(H, \star)$ be two groups. A \Balert{homomorphism} is a function $\phi: G\to H$ that \Balert{respects the operations}:
+    \[\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)\]
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
   \end{block} \pause
   \begin{alertblock}{Hey, c'mere} \pause
     \begin{itemize}
@@ -246,6 +255,7 @@
   \end{alertblock}
 \end{frame}
 
+<<<<<<< HEAD
 \begin{frame}{Why this?}
   A common theme in various maths is that we study \Alert{objects} and then \Balert{maps between objects}.
 
@@ -267,11 +277,17 @@
   \end{exampleblock}
 \end{frame}
 
+=======
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 %%====================================================================
 
 \begin{frame}{An example homomorphism} %\Pause
 
+<<<<<<< HEAD
   Here is $D_3$ but I'm highlighting a subgroup that ``looks like'' $\Z_3$:
+=======
+  Here is $D_3$ but I'm highlighting a subgroup $\Z_3 \leq D_3$: \pause
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   \[
     \begin{tikzpicture}
@@ -298,14 +314,27 @@
       \draw [bbFaded] (r) to (rf); 
       \draw [bbFaded] (r2) to (r2f);
     \end{tikzpicture}
+<<<<<<< HEAD
   \] \pause
+=======
+  \]
+  
+  
+  
+  When we say $\Z_3\leq D_3$, we really mean that \emph{the structure of
+  $\Z_3$ appears in $D_3$}. \medskip\Pause
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   This can be formalized by a homomorphism $\phi\colon\Z_3\to D_3$, defined by
   $\phi\colon n\mapsto r^n$. \medskip\Pause
 
+<<<<<<< HEAD
   Let's check that $\phi$ meets the definition of being a homomorphism,  \[\phi(g_1 \star g_2) = \phi(g_1) \odot \phi(g_2)\]
 
   What is the operation in $\Z_3$? \pause in $D_3$? \pause
+=======
+  Let's check that $\phi$ meets the definition of being a homomorphism, $\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)$:
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   \[\phi(n_1 + n_2) \pause 
     = r^{n_1 + n_2} \pause
@@ -316,6 +345,7 @@
   
 \end{frame}
 
+<<<<<<< HEAD
 %%====================================================================
 
 \begin{frame}{Some more fun examples}
@@ -1543,6 +1573,8 @@
   \]
   
 \end{frame}
+=======
+>>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
 %%====================================================================
 \section{The end!}
