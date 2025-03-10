@@ -283,17 +283,19 @@ Do \Alert{a few of} Problems \ref{elements} and \ref{orders}. How many is \Alert
         \end{scope}
         \begin{scope}[shift={(5,-2)},shorten >= -2pt,shorten <= -2pt, scale=0.8]
             \node(Q12) at (0,5) {$Q_{12}$};
-            \node(r) at (-1, 4) {$\<r\>$};
+            \node(r) at (-2, 4) {$\<r\>$};
             \node(s) at (0,3) { $\<s\>$};
             \node(r2s) at (1,3) { $\<r^2\!s\>$};
             \node(r4s) at (2,3) { $\<r^4\!s\>$};
-            \node(r2) at (-1, 2) {$\<r^2\>$};
+            \node(r2) at (-2, 2) {$\<r^2\>$};
             \node(r3) at (1,1) { $\<r^3\>$};
             \node(1) at (0,0) { $\left\<1\right\>$};
             \draw[f](Q12)--(s); \draw[f](Q12)--(r2s); \draw[f](Q12)--(r4s); 
             \draw[f](Q12)--(r);
             \draw[f](r3)--(s); \draw[f](r3)--(r2s); \draw[f](r3)--(r4s);
             \draw[f](r)--(r2);
+            \draw[xPurple](r3)--(r);
+            %\draw[xPurple](r3) to [bend left=20](r);
             \draw[f](1)--(r2); \draw[f](1)--(r3);
             \node at (3.5, 5.5) {\textbf{Order}};
             \node at (3.5, 5) {$12$};

@@ -140,6 +140,162 @@
   \end{enumerate}
 \end{frame}
 
+%%====================================================================
+\section{First, something from the hw}
+%%====================================================================
+
+\begin{frame}{The quotient $G/Z(G)$ can \emph{never} be a nontrivial cyclic subgroup}
+  
+  \begin{block}{From homework:}
+    If $G/Z(G)$ is cyclic, then $G$ is abelian.
+  \end{block}
+
+  \vspace{-4mm}
+
+  %% Shoebox diagram of G/Z(G), and the subgroup lattice of C7xC6.
+  \[
+  \begin{tikzpicture}[scale=.7]
+    %%
+    \newcommand\Hh{6.5} % height of 42
+    \newcommand\Hg{5.5} % height of 21
+    \newcommand\Hf{4.5} % height of 14
+    \newcommand\He{3.5} % height of 7
+    \newcommand\Hd{2.5} % height of 6
+    \newcommand\Hc{1.5} % height of 3
+    \newcommand\Hb{1} % height of 2
+    \newcommand\Ha{0} % height of 1
+    \tikzstyle{every node}=[font=\footnotesize,anchor=south]
+    \begin{scope}[shift={(0,0)},scale=1.5,xscale=1.1]
+      \node at (2.25,3.25)
+            {\normalsize \emph{$\bm{G/Z(G)=\<gZ\>}$, where $Z\!=\!Z(G)$}};
+      \draw[thin] (0,0) rectangle (4.5,3);
+      \draw[thin,fill=faded] (0,0) rectangle (4.5,.5);
+      \draw[thin] (0,2.5) to (4.5,2.5);
+      \draw[thin] (0,1.5) to (4.5,1.5);
+      \draw[thin] (0,1) to (4.5,1);
+      %%
+      \node[anchor=west] at (.2,2.77) {$\bullet\;g^{n-1}$};
+      \node[anchor=west] at (.85,2.77) {$\bullet\;g^{n-1}\!z_1$};
+      \node[anchor=west] at (1.7,2.77) {$\bullet\;g^{n-1}\!z_2$};
+      \node[anchor=west] at (2.55,2.77) {$\bullet\;g^{n-1}\!z_3$};
+      \node[anchor=west] at (3.35,2.77) {$\cdots$};
+      \node[anchor=east] at (4.43,2.77) {\normalsize $\bm{g^{n-1}\!Z}$};
+      %%
+      \node at (2.25,1.77) {\Large $\bm\vdots$};
+      %%
+      \node[anchor=west] at (.2,1.27) {$\bullet\;g^2$};
+      \node[anchor=west] at (.85,1.27) {$\bullet\;g^2z_1$};
+      \node[anchor=west] at (1.7,1.27) {$\bullet\;g^2\!z_2$};
+      \node[anchor=west] at (2.55,1.27) {$\bullet\;g^2\!z_3$};
+      \node[anchor=west] at (3.35,1.27) {$\cdots$};
+      \node[anchor=east] at (4.43,1.27) {\normalsize $\bm{g^2\!Z}$};
+      %%
+      \node[anchor=west] at (.2,.77) {$\bullet\;g$};
+      \node[anchor=west] at (.85,.77) {$\bullet\;gz_1$};
+      \node[anchor=west] at (1.7,.77) {$\bullet\;gz_2$};
+      \node[anchor=west] at (2.55,.77) {$\bullet\;gz_3$};
+      \node[anchor=west] at (3.35,.77) {$\cdots$};
+      \node[anchor=east] at (4.43,.77) {\normalsize $\bm{gZ}$};
+      %%
+      \node[anchor=west] at (.2,.27) {$\bullet\;e$};
+      \node[anchor=west] at (.85,.27) {$\bullet\;z_1$};
+      \node[anchor=west] at (1.7,.27) {$\bullet\;z_2$};
+      \node[anchor=west] at (2.55,.27) {$\bullet\;z_3$};
+      \node[anchor=west] at (3.35,.27) {$\cdots$};
+      \node[anchor=east] at (4.43,.27) {\normalsize $\bm{Z}$};
+      %%
+    \end{scope}
+    %%
+    \begin{scope}[shift={(11.8,-1.25)},scale=1,shorten >= -1pt, shorten <= -1pt,xscale=.7,yscale=1.15]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node(G) at (-1.75,\Hh) {\small $C_7\!\rtimes\!C_6$};
+      \node(C7-C3) at (-4.25,\Hg) {\small $C_7\!\rtimes\!C_3$};
+      \node(D7) at (-1.75,\Hf) {\small $D_7$};
+      \node(C7) at (-4.25,\He) {\small $C_7$};
+      \node(C3-1) at (-1.25,\Hc) {$C_3$};
+      \node(C3-2) at (-.75,\Hc) {$C_3$};
+      \node(C3-3) at (-.25,\Hc) {$C_3$};
+      \node(C3-4) at (.25,\Hc) {$C_3$};
+      \node(C3-5) at (.75,\Hc) {$C_3$};
+      \node(C3-6) at (1.25,\Hc) {$C_3$};
+      \node(C3-7) at (1.75,\Hc) {$C_3$};
+      \node(C6-1) at (3.25,\Hd) {$C_6$};
+      \node(C6-2) at (3.75,\Hd) {$C_6$};
+      \node(C6-3) at (4.25,\Hd) {$C_6$};
+      \node(C6-4) at (4.75,\Hd) {$C_6$};
+      \node(C6-5) at (5.25,\Hd) {$C_6$};
+      \node(C6-6) at (5.75,\Hd) {$C_6$};
+      \node(C6-7) at (6.25,\Hd) {$C_6$};
+      \node(C2-1) at (3.25,\Hb) {$C_2$};
+      \node(C2-2) at (3.75,\Hb) {$C_2$};
+      \node(C2-3) at (4.25,\Hb) {$C_2$};
+      \node(C2-4) at (4.75,\Hb) {$C_2$};
+      \node(C2-5) at (5.25,\Hb) {$C_2$};
+      \node(C2-6) at (5.75,\Hb) {$C_2$};
+      \node(C2-7) at (6.25,\Hb) {$C_2$};
+      \node(1) at (0,\Ha) {\small $C_1$};
+      \draw[faded] (G) to (C7-C3);
+      \draw[faded] (G) to (D7);
+      \draw[faded] (G) to (C6-1);
+      \draw[faded] (G) to (C6-2);
+      \draw[faded] (G) to (C6-3);
+      \draw[faded] (G) to (C6-4);
+      \draw[faded] (G) to (C6-5);
+      \draw[faded] (G) to (C6-6);
+      \draw[faded] (G) to (C6-7);
+      \draw[faded] (D7) to (C7);
+      \draw[faded] (D7) to (C2-1);
+      \draw[faded] (D7) to (C2-2);
+      \draw[faded] (D7) to (C2-3);
+      \draw[faded] (D7) to (C2-4);
+      \draw[faded] (D7) to (C2-5);
+      \draw[faded] (D7) to (C2-6);
+      \draw[faded] (D7) to (C2-7);
+      \draw[faded] (C7-C3) to (C7);
+      \draw[faded] (C7) to (1);
+      \draw[faded] (C7-C3) to (C3-1);
+      \draw[faded] (C7-C3) to (C3-2);
+      \draw[faded] (C7-C3) to (C3-3);
+      \draw[faded] (C7-C3) to (C3-4);
+      \draw[faded] (C7-C3) to (C3-5);
+      \draw[faded] (C7-C3) to (C3-6);
+      \draw[faded] (C7-C3) to (C3-7);
+      \draw[faded] (C6-1) to (C2-1);
+      \draw[faded] (C6-2) to (C2-2);
+      \draw[faded] (C6-3) to (C2-3);
+      \draw[faded] (C6-4) to (C2-4);
+      \draw[faded] (C6-5) to (C2-5);
+      \draw[faded] (C6-6) to (C2-6);
+      \draw[faded] (C6-7) to (C2-7);
+      \draw[faded] (C6-1) to (C3-1);
+      \draw[faded] (C6-2) to (C3-2);
+      \draw[faded] (C6-3) to (C3-3);
+      \draw[faded] (C6-4) to (C3-4);
+      \draw[faded] (C6-5) to (C3-5);
+      \draw[faded] (C6-6) to (C3-6);
+      \draw[faded] (C6-7) to (C3-7);
+      \draw[faded] (1) to (C3-1);
+      \draw[faded] (1) to (C3-2);
+      \draw[faded] (1) to (C3-3);
+      \draw[faded] (1) to (C3-4);
+      \draw[faded] (1) to (C3-5);
+      \draw[faded] (1) to (C3-6);
+      \draw[faded] (1) to (C3-7);
+      \draw[faded] (1) to (C2-1);
+      \draw[faded] (1) to (C2-2);
+      \draw[faded] (1) to (C2-3);
+      \draw[faded] (1) to (C2-4);
+      \draw[faded] (1) to (C2-5);
+      \draw[faded] (1) to (C2-6);
+      \draw[faded] (1) to (C2-7);
+    \end{scope}
+    \end{tikzpicture}
+%    \caption{Left: If $G/Z(G)$ is cyclic, then arbitrary elements $a,b\in G$ must have the form $a=g^iz_1$ and $b=g^jz_2$ for some $i,j\in\Z$ and $z_1,z_2\in Z(G)$. Right: The center of $G=C_7\!\rtimes\!C_6$ cannot be $C_7\!\rtimes\!C_3$, $D_7$, and $C_7$ because these all have cyclic quotients with $G$.}\label{fig11:F-contraction-lemma}
+  \]
+  Note that if $G$ is abelian, then $Z(G)=G$.
+  
+\end{frame}
+
 
 %%====================================================================
 \section{Definition and notation time!}
@@ -219,11 +375,7 @@
   \end{block} \pause 
 
   \begin{block}{Okay, smartass, what's an isomorphism?} \pause
-<<<<<<< HEAD
     Let $G$, $H$ be groups. An \Alert{isomorphism} $\phi: G \to H$ is a \Palert{bijective} \Balert{homomorphism}.
-=======
-    Let $G$, $H$ be groups. An \Alert{isomorphism} $\phi: G \to H$ is a bijective \Balert{homomorphism}.
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
   \end{block} \pause
 
   \begin{exampleblock}{Istg if you don't tell me right now what a homomorphism is --} \pause
@@ -239,13 +391,8 @@
   Since groups aren't just sets, they deserve maps that aren't just functions. \pause
 
   \begin{block}{Formal definition}
-<<<<<<< HEAD
     Let $(G, \star)$ and $(H, \odot)$ be two groups. A \Balert{homomorphism} is a function $\phi: G\to H$ that \Balert{respects the operations}:
     \[\phi(g_1 \star g_2) = \phi(g_1) \odot \phi(g_2)\]
-=======
-    Let $(G, \cdot)$ and $(H, \star)$ be two groups. A \Balert{homomorphism} is a function $\phi: G\to H$ that \Balert{respects the operations}:
-    \[\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)\]
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
   \end{block} \pause
   \begin{alertblock}{Hey, c'mere} \pause
     \begin{itemize}
@@ -255,7 +402,6 @@
   \end{alertblock}
 \end{frame}
 
-<<<<<<< HEAD
 \begin{frame}{Why this?}
   A common theme in various maths is that we study \Alert{objects} and then \Balert{maps between objects}.
 
@@ -277,17 +423,11 @@
   \end{exampleblock}
 \end{frame}
 
-=======
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 %%====================================================================
 
 \begin{frame}{An example homomorphism} %\Pause
 
-<<<<<<< HEAD
   Here is $D_3$ but I'm highlighting a subgroup that ``looks like'' $\Z_3$:
-=======
-  Here is $D_3$ but I'm highlighting a subgroup $\Z_3 \leq D_3$: \pause
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   \[
     \begin{tikzpicture}
@@ -314,27 +454,14 @@
       \draw [bbFaded] (r) to (rf); 
       \draw [bbFaded] (r2) to (r2f);
     \end{tikzpicture}
-<<<<<<< HEAD
   \] \pause
-=======
-  \]
-  
-  
-  
-  When we say $\Z_3\leq D_3$, we really mean that \emph{the structure of
-  $\Z_3$ appears in $D_3$}. \medskip\Pause
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   This can be formalized by a homomorphism $\phi\colon\Z_3\to D_3$, defined by
   $\phi\colon n\mapsto r^n$. \medskip\Pause
 
-<<<<<<< HEAD
   Let's check that $\phi$ meets the definition of being a homomorphism,  \[\phi(g_1 \star g_2) = \phi(g_1) \odot \phi(g_2)\]
 
   What is the operation in $\Z_3$? \pause in $D_3$? \pause
-=======
-  Let's check that $\phi$ meets the definition of being a homomorphism, $\phi(g_1 \cdot g_2) = \phi(g_1) \star \phi(g_2)$:
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
   \[\phi(n_1 + n_2) \pause 
     = r^{n_1 + n_2} \pause
@@ -345,7 +472,6 @@
   
 \end{frame}
 
-<<<<<<< HEAD
 %%====================================================================
 
 \begin{frame}{Some more fun examples}
@@ -506,72 +632,6 @@
   \end{tikzpicture}
   \]
   
-\end{frame}
-
-%%====================================================================
-\section{Properties of homomorphisms!}
-%%====================================================================
-
-\begin{frame}{Some basic properties of homomorphisms}
-  \begin{block}{Proposition}
-    For any homomorphism $\phi\colon G\to H$: \Pause
-    \begin{enumerate}[(i)]
-    \item ``{$\phi$ sends the identity to the identity}'' 
-    \hfill \pause $\phi(1_G) = 1_H$ \pause
-    \item ``{$\phi$ sends inverses to inverses}''
-    \hfill \pause $\phi(g\inv) = \phi(g)\inv$ \pause
-    \item ``{$\phi$ sends powers to powers}'' \pause
-    \item ``{$\phi$ sends orbits to orbits}'' \pause
-    \item ``{$\phi$ sends conjugates to conjugates}'' \pause
-    \item ``{$\phi$ is determined by what it does to generators}'' \pause
-    \end{enumerate}
-  \end{block}
-  \medskip
-  What other properties along these lines can you conjecture? \pause
-  \begin{exampleblock}{Homework}
-    If $|g|$ is finite, then $|\phi(g)|$ must divide $|g|$.
-  \end{exampleblock}
-\end{frame}
-
-%%====================================================================
-
-\begin{frame}{A word of caution} %\Pause
-  
-  Just because a homomorphism $\phi\colon G\to H$ is determined by the
-  image of its generators does \emph{not} mean that every such image
-  will work.
-  
-  \medskip\Pause
-  
-  For example, let's try to define a homomorphism $\phi\colon
-  \Z_3\to\Z_4$ by $\phi(1)=1$. \Pause Then we get \vspace{-2mm}
-  \[
-  \def\arraystretch{1.75}
-  \begin{array}{l}
-    \phi(2)\Pause=\phi(1+1)\Pause=\phi(1)+\phi(1)\Pause=2,\qquad\Pause
-    \\ \phi(0)\Pause=\phi(1+1+1)\Pause=\phi(1)+\phi(1)+\phi(1)\Pause=3\neq
-    0. \Pause
-  \end{array}
-  \]
-  This is \emph{impossible}, because $\phi(0)$ must be $0\in\Z_4$.
-  
-  \medskip\Pause
-  
-  That's not to say that there isn't a homomorphism
-  $\phi\colon\Z_3\to\Z_4$; note that there is always the
-  \Alert{trivial homomorphism} between two groups:
-  \[
-  \phi\colon G\longto H\,,\qquad\phi(g)=1_H\quad\text{for all $g\in G$}.
-  \]
-  
-  \Pause
-  
-  \begin{exampleblock}{Exercise}
-    Show that there is no \Alert{embedding} $\phi\colon\Z_n\into\Z$, for
-    $n\geq 2$. That is, \emph{any} such homomorphism must satisfy
-    $\phi(1)=0$.
-  \end{exampleblock}
-
 \end{frame}
 
 %%====================================================================
@@ -988,6 +1048,74 @@
   \Pause However, there are other isomorphisms between these groups. 
   
 \end{frame}
+
+
+%%====================================================================
+\section{Properties of homomorphisms!}
+%%====================================================================
+
+\begin{frame}{Some basic properties of homomorphisms}
+  \begin{block}{Proposition}
+    For any homomorphism $\phi\colon G\to H$: \Pause
+    \begin{enumerate}[(i)]
+    \item ``{$\phi$ sends the identity to the identity}'' 
+    \hfill \pause $\phi(1_G) = 1_H$ \pause
+    \item ``{$\phi$ sends inverses to inverses}''
+    \hfill \pause $\phi(g\inv) = \phi(g)\inv$ \pause
+    \item ``{$\phi$ sends powers to powers}'' \pause
+    \item ``{$\phi$ sends orbits to orbits}'' \pause
+    \item ``{$\phi$ sends conjugates to conjugates}'' \pause
+    \item ``{$\phi$ is determined by what it does to generators}'' \pause
+    \end{enumerate}
+  \end{block}
+  \medskip
+  What other properties along these lines can you conjecture? \pause
+  \begin{exampleblock}{Homework}
+    If $|g|$ is finite, then $|\phi(g)|$ must divide $|g|$.
+  \end{exampleblock}
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{A word of caution} %\Pause
+  
+  Just because a homomorphism $\phi\colon G\to H$ is determined by the
+  image of its generators does \emph{not} mean that every such image
+  will work.
+  
+  \medskip\Pause
+  
+  For example, let's try to define a homomorphism $\phi\colon
+  \Z_3\to\Z_4$ by $\phi(1)=1$. \Pause Then we get \vspace{-2mm}
+  \[
+  \def\arraystretch{1.75}
+  \begin{array}{l}
+    \phi(2)\Pause=\phi(1+1)\Pause=\phi(1)+\phi(1)\Pause=2,\qquad\Pause
+    \\ \phi(0)\Pause=\phi(1+1+1)\Pause=\phi(1)+\phi(1)+\phi(1)\Pause=3\neq
+    0. \Pause
+  \end{array}
+  \]
+  This is \emph{impossible}, because $\phi(0)$ must be $0\in\Z_4$.
+  
+  \medskip\Pause
+  
+  That's not to say that there isn't a homomorphism
+  $\phi\colon\Z_3\to\Z_4$; note that there is always the
+  \Alert{trivial homomorphism} between two groups:
+  \[
+  \phi\colon G\longto H\,,\qquad\phi(g)=1_H\quad\text{for all $g\in G$}.
+  \]
+  
+  \Pause
+  
+  \begin{exampleblock}{Exercise}
+    Show that there is no \Alert{embedding} $\phi\colon\Z_n\into\Z$, for
+    $n\geq 2$. That is, \emph{any} such homomorphism must satisfy
+    $\phi(1)=0$.
+  \end{exampleblock}
+
+\end{frame}
+
 
 %%====================================================================
 \section{Kernels!}
@@ -1573,8 +1701,6 @@
   \]
   
 \end{frame}
-=======
->>>>>>> 259279d3f34db266b608fa0d6d01bba6b6064834
 
 %%====================================================================
 \section{The end!}
