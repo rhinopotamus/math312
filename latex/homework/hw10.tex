@@ -1,0 +1,686 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+\newtheorem*{definition}{Definition}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{visualalgebra}
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+%##################################################################
+\begin{document}
+\section{Homework \#10 (due Apr 6)}
+
+\subsection*{Shoebox diagrams and the lattice theorem}
+
+Let $G$ be the \emph{semiabelian group} of order 16, defined by
+  the presentation
+  \[
+  \SA_8=\big\<r,s\mid r^8=s^2=1, srs=r^5\big\>
+  \]
+  A Cayley graph and subgroup lattice are shown below.
+  \vspace{-7mm}
+  
+  \[
+  \hspace*{-4mm}
+  \begin{tikzpicture}[scale=1.55]
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4.25,-2.15)},shorten >= -2pt, shorten <= -2pt,
+        scale=.7]
+      \tikzstyle{every node}=[font=\small]
+      %%
+      \node(G) at (3.5,6) {$\<r,s\>$};
+      \node(rs) at (3.5,4.5) {$\<rs\>$};
+      \node(r2-s) at (1.75,4.5) {$\<r^2,s\>$};
+      \node(r) at (5.25,4.5) {$\<r\>$};
+      \node(r4-s) at (0,3) {$\<r^4,s\>$};
+      \node(r2s) at (1.75,3) {$\<r^2s\>$};
+      \node(r2) at (3.5,3) {$\<r^2\>$};
+      \node(s) at (-1.75,1.5) {$\<s\>$};
+      \node(r4s) at (0,1.5) {$\<r^4s\>$};
+      \node(r4) at (1.75,1.5) {$\<r^4\>$};
+      \node(1) at (0,0) {$\<1\>$};
+      \draw[f] (1) to (s);
+      \draw[f] (1) to (r4s);
+      \draw[f] (1) to (r4);
+      \draw[f] (s) to (r4-s);
+      \draw[f] (r4s) to (r4-s);
+      \draw[f] (r4) to (r4-s);
+      \draw[f] (r4) to (r2s);
+      \draw[f] (r4) to (r2);
+      \draw[f] (r4-s) to (r2-s);
+      \draw[f] (r2s) to (r2-s);
+      \draw[f] (r2) to (r2-s);
+      \draw[f] (r2) to (r);
+      \draw[f] (r2) to (rs);
+      \draw[f] (r2-s) to (G);
+      \draw[f] (r) to (G);
+      \draw[f] (rs) to (G);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+\begin{problem}
+  The subgroups $V=\<r^4,s\>$, $H=\<r^2s\>$, $K=\<r^2\>$, and $N=\<r^4\>$ are all normal (because they are unicorns). Highlight their cosets on a fresh Cayley diagram by colors. \\(I put multiple copies of the Cayley diagram at the end of this document).
+\end{problem}
+
+\begin{problem}
+  For each of the quotients $G/V$, $G/H$, $G/K$, and $G/N$, construct a multiplication table and a Cayley graph, labeling the nodes with elements (which are cosets, yes?).
+\end{problem}
+
+\begin{problem}\label{shoebox}
+  Let $N=\<r^4\>$. The shaded region below shows $\<rN\>$, which is an order-$4$ cyclic subgroup of $G/N$, and how the union of these four cosets is the order-$8$ subgroup $\<r\>$ of $G$. Construct analogous ``shoebox diagrams'' for the other five non-trivial proper subgroups of $G/N$.
+    
+    \vspace{-2mm}
+    
+    \[
+    \hspace*{-5mm}
+    \begin{tikzpicture}[xscale=.9]
+      \tikzstyle{every node}=[font=\small,anchor=south]
+      %%
+      \begin{scope}[shift={(0,0)}]
+        \draw[thin,fill=faded] (0,0) rectangle (2,3.2);
+        \draw[thin] (0,2.4) to (4,2.4); 
+        \draw[thin] (0,1.6) to (4,1.6);
+        \draw[thin] (0,.8) to (4,.8);
+        \draw[thin] (2,0) to (4,0);
+        \draw[thin] (2,3.2) to (4,3.2);
+        \draw[thin] (4,0) to (4,3.2);
+        \node at (1,.1) {$N$};
+        \node at (3,.1) {$sN$};
+        \node at (1,.9) {$rN$};
+        \node at (3,.9) {$rsN$};
+        \node at (1,1.7) {$r^2N$};
+        \node at (3,1.7) {$r^2sN$};
+        \node at (1,2.5) {$r^3N$};
+        \node at (3,2.5) {$r^3sN$};
+        \node at (2,-.8) {$\<rN\>\leq G/N$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(6,0)}]
+        \draw[thin,fill=faded] (0,0) rectangle (2,3.2);
+        \draw[thin] (0,2.4) to (4,2.4); 
+        \draw[thin] (0,1.6) to (4,1.6);
+        \draw[thin] (0,.8) to (4,.8);
+        \draw[thin] (2,0) to (4,0);
+        \draw[thin] (2,3.2) to (4,3.2);
+        \draw[thin] (4,0) to (4,3.2);
+        \node at (.5,.15) {$1$};
+        \node at (1.5,.15) {$r^4$};
+        \node at (2.5,.15) {$s$};
+        \node at (3.5,.15) {$r^4s$};
+        \node at (.5,.95) {$r$};
+        \node at (1.5,.95) {$r^5$};
+        \node at (2.5,.95) {$rs$};
+        \node at (3.5,.95) {$r^5s$};
+        \node at (.5,1.75) {$r^2$};
+        \node at (1.5,1.75) {$r^6$};
+        \node at (2.5,1.75) {$r^2s$};
+        \node at (3.5,1.75) {$r^6s$};
+        \node at (.5,2.55) {$r^3$};
+        \node at (1.5,2.55) {$r^7$};
+        \node at (2.5,2.55) {$r^3s$};
+        \node at (3.5,2.55) {$r^7s$};
+        \node at (2,-.8) {$\<r\>/N\leq G/N$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(12,0)}]
+        \draw[thin,fill=faded] (0,0) rectangle (2,3.2);
+        \draw[thin] (2,0) to (4,0);
+        \draw[thin] (2,3.2) to (4,3.2);
+        \draw[thin] (4,0) to (4,3.2);
+        \node at (.5,.15) {$1$};
+        \node at (1.5,.15) {$r^4$};
+        \node at (2.5,.15) {$s$};
+        \node at (3.5,.15) {$r^4s$};
+        \node at (.5,.95) {$r$};
+        \node at (1.5,.95) {$r^5$};
+        \node at (2.5,.95) {$rs$};
+        \node at (3.5,.95) {$r^5s$};
+        \node at (.5,1.75) {$r^2$};
+        \node at (1.5,1.75) {$r^6$};
+        \node at (2.5,1.75) {$r^2s$};
+        \node at (3.5,1.75) {$r^6s$};
+        \node at (.5,2.55) {$r^3$};
+        \node at (1.5,2.55) {$r^7$};
+        \node at (2.5,2.55) {$r^3s$};
+        \node at (3.5,2.55) {$r^7s$};
+        \node at (2,-.8) {$\<r\>\leq G$};
+      \end{scope}
+    \end{tikzpicture}
+    \] \vspace{-9mm}
+\end{problem}
+
+\begin{problem}\label{lattice}
+  Quotients are stalactites: Construct the subgroup lattice of $G/N$ and compare to the portion of the subgroup lattice of $G$ that is above $N$.
+\end{problem}
+
+\begin{problem}
+  For each subgroup $M/N$ from Problem \ref{shoebox}, determine what the quotient of $G/N$ (order $8$) by $M/N$ (order $4$ or $2$) is isomorphic to. Justify your answer.
+\end{problem}
+
+\begin{problem}
+  One step of Problem \ref{shoebox} consisted of starting with $G$, taking the quotient by $N$, and then taking the subgroup generated by $r^2N$ and $sN$. Try doing these steps in the reverse order. That is: \emph{start with $G$, first take the subgroup $\<r^2,s\>$, and then take the quotient by $N$}.  
+\end{problem}
+
+\begin{problem}
+  Repeat Problem \ref{shoebox} and Problem \ref{lattice} for subgroups $V=\<r^4,s\>$, $H=\<r^2s\>$, and $K=\<r^2\>$ of $G$. This time, include the trivial and proper subgroups for each.
+\end{problem}
+
+%%======================================================================
+
+\subsection*{Playing with $\SL(2, \Z_3)$}
+
+Ok, so $\SL(2, \Z_3)$ (also written $\SL_2(\Z_3)$ or sometimes even $\SL(2,3)$) is the ``special linear group'' of $2\times 2$ matrices whose entries come from $\Z_3$ and who have determinant 1. Throughout these problems, I'll refer to $\SL(2, \Z_3)$ as $G$. (See some notes on the next page.)
+
+\begin{problem}\label{sl23-list}
+  We decided there are 24 elements of $G$; please list them out, but group them up by order. Hint: there is one matrix of order 1 (obviously), one of order 2, eight of order 3, six of order 4, and then eight of order 6. (See some LaTeX matrix tips in the source here.)
+\end{problem}
+
+%%======================================================================
+% Matrices in LaTeX:
+% \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+% or:
+% \begin{pmatrix} a & b \\ c & d \end{pmatrix} 
+% depending on personal preference
+
+\begin{problem} \label{generators}
+  My two favorite elements of $G$ are \(a = \begin{bmatrix}0 & -1 \\ 1 & 1\end{bmatrix}\) and \(b = \begin{bmatrix}1& -1 \\ 1 & 0\end{bmatrix}\), because they generate the whole group (!). Convince yourself that this is true by writing each of the matrices in Problem \ref{sl23-list} as some product involving powers of $a$ and $b$.
+\end{problem}
+
+\begin{problem}
+  Here is the subgroup lattice of $G$. Turns out that all but one of the proper subgroups are cyclic, and the one that's not cyclic is generated by two elements. Find generators for each of these subgroups in terms of $a$ and $b$. \\(It'll be heplful to think about possible orders for each row of the lattice.)
+  \[
+    \hspace*{-2mm}
+    \begin{tikzpicture}[node distance=1cm,shorten >= -2pt, shorten <= -2pt,scale=1]
+      %%
+      \begin{scope}[shift={(0,0)}]
+        %\tikzstyle{every node}=[font=\footnotesize]
+        \node (1) {$\<1\>$};
+        \node (a3) at (-2.5,2) {$\<\quad\>$};
+        \node (a2) at (.9,3) {$\<\quad\>$};
+        \node (b2) at (2,3) {$\<\quad\>$};
+        \node (abab) at (3.1,3) {$\<\quad\>$};
+        \node (baba) at (4.35,3) {$\<\quad\>$};
+        \node (a2b) at (-3.75,4) {$\<\quad\>$};
+        \node (aba) at (-2.5,4) {$\<\quad\>$};
+        \node (ab2) at (-1.25,4) {$\<\quad\>$};
+        \node (a) at (.5,5) {$\<\quad\>$};
+        \node (b) at (1.6,5) {$\<\quad\>$};
+        \node (ab) at (2.7,5) {$\<\quad\>$};
+        \node (ba) at (3.95,5) {$\<\quad\>$};
+        \node (a2b-ab2) at (-2.5,6) {$\<\quad, \quad\>$};
+        \node (G) at (0,8) {$G = \SL(2,\Z_3) = \<a,b\>$};
+        \draw (1) -- (a3);
+        \draw (1) -- (a2);
+        \draw (1) -- (b2);
+        \draw (1) -- (abab);
+        \draw (1) -- (baba);
+        \draw (a3) -- (a2b);
+        \draw (a3) -- (aba);
+        \draw (a3) -- (ab2);
+        \draw (a3) -- (a);
+        \draw (a3) -- (b);
+        \draw (a3) -- (ab);
+        \draw (a3) -- (ba);
+        \draw (a2) -- (a);
+        \draw (b2) -- (b);
+        \draw (abab) -- (ab);
+        \draw (baba) -- (ba);
+        \draw (a2b) -- (a2b-ab2);
+        \draw (aba) -- (a2b-ab2);
+        \draw (ab2) -- (a2b-ab2);
+        \draw (G) -- (a2b-ab2);
+        \draw (G) -- (a);
+        \draw (G) -- (b);
+        \draw (G) -- (ab);
+        \draw (G) -- (ba);
+      \end{scope}
+    \end{tikzpicture}
+    \]
+\end{problem}
+
+\begin{problem}
+  There are exactly two nontrivial proper normal subgroups of $G = \SL(2, \Z_3)$; let's call 'em $N\normal G$ and $K\normal G$. Which ones are they in the lattice?
+\end{problem}
+
+\begin{problem}
+  Quotients are stalactites; use the correspondence theorem to quickly and easily draw the subgroup lattices of $G/N$ and $G/K$. Decide what they're isomorphic to.
+\end{problem}
+
+\begin{problem}
+  Subgroups are stalagmites; find a subgroup $H < G$ such that $H \cong Q_8$ by spotting the lattice of $Q_8$ as a stalagmite.
+\end{problem}
+
+\begin{problem}
+  Every subgroup of $Q_8$ is normal, but the subgroups of $H$ aren't all normal in $G$; indeed, that set of three subgroups in the middle are all conjugate to each other. Why doesn't this contradict the lattice theorem?
+\end{problem}
+
+\hrulefill
+
+\medskip
+
+Some notes about calculations: You can certainly just do a bunch of matrix multiplication in your favorite program and then reduce the coordinates mod 3. However, it's also fun to use a system like \href{https://sagecell.sagemath.org/}{Sage}, which is programmed specifically for group theory. Such a system can make a lot of these computations wayyyyy more streamlined.
+
+\medskip
+
+At \href{https://sagecell.sagemath.org/}{https://sagecell.sagemath.org/}, you can use Sage directly without having to install anything. For instance, the following code sets $G$ as $\SL(2, \Z_3)$, establishes the generators $a$ and $b$ from Problem \ref{generators} as elements of $G$, and calculates the order of $a$:
+
+\begin{verbatim}
+G = SL(2,3)
+a = G(matrix(2,2,[0,2,1,1]))
+b = G(matrix(2,2,[1,2,1,0]))
+a.order()
+\end{verbatim}
+
+There are a whole bunch of other neat commands you can use, such as
+\begin{itemize}
+  \item \verb|G.list()|
+  \item \verb|G.conjugacy_classes_representatives()|
+  \item \verb|G.subgroup([a])| and \verb|G.subgroup([a]).list()|
+  \item (As you'd expect, \verb|G.subgroup([a, b]).list()| is the whole group $G$)
+\end{itemize} 
+
+Lots of other things are listed in the Sage reference documents. See, e.g., \href{https://doc.sagemath.org/html/en/reference/groups/sage/groups/matrix_gps/matrix_group.html}{the base class for matrix groups} and \href{https://doc.sagemath.org/html/en/reference/groups/sage/groups/group.html}{the base class for groups}. Click around in the reference list and you'll learn lots more interesting stuff.
+
+\newpage
+
+\subsection*{A bunch of copies of the Cayley diagram of $\SA_{8}$}
+
+Looks like I can juuuuuust fit 6 copies on a page.
+
+\[
+  \hspace*{-4mm}
+  \begin{tikzpicture}[scale=1.55]
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+    \begin{scope}[shift={(5,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+  \end{tikzpicture}
+\]
+\[
+  \hspace*{-4mm}
+  \begin{tikzpicture}[scale=1.55]
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+    \begin{scope}[shift={(5,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+  \end{tikzpicture}
+\]
+\[
+  \hspace*{-4mm}
+  \begin{tikzpicture}[scale=1.55]
+    \tikzstyle{R-in} = [draw, very thick, eRed,-stealth,bend right=12]
+    \tikzstyle{R-out} = [draw, very thick, eRed,-stealth,bend right=15]
+    %%
+    \begin{scope}[shift={(0,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+    \begin{scope}[shift={(5,0)},scale=1]
+      \tikzstyle{every node}=[font=\footnotesize]
+      \node (s) at (0:1.1) [v] {$s$};
+      \node (rs) at (45:1.15) [v] {$rs$};
+      \node (r2s) at (90:1.15) [v] {$r^2\!s$};
+      \node (r3s) at (135:1.15) [v] {$r^3\!s$};
+      \node (r4s) at (180:1.15) [v] {$r^4\!s$};
+      \node (r5s) at (225:1.15) [v] {$r^5\!s$};
+      \node (r6s) at (270:1.15) [v] {$r^6\!s$};
+      \node (r7s) at (315:1.15) [v] {$r^7\!s$};
+      %%
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (45:2) [v] {$r$};
+      \node (r2) at (90:2) [v] {$r^2$};
+      \node (r3) at (135:2) [v] {$r^3$};
+      \node (r4) at (180:2) [v] {$r^4$};
+      \node (r5) at (225:2) [v] {$r^5$};
+      \node (r6) at (270:2) [v] {$r^6$};
+      \node (r7) at (315:2) [v] {$r^7$};
+      %%
+      \draw [R-out] (1) to (r);
+      \draw [R-out] (r) to (r2);
+      \draw [R-out] (r2) to (r3);
+      \draw [R-out] (r3) to (r4);
+      \draw [R-out] (r4) to (r5);
+      \draw [R-out] (r5) to (r6);
+      \draw [R-out] (r6) to (r7);
+      \draw [R-out] (r7) to (1);
+      %%
+      \draw [r] (s) to (r5s);
+      \draw [r] (r5s) to (r2s);
+      \draw [r] (r2s) to (r7s);
+      \draw [r] (r7s) to (r4s);
+      \draw [r] (r4s) to (rs);
+      \draw [r] (rs) to (r6s);
+      \draw [r] (r6s) to (r3s);
+      \draw [r] (r3s) to (s);
+      %%
+      \draw [bb] (1) to (s); \draw [bb] (r) to (rs);
+      \draw [bb] (r2) to (r2s); \draw [bb] (r3) to (r3s);
+      \draw [bb] (r4) to (r4s); \draw [bb] (r5) to (r5s);
+      \draw [bb] (r6) to (r6s); \draw [bb] (r7) to (r7s);
+      %%
+      \node at (0,0) {\normalsize $\SA_8$}; 
+    \end{scope}
+  \end{tikzpicture}
+\]
+
+\end{document}
+
