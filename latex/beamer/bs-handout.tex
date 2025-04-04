@@ -1,0 +1,1220 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+\newtheorem*{definition}{Definition}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{visualalgebra}
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+\chead{\textbf{$D_4$ acting on ``binary squares''}}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+%##################################################################
+\begin{document}
+
+\label{rf}
+
+Let's say that $D_4 = \<\Alert{r}, \Balert{f}\>$, where $\Alert{r}$ is the $90^\circ$ ccw rotation and $\Balert{f}$ is the flip over a vertical axis. Draw arrows indicating what each element of $D_4$ does to this list of ``binary squares.''
+
+\[ %e
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$e$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %r
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %f
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Balert{f}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %r^2
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}^2$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %r^3
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}^3$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %rf
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}\Balert{f}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %r^2 f
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}^2 \Balert{f}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %r^3 f
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Alert{r}^3 \Balert{f}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\newpage
+
+
+What if $D_4 = \<\Balert{s}, \Galert{t}\>$, where $\Balert{s}$ is the flip over a vertical axis and $\Galert{t}$ is the flip over the up-right diagonal?
+
+\[ %e
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$e$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %s
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Balert{s}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %t
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Galert{t}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %st
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Balert{s}\Galert{t}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %sts
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Balert{s}\Galert{t}\Balert{s}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %stst
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Balert{s}\Galert{t}\Balert{s}\Galert{t}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %ts
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Galert{t}\Balert{s}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\vfill
+
+\[ %tst
+\begin{tikzpicture}[scale=1]
+    \node at (-1,.5) {$\Galert{t}\Balert{s}\Galert{t}$:};
+    \begin{scope}[shift={(0,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+        \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(4,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+    \begin{scope}[shift={(8,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+        \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(10,0)}]
+        \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+        \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+        \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+        \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+        \draw (0,0) rectangle (1,1);
+        \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+        \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{scope}
+\end{tikzpicture}
+\]
+
+\end{document}
