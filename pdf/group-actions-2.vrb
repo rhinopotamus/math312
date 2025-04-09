@@ -1,0 +1,234 @@
+\frametitle{The stabilizer subgroup}
+
+  Here is another example of an action (or $G$-set), this time of
+  $G=D_6$ acting on these six ``Pacman hexagons.'' \bigskip
+
+  Let $s$ be the highlighted hexagon, and $H=\stab(s)$. \medskip
+
+  %% Size-6 orbit of D_6 action on hexagons, shown twice
+  \[
+  \hspace*{-3mm}
+  \begin{tikzpicture}[scale=.48]
+    %% The size-6 orbit
+    \begin{scope}[shift={(0,0)},shorten >= -2pt, shorten <= -2pt]
+      \begin{scope}[shift={(0:4)}, shorten >= 0pt, shorten <= 0pt] %% H
+        \draw [yellow,rounded corners,fill=yellow] (0:1.3) -- (60:1.3) --
+        (120:1.3) -- (180:1.3) -- (240:1.3) -- (300:1.3) -- (0:1.3);
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$1$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (0-out) at (90:.866) {};
+        \node (0-in) at (270:.866) {};
+        \node at (330:1.7) {$\bm{H}$};
+        \Loop[dist=2cm,dir=NO,color=eBlue](.55,.866);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(60:4)}, shorten >= 0pt, shorten <= 0pt] %% Hr
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$1$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (60-out) at (150:.866) {};
+        \node (60-in) at (330:.866) {};
+        \node (60-bb) at (0,-.866) {};
+        \node at (30:1.7) {$\bm{Hr}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(120:4)}, shorten >= 0pt, shorten <= 0pt] %% Hr^2
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$1$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (120-out) at (210:.866) {};
+        \node (120-in) at (30:.866) {};
+        \node (120-bb) at (0,-.866) {};
+        \node at (150:1.7) {$\bm{Hr^2}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(180:4)}, shorten >= 0pt, shorten <= 0pt] %% Hr^3
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$1$};\node at (330:.6) {$0$};
+        \node (180-out) at (270:.866) {};
+        \node (180-in) at (90:.866) {};
+        \node at (210:1.7) {$\bm{Hr^3}$};
+        \Loop[dist=2cm,dir=NO,color=eBlue](-.55,.866);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(240:4)}, shorten >= 0pt, shorten <= 0pt] %% Hr^4
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$1$};
+        \node (240-out) at (330:.866) {};
+        \node (240-in) at (150:.866) {};
+        \node (240-bb) at (0,.866) {};
+        \node at (210:1.7) {$\bm{Hr^4}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(300:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actPurple] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$1$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (300-out) at (30:.866) {};
+        \node (300-in) at (210:.866) {};
+        \node (300-bb) at (0,.866) {};
+        \node at (330:1.7) {$\bm{Hr^5}$};
+      \end{scope}
+      %%
+      \draw [r] (0-out) to [bend right=12] (60-in);
+      \draw [r] (60-out) to [bend right=12] (120-in);
+      \draw [r] (120-out) to [bend right=12] (180-in);
+      \draw [r] (180-out) to [bend right=12] (240-in);
+      \draw [r] (240-out) to [bend right=12] (300-in);
+      \draw [r] (300-out) to [bend right=12] (0-in);
+      \draw [bb] (60-bb) to (300-bb);
+      \draw [bb] (120-bb) to (240-bb);
+      \node at (0,-6) {\emph{labeled by destinations}};
+    \end{scope}
+    %%
+    %% The size-6 orbit labeled by stablizers
+    %%
+    \begin{scope}[shift={(13,0)},shorten >= -2pt, shorten <= -2pt]
+      \begin{scope}[shift={(0:4)},shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$1$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (0-out) at (90:.866) {};
+        \node (0-in) at (270:.866) {};
+        \node at (330:1.7) {$\bm{\<f\>}$};
+        \Loop[dist=2cm,dir=NO,color=eBlue](.55,.866);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(60:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$1$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (60-out) at (150:.866) {};
+        \node (60-in) at (330:.866) {};
+        \node (60-bb) at (0,-.866) {};
+        \node at (30:1.9) {$\bm{\<r^4f\>}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(120:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$1$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (120-out) at (210:.866) {};
+        \node (120-in) at (30:.866) {};
+        \node (120-bb) at (0,-.866) {};
+        \node at (150:1.9) {$\bm{\<r^2f\>}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(180:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$1$};\node at (330:.6) {$0$};
+        \node (180-out) at (270:.866) {};
+        \node (180-in) at (90:.866) {};
+        \Loop[dist=2cm,dir=NO,color=eBlue](-.55,.866);
+        \node at (210:1.7) {$\bm{\<f\>}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(240:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actOrange] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actPurple] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$0$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$1$};
+        \node (240-out) at (330:.866) {};
+        \node (240-in) at (150:.866) {};
+        \node (240-bb) at (0,.866) {};
+        \node at (210:1.9) {$\bm{\<r^4f\>}$};
+      \end{scope}
+      %%
+      \begin{scope}[shift={(300:4)}, shorten >= 0pt, shorten <= 0pt]
+        \path[fill=actPurple] (0,0) -- (0:1) -- (60:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (60:1) -- (120:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (120:1) -- (180:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (180:1) -- (240:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (240:1) -- (300:1) -- (0,0);
+        \path[fill=actOrange] (0,0) -- (300:1) -- (0:1) -- (0,0);
+        \draw (0:1) -- (60:1) -- (120:1) -- (180:1) -- (240:1)--(300:1)--(0:1);
+        \node at (30:.6) {$1$};\node at (90:.6) {$0$};\node at (150:.6) {$0$};
+        \node at (210:.6) {$0$};\node at (270:.6) {$0$};\node at (330:.6) {$0$};
+        \node (300-out) at (30:.866) {};
+        \node (300-in) at (210:.866) {};
+        \node (300-bb) at (0,.866) {};
+        \node at (330:1.9) {$\bm{\<r^2f\>}$};
+      \end{scope}
+      %%
+      \draw [r] (0-out) to [bend right=12] (60-in);
+      \draw [r] (60-out) to [bend right=12] (120-in);
+      \draw [r] (120-out) to [bend right=12] (180-in);
+      \draw [r] (180-out) to [bend right=12] (240-in);
+      \draw [r] (240-out) to [bend right=12] (300-in);
+      \draw [r] (300-out) to [bend right=12] (0-in);
+      \draw [bb] (60-bb) to (300-bb);
+      \draw [bb] (120-bb) to (240-bb);
+      \node at (0,-6) {\emph{labeled by stabilizers}};
+    \end{scope}
+  \end{tikzpicture}
+  \]
+

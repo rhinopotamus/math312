@@ -1,0 +1,398 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+\newtheorem*{definition}{Definition}
+\newtheorem*{obs}{Orbit-Stabilizer Theorem}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{visualalgebra}
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+%##################################################################
+\begin{document}
+\section{Homework \#11 (due Apr 13)}
+
+\subsection*{Definitions, for easy reference}
+
+All these definitions look really similar but have important differences. 
+
+Suppose that $G$ acts on a set $S$ (on the right) via $\phi:G\to \Perm(S)$.
+
+\begin{definition}[or, really, notation]
+  For $s\in S$ and $g\in G$, we write $\mathbf{s.\phi(g)}$ to denote the new element of $S$ that $s$ is sent to when we push the $g$ button. \textbf{Emphasizing:} $s.\phi(g)$ is a new element of $S$!
+\end{definition}
+
+\begin{definition}[orbit]
+  The \Alert{orbit} of $s\in S$ is the set of all the new $s$'s that $s$ moves to: \[\orb(s) = \{s.\phi(g) \mid g\in G\}.\]
+  Note $\orb(s) \subseteq S$.
+\end{definition}
+
+\begin{definition}[stabilizer]
+  The \Balert{stabilizer} of $s\in S$ is the set of all the $g$'s that don't move $s$: \[\stab(s) = \{g \in G \mid s.\phi(g) = s\}.\]  
+  Note $\stab(s) \leq G$.
+\end{definition}
+
+\begin{definition}[fixator]
+  The \Galert{fixator} of $g\in G$ is the set of all the $s$'s that don't get moved by $g$: \[\fix(g) = \{s\in S \mid s.\phi(g) = s\}.\]  
+  Note $\fix(g) \subseteq S$.
+\end{definition}
+
+\begin{definition}[kernel]
+  The \Balert{kernel} of the action is the set of all the ``broken buttons:'' \[\Ker(\phi) = \{k\in G \mid \phi(k) = e\} = \{k\in G \mid s.\phi(k) = s \textbf{ for all }s\in S\}.\]
+  Note $\Ker(\phi) \leq G$, and indeed, $\displaystyle\Ker(\phi) = \bigcap_{s\in S} \Balert{\stab(s)}$.
+\end{definition}
+
+\begin{definition}[fixed points]
+  The \Galert{fixed points} of the action is the set of $s$'s that never move: \[\Fix(\phi) = \{s\in S \mid s.\phi(g) = s \textbf{ for all } g\in G\}.\]  
+  Note $\Fix(\phi) \subseteq S$, and indeed, $\displaystyle\Fix(\phi) = \bigcap_{g\in G} \Galert{\fix(g)}$.
+\end{definition}
+
+\hrulefill
+
+\begin{problem}
+  Write yourself a couple of good paragraphs discussing the similarities and differences between these five features of the group action.
+\end{problem}
+
+\newpage
+
+\subsection*{Propositions from class}
+
+\begin{problem}
+  Prove that for any $s\in S$, the set $\Balert{\stab(s)}$ is a subgroup of $G$. (See outline on slide 10.)
+\end{problem}
+
+\begin{problem}\label{conj-stab}
+  Prove that any two elements in the same orbit have conjugate stabilizers. Specifically:
+  \[\stab(s.\phi(g)) = g\inv \stab(s) g, \text{ for all } g\in G \text{ and } s\in S.\]
+  In other words, if $x$ stabilizes $s$, then $g\inv x g$ stabilizes $s.\phi(g)$.
+
+  (Parsing this out is the hardest part. See outline and intution on slide 11; note in particular that $s.\phi(g)$ is a generic element of the orbit of $s$.)
+\end{problem}
+
+\subsection*{Proving the orbit-stabilizer theorem}
+
+\begin{obs}
+Suppose $G$ acts on a set $S$ (on the right) by $\phi: G\to \Perm(S)$. Then for any $s\in S$, ``the size of the orbit is the index of the stabilizer:''
+\[|\orb(s)| = [G:\stab(s)].\] 
+Equivalently, $|\orb(s)| \cdot |\stab(s)| = |G|$.
+\end{obs}
+
+\begin{problem}
+  In class we proved this for a \textbf{right} group action (written $s.\phi(g)$) by setting up a bijection (aka a correspondence) between $\orb(s)$ and \textbf{right} cosets of $\stab(s)$. Use similar logic to write down a proof of the orbit-stabilizer theorem for a \textbf{left} group action (written $\phi(g).s$).
+\end{problem}
+
+\subsection*{Using the orbit-stabilizer theorem}
+
+The orbit-stabilizer theorem is a cheat code. There are a ton of cool theorems whose proofs are just filling in the blanks in this template:
+
+\begin{center}
+  \fbox{\parbox{.8\textwidth}{
+    \begin{proof}
+      Let $G$ act on \underline{\qquad} by \underline{\qquad}. This defines a homomorphism \[\phi: G\to \Perm(\underline{\qquad})\] The orbit of \underline{\quad} is \underline{\qquad}, and the stabilizer of \underline{\quad} is \underline{\qquad}. Therefore, by the orbit-stabilizer theorem, \ldots
+    \end{proof}
+  }}
+\end{center}
+
+\begin{problem}\label{ost-conj}
+  Use this template to prove that if $H \leq G$, then $|\cl_G(H)| = [G:N_G(H)]$ (``the size of the conjugacy class of $H$ is the index of its normalizer''):
+  \begin{itemize}
+    \item Make $G$ act on its set of subgroups, $S = \{H \mid H\leq G\}$, by (right) conjugation. \\
+    (Your job in this step is to tell me specifically what is $H.\phi(g)$.)
+    \item For some $H \in S$, what is $\stab(H)$?
+    \item For some $H \in S$, what is $\orb(H)$?
+    \item Apply the orbit-stabilizer theorem.
+  \end{itemize}
+\end{problem}
+
+\begin{problem}\label{ost-cent}
+  Here's a similar thing. We previously defined the conjugacy class of an element $x\in G$: \[\cl_G(x) = \{g\inv x g\mid g\in G\}.\]
+  \begin{itemize}
+    \item Make $G$ act on \textbf{itself}, $S = G$, by right conjugation.
+    \item For some $x\in S$ (aka $x\in G$), what is $\stab(x)$? 
+    
+    (This set is called the ``centralizer'' of $x$; do you see why?)
+    \item For some $x\in S$ (aka $x\in G$), what is $\orb(x)$?
+    \item Apply the orbit-stabilizer theorem to reach an interesting conclusion about how the sizes of these two things are related.
+  \end{itemize}
+\end{problem}
+
+\subsection*{A specific example: $D_6$}
+
+Let $G=D_6=\<r,f\>$ act on its set $S=\{H\leq D_6\}$ of
+  subgroups by (right) conjugation, i.e.,
+  \[
+  \phi\colon G\longto\Perm(S)\,,\qquad \phi(g)=\mbox{the
+      permutation that sends each $H\mapsto g^{-1}Hg$.}
+  \]
+  A Cayley graph, cycle graph, and subgroup lattice for $D_6$ are shown below.
+  
+  \[
+  \hspace*{-8mm}
+  \begin{tikzpicture}
+    \newcommand\Hf{6.495} % height of D_6 
+    \newcommand\He{5.196} % height of C_6  
+    \newcommand\Hd{3.897} % height of V_4 
+    \newcommand\Hc{2.598} % height of C_3  
+    \newcommand\Hb{1.299} % height of C_2 
+    \newcommand\Ha{0} % height of C_1   
+    \tikzstyle{R6-out} = [draw, very thick, eRed,-stealth,bend right=18]
+    \tikzstyle{R6-in} = [draw, very thick, eRed,-stealth,bend left=12]
+    \tikzstyle{v} = [circle, draw, fill=lightgray,inner sep=0pt,
+      minimum size=6.5mm] 
+    %%
+    %% ------------- Cycle graph of D_6 ---------------------------
+    %%
+    \begin{scope}[shift={(0,7.5)},scale=.68]
+      \tikzstyle{v-r} = [circle, draw, fill=vRed,inner sep=0pt,
+        minimum size=6mm]
+      \tikzstyle{v-g} = [circle, draw, fill=vGreen,inner sep=0pt,
+        minimum size=6mm]
+      \tikzstyle{v-b} = [circle, draw, fill=vBlue,inner sep=0pt,
+        minimum size=6mm]
+      \tikzstyle{v-p} = [circle, draw, fill=vPurple,inner sep=0pt, 
+        minimum size=6mm]
+      \tikzstyle{v-o} = [circle, draw, fill=vOrange,inner sep=0pt, 
+        minimum size=6mm]
+      \tikzstyle{v-gr} = [circle, draw, fill=midgray,inner sep=0pt, 
+        minimum size=6mm]
+      \tikzstyle{cy2} = [draw,thick]
+      \tikzstyle{every node}=[font=\small]
+      \node (1) at (90:2) [v-gr] {$1$};
+      \node (r) at (150:2) [v-r] {$r$};
+      \node (r2) at (210:2) [v-o] {$r^2$};
+      \node (r3) at (270:2) [v-p] {$r^3$};
+      \node (r4) at (330:2) [v-o] {$r^4$};
+      \node (r5) at (30:2) [v-r] {$r^5$};
+      \node (f) at (-3,4) [v-b] {$f$};
+      \node (r2f) at (-1.8,4) [v-b] {$r^2\!f$};
+      \node (r4f) at (-.6,4) [v-b] {$r^4\!f$};
+      \node (rf) at (.6,4) [v-g] {$rf$};
+      \node (r3f) at (1.8,4) [v-g] {$r^3\!f$};
+      \node (r5f) at (3,4) [v-g] {$r^5\!f$};
+      \draw [cy2] (1) to [bend right=15] (r);
+      \draw [cy2] (r) to [bend right=15] (r2);
+      \draw [cy2] (r2) to [bend right=15] (r3);
+      \draw [cy2] (r3) to [bend right=15] (r4);
+      \draw [cy2] (r4) to [bend right=15] (r5);
+      \draw [cy2] (r5) to [bend right=15] (1);
+      \draw [cy2] (1) to (f);
+      \draw [cy2] (1) to (rf);
+      \draw [cy2] (1) to (r2f);
+      \draw [cy2] (1) to (r3f);
+      \draw [cy2] (1) to (r4f);
+      \draw [cy2] (1) to (r5f);
+    \end{scope}
+    %%
+    %% ------------- Cayley graph of D_6 ---------------------------
+    %%    
+    \begin{scope}[shift={(0,2.5)},scale=1.45]
+      \tikzstyle{every node}=[font=\small]
+      \node (1) at (0:2) [v] {$1$};
+      \node (r) at (60:2) [v] {$r$};
+      \node (r2) at (120:2) [v] {$r^2$};
+      \node (r3) at (180:2) [v] {$r^3$};
+      \node (r4) at (240:2) [v] {$r^4$};
+      \node (r5) at (300:2) [v] {$r^5$};
+      \node (f) at (0:1) [v] {$f$};
+      \node (rf) at (60:1) [v] {$rf$};
+      \node (r2f) at (120:1) [v] {$r^2\!f$};
+      \node (r3f) at (180:1) [v] {$r^3\!f$};
+      \node (r4f) at (240:1) [v] {$r^4\!f$};
+      \node (r5f) at (300:1) [v] {$r^5\!f$};
+      \path[bb] (1) to (f);
+      \path[bb] (r) to (rf);
+      \path[bb] (r2) to (r2f);
+      \path[bb] (r3) to (r3f);
+      \path[bb] (r4) to (r4f);
+      \path[bb] (r5) to (r5f);
+      \path[R6-out] (1) to (r);
+      \path[R6-out] (r) to (r2);
+      \path[R6-out] (r2) to (r3);
+      \path[R6-out] (r3) to (r4);
+      \path[R6-out] (r4) to (r5);
+      \path[R6-out] (r5) to (1);
+      \path[R6-in] (f) to (r5f);
+      \path[R6-in] (r5f) to (r4f);
+      \path[R6-in] (r4f) to (r3f);
+      \path[R6-in] (r3f) to (r2f);
+      \path[R6-in] (r2f) to (rf);
+      \path[R6-in] (rf) to (f);
+    \end{scope}
+    %%
+    %% ------------- Subgroup lattice of D_6 ------------------------
+    %%
+    \begin{scope}[shift={(7.25,0)},scale=1.6]
+      \tikzstyle{every node}=[font=\small]
+      \node(D6) at (0,\Hf) {$D_6$};
+      \node(r2-f) at (-1,\He) {$\<r^2,f\>$};
+      \node(r2-rf) at (0,\He) {$\<r^2,rf\>$}; 
+      \node(r) at (-2,\He) {$\<r\>$}; 
+      \node(r3-f) at (2.4,\Hd) {\footnotesize $\<r^3\!,\!f\>$};
+      \node(r3-rf) at (3.1,\Hd) {\footnotesize $\<r^3\!,rf\>$};
+      \node(r3-r2f) at (3.8,\Hd) {\footnotesize $\<r^3\!,\!r^2\!f\>$};
+      \node(r2) at (-2,\Hc) {$\<r^2\>$};
+      \node(r3) at (0,\Hb) {$\<r^3\>$};
+      \node(f) at (.6,\Hb) {$\<f\>$};
+      \node(r4f) at (1.2,\Hb) {$\<r^4\!f\>$};      
+      \node(r2f) at (1.8,\Hb) {$\<r^2\!f\>$};      
+      \node(r3f) at (2.4,\Hb) {$\<r^3\!f\>$};
+      \node(rf) at (3.1,\Hb) {$\<rf\>$};
+      \node(r5f) at (3.8,\Hb) {$\<r^5\!f\>$};
+      \node (1) at (0,\Ha) {$\<1\>$};
+      \draw[f] (D6) -- (r2-f);
+      \draw[f] (D6) -- (r);
+      \draw[f] (D6) to (r2-rf);
+      \draw[f] (D6) to (r3-f); 
+      \draw[f] (D6) -- (r3-rf);
+      \draw[f] (D6) to (r3-r2f); 
+      \draw[f] (r2-f) to (f); 
+      \draw[f] (r2-f) -- (r2f);
+      \draw[f] (r2-f) to (r4f);
+      \draw[f] (r2-f) to (r2);
+      \draw[f] (r) -- (r2);
+      \draw[f] (r) -- (r3);
+      \draw[f] (r2-rf) -- (r2);
+      \draw[f] (r2-rf) to (rf);
+      \draw[f] (r2-rf) to (r3f);
+      \draw[f] (r2-rf) to (r5f);
+      \draw[f] (r3-f) -- (f);
+      \draw[f] (r3-f) to (r3);
+      \draw[f] (r3-f) to (r3f); 
+      \draw[f] (r3-rf) to (rf);
+      \draw[f] (r3-rf) to (r3);
+      \draw[f] (r3-rf) to (r4f); 
+      \draw[f] (r3-r2f) to (r2f);
+      \draw[f] (r3-r2f) to (r3);
+      \draw[f] (r3-r2f) to (r5f);
+      \draw[f] (r2) -- (1);
+      \draw[f] (f) -- (1);
+      \draw[f] (rf) to (1);
+      \draw[f] (r2f) to (1);
+      \draw[f] (r3f) to (1);
+      \draw[f] (r4f) to (1);
+      \draw[f] (r5f) to (1); 
+      \draw[f] (r3) -- (1);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+
+  \begin{problem}
+    Draw the action graph superimposed on the subgroup lattice. For example, since $\Alert{r}\inv \Balert{f} \Alert{r} = \Alert{r}^4 \Balert f$ (which you can read off the Cayley graph), the $\Alert{r}$-conjugate of $\<\Balert{f}\>$ is $\<\Balert{f}\>.\phi(\Alert{r}) = \<\Alert{r}^4 \Balert{f}\>$, so I would draw a \Alert{red} arrow from $\<f\>$ to $\<r^4 f\>$ in the subgroup lattice.
+  \end{problem}
+
+  \begin{problem}
+    Construct the fixed point table (y'know, the one with checkmarks).
+  \end{problem}
+
+  \begin{problem}
+    Find $\stab(H)$ for each subgroup $H\leq D_6$, and $\fix(g)$
+    for each $g\in D_6$.
+  \end{problem}
+
+  \begin{problem}
+    Find $\Ker(\phi)$ and $\Fix(\phi)$.
+  \end{problem}
+
+  \begin{problem}
+    What do each of these things mean in this context?
+    \begin{itemize}
+      \item $\orb(H)$
+      \item $\stab(H)$
+      \item $[G:\stab(H)]$ (hint: your answer should sound like ``the number of cosets of\ldots'')
+      \item $\Fix(\phi)$
+      \item $\Ker(\phi)$
+      \item $\fix(g)$
+    \end{itemize}
+  \end{problem}
+
+  \begin{problem}
+    Apply the orbit-counting theorem. What does the result mean in this context?
+  \end{problem}
+
+\subsection*{Bonus problems!}
+  
+
+\begin{problem}
+  Use the results of several other problems on this homework set (including \ref{conj-stab} and \ref{ost-conj}) to explore this question: Under what circumstances is $\stab(s)$ a \textbf{normal} subgroup of $G$?
+
+  (I don't know that there's one specific answer that I'm looking for, but you do have the tools to say several interesting things.)
+\end{problem}
+
+\begin{problem}
+  Suppose a group $G$ of order $55$ acts on a set $S$ of size
+  $14$, and pick some $s\in S$.
+  \begin{enumerate}[(a)]
+  \item What are the possible sizes of the orbit of $s$?
+  \item What are the possible sizes of the stabilizer of $s$?
+  \item Show that this action must have a fixed point.
+  \item What is the fewest number of fixed points that this action can
+    have? Justify your answer.
+  \end{enumerate}
+\end{problem}
+
+\begin{problem}
+  Prove these things we observed in class: if $G$ acts on itself by right multiplication (so $S = G$ and $s.\phi(g) = sg$), then
+  \begin{itemize}
+    \item the action is \textit{transitive}, i.e., there is only one orbit, and
+    \item the action is \textit{faithful}, i.e., $\Ker(\phi)$ is trivial.
+  \end{itemize}
+\end{problem}
+
+\begin{problem}
+  Let $G$ act on itself by conjugation, and derive the \textit{class equation}:
+  \[|G| = |Z(G)| + \sum [G:C_G(x)],\]
+  where the sum is over one representative $x$ from each conjugacy class that isn't in the center of the group, and $C_G(x)$ is the ``centralizer'' discussed in Problem \ref{ost-cent}.
+\end{problem}
+
+\end{document}
+
