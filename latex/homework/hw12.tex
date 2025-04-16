@@ -1,0 +1,222 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{lscape} %making one page landscape mode
+\usepackage{tabularx}
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{visualalgebra}
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+%##################################################################
+\begin{document}
+\section{Homework \#12 (due Apr 20)}
+
+\subsection*{Play catch-up}
+
+I am deliberately making this homework a bit shorter than usual, because each of you has a fair amount of catching up to do. Challenge yourself to get as many old homeworks up to snuff as you can this weekend.
+
+\subsection*{Applications of group actions}
+
+\begin{problem}
+  Suppose a group $G$ of order $55$ acts on a set $S$ of size
+  $14$, and pick some $s\in S$.
+  \begin{enumerate}[(a)]
+  \item What are the possible sizes of the orbit of $s$? Why?
+  \item What are the possible sizes of the stabilizer of $s$? Why?
+  \item Show that this action must have a fixed point.
+  \item What is the fewest number of fixed points that this action can have? Justify your answer.
+  \item \textbf{Challenge:} Can you make your reasoning more general? What is it about the numbers 55 and 14 that makes your conclusions true? Can you think of other pairs of numbers that would have similar properties?
+  \end{enumerate}
+\end{problem}
+
+\begin{problem}
+  Let $G$ act on itself by conjugation, and derive the \textit{class equation}:
+  \[|G| = |Z(G)| + \sum [G:C_G(x)],\]
+  where the sum is over one representative $x$ from each conjugacy class that isn't in the center of the group, and $C_G(x)$ is the ``centralizer'' of $x$:
+  \[C_G(x) = \{g\in G \mid xg = gx\}.\]
+\end{problem}
+
+\vfill
+
+(Next page!)
+
+\vfill
+\newpage
+
+\begin{problem}
+  Here is a sketch of an interesting proof; your job will be to provide warrants (ie., answer \Alert{``why?''} questions), explain details, and/or fill in skipped steps. In particular, you should answer the questions in red, but don't limit yourself to just those things.
+
+  \begin{theorem}
+  If $G$ has no subgroup of index 2, then any subgroup of index 3 is normal.
+  \end{theorem}
+  \begin{proof}
+    Let $H < G$ with $[G:H] = 3$. Note that $H \lneq G$, by which I mean that $H$ is a \textit{proper} subgroup of $G$. \Alert{Why is this true?}
+    
+    Let $G$ act on the cosets of $H$ by right multiplication, to get a nontrivial homomorphism 
+    \[\phi:G \to S_3, \qquad Hx.\phi(g) = \Alert{\text{what goes here?}}\]
+    \Alert{Why does $\phi$ have the codomain $S_3$?}
+    
+    Let $K$ be the kernel of $\phi$. Then $K$ is the largest normal subgroup of $G$ contained in $H$. \Alert{This is \textit{several} claims in one: that $K\leq H$, that $K\normaleq G$, and that $K$ is the largest such subgroup. Please warrant each of those claims.}
+
+    $G/K \cong \Image(\phi) \leq S_3$. \Alert{That is \textit{two} claims actually; please warrant them both.}
+
+    Thus, there are three cases for this quotient: 
+    \[G/K \cong S_3, \qquad G/K \cong C_3, \qquad G/K \cong C_2.\] \Alert{Why these three possibilities and no more?}
+
+    So then here are the possible subgroup lattices for $G/K$:
+    \[
+    \begin{tikzpicture}[shorten >= -2pt,shorten <= -2pt]
+      \begin{scope}[shift={(0,0)},scale=1]
+        \node(G) at (0,6) {$G/K \cong S_3$};
+        \node(N) at (-1.75,4.5) {$N/K$};
+        \node(K) at (0,1.5) {$K/K$};
+        \node(H1) at (.2,24/7) {$A/K$};
+        \node(H2) at (1.55,24/7) {$B/K$};
+        \node(H3) at (3,24/7) {$C/K$};
+        \draw(N)--(K);
+        \draw(G)--(H1); 
+        \draw(G)--(H2);
+        \draw(G)--(H3);
+        \draw(G)--(N) ;
+        \draw(K)--(H1);
+        \draw(K)--(H2);
+        \draw(K)--(H3);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(6,0)},scale=1]
+        \node(G) at (0,6) {$G/K \cong C_3$};
+        \node(K) at (0,24/7) {$K/K$};
+        \draw(G)--(K);
+      \end{scope}
+      %%
+      \begin{scope}[shift={(10,0)},scale=1]
+        \node(G) at (0,6) {$G/K \cong C_2$};
+        \node(K) at (0,4.5) {$K/K$};
+        \draw(G)--(K);
+      \end{scope}
+    \end{tikzpicture}
+    \]
+    \Alert{Please label each edge in each of those lattices by the corresponding index. (This will be very helpful in the near future.)}
+
+    $K\leq H\lneq G$ \Alert{(why?)}, and therefore $K/K\leq H/K\lneq G/K$. \Alert{What theorem warrants this claim?}
+
+    Only the middle case is possible. \Alert{Why? What's wrong with the other two cases?}
+
+    Therefore $K/K = H/K$. \Alert{Why?} So, $K = H$ \Alert{(why?)}, which is normal for multiple reasons. \Alert{Please provide at least one good reason.}
+  \end{proof} 
+\end{problem}
+
+\begin{problem} (Challenge!)
+
+  Extend the logic of the previous problem to prove that if $[G:H] = p$, where $p$ is the smallest prime dividing $|G|$, then $H \normal G$.  
+\end{problem}
+
+\newpage
+\begin{landscape}
+  
+\subsection*{Contribute to the final letter grade rubric}
+
+\begin{problem}
+  Lastly, please contribute to the rubric by which we will assess your ``comprehensive conversation'' during the last day of class and thereby determine final letter grades. Because I am a math professor and this is specifically my job, I have sketched out some thoughts about specific mathematical stuff, which definitely yes is an important criterion of your final letter grade in a math class.
+
+  \bigskip
+
+  %listen: 
+  %tables are black magic;
+  %tabularx is extra black magic
+\begin{tabularx}{\linewidth}{|*{5}{>{\raggedright\arraybackslash}X|}}\hline
+\textbf{Criterion}  
+& \textbf{Excellent} 
+& \textbf{Good} 
+& \textbf{Repairable} 
+& \textbf{Undeveloped}\\\hline
+\textbf{Mathematical content} 
+& %excellent
+Displays a confident command of relevant definitions and theorems. Explains why specific definitions and theorems are useful.
+&   %Good
+Clearly articulates definitions and theorems without errors.
+&   %repairable
+Explains definitions and theorems without difficulty and mostly without errors, but expresses ideas in rudimentary form.
+&   %undeveloped
+Student displays errors in knowledge of definitions or theorems.
+\\\hline
+\textbf{Proof and warrants} 
+&   %excellent
+Shows confidence in constructing logically sound, thoroughly warranted proofs.
+&   %good
+Explains proofs without difficulty and provides partial warrants for claims.
+&   %repairable
+Explains steps in proofs without difficulty.
+&   %undeveloped
+Has difficulty explaining individual steps in proofs.
+\\\hline
+\textbf{\ldots} 
+&   %excellent
+&   %good
+&   %repairable
+&   %undeveloped
+\\\hline
+\end{tabularx}
+
+\bigskip
+
+What other criteria do you think should be in this table? What observable behaviors should we put in each letter grade category?
+\end{problem}
+
+\end{landscape}
+\end{document}
+
