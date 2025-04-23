@@ -1,0 +1,263 @@
+\documentclass[12pt]{article}
+% controlling the geometry of the page:
+\usepackage[margin=1in, paperwidth=8.5in, paperheight=11in]{geometry} 
+\usepackage{amsmath, amssymb} % useful math symbols and environments
+
+\usepackage{lscape} %making one page landscape mode
+\usepackage{tabularx}
+
+\usepackage{multicol} % multiple columns side-by-side
+
+\usepackage{amsthm} % Theorem-like environments
+\theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{problem}{Problem}
+\newtheorem*{remark}{Remark}
+\newtheorem*{definition}{Definition}
+\newtheorem*{theorem}{Theorem}
+
+% pretty colors!
+\usepackage[dvipsnames]{xcolor}
+\colorlet{darkgrey}{black!70}
+\colorlet{darkgreen}{green!50!black}
+
+
+\usepackage{tikz} % for drawing diagrams
+\usetikzlibrary{arrows,automata,positioning} 
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{visualalgebra}
+\usepackage{graphicx} % for inserting figures with \includegraphics
+\usepackage{setspace} % for controlling space between lines, paragraphs, etc.
+
+\usepackage{fancyhdr} % for controlling headers and footers
+\usepackage{newtx} % changes the default font family
+\usepackage[shortlabels]{enumitem} % controllable labels for ordered and unordered lists
+
+\usepackage{hyperref} % controls hyperlinks, both internal and external
+\hypersetup{
+    colorlinks=true,
+    urlcolor=blue,
+}
+
+\setlength{\headheight}{14.5pt}
+\newcommand\inv{^{-1}} % I am very tired of typing ^{-1}
+
+% I don't like how LaTeX renders section headings by default
+\renewcommand{\section}[1]{\begin{center} \textbf{#1} \\\end{center}}
+%
+\setlength{\parindent}{0in}
+%\oddsidemargin=-.25in
+\allowdisplaybreaks
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\lhead{MATH 312}
+\rhead{Spring 2025}
+%\lfoot{\copyright\ CLEAR Calculus 2010}
+\cfoot{}
+\renewcommand{\thefootnote}{*} 
+\hyphenpenalty=10000 % LaTeX by default really likes hyphenating things
+
+%##################################################################
+\begin{document}
+\section{Homework \#13 (due Apr 27)}
+
+\subsection*{Wiki updates}
+
+\begin{problem}
+  The \href{https://westminster.instructure.com/courses/3521461/pages/wiki-of-abstract-algebra-theorems?module_item_id=87072884}{Wiki of theorems} never got updated after we first made it. During one of your study groups, take some time to add some Important Theorems to this list. Certainly not every theorem is Important; which ones do you want to make sure are there for easy reference?
+\end{problem}
+
+\subsection*{There exist group actions with no fixed points!}
+
+\begin{problem}
+  Here's the ``fixed point table'' for the action $\Galert{D_4} \xrightarrow{\phi} \Perm(\Balert{S})$, where $\Balert{S}$ is the set of 7 binary squares that are listed across the top of the table:
+  
+  %% Fixed point table of our binary square example
+  \[
+  \renewcommand\arraystretch{1.8}
+  \begin{tabular}{c|cccccccccccccc}
+    && \begin{tikzpicture}[scale=.5]
+         \tikzstyle{every node}=[font=\scriptsize]
+         \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+         \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+         \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+         \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+         \draw (.25,.75) node{$0$};\draw(.75,.75)node{$0$};
+         \draw (.25,.25) node{$0$};\draw(.75,.25)node{$0$};
+         \draw (0,0) rectangle (1,1); 
+       \end{tikzpicture}
+    && 
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+      \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+      \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+      \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+      \draw (0,0) rectangle (1,1);
+      \draw(.25,.75) node{$0$};\draw(.75,.75)node{$1$};
+      \draw(.25,.25) node{$1$};\draw (.75,.25)node{$0$};
+    \end{tikzpicture}
+    &&
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actPurple] (3.5,.5) rectangle ++(.5,.5); 
+      \path[fill=actOrange] (4,.5) rectangle ++(.5,.5);
+      \path[fill=actOrange] (3.5,0) rectangle ++(.5,.5);
+      \path[fill=actPurple] (4,0) rectangle ++(.5,.5);
+      \draw (3.5,0) rectangle (4.5,1);
+      \draw(3.75,.75) node{$1$};\draw(4.25,.75)node{$0$};
+      \draw(3.75,.25) node{$0$};\draw (4.25,.25)node{$1$};
+    \end{tikzpicture}
+    &&
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+      \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+      \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+      \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+      \draw (0,0) rectangle (1,1);
+      \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$0$};
+      \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$1$};
+    \end{tikzpicture}
+    &&
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actOrange] (0,.5) rectangle ++(.5,.5); 
+      \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+      \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+      \path[fill=actPurple] (.5,0) rectangle ++(.5,.5);
+      \draw (0,0) rectangle (1,1);
+      \draw (.25,.75) node{$0$}; \draw (.75,.75) node{$1$};
+      \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$1$};
+    \end{tikzpicture}
+    &&
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+      \path[fill=actPurple] (.5,.5) rectangle ++(.5,.5);
+      \path[fill=actOrange] (0,0) rectangle ++(.5,.5);
+      \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+      \draw (0,0) rectangle (1,1);
+      \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$1$};
+      \draw (.25,.25) node{$0$}; \draw (.75,.25) node{$0$};
+    \end{tikzpicture}
+    &&
+    \begin{tikzpicture}[scale=.5]
+      \tikzstyle{every node}=[font=\scriptsize]
+      \path[fill=actPurple] (0,.5) rectangle ++(.5,.5); 
+      \path[fill=actOrange] (.5,.5) rectangle ++(.5,.5);
+      \path[fill=actPurple] (0,0) rectangle ++(.5,.5);
+      \path[fill=actOrange] (.5,0) rectangle ++(.5,.5);
+      \draw (0,0) rectangle (1,1);
+      \draw (.25,.75) node{$1$}; \draw (.75,.75) node{$0$};
+      \draw (.25,.25) node{$1$}; \draw (.75,.25) node{$0$};
+    \end{tikzpicture}
+    \\ 
+    \hline $\Galert{1}$ && \checkmark && \checkmark && \checkmark && \checkmark && \checkmark && \checkmark && \checkmark  \\
+    $\Galert{r}$ && \checkmark && && && && && && \\
+    $\Galert{r^2}$ && \checkmark && \checkmark && \checkmark && && && && \\
+    $\Galert{r^3}$ && \checkmark && && && && && && \\
+    $\Galert{f}$ && \checkmark && && && \checkmark && && \checkmark && \\
+    $\Galert{rf}$ && \checkmark && \checkmark && \checkmark && && && && \\
+    $\Galert{r^2f}$ && \checkmark && && && && \checkmark && && \checkmark \\
+    $\Galert{r^3f}$ && \checkmark && \checkmark && \checkmark && && && && 
+  \end{tabular}
+  \]
+  The \Balert{fixed points} of the action $\phi$ are \Balert{columns} with \textbf{all} checkmarks: 
+  \\\Balert{set elements} fixed by \textbf{every} \Galert{group element}. 
+  
+  The \Galert{kernel} of the action $\phi$ consists of the \Galert{rows} with \textbf{all} checkmarks: 
+  \\\Galert{group elements} who fix \textbf{every} \Balert{set element}.
+
+  \begin{enumerate}[(a)]
+    \item Find a \Balert{binary square} that is \textbf{not} a fixed point of $\phi$.
+    \item Identify all the \Balert{fixed points} of $\phi$.
+    \item Identify all group elements in the \Galert{kernel} of $\phi$.
+    \item The \Galert{kernel} of any group action is always nonempty. Why?
+    \item Find or make up an example of a group action that has no \Balert{fixed points}. 
+    
+    Hint: maybe look at ones where \Galert{$G$} acts on its own \Balert{elements}, its \Balert{subgroups}, or its \Balert{cosets}.
+  \end{enumerate}
+\end{problem}
+
+\subsection*{The Sylow theorems}
+
+Handy hint: ask Wolfram Alpha ``divisors of $5\cdot 7 \cdot 11$,'' etc., to save lots of time.
+
+\begin{problem}
+  Prove that there is no simple group of order $312 = 2^3 \cdot 3 \cdot 13$.
+\end{problem}
+
+\begin{problem}\label{pq}
+  Suppose $p<q$ are primes such that $p$ doesn't divide $q-1$, and then suppose $|G| = pq$. One example of such a setup is $p=3$, $q=11$ (so then $q-1 = 10$ which isn't divisible by $3$), and $pq = 33$.
+
+  \begin{enumerate}[(a)]
+    \item Think of a couple more examples of $p$ and $q$ that would work.
+    \item Prove that $G$ is not simple.
+    \item What goes wrong if $p$ \textit{does} divide $q-1$?
+  \end{enumerate}
+\end{problem}
+
+\begin{problem}
+  Prove that there is no simple group of order $56 = 2^3 \cdot 7$.
+\end{problem}
+
+\begin{problem}\label{30}
+  Prove that there is no simple group of order $30 = 2\cdot 3 \cdot 5$.
+\end{problem}
+
+\begin{problem}
+  Prove that there is no simple group of order $6545 = 5\cdot 7 \cdot 11 \cdot 17$.
+\end{problem}
+
+\begin{problem}[easier than you think]
+  Suppose $|G| = pqr$, where $p<q<r$ are all primes. Prove that $G$ has a normal Sylow subgroup for either $p$, $q$, or $r$. (Hint: $30$ is like this; think about Problem \ref{30}.)
+\end{problem}
+
+\begin{problem}[secretly not a Sylow theorem problem]
+  Prove that if $|G| = p^n$, then $G$ is not simple. 
+  
+  Hint: let $G$ act on itself by conjugation, write down the class equation (from HW 12!), and decide that $|Z(G)| > 1$. Why does that mean $G$ is not simple?
+\end{problem}
+
+\subsection*{Further thoughts (optional)}
+
+\begin{problem}
+  Make up your own ``there is no simple group of order \underline{\quad}'' problem.
+\end{problem}
+
+\begin{problem}
+  Following on from Problem \ref{pq}: If $p$ \textit{does} divide $q-1$, construct a non-abelian group of order $pq$ (hint: $\rtimes$). Explain why this group you made has a normal subgroup.
+\end{problem}
+
+\begin{problem}
+  A group of order $p^2q$, where $p$ and $q$ are distinct primes, can't be simple. (There are two cases you'll have to think about separately: $p>q$ and $p<q$.)
+\end{problem}
+
+\begin{problem}
+  If $|G| = 30$, then $G$ has a normal subgroup isomorphic to $\Z_{15}$. (Use Problem $\ref{30}$.)
+\end{problem}
+
+\begin{problem}
+  In class I skipped over a ``side quest'' about the normalizer of the normalizer. Watch Matt Macauley's \href{https://youtu.be/yTyUdci7TTY?feature=shared&t=1465}{lecture 5.11, starting in particular at about 24:25}, and prove the following theorem: if $P$ is a (non-normal) Sylow $p$-subgroup of $G$, then $N_G(N_G(P)) = N_G(P)$. 
+\end{problem}
+
+\begin{problem}
+  Lots of fun stuff on \href{https://www.math.clemson.edu/~macaule/classes/s25_math4120/hw/s25_math4120_hw12.pdf}{Matt Macauley's homework from last week}, lol.
+\end{problem}
+
+\begin{problem}
+  Write a program that finds ``potential bad Sylow numbers:''
+  \begin{enumerate}[(a)]
+    \item gives each odd number $n<10,000$ that is not a power of a prime and that has some prime divisor $p$ such that $n_p$ is not forced to be 1
+    \item for each such $n$, shows the factorization of $n$ and gives the list of all permissible values of $n_p$ for each $p$ dividing $n$
+    \item does the same for even numbers below 1000; explain the relative lengths of the two lists!
+  \end{enumerate}
+\end{problem}
+
+\end{document}
+
