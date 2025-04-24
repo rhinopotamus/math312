@@ -1,0 +1,234 @@
+\documentclass[8pt, handout]{beamer} 
+
+
+%% Math packages
+%%
+\usepackage{amsmath,amsthm,amssymb}
+% Removes the "Too many math alphabets used in version normal" error.
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\usepackage[new]{old-arrows}
+\usepackage{cancel}
+\usepackage{mathdots}
+\usepackage{venndiagram}
+\usepackage{mathrsfs}          % Math script font
+
+% Graphics
+%%
+\graphicspath{{./}{figs/}}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{tikz-3dplot}
+\usepackage{tkz-graph}
+\usepackage{tikz-cd}
+
+%% Colors 
+%%
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{visualalgebra}  %% Put this *after* the TikZ packages
+\usepackage{visualalgebraslides}  %% Put this *after* "visualalgebra"
+
+%% Page layout packages
+%%
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[numbers,square,sort&compress]{natbib}
+
+%% Font and formatting packages
+%%
+\usepackage[english]{babel}    % Removing this causes compiler error
+\usepackage{alltt}             % Like verbatim, but excludes \ and { }
+\usepackage{enumerate}         % [shortlabels] option??
+\usepackage{comment}
+\usepackage{soul}              % strikeout text
+\usepackage{bm}                % Bold math
+\usepackage[T1]{fontenc}
+\usepackage{relsize}
+
+%% Fixes the \mathbf{} not working for fonts under 10pt
+\usepackage{cmbright}
+\fontencoding{OT1}\fontfamily{cmbr}\selectfont %to load ot1cmbr.fd
+\DeclareFontShape{OT1}{cmbr}{bx}{n}{% change bx definition
+<->cmbrbx10%
+}{}
+\normalfont
+
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+%%=======================================================================
+
+%% Beamer packages
+%%
+\mode<presentation>
+{
+  \usetheme{boadilla} 
+  \useinnertheme{rectangles}
+  \usecolortheme{dolphin}
+}
+
+\setbeamersize{text margin left=6mm}
+\setbeamersize{text margin right=6mm}
+\setbeamersize{sidebar width right=0mm}
+\setbeamersize{sidebar width left=0mm}
+\setbeamertemplate{navigation symbols}{}
+
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+% Other options: ball, circle, square 
+\setbeamertemplate{enumerate items}[default]
+%\setbeamercolor{enumerate subitem}{fg=red!80!black}
+\def\opacity{0.5}
+%\setbeamercovered{transparent}
+\setbeamercovered{invisible}
+
+\newcommand{\Pause}{\pause}      %% Comment this out => lots more page breaks
+
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+%%====================================================================
+
+\title[Rings and fields!]{Rings and fields!}
+
+\author[\href{mailto:sbagley@westminsteru.edu}{S. Bagley}]
+       {\href{mailto:sbagley@westminsteru.edu}{Spencer Bagley}}
+
+\institute[Westminster] { 
+  \normalsize With many thanks to Matthew Macauley, \\
+  \url{http://www.math.clemson.edu/~macaule/}}
+
+\date[28 Apr 2025]{28 Apr 2025}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%%====================================================================
+
+\section{Groups!}
+
+%%====================================================================
+
+\begin{frame}{What is a group? Why is a group?} 
+
+  \begin{block}{Definition} 
+    A \Palert{group} is ...
+    \onslide<2->{
+      \Alert{a set of elements $G$} together with a \Balert{binary operation $\ast$} such that:
+    }
+    \onslide<3->{
+      \begin{itemize}
+        \item $\ast$ has an \Alert{identity} element $e$ such that $g\ast e = g$, and $e\ast g = g$, for all $g\in G$
+        \onslide<4->{\item every element $g$ has an \Alert{inverse} element $g\inv$ such that $g\ast g\inv = g\inv \ast g = e$}
+        \onslide<5->{\item the operation $\ast$ is \Balert{associative}, ie., $(g\ast h)\ast k = g\ast(h\ast k)$}
+        \onslide<6->{\item (the set $G$ is \Balert{closed} under $\ast$, but that's implied by the precise definition of a binary operation)}
+      \end{itemize}
+    }
+  \end{block}
+
+  \medskip
+
+  Why are we making this definition?
+
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Why is a group?}
+  One reason to make this definition is that there are lots ways to \Balert{combine} \Alert{stuff}
+  \\ that remind us a bit of \Balert{multiplying} \Alert{numbers}. \pause
+
+  \medskip
+  
+  If we forget some specific things we know about \Alert{numbers}, what is still true about \Balert{multiplying}? \pause
+  
+  \medskip
+
+  How much can we forget and still have something that ``works like'' \Balert{multiplying} \Alert{numbers}?
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Let's play rock-paper-scissors} 
+
+  Let $M := \{r, p, s\}$ and define the binary operation $\ast$ as the winner between the two throws. For instance, $r\ast p = p$ because paper beats rock.
+
+  \medskip \pause
+
+  \[
+    \begin{array}{c|ccc}
+      \ast & r & p & s \\\hline
+         r & r & p & r\\
+         p & p & p & s\\
+         s & r & s & s     
+    \end{array}
+  \]
+
+  \medskip \pause
+
+  This is not a group. Why not? \pause
+  \begin{itemize}
+    \item Is there an identity element? 
+    \item Do elements have inverses?
+    \item Is the operation associative? (Check $r\ast(p \ast s)$ vs. $(r\ast p)\ast s$.)
+  \end{itemize} \pause
+
+  \medskip
+
+  We had to forget even more stuff about \Balert{multiplying} \Alert{numbers}! This is called a \Galert{magma}.
+  
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Forgetting more stuff}
+
+  \[
+  \begin{tikzpicture}[xscale=3]
+    \node at ( 0, 0) {magma};
+    \node at (-1, 1) {unital magma};
+    \node at ( 0, 1) {semigroup};
+    \node at ( 1, 1) {quasigroup};
+    \node at (-1, 2) {monoid};
+    \node at ( 0, 2) {loop};
+    \node at ( 1, 2) {assoc. quasigroup};
+    \node at ( 0, 3) {group};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (0, 0) -- (-1, 1) node [midway, left] {id.};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (0, 1) -- (-1, 2) node [midway, left] {id.};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (1, 1) -- ( 0, 2) node [midway, left] {id.};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (1, 2) -- ( 0, 3) node [midway, left] {id.};
+  \end{tikzpicture}
+  \]
+  
+\end{frame}
+
+%%====================================================================
+\section*{The end!}
+%%====================================================================
+
+\end{document}
