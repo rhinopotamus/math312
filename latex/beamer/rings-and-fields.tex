@@ -209,7 +209,7 @@
 \begin{frame}{Forgetting more stuff}
 
   \[
-  \begin{tikzpicture}[xscale=3]
+  \begin{tikzpicture}[xscale=3, yscale=2]
     \node at ( 0, 0) {magma};
     \node at (-1, 1) {unital magma};
     \node at ( 0, 1) {semigroup};
@@ -218,13 +218,70 @@
     \node at ( 0, 2) {loop};
     \node at ( 1, 2) {assoc. quasigroup};
     \node at ( 0, 3) {group};
+    %%
     \draw[r, shorten >= 12pt, shorten <= 12pt] (0, 0) -- (-1, 1) node [midway, left] {id.};
-    \draw[r, shorten >= 12pt, shorten <= 12pt] (0, 1) -- (-1, 2) node [midway, left] {id.};
-    \draw[r, shorten >= 12pt, shorten <= 12pt] (1, 1) -- ( 0, 2) node [midway, left] {id.};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (0, 1) -- (-1, 2) node [pos = 0.6, left] {id.};
+    \draw[r, shorten >= 12pt, shorten <= 12pt] (1, 1) -- ( 0, 2) node [pos = 0.6, left] {id.};
     \draw[r, shorten >= 12pt, shorten <= 12pt] (1, 2) -- ( 0, 3) node [midway, left] {id.};
+    %%
+    \draw[b, shorten >= 5pt, shorten <= 5pt] ( 0, 0) -- ( 0, 1) node [midway, left] {assoc.};
+    \draw[b, shorten >= 5pt, shorten <= 5pt] (-1, 1) -- (-1, 2) node [midway, left] {assoc.};
+    \draw[b, shorten >= 5pt, shorten <= 5pt] ( 1, 1) -- ( 1, 2) node [midway, right] {assoc.};
+    \draw[b, shorten >= 5pt, shorten <= 5pt] ( 0, 2) -- ( 0, 3) node [midway, left] {assoc.};
+    %%
+    \draw[g, shorten >= 12pt, shorten <= 12pt] ( 0, 0) -- ( 1, 1) node [midway, right] {inv.};
+    \draw[g, shorten >= 12pt, shorten <= 12pt] ( 0, 1) -- ( 1, 2) node [pos = 0.6, right] {inv.};
+    \draw[g, shorten >= 12pt, shorten <= 12pt] (-1, 1) -- ( 0, 2) node [pos = 0.6, right] {inv.};
+    \draw[g, shorten >= 12pt, shorten <= 12pt] (-1, 2) -- ( 0, 3) node [midway, left] {inv.};
   \end{tikzpicture}
   \]
   
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{Or, adding more stuff on}
+  Even groups don't remind me that much of how numbers work: 
+  
+  numbers have \Alert{two} operations. \pause
+  
+  \medskip
+
+  \begin{block}{Definition}
+    A \Alert{ring} $(R, +, \cdot)$ is a set of elements together with \Alert{two} binary operations $+$ and $\cdot$, such that: \pause
+    \begin{itemize}
+      \item $R$ is an abelian group under $+$ (with identity called $0$) \pause
+      \item $R$ has an element called $1$ such that $1\cdot a = a \cdot 1 = a$ for all $a\in R$ \pause
+      \item The operation $\cdot$ is associative \pause
+      \item $(a+b)\cdot c = a\cdot c + b\cdot c$
+      \item $c\cdot (a+b) = c\cdot a + c\cdot b$
+    \end{itemize}
+  \end{block}\pause 
+
+  \begin{exampleblock}{Morally:}
+    $+$ is addition and $\cdot$ is multiplication and that's the distributive law.
+  \end{exampleblock} \pause
+
+  \medskip
+
+  Examples?
+
+  \medskip
+
+  What are we still forgetting about how numbers work?
+\end{frame}
+
+%%====================================================================
+
+\begin{frame}{I would like division please}
+  \begin{block}{Definition}
+    A \Alert{field} $(F, +, \cdot)$ is a set of elements together with \Alert{two} binary operations $+$ and $\cdot$, such that:*
+    \begin{itemize}
+      \item $F$ is an abelian group under $+$ (with identity called $0$) \pause
+      \item $F - \{0\}$ is an abelian group under $\cdot$ (with identity called $1$) \pause
+      \item $(a+b)\cdot c = a\cdot c + b\cdot c$
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 %%====================================================================
