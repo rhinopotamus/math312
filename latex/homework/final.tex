@@ -63,20 +63,61 @@
 
 %##################################################################
 \begin{document}
-\section{Maybe these would be good final exam problems}
 
-\subsection*{Prove things}
+Here is my super-secret and extremely confidential collection of problems that I think would be good for oral exams. It would be so bad if this super-secret and extremely confidential list were to accidentally leak to students, because then students may be well-prepared to answer one or more of these basic yet revealing problems about group theory during their comprehensive conversations! Also, it would be \textit{extra} bad if a github link were to leak, because then students would even be able to see if I added more stuff to the list!!
+
+\subsection*{Define and prove things}
 
 \begin{problem}
-    Prove the ``one-step subgroup test:'' Let $H\subseteq G$. If $xy\inv \in H$ for all $x, y\in H$, then $H$ is a subgroup of $G$.
+    Suppose $G$ is a group, and let $H$ be a sub\textbf{set} of $G$. 
+    \begin{enumerate}[(a)]
+        \item Write a careful definition of what it means for $H$ to be a sub\textbf{group} of $G$.
+        \item Prove the ``one-step subgroup test:'' If $xy\inv \in H$ for all $x, y\in H$, then $H$ is a subgroup of $G$.
+    \end{enumerate}
 \end{problem}
 
 \begin{problem}
-    What does Lagrange's theorem say? Prove it.
+    Let $H$ and $K$ be subgroups of a group $G$, with $K \leq H \leq G$.
+    \begin{enumerate}[(a)]
+        \item Define $[G:H]$, the ``index of $H$ in $G$.''
+        \item State and prove Lagrange's theorem.
+        \item Use Lagrange's theorem to prove the ``tower law:'' $[G:K] = [G:H] \cdot [H:K].$
+    \end{enumerate}
 \end{problem}
 
 \begin{problem}
-    Let $G$ be a group, $N$ a normal subgroup, and $G/N = \{gN \mid g\in G\}$ be the set of left (or, equivalently, right) cosets of $N$.
+    Let $G$ be a group, $N$ a normal subgroup, and $G/N = \{gN \mid g\in G\}$ be the set of left cosets of $N$.
+    \begin{enumerate}[(a)]
+        \item Write careful definitions for ``coset'' and ``normal subgroup.''
+        \item Explain why $G/N$ is equivalent to $N \backslash G = \{Ng \mid g\in G\}$, the set of right cosets of $N$.
+        \item Prove that the binary operation on $G/N$ defined by \[aN\cdot bN := (ab)N\] is ``well-defined;'' that is, it does not depend on choice of coset representative.
+        \item Prove that $G/N$ with this binary operation is a group.
+    \end{enumerate}
+\end{problem}
+
+\begin{problem}
+    Suppose that $\phi:G\to H$ is a homomorphism.
+    \begin{enumerate}[(a)]
+        \item Write down a careful definition of a homomorphism.
+        \item Prove that $\phi(1_G) = 1_H$.
+        \item Use this result to prove that $\phi(g\inv) = \phi(g)\inv$.
+        \item Now you can show that $\Image(\phi) := \{\phi(g) \mid g\in G\}$ is a subgroup of \underline{\quad},
+        \item and also that $\Ker(\phi) := \{g \in G \mid \phi(g) = 1\}$ is a subgroup of \underline{\quad}.
+    \end{enumerate}
+\end{problem}
+
+\subsection*{Calculate things}
+
+\begin{problem}
+    \href{https://www.math.clemson.edu/~macaule/classes/s24_math4120/exams/s24_math4120_midterm1.pdf}{Macauley S24 midterm 1, problem 3}, but also, draw the subgroup lattice
+\end{problem}
+
+\begin{problem}
+    \href{https://www.math.clemson.edu/~macaule/classes/s24_math4120/exams/s24_math4120_midterm1.pdf}{Macauley S24 midterm 1, problem 4}
+\end{problem}
+
+\begin{problem}
+    \href{https://www.math.clemson.edu/~macaule/classes/f22_math4120/exams/f22_math4120_finalexam.pdf}{Macauley F22 final, problem 7}
 \end{problem}
 
 \end{document}
