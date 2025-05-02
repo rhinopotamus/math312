@@ -7,6 +7,7 @@
 \usepackage{tabularx}
 
 \usepackage{multicol} % multiple columns side-by-side
+\usepackage[normalem]{ulem}   
 
 \usepackage{amsthm} % Theorem-like environments
 \theoremstyle{definition} % Without this line, theorem statements (and therefore problem statements etc.) show up in italic text.
@@ -110,15 +111,515 @@ Here is my super-secret and extremely confidential collection of problems that I
 \subsection*{Calculate things}
 
 \begin{problem}
-    \href{https://www.math.clemson.edu/~macaule/classes/s24_math4120/exams/s24_math4120_midterm1.pdf}{Macauley S24 midterm 1, problem 3}, but also, draw the subgroup lattice
+    A Cayley graph of a mystery group $G$ of order $12$ is shown below; let $1$ (not $e$) denote the identity element.
+  \[
+  \begin{tikzpicture}[scale=1,auto]
+    \begin{scope}[shift={(0,0)},xscale=.8]
+      \tikzstyle{every node}=[font=\small]
+      \node (1) at (.2,2.8) [v] {$1$};
+      \node (r2) at (.2,1.25) [v] {$d$};
+      \node (r4) at (.2,-.3) [v] {$h$};
+      \node (f) at (0+2.53,2.8) [v] {$a$};
+      \node (r2f) at (0+2.53,1.25) [v] {$e$};
+      \node (r4f) at (0+2.53,-.3) [v] {$i$};
+      \node (r3f) at (4.87,2.8) [v] {$b$};
+      \node (r5f) at (4.87,1.25) [v] {$f$};
+      \node (rf) at (4.87,-.3) [v] {$j$};
+      \node (r3) at (7.2,2.8) [v] {$c$};
+      \node (r5) at (7.2,1.25) [v] {$g$};
+      \node (r) at (7.2,-.3) [v] {$k$};
+      \draw [bb] (1) to (f); \draw [bb] (r3f) to (r3);
+      \draw [gg] (1) to [bend left=15] (r3); \draw [gg] (f) to (r3f);
+      \draw [bb] (r2) to (r2f); \draw [bb] (r5f) to (r5);
+      \draw [gg] (r2) to [bend left=15] (r5); \draw [gg] (r2f) to (r5f);
+      \draw [bb] (r4) to (r4f); \draw [bb] (rf) to (r);
+      \draw [gg] (r4) to [bend right=15] (r); \draw [gg] (r4f) to (rf);
+      \draw [r] (1) to (r2);
+      \draw [r] (r2) to (r4);
+      \draw [r] (r4) to [bend left=30] (1);
+      \draw [r] (r4f) to (r2f);
+      \draw [r] (r2f) to (f);
+      \draw [r] (f) to [bend right=30] (r4f);
+      \draw [r] (r3f) to (r5f);
+      \draw [r] (r5f) to (rf);
+      \draw [r] (rf) to [bend right=30] (r3f);
+      \draw [r] (r) to (r5);
+      \draw [r] (r5) to (r3);
+      \draw [r] (r3) to [bend left=30] (r);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(8,0)},xscale=.8]
+      \node (1) at (.2,2.8) [v] {};
+      \node (r2) at (.2,1.25) [v] {};
+      \node (r4) at (.2,-.3) [v] {};
+      \node (f) at (0+2.53,2.8) [v] {};
+      \node (r2f) at (0+2.53,1.25) [v] {};
+      \node (r4f) at (0+2.53,-.3) [v] {};
+      \node (r3f) at (4.87,2.8) [v] {};
+      \node (r5f) at (4.87,1.25) [v] {};
+      \node (rf) at (4.87,-.3) [v] {};
+      \node (r3) at (7.2,2.8) [v] {};
+      \node (r5) at (7.2,1.25) [v] {};
+      \node (r) at (7.2,-.3) [v] {};
+      \draw [bb] (1) to (f); \draw [bb] (r3f) to (r3);
+      \draw [gg] (1) to [bend left=15] (r3); \draw [gg] (f) to (r3f);
+      \draw [bb] (r2) to (r2f); \draw [bb] (r5f) to (r5);
+      \draw [gg] (r2) to [bend left=15] (r5); \draw [gg] (r2f) to (r5f);
+      \draw [bb] (r4) to (r4f); \draw [bb] (rf) to (r);
+      \draw [gg] (r4) to [bend right=15] (r); \draw [gg] (r4f) to (rf);
+      \draw [r] (1) to (r2);
+      \draw [r] (r2) to (r4);
+      \draw [r] (r4) to [bend left=30] (1);
+      \draw [r] (r4f) to (r2f);
+      \draw [r] (r2f) to (f);
+      \draw [r] (f) to [bend right=30] (r4f);
+      \draw [r] (r3f) to (r5f);
+      \draw [r] (r5f) to (rf);
+      \draw [r] (rf) to [bend right=30] (r3f);
+      \draw [r] (r) to (r5);
+      \draw [r] (r5) to (r3);
+      \draw [r] (r3) to [bend left=30] (r);
+    \end{scope}
+  \end{tikzpicture}
+  \]
+  
+  \begin{enumerate}[(a)]
+    \item Write the order of each element in the nodes of the blank
+      Cayley graph on the right.
+
+    \item The subgroup $H\!=\!\<a,b\>\!\cong$ \uline{\hfill}, and
+      $K\!=\!\<d\>\!\cong$ \uline{\hfill}.
+
+    \item The subgroup $\<a,d\>$ has order \uline{\hfill}, and is
+      isomorphic to \uline{\hfill}.
+
+    \item The subgroup $\<b,d\>$ has order \uline{\hfill}, and is
+      isomorphic to \uline{\hfill}.
+      
+    \item The center of this group is $Z(G)=$ \uline{\hfill}. [Write
+      it in terms of generator(s).]
+    
+  \item Find all left cosets of $H=\<a,b\>$. Then find all right
+    cosets. Write your answers as subsets of $G$, or describe them
+    in words (e.g., ``the rows'' or ``the columns''). 
+  \item Find all left cosets of $K=\<d\>$. Then find all right
+    cosets. Write your answers as subsets of $G$, or describe them
+    in words. 
+  \item The normalizers are $N_G(H)=\big\<$\hfill$\big\>$ and
+    $N_G(K)=\big\<$\hfill$\big\>$. {\hfill} \medskip
+    
+  \item Find all conjugate subgroups to $H$ and to $K$. Write each
+    subgroup only once.
+    \item Is $H$ normal? Is $K$ normal? 
+    \item Draw the subgroup lattice of $G$.
+\end{enumerate}
 \end{problem}
 
+\newpage
 \begin{problem}
-    \href{https://www.math.clemson.edu/~macaule/classes/s24_math4120/exams/s24_math4120_midterm1.pdf}{Macauley S24 midterm 1, problem 4}
+    \colorlet{midgrey}{black!50}
+    Answer questions about the following group, whose subgroup
+  lattice is shown below.
+  \[
+  \begin{tikzpicture}[shorten >= -3pt, shorten <= -3pt, scale=1.3,yscale=1.4]
+    \begin{scope}[shift={(0,0)}]
+    \tikzstyle{every node}=[font=\small]
+      \node[anchor=east] at (-4.5,4) {\normalsize \textbf{Order} $=24$};
+      %%
+      \node[anchor=east] at (5,4) {\normalsize \textbf{Index}};
+      %%
+      \node (G) at (0,4) {$G$};
+      \node (D6) at (-2.2,3.2) {$D_6$};
+      \node (C12) at (0,3.2) {$C_{12}$};
+      \node (Dic6) at (2.7,3.2) {$\Dic_6$};
+      \node (C4xC2) at (2.2,2.7) {${}_{\color{midgrey} 3}C_4\!\times\!C_2$};
+      \node (D3-1) at (-3.2,2.2) {$D_3$};
+      \node (D3-2) at (-2.2,2.2) {$D_3$};
+      \node (C6) at (-1.2,2.2) {$C_6$};
+      \node (V4) at (1.2,1.8) {${}_{\color{midgrey} 3}V_4$};
+      \node (C4-1) at (2.2,1.8) {$C_4$};
+      \node (C4-2) at (3.2,1.8) {${}_{\color{midgrey} 3}C_4$};
+      \node (C3) at (-2.2,1.3) {$C_3$};
+      \node (C2-1) at (-2.7,.8) {${}_{\color{midgrey} 3}C_2$};
+      \node (C2-3) at (0,.8) {${}_{\color{midgrey} 3}C_2$};
+      \node (C2-2) at (2.2,.8) {$C_2$};
+      \node (1) at (0,0) {$C_1$};
+      %%
+      %%
+      \draw[faded] (G) to (D6); \draw[faded] (G) to (C12); 
+      \draw[faded] (G) to (Dic6); \draw[faded] (G) to (C4xC2); 
+      %%
+      \draw[faded] (D6) to (D3-1); \draw[faded] (D6) to (D3-2); 
+      \draw[faded] (D6) to (C6); \draw[faded] (D6) to (V4);
+      %%
+      \draw[faded] (C12) to (C6); \draw[faded] (C12) to (C4-1);
+      %%
+      \draw[faded] (Dic6) to (C6); \draw[faded] (Dic6) to (C4-2);
+      %%
+      \draw[faded] (C4xC2) to (V4); \draw[faded] (C4xC2) to (C4-1);
+      \draw[faded] (C4xC2) to (C4-2);
+      %%
+      \draw[faded] (D3-1) to (C2-1); \draw[faded] (D3-1) to (C3);
+      \draw[faded] (D3-2) to (C2-3); \draw[faded] (D3-2) to (C3);
+      %%
+      \draw[faded] (C6) to (C3); \draw[faded] (C6) to (C2-2); 
+      %%
+      \draw[faded] (C4-1) to (C2-2); \draw[faded] (C4-2) to (C2-2);
+      %%
+      \draw[faded] (V4) to (C2-1); \draw[faded] (V4) to (C2-2); \draw[faded] (V4) to (C2-3);
+      %%
+      \draw[faded] (C2-1) to (1); \draw[faded] (C2-2) to (1); 
+      \draw[faded] (C2-3) to (1); \draw[faded] (C3) to (1);
+      %%
+    \end{scope}
+    \end{tikzpicture}
+  \]
+  \begin{enumerate}[(a)]
+    \item Determine the order and the index of each row of subgroups in the lattice.
+  \item $G$ has \uline{\hfill} subgroup, which fall into \uline{\hfill}
+    conjugacy classes. \smallskip
+  \item $G$ has exactly \uline{\hfill} normal subgroups. \smallskip
+
+  \item $G$ has \uline{\hfill} subgroup(s) of order $2$ and
+    \uline{\hfill} element(s) of order $2$. \smallskip
+    
+  \item $G$ has \uline{\hfill} subgroup(s) of order $3$ and
+    \uline{\hfill} element(s) of order $3$. \smallskip
+
+  \item $G$ has \uline{\hfill} subgroup(s) of order $4$, of which
+    \uline{\hfill} are cyclic. \smallskip
+    
+  \item Find a normal subgroup $N\normaleq G$ such that $G/N \cong V_4$.
+    
+  \item Each non-normal order-$2$ subgroup has a normalizer isomorphic
+    to \uline{\hfill}.
+    
+  \item Each $D_3$ subgroup has a normalizer isomorphic to
+    \uline{\hfill}.
+    
+  \item This group has a quotient $G/C_4$ isomorphic to \uline{\hspace{10mm}}.
+    [\emph{Hint}: Determine the order, then count the index-$2$
+      subgroups.]
+
+  \item This group has a quotient $G/C_2$ isomorphic to \uline{\hspace{10mm}}.
+    [\emph{Hint}: Same as above.]  
+    
+  \item The quotient $G/C_3$ is isomorphic to \uline{\hspace{10mm}}.
+    [\emph{Hint}: Determine the order. Which lattice do you see?]
+
+  \item There are $n_2=\uline{\hspace{10mm}}$ Sylow $2$-subgroups,
+    which are isomorphic to $\uline{\hspace{15mm}}$.
+
+
+  \item There are $n_3=\uline{\hspace{10mm}}$ Sylow $3$-subgroups,
+    which are isomorphic to $\uline{\hspace{15mm}}$.
+
+  \item The largest order of an element in $G$ is
+    \uline{\hspace{10mm}}, and there are \uline{\hspace{10mm}}
+    element(s) of that order.
+  \end{enumerate}
 \end{problem}
 
+\newpage
 \begin{problem}
-    \href{https://www.math.clemson.edu/~macaule/classes/f22_math4120/exams/f22_math4120_finalexam.pdf}{Macauley F22 final, problem 7}
+    The subgroup diagram of a group $G$ is shown below.
+  %%
+  %% Subgroup lattice of A4 x C3
+  \[
+  \begin{tikzpicture}[shorten >= -2pt, shorten <= -2pt,yscale=.65, scale=1.75]
+    %%
+    \newcommand\Hg{5} % height of 36
+    \newcommand\Hf{3.5} % height of 12 
+    \newcommand\He{3} % height of 9
+    \newcommand\Hd{2.5} % height of 6 
+    \newcommand\Hc{2} % height of 4 
+    \newcommand\Hb{1.5} % height of 3
+    \newcommand\Ha{1} % height of 2
+    \tikzstyle{every node}=[font=\small]
+    %%
+    \begin{scope}[shift={(-2.75,0)}]
+      \tikzstyle{every node}=[font=\small]
+      \node[anchor=east] at (0,\Hg) {\textbf{Index} $=1$};
+      \node[anchor=east] at (0,\Hf) {$3$};
+    \end{scope}
+    %%
+    \begin{scope}[shift={(3,0)}]
+      \tikzstyle{every node}=[font=\small]
+      \node[anchor=east] at (0,\Hg) {\textbf{Order} $=36$};
+      \node[anchor=east] at (0,\Hf) {$12$};
+   \end{scope}
+   %%
+    \begin{scope}[shift={(0,0)}]
+      \node (G) at (0,\Hg) {$G$};
+      \node (A4-1) at (-.5,\Hf) {$A_4$};
+      \node (A4-2) at (0,\Hf) {$A_4$};
+      \node (A4-3) at (.5,\Hf) {$A_4$};
+      \node (C6xC2) at (1.2,\Hf) {$C_6\!\times\!C_2$};
+      \node (C3xC3) at (-1.6,\He)  {${}_{\color{midgray}4}C_3^2$};
+      \node (C6) at (1.8,\Hd) {${}_{\color{midgray}3}C_6$};
+      \node (V4) at (0,\Hc) {$V_4$}; 
+      \node (C3-1) at (-2.1,\Hb) {${}_{\color{midgray}4}C_3$};
+      \node (C3-2) at (-1.6,\Hb) {${}_{\color{midgray}4}C_3$};
+      \node (C3-3) at (-1.1,\Hb) {${}_{\color{midgray}4}C_3$};
+      \node (C3-4) at (-.5,\Hb) {$C_3$};
+      \node (C2) at (.6,\Ha) {${}_{\color{midgray}3}C_2$};
+      \node (1) at (0,0) {$C_1$};      
+      %%
+      \draw[f] (G) to (A4-1); \draw[f] (G) to (A4-2); \draw[f] (G) to (A4-3);
+      \draw[f] (G) to (C3xC3); \draw[f] (G) to (C6xC2);
+      \draw[f] (C6xC2) to (C6); 
+      \draw[f] (C6xC2) to (V4);
+      \draw[f] (A4-1) to (V4); \draw[f] (A4-2) to (V4); \draw[f] (A4-3) to (V4);
+      \draw[f] (A4-1) to (C3-1); \draw[f] (A4-2) to (C3-2); \draw[f] (A4-3) to (C3-3);
+      \draw[f] (C3xC3) to (C3-1); \draw[f] (C3xC3) to (C3-2); \draw[f] (C3xC3) to (C3-3);
+      \draw[f] (C3xC3) to (C3-4);
+      \draw[f] (C6) to (C3-4); \draw[f] (C6) to (C2); \draw[f] (V4) to (C2);
+      \draw[f] (C3-1) to (1); \draw[f] (C3-2) to (1); \draw[f] (C3-3) to (1);
+      \draw[f] (C3-4) to (1); \draw[f] (C2) to (1);
+    \end{scope}
+    %%%
+    \end{tikzpicture}
+  \]
+  \begin{enumerate}[(a)]
+    \item Determine the order and the index of each row of subgroups in the lattice.
+    \item The group $G$ has \uline{\hfill} subgroups, which fall into \uline{\hfill} conjugacy classes.
+
+    \item The quotient of $G$ by its unique normal subgroup $N$ of order $3$ has order \uline{\hfill}, and $G/N$ is isomorphic to the familiar group \uline{\hfill}.
+
+
+   \item There are $n_2=$\uline{\hfill} Sylow $2$-subgroup(s), isomorphic to \uline{\hfill}, 
+   
+   and $n_3=$\uline{\hfill} Sylow $3$-subgroup(s), isomorphic to \uline{\hfill}.
+   
+    \item Find all distinct ways that $G$ can be written as a direct or semidirect product of two of its proper subgroups. 
+    
+    \item Find the center $Z(G)$, and justify your answer. Though this cannot always be done by inspection, it can in this case, using a result from the previous part.
+
+   \item Let $G$ act on its subgroups by conjugation. This action has \uline{\hfill} orbit(s) 
+   
+   and \uline{\hfill} fixed point(s). \hfill\hfill \,
+
+   \item Let $G$ act on itself by multiplication. This action has \uline{\hfill} orbit(s) 
+   
+   and \uline{\hfill} fixed point(s). \hfill\hfill \,   
+
+   \item Let $H$ be a subgroup of order $9$, and let $G$ act on the right cosets of $H$ 
+   by right multiplication. This action has \uline{\hfill} orbit(s) and \uline{\hfill} fixed point(s).
+
+   \item Still assuming that $|H|=9$, let $G$ act on the \emph{left} cosets of $H$ 
+   by \emph{left} multiplication. This action has \uline{\hfill} orbit(s) and \uline{\hfill} fixed point(s).
+
+  \item Let $g\in G$ be an element of order $2$. Then $g$ commutes with exactly 
+  \uline{\hfill} element(s), and the centralizer of $\<g\>$ is isomorphic to \uline{\hfill}. The centralizer of $g$ is 
+  
+  (bigger than)(smaller than)(equal to) [$\longleftarrow$ \emph{circle one}] its normalizer.
+ \end{enumerate}
+\end{problem}
+
+\newpage
+\begin{problem}
+    \colorlet{lorange}{orange!50!white}
+    \definecolor{lpurple}{rgb}{0.7 0.45 0.9}
+    Consider the following set of ``binary rectangles'':
+  \[
+    \begin{tikzpicture}[scale=.9,yscale=1.618]
+    \node at (-1,.5) {$S=\Bigg\{$};
+    \node at (13.5,.5) {$\Bigg\}$};
+    \node at (1.5,.25) {,};
+    \node at (3.5,.25) {,};
+    \node at (5.5,.25) {,};
+    \node at (7.5,.25) {,};
+    \node at (9.5,.25) {,};
+    \node at (11.5,.25) {,};
+    %%
+    \begin{scope}[shift={(0,0)}]
+      \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+      \draw (.5,.78) node{$0$}; 
+      \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$0$}; 
+      \draw (.5,.22) node{$0$};
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(2,0)}]
+      \path[fill=lpurple] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$0$}; 
+      \draw (.18,.5) node{$1$}; \draw (.82,.5) node{$1$}; 
+      \draw (.5,.22) node{$0$};
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(4,0)}]
+      \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lpurple] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$1$}; 
+      \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$0$}; 
+      \draw (.5,.22) node{$1$};
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(6,0)}]
+      \path[fill=lpurple] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lpurple] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$1$}; 
+      \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$1$}; 
+      \draw (.5,.22) node{$0$};
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(8,0)}]
+      \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lpurple] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$1$}; 
+      \draw (.18,.5) node{$1$}; \draw (.82,.5) node{$0$}; 
+      \draw (.5,.22) node{$0$};  
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(10,0)}]
+      \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$0$}; 
+      \draw (.18,.5) node{$1$}; \draw (.82,.5) node{$0$}; 
+      \draw (.5,.22) node{$1$}; 
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+    %%
+    \begin{scope}[shift={(12,0)}]
+      \path[fill=lpurple] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$0$}; 
+      \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$1$}; 
+      \draw (.5,.22) node{$1$};
+      \draw (0,0) rectangle (1,1);
+    \end{scope}
+  \end{tikzpicture}
+    \]
+    The Klein-$4$ group $V=\{1,v,h,vh\}$ acts on $S$
+    via $\phi\colon V\to\Perm(S)$, where \vspace{-1mm}
+  \begin{align*}
+    \phi(v)&=\text{flips each tile vertically} \vspace{3mm} \\
+    \phi(h) &= \text{flips each tile horizontally}\vspace{3mm} \\
+    \phi(vh)&=\text{rotates each tile by $180^\circ$}
+  \end{align*}
+
+  \begin{enumerate}[(a)]
+  \item Pick a minimal generating set and then draw the \emph{action
+    graph}. (Feel free to label the rectangles above A,B,C,D,E,F,G to
+    save time.)
+    
+    \vfill
+    
+    
+  \item Find the following:
+    \begin{multicols}{2}
+    \begin{itemize}
+    \item $\stab\bigg(
+        \begin{tikzpicture}[yscale=1.618,scale=.6,baseline=2ex]
+          \tikzstyle{every node}=[font=\scriptsize]
+          \path[fill=lpurple] (.5,.5)--(1,1)--(1,0);
+          \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+          \path[fill=lpurple] (.5,.5)--(0,0)--(0,1);
+          \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+          \draw (.5,.78) node{$0$}; 
+          \draw (.18,.5) node{$1$}; \draw (.82,.5) node{$1$}; 
+          \draw (.5,.22) node{$0$};
+          \draw (0,0) rectangle (1,1);
+        \end{tikzpicture}\bigg)=$ \\ \\
+        
+      \item $\stab\bigg(
+        \begin{tikzpicture}[yscale=1.618,scale=.6,baseline=2ex]
+          \tikzstyle{every node}=[font=\scriptsize]
+          \path[fill=lorange] (.5,.5)--(0,1)--(1,1);
+          \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+          \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+          \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+          \draw (.5,.78) node{$0$}; 
+          \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$0$}; 
+          \draw (.5,.22) node{$0$};
+          \draw (0,0) rectangle (1,1);
+      \end{tikzpicture}\bigg)=$ \\ \\
+
+      \item $\stab\bigg(
+        \begin{tikzpicture}[yscale=1.618,scale=.6,baseline=2ex]
+          \tikzstyle{every node}=[font=\scriptsize]
+                \path[fill=lpurple] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lpurple] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$1$}; 
+      \draw (.18,.5) node{$0$}; \draw (.82,.5) node{$1$}; 
+      \draw (.5,.22) node{$0$};
+      \draw (0,0) rectangle (1,1);
+        \end{tikzpicture}\bigg)=$ \\ \\
+        %%
+  \item $\stab\bigg(
+    \begin{tikzpicture}[yscale=1.618,scale=.6,baseline=2ex]
+      \tikzstyle{every node}=[font=\scriptsize]        
+      \path[fill=lorange] (.5,.5)--(1,1)--(1,0);
+      \path[fill=lpurple] (.5,.5)--(0,1)--(1,1);
+      \path[fill=lpurple] (.5,.5)--(0,0)--(0,1);
+      \path[fill=lorange] (.5,.5)--(0,0)--(1,0);
+      \draw (.5,.78) node{$1$}; 
+      \draw (.18,.5) node{$1$}; \draw (.82,.5) node{$0$}; 
+      \draw (.5,.22) node{$0$};  
+      \draw (0,0) rectangle (1,1);
+    \end{tikzpicture}\bigg)=$ \\ \\
+    %%
+    \end{itemize}
+    \end{multicols}
+    
+    %\vspace{0mm}
+    
+    \begin{multicols}{2}
+      \begin{itemize}
+      \item $\fix(1)=$ \\ \\
+        
+      \item $\fix(v)=$ \\ \\
+        
+      \item $\fix(h)=$ \\ \\
+
+      \item $\fix(vh)=$ \\ \\
+      \end{itemize}
+    \end{multicols}
+
+    \begin{itemize}
+        
+      \item This action has \uline{\hspace{.7in}} orbits, which by the
+        orbit-counting theorem, is also \medskip
+
+        equal to the average
+        \uline{\hfill}.  \\ \smallskip
+        
+      %\item Average size of $\fix(g)$, where $g\in V_4=$ \\ \smallskip
+    \end{itemize}
+
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        
+      \item $\Fix(\phi)=$ 
+
+      \item $\Ker(\phi)=$ \\
+
+      \end{itemize}
+    \end{multicols}
+  \end{enumerate}
 \end{problem}
 
 \end{document}
